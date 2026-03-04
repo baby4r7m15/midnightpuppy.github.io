@@ -647,3 +647,32 @@ body{
   .hud-stats{ justify-content: center; flex-wrap: wrap; }
   .hud-nav{ flex-wrap: wrap; }
 }
+
+/* ===== AVATAR FIX: keep overlays BEHIND the image ===== */
+.avatar{
+  position: relative; /* ensure stacking context */
+}
+
+.avatar::after{
+  z-index: 0;         /* background glow layer */
+}
+
+.avatar-glitch{
+  z-index: 1;         /* scanlines layer */
+}
+
+.avatar-img{
+  position: relative; /* make z-index apply */
+  z-index: 3;         /* above overlays */
+}
+
+.avatar-silhouette{
+  position: relative;
+  z-index: 2;         /* fallback above overlays, below img */
+}
+
+/* OPTIONAL: if you want the scanlines to be SUPER subtle over the whole box,
+   but NOT over the face, you can clip them away from the image area: */
+.avatar-glitch{
+  opacity: 0.12;      /* softer so it doesn’t “cover” */
+}
