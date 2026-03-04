@@ -1,13 +1,14 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>midnightpuppy.exe – BIO DASHBOARD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- IMPORTANT: this path must exist on your site -->
   <link rel="stylesheet" href="/css/midnightpuppy-bio.css" />
 
-  <!-- Favicon -->
+  <!-- Favicon (make sure /logo.png exists at site root) -->
   <link rel="icon" href="/logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="/logo.png" />
 </head>
@@ -17,7 +18,8 @@
   <!-- TOP HUD -->
   <header class="hud-top">
     <div class="hud-brand">
-      <div class="hud-title">midnightpuppy.exe</div>
+      <!-- GLITCH TITLE -->
+      <div class="hud-title glitch" data-text="midnightpuppy.exe">midnightpuppy.exe</div>
       <div class="hud-sub">BIO DASHBOARD • SIGNAL UNSTABLE</div>
     </div>
 
@@ -45,9 +47,16 @@
         <span class="chip">ONLINE-ish</span>
       </div>
 
+      <!-- AVATAR IMG (set your image path here) -->
       <div class="avatar">
-        <div class="avatar-silhouette"></div>
-        <div class="avatar-glitch"></div>
+        <img
+          class="avatar-img"
+          src="/images/midnightpuppy-avatar.png"
+          alt="midnightpuppy.exe avatar"
+          onerror="this.style.display='none'; this.parentElement.classList.add('avatar-fallback');"
+        />
+        <div class="avatar-silhouette" aria-hidden="true"></div>
+        <div class="avatar-glitch" aria-hidden="true"></div>
       </div>
 
       <div class="profile-name">MIDNIGHTPUPPY.EXE</div>
@@ -77,7 +86,7 @@
       </ul>
     </section>
 
-    <!-- CENTER TOP: ABOUT / BIO LOG -->
+    <!-- CENTER TOP: BIO LOG -->
     <section class="panel quest">
       <div class="panel-head">
         <span>BIO LOG</span>
@@ -144,7 +153,7 @@
       </div>
     </section>
 
-    <!-- CENTER BOTTOM: STATUS REPORT -->
+    <!-- CENTER BOTTOM: STATUS -->
     <section class="panel battle">
       <div class="panel-head">
         <span>STATUS REPORT</span>
@@ -174,16 +183,22 @@
 
   </main>
 
-  <!-- SYSTEM TOAST -->
+  <!-- SYSTEM TOAST (TYPING) -->
   <div class="sao-toast show" role="status" aria-live="polite">
     <div class="sao-toast-header">SYSTEM</div>
-    <div class="sao-toast-body">midnightpuppy.exe has entered the void • ping unstable • affection.exe corrupted</div>
+
+    <!-- typing target -->
+    <div class="sao-toast-body">
+      <span class="type" id="toastType"></span><span class="caret" aria-hidden="true">▍</span>
+    </div>
+
     <button class="sao-toast-close" type="button" aria-label="Close system status">✕</button>
     <div class="sao-toast-progress"></div>
   </div>
 
   <script>
-    const BASE_TIME = 9000;
+    // Toast timer behavior (your original)
+    const BASE_TIME = 12000;
     const STAGGER = 1500;
 
     document.querySelectorAll(".sao-toast").forEach((toast, index) => {
@@ -209,6 +224,20 @@
         });
       }
     });
+
+    // Typing animation
+    const line = "midnightpuppy.exe has entered the void • ping unstable • affection.exe corrupted";
+    const el = document.getElementById("toastType");
+    let i = 0;
+
+    function typeNext() {
+      if (!el) return;
+      el.textContent = line.slice(0, i++);
+      if (i <= line.length) {
+        setTimeout(typeNext, 28);
+      }
+    }
+    typeNext();
   </script>
 
 </body>
