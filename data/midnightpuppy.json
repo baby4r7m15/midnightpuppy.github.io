@@ -22,11 +22,11 @@
     "glitchBottom": "rgba(177, 136, 255, 0.75)"
   },
   "head": {
-    "title": "midnightpuppy.exe – 2AM BIO"
+    "title": "midnightpuppy.exe"
   },
   "header": {
     "title": "midnightpuppy.exe",
-    "subtitle": "BIO DASHBOARD • SIGNAL UNSTABLE • HEART IN SAFE MODE",
+    "subtitle": "SIGNAL UNSTABLE • HEART IN SAFE MODE",
     "nav": [
       {
         "label": "BIO",
@@ -37,7 +37,7 @@
     "stats": [
       {
         "label": "mood",
-        "value": "low"
+        "value": "medium"
       },
       {
         "label": "ping",
@@ -56,13 +56,13 @@
       "src": "/images/mindnightpuppy-avatar.png",
       "alt": "midnightpuppy.exe avatar"
     },
-    "name": "MIDNIGHTPUPPY.EXE",
+    "name": "MidnightPuppy.exe",
     "metaHtml": "Build: <b>midnight</b> • Level: <b>21</b> • Status: <b>softly breaking</b>",
     "bars": [
       {
         "label": "SOCIAL BATTERY",
-        "percent": 5,
-        "value": "5 / 100",
+        "percent": 25,
+        "value": "25 / 100",
         "fillClass": "hp"
       },
       {
@@ -86,17 +86,17 @@
     "entries": [
       {
         "text": "i dont know what to say 90% of the time",
-        "tag": "TRUTH",
+        "tag": "",
         "tagClass": "yellow"
       },
       {
         "text": "i overthink everything then pretend i’m fine",
-        "tag": "DEFAULT",
+        "tag": "",
         "tagClass": "blue"
       },
       {
         "text": "if i go quiet, i’m not mad — i’m just hurt or confused",
-        "tag": "WARNING",
+        "tag": "",
         "tagClass": "red"
       }
     ],
@@ -106,8 +106,7 @@
       "☾ nocturnal",
       "✦ clingy",
       "⛓ quiet",
-      "🫧 fragile",
-      "💔 alone"
+      "🫧 fragile"
     ]
   },
   "statsPanel": {
@@ -118,7 +117,7 @@
         "name": "friends.sys",
         "level": "none",
         "percent": 1,
-        "subtext": "safe / warm / gentle"
+        "subtext": "friends list: empty"
       },
       {
         "name": "sleep.exe",
@@ -138,10 +137,6 @@
     "panelTitle": "STATUS REPORT",
     "panelChip": "LAST 24H",
     "items": [
-      "smiled once (accidental)",
-      "missed you (quietly)",
-      "replayed old memories (unhealthy)",
-      "cried (sad)"
     ]
   },
   "systemLog": {
