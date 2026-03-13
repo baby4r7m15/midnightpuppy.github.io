@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/midnightpuppy-bio.css" />
   <link rel="icon" type="image/png" sizes="512x512" href="/images/mindnightpuppy-avatar.png" />
   <link rel="apple-touch-icon" href="/images/mindnightpuppy-avatar.png" />
-  <meta name="theme-color" content="#070914" />
+  <meta name="theme-color" content="#070914" id="themeColorMeta" />
 </head>
 
 <body>
@@ -129,6 +129,54 @@
       if (el && value !== undefined && value !== null) el.innerHTML = value;
     }
 
+    function applyTheme(theme) {
+      if (!theme) return;
+
+      const root = document.documentElement;
+
+      const themeMap = {
+        bg: "--bg",
+        bg2: "--bg2",
+        panel: "--panel",
+        panel2: "--panel2",
+        cyan: "--cyan",
+        cyan2: "--cyan2",
+        blue: "--blue",
+        violet: "--violet",
+        purple: "--purple",
+        pink: "--pink",
+        pink2: "--pink2",
+        line: "--line",
+        line2: "--line2",
+        text: "--text",
+        muted: "--muted",
+        shadow: "--shadow"
+      };
+
+      Object.entries(themeMap).forEach(([jsonKey, cssVar]) => {
+        if (theme[jsonKey]) {
+          root.style.setProperty(cssVar, theme[jsonKey]);
+        }
+      });
+
+      if (theme.themeColor) {
+        const meta = document.getElementById("themeColorMeta");
+        if (meta) meta.setAttribute("content", theme.themeColor);
+      }
+
+      if (theme.titleGlow) {
+        root.style.setProperty("--title-glow", theme.titleGlow);
+      }
+
+      if (theme.glitchTop) {
+        root.style.setProperty("--glitch-top", theme.glitchTop);
+      }
+
+      if (theme.glitchBottom) {
+        root.style.setProperty("--glitch-bottom", theme.glitchBottom);
+      }
+    }
+
     function renderNav(navItems) {
       const nav = document.getElementById("siteNav");
       nav.innerHTML = "";
@@ -221,7 +269,6 @@
         div.className = "member";
 
         const pfpClass = index === 0 ? "pfp" : `pfp pfp${index + 1}`;
-
         const width = Math.max(0, Math.min(Number(card.percent || 0), 100));
 
         div.innerHTML = `
@@ -269,12 +316,56 @@
       });
     }
 
+    function runTypingToast(line) {
+      const el = document.getElementById("toastType");
+      let i = 0;
+      el.textContent = "";
+
+      function typeNext() {
+        el.textContent = line.slice(0, i++);
+        if (i <= line.length) setTimeout(typeNext, 24);
+      }
+
+      typeNext();
+    }
+
+    function setupToastTimer() {
+      const BASE_TIME = 14000;
+      const STAGGER = 1500;
+
+      document.querySelectorAll(".sao-toast").forEach((toast, index) => {
+        const progress = toast.querySelector(".sao-toast-progress");
+        const totalTime = BASE_TIME + (index * STAGGER);
+
+        if (progress) {
+          progress.style.animation = `toastTimer ${totalTime / 1000}s linear forwards`;
+        }
+
+        const autoClose = setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => toast.remove(), 220);
+        }, totalTime);
+
+        const closeBtn = toast.querySelector(".sao-toast-close");
+        if (closeBtn) {
+          closeBtn.addEventListener("click", () => {
+            clearTimeout(autoClose);
+            if (progress) progress.style.animation = "none";
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 220);
+          });
+        }
+      });
+    }
+
     async function loadBioData() {
       try {
         const response = await fetch(DATA_URL, { cache: "no-store" });
         if (!response.ok) throw new Error(`Failed to load ${DATA_URL}: ${response.status}`);
 
         const data = await response.json();
+
+        applyTheme(data.theme);
 
         document.title = data.head.title || document.title;
 
@@ -323,48 +414,6 @@
         console.error(error);
         setText("toastType", "failed to load midnightpuppy.json");
       }
-    }
-
-    function runTypingToast(line) {
-      const el = document.getElementById("toastType");
-      let i = 0;
-      el.textContent = "";
-
-      function typeNext() {
-        el.textContent = line.slice(0, i++);
-        if (i <= line.length) setTimeout(typeNext, 24);
-      }
-
-      typeNext();
-    }
-
-    function setupToastTimer() {
-      const BASE_TIME = 14000;
-      const STAGGER = 1500;
-
-      document.querySelectorAll(".sao-toast").forEach((toast, index) => {
-        const progress = toast.querySelector(".sao-toast-progress");
-        const totalTime = BASE_TIME + (index * STAGGER);
-
-        if (progress) {
-          progress.style.animation = `toastTimer ${totalTime / 1000}s linear forwards`;
-        }
-
-        const autoClose = setTimeout(() => {
-          toast.classList.remove("show");
-          setTimeout(() => toast.remove(), 220);
-        }, totalTime);
-
-        const closeBtn = toast.querySelector(".sao-toast-close");
-        if (closeBtn) {
-          closeBtn.addEventListener("click", () => {
-            clearTimeout(autoClose);
-            if (progress) progress.style.animation = "none";
-            toast.classList.remove("show");
-            setTimeout(() => toast.remove(), 220);
-          });
-        }
-      });
     }
 
     setupToastTimer();
