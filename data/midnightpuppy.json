@@ -84,21 +84,6 @@
     "panelTitle": "BIO LOG",
     "panelChip": "LIVE",
     "entries": [
-      {
-        "text": "i dont know what to say 90% of the time",
-        "tag": "",
-        "tagClass": "yellow"
-      },
-      {
-        "text": "i overthink everything then pretend i’m fine",
-        "tag": "",
-        "tagClass": "blue"
-      },
-      {
-        "text": "if i go quiet, i’m not mad — i’m just hurt or confused",
-        "tag": "",
-        "tagClass": "red"
-      }
     ],
     "vibesTitle": "VIBES",
     "vibes": [
