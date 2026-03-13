@@ -99,22 +99,10 @@
     "panelChip": "3",
     "cards": [
       {
-        "name": "friends.sys",
-        "level": "none",
-        "percent": 1,
-        "subtext": "friends list: empty"
-      },
-      {
         "name": "sleep.exe",
         "level": "denied",
         "percent": 9,
         "subtext": "3:17am / still awake"
-      },
-      {
-        "name": "anxiety.dll",
-        "level": "running",
-        "percent": 94,
-        "subtext": "background process • cannot close"
       }
     ]
   },
