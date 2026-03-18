@@ -1,182 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta charset="UTF-8" />
-  <title>middaypuppy.exe - Uh oh!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/images/puppyboypfp.png" />
-  <link rel="apple-touch-icon" href="/images/puppyboypfp.png" />
-  <meta name="theme-color" content="#fff0f7" id="themeColorMeta" />
+<head>
+<meta charset="UTF-8" />
+<title>middaypuppy.exe - Uh oh!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" sizes="512x512" href="/images/puppyboypfp.png" />
+<link rel="apple-touch-icon" href="/images/puppyboypfp.png" />
+<meta name="theme-color" content="#fff0f7" id="themeColorMeta" />
 
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
 
-    *{ margin:0; padding:0; box-sizing:border-box; }
+*{ margin:0; padding:0; box-sizing:border-box; }
 
-    body{
-      font-family:"Montserrat",sans-serif;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,.9), transparent 40%),
-        radial-gradient(circle at 20% 20%, rgba(255,200,230,.4), transparent 25%),
-        radial-gradient(circle at 80% 30%, rgba(200,230,255,.4), transparent 25%),
-        linear-gradient(180deg,#fff4fb,#ffeaf6);
-      overflow:hidden;
-      color:#6d5a79;
-    }
+body{
+  font-family:"Montserrat",sans-serif;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.9), transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(255,200,230,.4), transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(200,230,255,.4), transparent 25%),
+    linear-gradient(180deg,#fff4fb,#ffeaf6);
+  overflow:hidden;
+  color:#6d5a79;
+}
 
-    /* sparkles */
-    .sparkles{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.9) 1.5px, transparent 2px),
-        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 2px);
-      background-size:120px 120px, 160px 160px;
-      animation: float 10s linear infinite;
-      opacity:.6;
-    }
+/* sparkles */
+.sparkles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.9) 1.5px, transparent 2px),
+    radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 2px);
+  background-size:120px 120px, 160px 160px;
+  animation: float 10s linear infinite;
+  opacity:.6;
+}
 
-    @keyframes float{
-      0%{ transform:translateY(0); }
-      50%{ transform:translateY(-20px); }
-      100%{ transform:translateY(0); }
-    }
+@keyframes float{
+  0%{ transform:translateY(0); }
+  50%{ transform:translateY(-20px); }
+  100%{ transform:translateY(0); }
+}
 
-    .card{
-      background:rgba(255,255,255,.7);
-      border:1px solid rgba(255,180,215,.35);
-      border-radius:28px;
-      padding:40px 32px;
-      width:min(420px,90%);
-      text-align:center;
-      backdrop-filter:blur(16px);
-      box-shadow:0 20px 60px rgba(255,182,215,.25);
-      position:relative;
-    }
+.card{
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(255,180,215,.35);
+  border-radius:28px;
+  padding:40px 32px;
+  width:min(420px,90%);
+  text-align:center;
+  backdrop-filter:blur(16px);
+  box-shadow:0 20px 60px rgba(255,182,215,.25);
+  position:relative;
+}
 
-    .title{
-      font-weight:800;
-      letter-spacing:.1em;
-      font-size:1.4rem;
-      color:#ffb6c1;
-      text-shadow:0 0 14px rgba(255,190,230,.7);
-    }
+.title{
+  font-weight:800;
+  letter-spacing:.1em;
+  font-size:1.4rem;
+  color:#ffb6c1;
+  text-shadow:0 0 14px rgba(255,190,230,.7);
+}
 
-    .subtitle{
-      margin-top:8px;
-      font-size:.8rem;
-      letter-spacing:.18em;
-      color:rgba(120,100,140,.7);
-    }
+.subtitle{
+  margin-top:8px;
+  font-size:.8rem;
+  letter-spacing:.18em;
+  color:rgba(120,100,140,.7);
+}
 
-    .status{
-      margin-top:28px;
-      font-size:.95rem;
-      font-weight:600;
-    }
+.status{
+  margin-top:28px;
+  font-size:.95rem;
+  font-weight:600;
+}
 
-    .status span{
-      color:#ff9ed1;
-    }
+.status span{
+  color:#ff9ed1;
+}
 
-    .progress{
-      margin-top:24px;
-      height:10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.6);
-      border:1px solid rgba(255,180,215,.3);
-      overflow:hidden;
-    }
+/* 🌸 NEW SPINNER */
+.loader{
+  margin:26px auto 0;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  position:relative;
+}
 
-    .bar{
-      height:100%;
-      width:0%;
-      border-radius:inherit;
-      background:linear-gradient(90deg,#ffb3d8,#bde3ff,#e3c8ff);
-      animation: load 2.5s ease forwards;
-      box-shadow:0 0 12px rgba(255,200,230,.8);
-    }
+.loader::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:4px solid rgba(255,180,215,.25);
+}
 
-    @keyframes load{
-      to{ width:100%; }
-    }
+.loader::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:4px solid transparent;
+  border-top:4px solid #ffb3d8;
+  border-right:4px solid #bde3ff;
+  border-bottom:4px solid #e3c8ff;
+  animation: spin 1.2s linear infinite;
+  box-shadow:0 0 12px rgba(255,200,230,.6);
+}
 
-    .msg{
-      margin-top:18px;
-      font-size:.85rem;
-      color:rgba(120,100,140,.75);
-    }
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
 
-    .heart{
-      margin-top:10px;
-      font-size:1.4rem;
-      animation: pulse 1.5s infinite;
-    }
+.msg{
+  margin-top:20px;
+  font-size:.85rem;
+  color:rgba(120,100,140,.75);
+}
 
-    @keyframes pulse{
-      0%,100%{ transform:scale(1); }
-      50%{ transform:scale(1.2); }
-    }
-  </style>
+.heart{
+  margin-top:12px;
+  font-size:1.4rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.2); }
+}
+</style>
 </head>
 
 <body>
-  <div class="sparkles"></div>
+<div class="sparkles"></div>
 
-  <div class="card">
-    <div class="title">middaypuppy.exe</div>
-    <div class="subtitle">SYSTEM MAINTENANCE</div>
+<div class="card">
+  <div class="title">middaypuppy.exe</div>
+  <div class="subtitle">SYSTEM: gently restoring</div>
 
-    <div class="status">
-      Uh oh the site is <span>down</span>…
-    </div>
-
-    <!-- <div class="progress">
-      <div class="bar"></div>
-    </div> -->
-
-    <div class="msg" id="msg">
-      restoring affection module ♡
-    </div>
-
-    <div class="heart">♡</div>
+  <div class="status">
+    please wait… <span>new stuffs coming</span>
   </div>
 
-  <!-- <script>
-    const messages = [
-      "restoring affection module ♡",
-      "warming up soft systems…",
-      "stabilizing heartbeat…",
-      "loading cozy environment…",
-      "finalizing safe mode ☁️"
-    ];
+  <!-- 🌸 NEW LOADER -->
+  <div class="loader"></div>
 
-    let i = 0;
-    const msgEl = document.getElementById("msg");
+  <div class="msg" id="msg">
+    restoring affection module ♡
+  </div>
 
-    const interval = setInterval(() => {
-      i++;
-      if (i < messages.length) {
-        msgEl.textContent = messages[i];
-      } else {
-        clearInterval(interval);
-      }
-    }, 500);
+  <div class="heart">♡</div>
+</div>
 
-     redirect after animation
-     setTimeout(() => {
-      window.location.href = "/middaypuppy";
-    }, 2800);
-  </script> -->
-
-  <script>
-  document.getElementById("msg").textContent =
-    "we wil be here soon ♡ please check back later";
+<script>
+document.getElementById("msg").textContent =
+  "we will be here soon ♡ please check back later";
 </script>
+
+<!-- =========================
+     OLD CODE (KEPT FOR LATER)
+     ========================= -->
+
+<!--
+<div class="progress">
+  <div class="bar"></div>
+</div>
+
+<script>
+const messages = [
+  "restoring affection module ♡",
+  "warming up soft systems…",
+  "stabilizing heartbeat…",
+  "loading cozy environment…",
+  "finalizing safe mode ☁️"
+];
+
+let i = 0;
+const msgEl = document.getElementById("msg");
+
+const interval = setInterval(() => {
+  i++;
+  if (i < messages.length) {
+    msgEl.textContent = messages[i];
+  } else {
+    clearInterval(interval);
+  }
+}, 500);
+
+setTimeout(() => {
+  window.location.href = "/middaypuppy";
+}, 2800);
+</script>
+-->
+
 </body>
 </html>
