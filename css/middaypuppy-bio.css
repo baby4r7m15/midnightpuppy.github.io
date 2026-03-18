@@ -1,0 +1,74 @@
+:root{
+  --bg: #fff4fb;
+  --bg2: #ffeaf6;
+  --panel: rgba(255, 244, 251, 0.82);
+  --panel2: rgba(255, 244, 251, 0.64);
+  --cyan: #aeefff;
+  --cyan2: #d8f7ff;
+  --blue: #b8ccff;
+  --violet: #d9c2ff;
+  --purple: #e7c8ff;
+  --pink: #ffadd6;
+  --pink2: #ffd3ea;
+  --line: rgba(255, 173, 214, 0.28);
+  --line2: rgba(184, 204, 255, 0.24);
+  --text: #6b5676;
+  --muted: rgba(107, 86, 118, 0.68);
+  --shadow: 0 18px 60px rgba(255, 182, 215, 0.24);
+  --title-glow: 0 0 18px rgba(255, 182, 222, 0.55);
+}
+
+body{
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.85), transparent 38%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  color: var(--text);
+}
+
+.overlay-rain{
+  display: none;
+}
+
+.overlay-particles{
+  opacity: .55;
+  filter: blur(0.5px);
+}
+
+.overlay-vignette{
+  background:
+    radial-gradient(circle at center, transparent 45%, rgba(255, 210, 235, 0.18) 100%);
+}
+
+.panel{
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.hud-title{
+  color: #fff;
+  text-shadow: var(--title-glow);
+}
+
+.hud-sub,
+.profile-meta,
+.stat,
+.list li,
+.terminal,
+.quests li{
+  color: var(--text);
+}
+
+.chip,
+.hud-link,
+.bar,
+.sao-toast{
+  border-color: var(--line);
+}
+
+.sao-toast{
+  background: rgba(255, 245, 250, 0.94);
+  color: var(--text);
+  box-shadow: 0 12px 40px rgba(255, 182, 215, 0.25);
+}
