@@ -56,7 +56,6 @@ body{
   text-align:center;
   backdrop-filter:blur(16px);
   box-shadow:0 20px 60px rgba(255,182,215,.25);
-  position:relative;
 }
 
 .title{
@@ -97,8 +96,6 @@ body{
 }
 
 .puppy-face{
-  position: relative;
-  z-index: 3;
   width: 104px;
   height: 104px;
   object-fit: cover;
@@ -107,49 +104,99 @@ body{
   box-shadow:
     0 10px 28px rgba(255,182,215,.26),
     0 0 22px rgba(255,255,255,.55);
-  background: rgba(255,255,255,.55);
 }
 
-/* 🐕 REACTIVE TAIL */
+/* 🐾 CUSTOM TAIL */
 .tail-widget{
   position: fixed;
-  right: 16px;
-  bottom: 12px;
-  width: 80px;
+  bottom: -120px;
+  right: 18px;
+  width: 90px;
+  height: 140px;
   z-index: 100;
   cursor: pointer;
 
-  animation: tailFloat 3s ease-in-out infinite;
+  animation:
+    tailPopIn 0.9s cubic-bezier(.2,.8,.2,1) forwards,
+    tailIdle 2.8s ease-in-out infinite 1s;
+
   filter:
-    drop-shadow(0 6px 12px rgba(255,182,215,.35))
-    drop-shadow(0 0 12px rgba(255,200,230,.6));
-  transition: transform .2s ease;
+    drop-shadow(0 10px 18px rgba(255,182,215,.4))
+    drop-shadow(0 0 14px rgba(200,230,255,.6));
 }
 
-.tail-widget img{
-  width:100%;
+/* segments */
+.tail{
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-/* float */
-@keyframes tailFloat{
-  0%,100%{ transform: translateY(0); }
-  50%{ transform: translateY(-6px); }
+.tail-seg{
+  position: absolute;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 50%;
 }
 
-/* hover = excited */
+.seg1{
+  bottom: 0;
+  width: 38px;
+  height: 60px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #ffb3d8, #ff8fc8);
+}
+
+.seg2{
+  bottom: 42px;
+  width: 32px;
+  height: 55px;
+  transform: translateX(-50%) rotate(12deg);
+  background: linear-gradient(180deg, #bde3ff, #8fd2ff);
+}
+
+.seg3{
+  bottom: 82px;
+  width: 26px;
+  height: 48px;
+  transform: translateX(-50%) rotate(20deg);
+  background: linear-gradient(180deg, #ffd6ee, #caa6ff);
+}
+
+/* animations */
+@keyframes tailPopIn{
+  to{ bottom: 14px; }
+}
+
+@keyframes tailIdle{
+  0%,100%{ transform: rotate(0deg); }
+  50%{ transform: rotate(8deg); }
+}
+
 .tail-widget:hover{
-  transform: scale(1.1);
   animation: tailExcited .6s ease-in-out infinite;
 }
 
 @keyframes tailExcited{
-  0%,100%{ transform: rotate(0deg) scale(1.1); }
-  50%{ transform: rotate(6deg) scale(1.15); }
+  0%,100%{ transform: rotate(0deg) scale(1.05); }
+  50%{ transform: rotate(14deg) scale(1.1); }
 }
 
-/* click = happy burst */
-.tail-widget:active{
-  transform: scale(1.2) rotate(10deg);
+.tail-widget.dance{
+  animation: tailDance 0.4s ease-in-out infinite;
+}
+
+@keyframes tailDance{
+  0%{ transform: rotate(0deg); }
+  25%{ transform: rotate(18deg); }
+  50%{ transform: rotate(-18deg); }
+  75%{ transform: rotate(12deg); }
+  100%{ transform: rotate(0deg); }
+}
+
+@keyframes puppyFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-4px); }
 }
 
 .msg{
@@ -193,61 +240,24 @@ body{
   <div class="heart">♡</div>
 </div>
 
-<!-- 🐕 TAIL -->
+<!-- 🐾 CUSTOM TAIL -->
 <div class="tail-widget" id="tail">
-  <img src="/images/puppy-tail.gif" />
+  <div class="tail">
+    <div class="tail-seg seg1"></div>
+    <div class="tail-seg seg2"></div>
+    <div class="tail-seg seg3"></div>
+  </div>
 </div>
 
 <script>
-document.getElementById("msg").textContent =
-  "we will be here soon ♡ please check back later";
-
-/* click reaction sparkle burst */
 const tail = document.getElementById("tail");
 
 tail.addEventListener("click", () => {
-  tail.style.transform = "scale(1.25) rotate(12deg)";
+  tail.classList.add("dance");
   setTimeout(() => {
-    tail.style.transform = "";
-  }, 200);
+    tail.classList.remove("dance");
+  }, 800);
 });
 </script>
-
-<!-- =========================
-     OLD CODE (KEPT FOR LATER)
-     ========================= -->
-
-<!--
-<div class="progress">
-  <div class="bar"></div>
-</div>
-
-<script>
-const messages = [
-  "restoring affection module ♡",
-  "warming up soft systems…",
-  "stabilizing heartbeat…",
-  "loading cozy environment…",
-  "finalizing safe mode ☁️"
-];
-
-let i = 0;
-const msgEl = document.getElementById("msg");
-
-const interval = setInterval(() => {
-  i++;
-  if (i < messages.length) {
-    msgEl.textContent = messages[i];
-  } else {
-    clearInterval(interval);
-  }
-}, 500);
-
-setTimeout(() => {
-  window.location.href = "/middaypuppy";
-}, 2800);
-</script>
--->
-
 </body>
 </html>
