@@ -110,9 +110,46 @@ body{
   background: rgba(255,255,255,.55);
 }
 
-@keyframes puppyFloat{
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+/* 🐕 REACTIVE TAIL */
+.tail-widget{
+  position: fixed;
+  right: 16px;
+  bottom: 12px;
+  width: 80px;
+  z-index: 100;
+  cursor: pointer;
+
+  animation: tailFloat 3s ease-in-out infinite;
+  filter:
+    drop-shadow(0 6px 12px rgba(255,182,215,.35))
+    drop-shadow(0 0 12px rgba(255,200,230,.6));
+  transition: transform .2s ease;
+}
+
+.tail-widget img{
+  width:100%;
+}
+
+/* float */
+@keyframes tailFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-6px); }
+}
+
+/* hover = excited */
+.tail-widget:hover{
+  transform: scale(1.1);
+  animation: tailExcited .6s ease-in-out infinite;
+}
+
+@keyframes tailExcited{
+  0%,100%{ transform: rotate(0deg) scale(1.1); }
+  50%{ transform: rotate(6deg) scale(1.15); }
+}
+
+/* click = happy burst */
+.tail-widget:active{
+  transform: scale(1.2) rotate(10deg);
 }
 
 .msg{
@@ -142,13 +179,11 @@ body{
   <div class="subtitle">SYSTEM: gently restoring</div>
 
   <div class="status">
-    please wait… <span>new stuffs coming!</span>
+    please wait… <span>new stuffs incoming!</span>
   </div>
 
   <div class="puppy-loader">
-    <div class="puppy-ear ear-left"></div>
-    <div class="puppy-ear ear-right"></div>
-    <img src="/images/puppyboypfp.png" alt="middaypuppy puppy avatar" class="puppy-face" />
+    <img src="/images/puppyboypfp.png" class="puppy-face" />
   </div>
 
   <div class="msg" id="msg">
@@ -158,9 +193,24 @@ body{
   <div class="heart">♡</div>
 </div>
 
+<!-- 🐕 TAIL -->
+<div class="tail-widget" id="tail">
+  <img src="/images/puppy-tail.gif" />
+</div>
+
 <script>
 document.getElementById("msg").textContent =
   "we will be here soon ♡ please check back later";
+
+/* click reaction sparkle burst */
+const tail = document.getElementById("tail");
+
+tail.addEventListener("click", () => {
+  tail.style.transform = "scale(1.25) rotate(12deg)";
+  setTimeout(() => {
+    tail.style.transform = "";
+  }, 200);
+});
 </script>
 
 <!-- =========================
