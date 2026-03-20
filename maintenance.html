@@ -106,94 +106,6 @@ body{
     0 0 22px rgba(255,255,255,.55);
 }
 
-/* 🐾 CUSTOM TAIL */
-.tail-widget{
-  position: fixed;
-  bottom: -120px;
-  right: 18px;
-  width: 90px;
-  height: 140px;
-  z-index: 100;
-  cursor: pointer;
-
-  animation:
-    tailPopIn 0.9s cubic-bezier(.2,.8,.2,1) forwards,
-    tailIdle 2.8s ease-in-out infinite 1s;
-
-  filter:
-    drop-shadow(0 10px 18px rgba(255,182,215,.4))
-    drop-shadow(0 0 14px rgba(200,230,255,.6));
-}
-
-/* segments */
-.tail{
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.tail-seg{
-  position: absolute;
-  left: 50%;
-  transform-origin: bottom center;
-  border-radius: 50%;
-}
-
-.seg1{
-  bottom: 0;
-  width: 38px;
-  height: 60px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, #ffb3d8, #ff8fc8);
-}
-
-.seg2{
-  bottom: 42px;
-  width: 32px;
-  height: 55px;
-  transform: translateX(-50%) rotate(12deg);
-  background: linear-gradient(180deg, #bde3ff, #8fd2ff);
-}
-
-.seg3{
-  bottom: 82px;
-  width: 26px;
-  height: 48px;
-  transform: translateX(-50%) rotate(20deg);
-  background: linear-gradient(180deg, #ffd6ee, #caa6ff);
-}
-
-/* animations */
-@keyframes tailPopIn{
-  to{ bottom: 14px; }
-}
-
-@keyframes tailIdle{
-  0%,100%{ transform: rotate(0deg); }
-  50%{ transform: rotate(8deg); }
-}
-
-.tail-widget:hover{
-  animation: tailExcited .6s ease-in-out infinite;
-}
-
-@keyframes tailExcited{
-  0%,100%{ transform: rotate(0deg) scale(1.05); }
-  50%{ transform: rotate(14deg) scale(1.1); }
-}
-
-.tail-widget.dance{
-  animation: tailDance 0.4s ease-in-out infinite;
-}
-
-@keyframes tailDance{
-  0%{ transform: rotate(0deg); }
-  25%{ transform: rotate(18deg); }
-  50%{ transform: rotate(-18deg); }
-  75%{ transform: rotate(12deg); }
-  100%{ transform: rotate(0deg); }
-}
-
 @keyframes puppyFloat{
   0%,100%{ transform: translateY(0); }
   50%{ transform: translateY(-4px); }
@@ -239,25 +151,5 @@ body{
 
   <div class="heart">♡</div>
 </div>
-
-<!-- 🐾 CUSTOM TAIL -->
-<div class="tail-widget" id="tail">
-  <div class="tail">
-    <div class="tail-seg seg1"></div>
-    <div class="tail-seg seg2"></div>
-    <div class="tail-seg seg3"></div>
-  </div>
-</div>
-
-<script>
-const tail = document.getElementById("tail");
-
-tail.addEventListener("click", () => {
-  tail.classList.add("dance");
-  setTimeout(() => {
-    tail.classList.remove("dance");
-  }, 800);
-});
-</script>
 </body>
 </html>
