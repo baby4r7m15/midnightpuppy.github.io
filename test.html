@@ -11,14 +11,7 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
 
-*{ margin:0; padding:0; box-sizing:border-box; }
-
-:root{
-  --tail-rotate: 0deg;
-  --tail-lift: 0px;
-  --tail-scale: 1;
-  --tail-glow: .72;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body{
   font-family:"Montserrat",sans-serif;
@@ -92,20 +85,74 @@ body{
 }
 
 .puppy-loader{
-  margin:26px auto 0;
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin: 26px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: puppyFloat 3.2s ease-in-out infinite;
 }
 
 .puppy-face{
-  width:104px;
-  height:104px;
-  object-fit:cover;
-  border-radius:50%;
-  border:4px solid rgba(255,255,255,.72);
+  position: relative;
+  z-index: 3;
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,.72);
   box-shadow:
     0 10px 28px rgba(255,182,215,.26),
     0 0 22px rgba(255,255,255,.55);
   background: rgba(255,255,255,.55);
+}
+
+.puppy-ear{
+  position: absolute;
+  top: 6px;
+  width: 44px;
+  height: 58px;
+  z-index: 1;
+  background: linear-gradient(180deg, #d7a889 0%, #bf8769 100%);
+  border: 3px solid rgba(255,255,255,.35);
+  box-shadow:
+    0 8px 18px rgba(255,182,215,.16),
+    inset 0 2px 8px rgba(255,255,255,.18);
+}
+
+.puppy-ear::after{
+  content:"";
+  position:absolute;
+  inset: 9px 8px 13px 8px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,220,230,.72), rgba(255,205,220,.45));
+  opacity: .55;
+}
+
+.ear-left{
+  left: 16px;
+  transform-origin: top center;
+  border-radius: 55% 45% 70% 70%;
+  animation: floppyLeft 2.2s ease-in-out infinite;
+}
+
+.ear-right{
+  right: 16px;
+  transform-origin: top center;
+  border-radius: 45% 55% 70% 70%;
+  animation: floppyRight 2.2s ease-in-out infinite;
+}
+
+@keyframes floppyLeft{
+  0%,100%{ transform: rotate(-18deg); }
+  50%{ transform: rotate(-30deg); }
+}
+
+@keyframes floppyRight{
+  0%,100%{ transform: rotate(18deg); }
+  50%{ transform: rotate(30deg); }
 }
 
 @keyframes puppyFloat{
@@ -130,117 +177,54 @@ body{
   50%{ transform:scale(1.2); }
 }
 
-/* Tail system */
+/* Fluid tail */
 .tail-widget{
-  position:fixed;
-  right:0;
-  bottom:0;
-  width:170px;
-  height:190px;
-  z-index:30;
-  cursor:pointer;
-  user-select:none;
-  -webkit-user-drag:none;
-  pointer-events:auto;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 220px;
+  height: 220px;
+  z-index: 30;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .tail-shell{
-  position:absolute;
-  right:-8px;
-  bottom:-120px;
-  width:100%;
-  height:100%;
-  transform-origin: 88% 100%;
-  animation:
-    tailPopIn .9s cubic-bezier(.2,.9,.2,1) forwards,
-    tailPeek 3.6s ease-in-out infinite 1s;
+  position: absolute;
+  right: -8px;
+  bottom: -170px;
+  width: 220px;
+  height: 220px;
+  opacity: 0;
+  animation: tailPopIn .9s cubic-bezier(.22,.86,.2,1) forwards;
 }
 
 .tail-glow{
   position:absolute;
-  inset:28px 10px 10px 30px;
+  inset: 48px 20px 0 48px;
   border-radius:50%;
   background:
     radial-gradient(circle at 45% 55%,
-      rgba(255,179,216,.28) 0%,
-      rgba(255,210,235,.22) 28%,
-      rgba(255,245,250,.18) 52%,
-      transparent 76%);
+      rgba(255, 216, 234, .45) 0%,
+      rgba(255, 195, 220, .25) 28%,
+      rgba(255,255,255,.14) 55%,
+      transparent 78%);
   filter: blur(18px);
-  opacity: var(--tail-glow);
   pointer-events:none;
-  transition: opacity .18s ease;
+  animation: glowPulse 2.6s ease-in-out infinite;
 }
 
-.tail-art{
+.tail-canvas{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:contain;
-  object-position:bottom right;
-  pointer-events:none;
-  transform-origin: 78% 92%;
-  transform:
-    translateY(var(--tail-lift))
-    rotate(var(--tail-rotate))
-    scale(var(--tail-scale));
-  animation:
-    tailIdleSway 2.4s ease-in-out infinite,
-    tailBreath 3.4s ease-in-out infinite;
-  transition:
-    transform .14s ease-out,
-    filter .18s ease,
-    opacity .18s ease;
+  display:block;
   filter:
-    drop-shadow(0 10px 18px rgba(255,182,215,.30))
-    drop-shadow(0 0 16px rgba(255,225,238,.38));
-}
-
-.tail-widget:hover .tail-art{
-  filter:
-    drop-shadow(0 12px 24px rgba(255,182,215,.42))
-    drop-shadow(0 0 22px rgba(255,230,240,.52));
-}
-
-.tail-spark{
-  position:absolute;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:rgba(255,255,255,.95);
-  box-shadow:
-    0 0 10px rgba(255,255,255,.9),
-    0 0 14px rgba(255,210,235,.65);
-  opacity:.72;
-  pointer-events:none;
-  animation: sparkleFloat 2.8s ease-in-out infinite;
-}
-
-.tail-spark.s1{ right:102px; bottom:132px; animation-delay:0s; }
-.tail-spark.s2{ right:42px; bottom:96px; animation-delay:.7s; width:6px; height:6px; }
-.tail-spark.s3{ right:118px; bottom:60px; animation-delay:1.4s; width:5px; height:5px; }
-
-.tail-widget.curious .tail-shell{
-  animation:
-    tailPopHold .25s ease forwards,
-    tailCuriousBounce .55s ease-in-out infinite;
-}
-
-.tail-widget.curious .tail-art{
-  animation:
-    tailCuriousSway .55s ease-in-out infinite,
-    tailBreath 2.2s ease-in-out infinite;
-}
-
-.tail-widget.dance .tail-shell{
-  animation: tailDanceWrap .32s ease-in-out 3;
-}
-
-.tail-widget.dance .tail-art{
-  animation:
-    tailDance .32s ease-in-out 3,
-    tailBreath .9s ease-in-out 3;
+    drop-shadow(0 12px 20px rgba(255,182,215,.25))
+    drop-shadow(0 0 18px rgba(255,240,246,.5));
 }
 
 .tail-burst{
@@ -251,75 +235,42 @@ body{
 
 .tail-burst span{
   position:absolute;
-  right:62px;
-  bottom:54px;
+  right:74px;
+  bottom:60px;
   width:10px;
   height:10px;
   border-radius:50%;
   opacity:0;
-  background: radial-gradient(circle, #fff 0%, #ffd6ee 55%, #ffeef6 100%);
+  background: radial-gradient(circle, #fff 0%, #ffddea 55%, #fff8fb 100%);
   box-shadow:
-    0 0 10px rgba(255,255,255,.8),
-    0 0 16px rgba(255,182,215,.55);
+    0 0 10px rgba(255,255,255,.9),
+    0 0 16px rgba(255,196,223,.65);
 }
 
-.tail-widget.dance .tail-burst span:nth-child(1){ animation: burst1 .55s ease-out; }
-.tail-widget.dance .tail-burst span:nth-child(2){ animation: burst2 .55s ease-out; }
-.tail-widget.dance .tail-burst span:nth-child(3){ animation: burst3 .55s ease-out; }
-.tail-widget.dance .tail-burst span:nth-child(4){ animation: burst4 .55s ease-out; }
+.tail-widget.bursting .tail-burst span:nth-child(1){ animation: burst1 .55s ease-out; }
+.tail-widget.bursting .tail-burst span:nth-child(2){ animation: burst2 .55s ease-out; }
+.tail-widget.bursting .tail-burst span:nth-child(3){ animation: burst3 .55s ease-out; }
+.tail-widget.bursting .tail-burst span:nth-child(4){ animation: burst4 .55s ease-out; }
 
 @keyframes tailPopIn{
-  from{ transform: translateY(130px) scale(.88); opacity:0; }
-  65%{ transform: translateY(-10px) scale(1.03); opacity:1; }
-  to{ transform: translateY(0) scale(1); opacity:1; bottom:0; }
+  0%{
+    transform: translateY(150px) scale(.86);
+    opacity: 0;
+  }
+  70%{
+    transform: translateY(-8px) scale(1.03);
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    bottom: 0;
+  }
 }
 
-@keyframes tailPeek{
-  0%,100%{ transform: translateY(0); }
-  50%{ transform: translateY(-4px); }
-}
-
-@keyframes tailPopHold{
-  from{ bottom:-120px; opacity:0; }
-  to{ bottom:0; opacity:1; }
-}
-
-@keyframes tailIdleSway{
-  0%,100%{ transform: translateY(var(--tail-lift)) rotate(calc(var(--tail-rotate) + 7deg)) scale(var(--tail-scale)); }
-  50%{ transform: translateY(calc(var(--tail-lift) - 2px)) rotate(calc(var(--tail-rotate) + 18deg)) scale(var(--tail-scale)); }
-}
-
-@keyframes tailCuriousSway{
-  0%,100%{ transform: translateY(calc(var(--tail-lift) - 1px)) rotate(calc(var(--tail-rotate) + 10deg)) scale(calc(var(--tail-scale) + .01)); }
-  50%{ transform: translateY(calc(var(--tail-lift) - 6px)) rotate(calc(var(--tail-rotate) + 28deg)) scale(calc(var(--tail-scale) + .05)); }
-}
-
-@keyframes tailDance{
-  0%{ transform: translateY(var(--tail-lift)) rotate(8deg) scale(1); }
-  25%{ transform: translateY(calc(var(--tail-lift) - 6px)) rotate(30deg) scale(1.06); }
-  50%{ transform: translateY(calc(var(--tail-lift) - 2px)) rotate(-4deg) scale(.98); }
-  75%{ transform: translateY(calc(var(--tail-lift) - 8px)) rotate(26deg) scale(1.05); }
-  100%{ transform: translateY(var(--tail-lift)) rotate(8deg) scale(1); }
-}
-
-@keyframes tailDanceWrap{
-  0%,100%{ transform: translateY(0) scale(1.01); }
-  50%{ transform: translateY(-8px) scale(1.06); }
-}
-
-@keyframes tailCuriousBounce{
-  0%,100%{ transform: translateY(0); }
-  50%{ transform: translateY(-8px); }
-}
-
-@keyframes tailBreath{
-  0%,100%{ filter: drop-shadow(0 10px 18px rgba(255,182,215,.30)) drop-shadow(0 0 16px rgba(255,225,238,.38)); }
-  50%{ filter: drop-shadow(0 12px 22px rgba(255,182,215,.36)) drop-shadow(0 0 22px rgba(255,235,242,.46)); }
-}
-
-@keyframes sparkleFloat{
-  0%,100%{ transform: translateY(0) scale(.9); opacity:.45; }
-  50%{ transform: translateY(-8px) scale(1.1); opacity:.95; }
+@keyframes glowPulse{
+  0%,100%{ opacity:.55; transform:scale(.96); }
+  50%{ opacity:.95; transform:scale(1.06); }
 }
 
 @keyframes burst1{
@@ -344,9 +295,14 @@ body{
 }
 
 @media (max-width: 700px){
-  .tail-widget{
-    width:132px;
-    height:150px;
+  .tail-widget,
+  .tail-shell{
+    width: 170px;
+    height: 170px;
+  }
+
+  .tail-shell{
+    bottom: -135px;
   }
 }
 </style>
@@ -364,7 +320,9 @@ body{
   </div>
 
   <div class="puppy-loader">
-    <img src="/images/puppyboypfp.png" class="puppy-face" alt="middaypuppy avatar" />
+    <div class="puppy-ear ear-left"></div>
+    <div class="puppy-ear ear-right"></div>
+    <img src="/images/puppyboypfp.png" alt="middaypuppy puppy avatar" class="puppy-face" />
   </div>
 
   <div class="msg" id="msg">
@@ -374,13 +332,10 @@ body{
   <div class="heart">♡</div>
 </div>
 
-<div class="tail-widget" id="tail" aria-label="wagging puppy tail">
+<div class="tail-widget" id="tail" aria-label="fluid puppy tail">
   <div class="tail-shell">
     <div class="tail-glow"></div>
-    <img src="/images/puppy-tail-pastel.png" alt="" class="tail-art" />
-    <div class="tail-spark s1"></div>
-    <div class="tail-spark s2"></div>
-    <div class="tail-spark s3"></div>
+    <canvas id="tailCanvas" class="tail-canvas" width="220" height="220"></canvas>
     <div class="tail-burst">
       <span></span><span></span><span></span><span></span>
     </div>
@@ -391,73 +346,379 @@ body{
 document.getElementById("msg").textContent =
   "we will be here soon ♡ please check back later";
 
-const tail = document.getElementById("tail");
-const root = document.documentElement;
+const tailWidget = document.getElementById("tail");
+const canvas = document.getElementById("tailCanvas");
+const ctx = canvas.getContext("2d");
 
-let danceTimeout = null;
-let proximityActive = false;
+const state = {
+  mouseX: window.innerWidth * 0.5,
+  mouseY: window.innerHeight * 0.5,
+  hover: false,
+  danceUntil: 0,
+  popDone: false,
+  time: 0
+};
 
-function setTailState(rotation, lift, scale, glow, curious){
-  root.style.setProperty("--tail-rotate", rotation + "deg");
-  root.style.setProperty("--tail-lift", lift + "px");
-  root.style.setProperty("--tail-scale", scale);
-  root.style.setProperty("--tail-glow", glow);
+const DPR = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
 
-  tail.classList.toggle("curious", curious);
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = Math.round(rect.width * DPR);
+  canvas.height = Math.round(rect.height * DPR);
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+setTimeout(() => {
+  state.popDone = true;
+}, 950);
+
+document.addEventListener("mousemove", (e) => {
+  state.mouseX = e.clientX;
+  state.mouseY = e.clientY;
+});
+
+tailWidget.addEventListener("mouseenter", () => {
+  state.hover = true;
+});
+
+tailWidget.addEventListener("mouseleave", () => {
+  state.hover = false;
+});
+
+tailWidget.addEventListener("click", () => {
+  state.danceUntil = performance.now() + 900;
+  tailWidget.classList.remove("bursting");
+  void tailWidget.offsetWidth;
+  tailWidget.classList.add("bursting");
+  setTimeout(() => tailWidget.classList.remove("bursting"), 560);
+});
+
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
 }
 
-function resetTail(){
-  proximityActive = false;
-  setTailState(0, 0, 1, .72, false);
+function lerp(a, b, t) {
+  return a + (b - a) * t;
 }
 
-document.addEventListener("mousemove", (event) => {
-  const rect = tail.getBoundingClientRect();
-  const cx = rect.left + rect.width * 0.72;
-  const cy = rect.top + rect.height * 0.78;
+function smoothstep(edge0, edge1, x) {
+  const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
+  return t * t * (3 - 2 * t);
+}
 
-  const dx = event.clientX - cx;
-  const dy = event.clientY - cy;
-  const distance = Math.hypot(dx, dy);
+function drawTail(now) {
+  const rect = canvas.getBoundingClientRect();
+  const w = rect.width;
+  const h = rect.height;
 
-  const reactRadius = 240;
-  if (distance > reactRadius) {
-    if (proximityActive) resetTail();
-    return;
+  ctx.clearRect(0, 0, w, h);
+
+  state.time = now * 0.001;
+
+  const anchorX = w - 36;
+  const anchorY = h - 26;
+
+  const pageAnchorX = rect.left + anchorX;
+  const pageAnchorY = rect.top + anchorY;
+
+  const dx = state.mouseX - pageAnchorX;
+  const dy = state.mouseY - pageAnchorY;
+  const dist = Math.hypot(dx, dy);
+
+  const react = 1 - clamp(dist / 280, 0, 1);
+  const proximity = smoothstep(0, 1, react);
+  const dance = now < state.danceUntil ? 1 : 0;
+  const hoverBoost = state.hover ? 1 : 0;
+
+  const baseAngle =
+    -2.05
+    + Math.sin(state.time * 2.2) * 0.12
+    + proximity * 0.34
+    + hoverBoost * 0.18
+    + dance * Math.sin(state.time * 22) * 0.28;
+
+  const curve1 =
+    -0.95
+    + Math.sin(state.time * 2.5 + 0.5) * 0.16
+    + proximity * 0.28
+    + hoverBoost * 0.16
+    + dance * Math.sin(state.time * 24 + 0.7) * 0.25;
+
+  const curve2 =
+    -1.55
+    + Math.sin(state.time * 2.8 + 1.4) * 0.19
+    + proximity * 0.36
+    + hoverBoost * 0.18
+    + dance * Math.sin(state.time * 26 + 1.1) * 0.32;
+
+  const lift =
+    Math.sin(state.time * 1.8) * 4
+    + proximity * 8
+    + hoverBoost * 6
+    + dance * Math.sin(state.time * 16) * 5;
+
+  const length = w < 190 ? 112 : 140;
+
+  const p0 = { x: anchorX, y: anchorY - lift * 0.35 };
+  const p1 = {
+    x: p0.x + Math.cos(baseAngle) * (length * 0.38),
+    y: p0.y + Math.sin(baseAngle) * (length * 0.38)
+  };
+  const p2 = {
+    x: p1.x + Math.cos(curve1) * (length * 0.34),
+    y: p1.y + Math.sin(curve1) * (length * 0.34)
+  };
+  const p3 = {
+    x: p2.x + Math.cos(curve2) * (length * 0.28),
+    y: p2.y + Math.sin(curve2) * (length * 0.28)
+  };
+
+  const spine = sampleBezier(p0, p1, p2, p3, 34);
+
+  const leftPts = [];
+  const rightPts = [];
+
+  for (let i = 0; i < spine.length; i++) {
+    const pt = spine[i];
+    const prev = spine[Math.max(0, i - 1)];
+    const next = spine[Math.min(spine.length - 1, i + 1)];
+    const tangentX = next.x - prev.x;
+    const tangentY = next.y - prev.y;
+    const len = Math.hypot(tangentX, tangentY) || 1;
+    const nx = -tangentY / len;
+    const ny = tangentX / len;
+
+    const t = i / (spine.length - 1);
+    const baseWidth = lerp(20, 5.8, t);
+    const fluff = (1 - t) * 1.4 + Math.sin(state.time * 4 + i * 0.8) * 0.5;
+    const width = baseWidth + fluff;
+
+    leftPts.push({ x: pt.x + nx * width, y: pt.y + ny * width });
+    rightPts.push({ x: pt.x - nx * width, y: pt.y - ny * width });
   }
 
-  proximityActive = true;
+  drawOuterGlow(leftPts, rightPts);
+  drawTailShape(leftPts, rightPts, spine);
+  drawCenterHighlight(spine);
+  drawTipFluff(p3, spine[spine.length - 2]);
+  drawFurStrands(leftPts, rightPts, spine, now);
+  drawBaseSoftShadow(anchorX, anchorY);
 
-  const t = 1 - Math.min(distance / reactRadius, 1);
-  const rotate = Math.max(-4, Math.min(14, (dx / 28) * t));
-  const lift = -Math.round(10 * t);
-  const scale = 1 + (0.05 * t);
-  const glow = 0.72 + (0.38 * t);
-  const curious = t > 0.18;
+  requestAnimationFrame(drawTail);
+}
 
-  setTailState(rotate, lift, scale, glow, curious);
-});
+function sampleBezier(p0, p1, p2, p3, count) {
+  const pts = [];
+  for (let i = 0; i <= count; i++) {
+    const t = i / count;
+    const mt = 1 - t;
+    const x =
+      mt * mt * mt * p0.x +
+      3 * mt * mt * t * p1.x +
+      3 * mt * t * t * p2.x +
+      t * t * t * p3.x;
+    const y =
+      mt * mt * mt * p0.y +
+      3 * mt * mt * t * p1.y +
+      3 * mt * t * t * p2.y +
+      t * t * t * p3.y;
+    pts.push({ x, y });
+  }
+  return pts;
+}
 
-document.addEventListener("mouseleave", resetTail);
+function roundedPolygon(points) {
+  if (!points.length) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
 
-tail.addEventListener("mouseenter", () => {
-  setTailState(6, -8, 1.05, 1.0, true);
-});
+  for (let i = 1; i < points.length - 1; i++) {
+    const cx = (points[i].x + points[i + 1].x) * 0.5;
+    const cy = (points[i].y + points[i + 1].y) * 0.5;
+    ctx.quadraticCurveTo(points[i].x, points[i].y, cx, cy);
+  }
 
-tail.addEventListener("mouseleave", () => {
-  if (!proximityActive) resetTail();
-});
+  const last = points[points.length - 1];
+  ctx.lineTo(last.x, last.y);
+}
 
-tail.addEventListener("click", () => {
-  tail.classList.remove("dance");
-  void tail.offsetWidth;
-  tail.classList.add("dance");
+function buildTailPath(leftPts, rightPts) {
+  ctx.beginPath();
+  roundedPolygon(leftPts);
 
-  clearTimeout(danceTimeout);
-  danceTimeout = setTimeout(() => {
-    tail.classList.remove("dance");
-  }, 950);
-});
+  for (let i = rightPts.length - 1; i > 0; i--) {
+    const curr = rightPts[i];
+    const prev = rightPts[i - 1];
+    const cx = (curr.x + prev.x) * 0.5;
+    const cy = (curr.y + prev.y) * 0.5;
+    ctx.quadraticCurveTo(curr.x, curr.y, cx, cy);
+  }
+
+  ctx.closePath();
+}
+
+function drawOuterGlow(leftPts, rightPts) {
+  ctx.save();
+  buildTailPath(leftPts, rightPts);
+  ctx.shadowBlur = 24;
+  ctx.shadowColor = "rgba(255, 213, 231, .55)";
+  ctx.fillStyle = "rgba(255, 237, 245, .28)";
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawTailShape(leftPts, rightPts, spine) {
+  ctx.save();
+  buildTailPath(leftPts, rightPts);
+
+  const gradient = ctx.createLinearGradient(
+    spine[0].x, spine[0].y,
+    spine[spine.length - 1].x, spine[spine.length - 1].y
+  );
+  gradient.addColorStop(0, "#c89268");
+  gradient.addColorStop(0.18, "#d9a57f");
+  gradient.addColorStop(0.42, "#efc6b7");
+  gradient.addColorStop(0.72, "#ffdbe9");
+  gradient.addColorStop(1, "#fffafc");
+
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  const sheen = ctx.createRadialGradient(
+    spine[8].x, spine[8].y,
+    2,
+    spine[8].x, spine[8].y,
+    54
+  );
+  sheen.addColorStop(0, "rgba(255,255,255,.55)");
+  sheen.addColorStop(.38, "rgba(255,240,246,.18)");
+  sheen.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = sheen;
+  ctx.fill();
+
+  ctx.lineWidth = 1.2;
+  ctx.strokeStyle = "rgba(255,255,255,.24)";
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function drawCenterHighlight(spine) {
+  ctx.save();
+  ctx.beginPath();
+
+  for (let i = 0; i < spine.length; i++) {
+    const p = spine[i];
+    const wobble = Math.sin(state.time * 3 + i * 0.45) * 1.1;
+    const x = p.x + 2 - i * 0.03;
+    const y = p.y - 1.5 + wobble * 0.15;
+
+    if (i === 0) ctx.moveTo(x, y);
+    else {
+      const prev = spine[i - 1];
+      const px = prev.x + 2 - (i - 1) * 0.03;
+      const py = prev.y - 1.5;
+      ctx.quadraticCurveTo(px, py, (px + x) / 2, (py + y) / 2);
+    }
+  }
+
+  ctx.strokeStyle = "rgba(255,255,255,.42)";
+  ctx.lineWidth = 2.1;
+  ctx.lineCap = "round";
+  ctx.shadowBlur = 8;
+  ctx.shadowColor = "rgba(255,255,255,.25)";
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawTipFluff(tip, nearTip) {
+  const angle = Math.atan2(tip.y - nearTip.y, tip.x - nearTip.x);
+  ctx.save();
+  ctx.translate(tip.x, tip.y);
+  ctx.rotate(angle);
+
+  for (let i = 0; i < 7; i++) {
+    const spread = -0.75 + i * 0.24;
+    const len = 16 + (i % 2) * 4;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.quadraticCurveTo(
+      Math.cos(spread) * (len * 0.45),
+      Math.sin(spread) * (len * 0.45),
+      Math.cos(spread) * len,
+      Math.sin(spread) * len
+    );
+    ctx.strokeStyle = i < 5 ? "rgba(255,255,255,.88)" : "rgba(255,241,247,.8)";
+    ctx.lineWidth = 2.2 - i * 0.14;
+    ctx.lineCap = "round";
+    ctx.stroke();
+  }
+
+  const puff = ctx.createRadialGradient(0, 0, 0, 0, 0, 16);
+  puff.addColorStop(0, "rgba(255,255,255,.95)");
+  puff.addColorStop(.55, "rgba(255,247,250,.78)");
+  puff.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = puff;
+  ctx.beginPath();
+  ctx.arc(0, 0, 16, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawFurStrands(leftPts, rightPts, spine, now) {
+  ctx.save();
+  ctx.lineCap = "round";
+
+  for (let i = 3; i < spine.length - 2; i += 2) {
+    const t = i / (spine.length - 1);
+    const pt = spine[i];
+    const prev = spine[i - 1];
+    const next = spine[i + 1];
+    const tx = next.x - prev.x;
+    const ty = next.y - prev.y;
+    const len = Math.hypot(tx, ty) || 1;
+    const nx = -ty / len;
+    const ny = tx / len;
+
+    const furLen = lerp(6, 2.5, t) + Math.sin(now * 0.008 + i) * 0.4;
+
+    const leftBase = leftPts[i];
+    const rightBase = rightPts[i];
+
+    ctx.strokeStyle = t > 0.72 ? "rgba(255,255,255,.58)" : "rgba(255, 238, 244, .32)";
+    ctx.lineWidth = t > 0.7 ? 1.15 : 0.85;
+
+    ctx.beginPath();
+    ctx.moveTo(leftBase.x, leftBase.y);
+    ctx.lineTo(leftBase.x + nx * furLen, leftBase.y + ny * furLen);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(rightBase.x, rightBase.y);
+    ctx.lineTo(rightBase.x - nx * furLen, rightBase.y - ny * furLen);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawBaseSoftShadow(x, y) {
+  ctx.save();
+  const shadow = ctx.createRadialGradient(x - 6, y - 4, 4, x - 6, y - 4, 28);
+  shadow.addColorStop(0, "rgba(188, 125, 104, .20)");
+  shadow.addColorStop(.55, "rgba(255, 189, 213, .10)");
+  shadow.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = shadow;
+  ctx.beginPath();
+  ctx.arc(x - 6, y - 4, 28, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+requestAnimationFrame(drawTail);
 </script>
 
 </body>
