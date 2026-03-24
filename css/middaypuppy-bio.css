@@ -175,9 +175,9 @@ body{
 .panel{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:18px;
-  padding:16px;
-  box-shadow:var(--glow);
+  box-shadow:
+    0 8px 24px rgba(255,180,220,.18),
+    0 0 12px rgba(255,200,230,.15);
 }
 
 .panel-head{
