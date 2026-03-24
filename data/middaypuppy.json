@@ -1,0 +1,158 @@
+{
+  "theme": {
+    "themeColor": "#fff3f8",
+    "bg": "#fff6fb",
+    "bg2": "#fff0f7",
+    "panel": "rgba(255, 255, 255, 0.75)",
+    "panel2": "rgba(255, 240, 250, 0.65)",
+
+    "cyan": "#ff9ecb",
+    "cyan2": "#ffc7e3",
+    "blue": "#ffd6ec",
+    "violet": "#ffc1dd",
+    "purple": "#ffb6d9",
+
+    "pink": "#ffb6d9",
+    "pink2": "#ffd6ec",
+
+    "line": "rgba(255, 180, 220, 0.25)",
+    "line2": "rgba(255, 200, 230, 0.25)",
+
+    "text": "#5c4b56",
+    "muted": "#9a7d8c",
+    "shadow": "rgba(255, 180, 220, 0.25)",
+
+    "titleGlow": "rgba(255, 200, 230, 0.6)",
+    "glitchTop": "rgba(255, 210, 230, 0.5)",
+    "glitchBottom": "rgba(255, 180, 220, 0.6)"
+  },
+
+  "head": {
+    "title": "middaypuppy.exe"
+  },
+
+  "header": {
+    "title": "middaypuppy.exe",
+    "subtitle": "SIGNAL STABLE • HEART WARM • SUNLIGHT LOADED",
+    "nav": [
+      { "label": "BIO", "href": "/", "active": true }
+    ],
+    "stats": [
+      { "label": "mood", "value": "soft ☁" },
+      { "label": "ping", "value": "stable" },
+      { "label": "heart", "value": "safe ♡" }
+    ]
+  },
+
+  "profile": {
+    "panelTitle": "USER PROFILE",
+    "panelChip": "ONLINE",
+
+    "avatar": {
+      "src": "/middaypuppy/pfp.png",
+      "alt": "middaypuppy avatar"
+    },
+
+    "name": "MiddayPuppy.exe",
+
+    "metaHtml": "Build: <b>daylight</b> • Level: <b>21</b> • Status: <b>warm and safe</b>",
+
+    "bars": [
+      {
+        "label": "SOCIAL BATTERY",
+        "percent": 78,
+        "value": "78 / 100",
+        "fillClass": "hp"
+      },
+      {
+        "label": "AFFECTION.EXE",
+        "percent": 92,
+        "value": "restored ♡",
+        "fillClass": "ep"
+      }
+    ],
+
+    "loadoutTitle": "LOADOUT",
+
+    "loadout": [
+      "hoodie.zip (soft + oversized)",
+      "sunlight.png (warm)",
+      "comfort.exe (running)",
+      "snacks.dat (shared)"
+    ]
+  },
+
+  "bio": {
+    "panelTitle": "BIO LOG",
+    "panelChip": "LIVE",
+
+    "entries": [
+      { "text": "middaypuppy.exe has logged in", "tag": "OK", "tagClass": "blue" },
+      { "text": "sunlight detected ☁", "tag": "OK", "tagClass": "blue" },
+      { "text": "warmth spreading through system", "tag": "OK", "tagClass": "yellow" },
+      { "text": "user is safe here", "tag": "OK", "tagClass": "blue" }
+    ],
+
+    "vibesTitle": "VIBES",
+
+    "vibes": [
+      "☁ soft",
+      "☀ warm",
+      "♡ safe",
+      "🫧 calm",
+      "🐾 gentle"
+    ]
+  },
+
+  "statsPanel": {
+    "panelTitle": "Stats",
+    "panelChip": "soft",
+
+    "cards": [
+      {
+        "name": "sleep.exe",
+        "level": "healthy",
+        "percent": 82,
+        "subtext": "rested + cozy"
+      }
+    ]
+  },
+
+  "statusReport": {
+    "panelTitle": "STATUS REPORT",
+    "panelChip": "CURRENT",
+
+    "items": [
+      "heart rate: calm",
+      "anxiety.exe: minimized",
+      "comfort.exe: active",
+      "environment: safe"
+    ]
+  },
+
+  "systemLog": {
+    "panelTitle": "SYSTEM LOG",
+    "panelChip": "RUNNING",
+
+    "lines": [
+      { "time": "12:00:01", "message": "booting middaypuppy.exe…" },
+      { "time": "12:00:10", "message": "loading warmth.dll…", "status": "ok", "statusClass": "term-ok" },
+      { "time": "12:00:15", "message": "affection.exe", "status": "restored", "statusClass": "term-ok" },
+      { "time": "12:00:20", "message": "sunlight renderer active…" },
+
+      { "type": "gap" },
+
+      { "time": "12:01:00", "message": "comfort.exe...", "status": "running", "statusClass": "term-ok" },
+      { "time": "12:02:00", "message": "loneliness.js...", "status": "cleared", "statusClass": "term-ok" },
+
+      { "type": "gap" },
+
+      { "time": "12:05:00", "dimPrefix": "status:", "message": "online • safe • warm" }
+    ]
+  },
+
+  "toast": {
+    "header": "SYSTEM",
+    "line": "middaypuppy.exe initialized • warmth restored • you are safe here"
+  }
+}
