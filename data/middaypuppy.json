@@ -76,8 +76,7 @@
     "entries": [
       { "text": "middaypuppy.exe has logged in", "tag": "OK", "tagClass": "blue" },
       { "text": "sunlight detected ☁", "tag": "OK", "tagClass": "blue" },
-      { "text": "warmth spreading through system", "tag": "OK", "tagClass": "yellow" },
-      { "text": "user is safe here", "tag": "OK", "tagClass": "blue" }
+      { "text": "warmth spreading through system", "tag": "OK", "tagClass": "yellow" }
     ],
 
     "vibes": [
