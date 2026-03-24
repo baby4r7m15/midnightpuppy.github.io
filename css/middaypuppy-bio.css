@@ -1,22 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
 
 :root{
-  --bg: #fff4fb;
-  --bg2: #ffeaf6;
-  --panel: rgba(255, 244, 251, 0.84);
-  --panel2: rgba(255, 244, 251, 0.68);
+  --bg:#fff4fb;
+  --bg2:#ffeaf6;
 
-  --cyan: #acecff;
-  --violet: #d8c0ff;
-  --pink: #ffacd5;
+  --panel:rgba(255,244,251,0.84);
+  --panel2:rgba(255,244,251,0.68);
 
-  --line: rgba(255, 173, 214, 0.28);
-  --text: #6d5a79;
-  --muted: rgba(109, 90, 121, 0.68);
+  --pink:#ffacd5;
+  --cyan:#acecff;
+  --violet:#d8c0ff;
 
-  --shadow: 0 18px 60px rgba(255, 182, 215, 0.25);
+  --line:rgba(255,173,214,0.28);
+
+  --text:#6d5a79;
+  --muted:rgba(109,90,121,0.68);
+
+  --shadow:0 18px 60px rgba(255,182,215,0.25);
 }
 
 /* BODY */
@@ -24,21 +26,41 @@ body{
   font-family:"Montserrat",sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at top, rgba(255,255,255,0.95), transparent 40%),
+    radial-gradient(circle at top,rgba(255,255,255,0.95),transparent 40%),
     linear-gradient(180deg,var(--bg),var(--bg2));
+}
+
+/* HEADER */
+.hud-top{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:center;
+  padding:18px 24px;
+  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,0.35);
+  border-bottom:1px solid var(--line);
+}
+
+.hud-title{
+  font-weight:800;
+  font-size:22px;
+}
+
+.hud-sub{
+  font-size:12px;
+  opacity:.7;
 }
 
 /* GRID */
 .grid{
-  width:min(1200px,100%);
+  max-width:1200px;
   margin:30px auto;
+  padding:0 16px;
   display:grid;
   grid-template-columns:repeat(12,1fr);
   gap:20px;
-  padding:0 16px;
 }
 
-/* PANEL POSITIONS */
 .profile{grid-column:span 4;}
 .bio{grid-column:span 4;}
 .stats-panel{grid-column:span 4;}
@@ -49,15 +71,10 @@ body{
 .panel{
   background:linear-gradient(180deg,var(--panel),var(--panel2));
   border:1px solid var(--line);
-  border-radius:24px;
+  border-radius:26px;
   padding:18px;
   backdrop-filter:blur(16px);
   box-shadow:var(--shadow);
-  transition:.2s;
-}
-
-.panel:hover{
-  transform:translateY(-2px);
 }
 
 /* PANEL HEAD */
@@ -66,27 +83,27 @@ body{
   justify-content:space-between;
   margin-bottom:14px;
   font-weight:800;
-  letter-spacing:.1em;
 }
 
 /* AVATAR */
 .avatar{
   display:flex;
   justify-content:center;
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 
 .avatar-img{
   width:100%;
   max-width:220px;
-  border-radius:20px;
+  border-radius:18px;
   box-shadow:0 10px 30px rgba(255,182,215,.4);
 }
 
-/* TEXT */
+/* PROFILE TEXT */
 #profileName{
   text-align:center;
   font-weight:800;
+  margin-bottom:6px;
 }
 
 #profileMeta{
@@ -100,27 +117,30 @@ body{
   height:10px;
   background:white;
   border-radius:999px;
-  margin:6px 0;
+  margin:8px 0;
   overflow:hidden;
 }
 
 .bar-fill{
   height:100%;
+  border-radius:999px;
 }
 
 .bar-fill.pink{background:var(--pink);}
 .bar-fill.cyan{background:var(--cyan);}
 .bar-fill.violet{background:var(--violet);}
 
-/* LIST */
-ul{list-style:none;}
-
-li{
-  padding:6px 0;
+/* BIO LOG — 💖 THIS IS YOUR “CUTE BOXES” */
+#bioEntries li{
+  background:white;
+  border-radius:14px;
+  padding:10px 12px;
+  margin-bottom:10px;
+  box-shadow:0 6px 14px rgba(255,182,215,.25);
 }
 
-/* TAGS */
-.tag{
+/* VIBES */
+#vibesTags span{
   display:inline-block;
   padding:6px 12px;
   border-radius:999px;
@@ -129,26 +149,23 @@ li{
   box-shadow:0 4px 10px rgba(255,182,215,.2);
 }
 
-/* STATS */
-.stat-card{
-  padding:12px;
-  border-radius:14px;
-  border:1px solid var(--line);
+/* STATS — 💖 RESTORED CARDS */
+#statsCards div{
   background:white;
+  border-radius:16px;
+  padding:12px;
   margin-bottom:10px;
+  box-shadow:0 6px 14px rgba(255,182,215,.25);
+  border:1px solid var(--line);
 }
 
-.stat-label{
-  font-size:12px;
-  color:var(--muted);
-}
-
-.stat-value{
-  font-weight:800;
+/* REPORT */
+#reportItems li{
+  margin-bottom:6px;
 }
 
 /* TERMINAL */
-.terminal-line{
+#systemLog div{
   font-family:monospace;
   font-size:13px;
   margin-bottom:6px;
@@ -174,7 +191,6 @@ li{
   transform:translateY(0);
 }
 
-/* PROGRESS */
 .sao-toast-progress{
   height:4px;
   background:#ffb6c1;
