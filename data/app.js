@@ -1,19 +1,20 @@
-fetch("/middaypuppy/data.json")
-  .then(res => res.json())
-  .then(data => {
+fetch("/data/middaypuppy.json")
+.then(r=>r.json())
+.then(data=>{
 
-    document.getElementById("name").textContent = data.name;
-    document.getElementById("tagline").textContent = data.tagline;
-    document.getElementById("pfp").src = data.avatar;
+  document.getElementById("profileName").textContent = data.profile.name;
+  document.getElementById("profileMeta").innerHTML = data.profile.meta;
 
-    const bioEl = document.getElementById("bio");
-    bioEl.innerHTML = data.bio.map(line => `<div>${line}</div>`).join("");
+  document.getElementById("bioLogList").innerHTML =
+    data.bio.map(e=>`<li>${e}</li>`).join("");
 
-    const statsEl = document.getElementById("stats");
-    statsEl.innerHTML = data.stats.map(s => `
-      <div class="stat">
-        <strong>${s.label}</strong><br>${s.value}
-      </div>
-    `).join("");
+  document.getElementById("vibesList").innerHTML =
+    data.vibes.map(v=>`<span class="chip">${v}</span>`).join("");
 
-  });
+  document.getElementById("statusReportList").innerHTML =
+    data.status.map(s=>`<li>${s}</li>`).join("");
+
+  document.getElementById("systemLogLines").innerHTML =
+    data.logs.map(l=>`<div>${l}</div>`).join("");
+
+});
