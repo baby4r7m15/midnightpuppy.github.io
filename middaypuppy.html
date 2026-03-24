@@ -37,7 +37,9 @@
           id="avatarImg"
           src="/images/puppyboypfp.png"
           alt="middaypuppy.exe avatar"
+          onerror="this.style.display='none'; this.parentElement.classList.add('avatar-fallback');"
         />
+        <div class="avatar-silhouette" aria-hidden="true"></div>
       </div>
 
       <h1 class="profile-name" id="profileName">MiddayPuppy.exe</h1>
@@ -106,247 +108,283 @@
   </div>
 
   <script>
-  const DATA_URL = "/data/middaypuppy.json";
+    const DATA_URL = "/data/middaypuppy.json";
 
-  function escapeHtml(str) {
-    return String(str)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
-  }
-
-  function setText(id, value) {
-    const el = document.getElementById(id);
-    if (el && value !== undefined && value !== null) el.textContent = value;
-  }
-
-  function setHTML(id, value) {
-    const el = document.getElementById(id);
-    if (el && value !== undefined && value !== null) el.innerHTML = value;
-  }
-
-  function applyTheme(theme) {
-    if (!theme) return;
-
-    const root = document.documentElement;
-
-    const themeMap = {
-      bg: "--bg",
-      bg2: "--bg2",
-      panel: "--panel",
-      panel2: "--panel2",
-      cyan: "--cyan",
-      cyan2: "--cyan2",
-      blue: "--blue",
-      violet: "--violet",
-      purple: "--purple",
-      pink: "--pink",
-      pink2: "--pink2",
-      line: "--line",
-      line2: "--line2",
-      text: "--text",
-      muted: "--muted",
-      shadow: "--shadow",
-      titleGlow: "--title-glow",
-      glitchTop: "--glitch-top",
-      glitchBottom: "--glitch-bottom"
-    };
-
-    Object.entries(themeMap).forEach(([key, cssVar]) => {
-      if (theme[key]) root.style.setProperty(cssVar, theme[key]);
-    });
-
-    if (theme.themeColor) {
-      const meta = document.getElementById("themeColorMeta");
-      if (meta) meta.setAttribute("content", theme.themeColor);
-    }
-  }
-
-  function renderNav(items = []) {
-    const nav = document.getElementById("siteNav");
-    if (!nav) return;
-
-    nav.innerHTML = items
-      .map(
-        (item) => `
-          <a class="hud-link${item.active ? " active" : ""}" href="${escapeHtml(item.href)}">
-            ${escapeHtml(item.label)}
-          </a>
-        `
-      )
-      .join("");
-  }
-
-  function renderTopStats(items = []) {
-    const wrap = document.getElementById("topStats");
-    if (!wrap) return;
-
-    wrap.innerHTML = items
-      .map(
-        (item) => `
-          <div class="hud-stat">
-            <span class="hud-stat-label">${escapeHtml(item.label)}</span>
-            <span class="hud-stat-value">${escapeHtml(item.value)}</span>
-          </div>
-        `
-      )
-      .join("");
-  }
-
-  function renderBars(items = []) {
-    const wrap = document.getElementById("profileBars");
-    if (!wrap) return;
-
-    wrap.innerHTML = items
-      .map(
-        (item) => `
-          <div class="bar-row">
-            <div class="bar-meta">
-              <span>${escapeHtml(item.label)}</span>
-              <span>${Number(item.percent) || 0}%</span>
-            </div>
-            <div class="bar">
-              <span class="bar-fill ${escapeHtml(item.fillClass || "")}" style="width:${Number(item.percent) || 0}%"></span>
-            </div>
-          </div>
-        `
-      )
-      .join("");
-  }
-
-  function renderList(id, items = []) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-  }
-
-  function renderVibes(items = []) {
-    const el = document.getElementById("vibesTags");
-    if (!el) return;
-    el.innerHTML = items.map((item) => `<span class="tag">${escapeHtml(item)}</span>`).join("");
-  }
-
-  function renderStatsCards(items = []) {
-    const el = document.getElementById("statsCards");
-    if (!el) return;
-
-    el.innerHTML = items
-      .map(
-        (item) => `
-          <article class="stat-card">
-            <div class="stat-label">${escapeHtml(item.label)}</div>
-            <div class="stat-value">${escapeHtml(item.value)}</div>
-          </article>
-        `
-      )
-      .join("");
-  }
-
-  function renderSystemLog(lines = []) {
-    const el = document.getElementById("systemLog");
-    if (!el) return;
-    el.innerHTML = lines.map((line) => `<div class="terminal-line">${escapeHtml(line)}</div>`).join("");
-  }
-
-  // 🔥 PERFECT SYNC TOAST
-  function runSyncedToast(text = "") {
-    const toast = document.getElementById("saoToast");
-    const target = document.getElementById("toastType");
-    const progress = toast.querySelector(".sao-toast-progress");
-
-    if (!toast || !target) return;
-
-    const typingSpeed = 22; // ms per char
-    const totalTime = text.length * typingSpeed + 600; // padding
-
-    target.textContent = "";
-
-    // show toast
-    requestAnimationFrame(() => toast.classList.add("show"));
-
-    // start progress EXACTLY same time
-    if (progress) {
-      progress.style.animation = `toastTimer ${totalTime / 1000}s linear forwards`;
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
     }
 
-    let i = 0;
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el && value !== undefined && value !== null) el.textContent = value;
+    }
 
-    function typeNext() {
-      if (i < text.length) {
-        target.textContent += text[i];
-        i++;
-        setTimeout(typeNext, typingSpeed);
-      } else {
-        // close AFTER typing finishes
-        setTimeout(() => {
-          toast.classList.remove("show");
-          setTimeout(() => toast.remove(), 220);
-        }, 400);
+    function setHTML(id, value) {
+      const el = document.getElementById(id);
+      if (el && value !== undefined && value !== null) el.innerHTML = value;
+    }
+
+    function applyTheme(theme) {
+      if (!theme) return;
+
+      const root = document.documentElement;
+
+      const themeMap = {
+        bg: "--bg",
+        bg2: "--bg2",
+        panel: "--panel",
+        panel2: "--panel2",
+        cyan: "--cyan",
+        cyan2: "--cyan2",
+        blue: "--blue",
+        violet: "--violet",
+        purple: "--purple",
+        pink: "--pink",
+        pink2: "--pink2",
+        line: "--line",
+        line2: "--line2",
+        text: "--text",
+        muted: "--muted",
+        shadow: "--shadow",
+        titleGlow: "--title-glow",
+        glitchTop: "--glitch-top",
+        glitchBottom: "--glitch-bottom"
+      };
+
+      Object.entries(themeMap).forEach(([key, cssVar]) => {
+        if (theme[key]) root.style.setProperty(cssVar, theme[key]);
+      });
+
+      if (theme.themeColor) {
+        const meta = document.getElementById("themeColorMeta");
+        if (meta) meta.setAttribute("content", theme.themeColor);
       }
     }
 
-    typeNext();
+    function renderNav(items = []) {
+      const nav = document.getElementById("siteNav");
+      if (!nav) return;
 
-    // manual close
-    const closeBtn = toast.querySelector(".sao-toast-close");
-    if (closeBtn) {
-      closeBtn.onclick = () => {
-        if (progress) progress.style.animation = "none";
+      nav.innerHTML = items
+        .map(
+          (item) => `
+            <a class="hud-link${item.active ? " active" : ""}" href="${escapeHtml(item.href)}">
+              ${escapeHtml(item.label)}
+            </a>
+          `
+        )
+        .join("");
+    }
+
+    function renderTopStats(items = []) {
+      const wrap = document.getElementById("topStats");
+      if (!wrap) return;
+
+      wrap.innerHTML = items
+        .map(
+          (item) => `
+            <div class="hud-stat">
+              <span class="hud-stat-label">${escapeHtml(item.label)}</span>
+              <span class="hud-stat-value">${escapeHtml(item.value)}</span>
+            </div>
+          `
+        )
+        .join("");
+    }
+
+    function renderBars(items = []) {
+      const wrap = document.getElementById("profileBars");
+      if (!wrap) return;
+
+      wrap.innerHTML = items
+        .map(
+          (item) => `
+            <div class="bar-row">
+              <div class="bar-meta">
+                <span>${escapeHtml(item.label)}</span>
+                <span>${Number(item.percent) || 0}%</span>
+              </div>
+              <div class="bar">
+                <span class="bar-fill ${escapeHtml(item.fillClass || "")}" style="width:${Number(item.percent) || 0}%"></span>
+              </div>
+            </div>
+          `
+        )
+        .join("");
+    }
+
+    function renderList(id, items = []) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    }
+
+    function renderVibes(items = []) {
+      const el = document.getElementById("vibesTags");
+      if (!el) return;
+      el.innerHTML = items.map((item) => `<span class="tag">${escapeHtml(item)}</span>`).join("");
+    }
+
+    function renderStatsCards(items = []) {
+      const el = document.getElementById("statsCards");
+      if (!el) return;
+
+      el.innerHTML = items
+        .map(
+          (item) => `
+            <article class="stat-card">
+              <div class="stat-label">${escapeHtml(item.label)}</div>
+              <div class="stat-value">${escapeHtml(item.value)}</div>
+            </article>
+          `
+        )
+        .join("");
+    }
+
+    function renderSystemLog(lines = []) {
+      const el = document.getElementById("systemLog");
+      if (!el) return;
+      el.innerHTML = lines
+        .map((line) => {
+          if (typeof line === "string") {
+            return `<div class="terminal-line">${escapeHtml(line)}</div>`;
+          }
+          return `<div class="terminal-line">${escapeHtml(line.message || "")}</div>`;
+        })
+        .join("");
+    }
+
+    function runTypingToast(text = "") {
+      const el = document.getElementById("toastType");
+      if (!el) return;
+
+      let i = 0;
+      el.textContent = "";
+
+      function typeNext() {
+        if (i < text.length) {
+          el.textContent += text[i++];
+          setTimeout(typeNext, 24);
+        }
+      }
+
+      typeNext();
+    }
+
+    function setupToastTimer() {
+      const toast = document.getElementById("saoToast");
+      if (!toast) return;
+
+      const progress = toast.querySelector(".sao-toast-progress");
+      const closeBtn = toast.querySelector(".sao-toast-close");
+      const DURATION = 8000;
+
+      requestAnimationFrame(() => toast.classList.add("show"));
+
+      if (progress) {
+        progress.style.animation = `toastTimer ${DURATION / 1000}s linear forwards`;
+      }
+
+      const autoClose = setTimeout(() => {
         toast.classList.remove("show");
-        setTimeout(() => toast.remove(), 220);
-      };
+        setTimeout(() => {
+          if (toast.parentNode) toast.remove();
+        }, 220);
+      }, DURATION);
+
+      if (closeBtn) {
+        closeBtn.onclick = () => {
+          clearTimeout(autoClose);
+          if (progress) progress.style.animation = "none";
+          toast.classList.remove("show");
+          setTimeout(() => {
+            if (toast.parentNode) toast.remove();
+          }, 220);
+        };
+      }
     }
-  }
 
-  async function loadBioData() {
-    try {
-      const response = await fetch(DATA_URL, { cache: "no-store" });
-      if (!response.ok) throw new Error(`Failed to load ${DATA_URL}`);
+    async function loadBioData() {
+      try {
+        const response = await fetch(DATA_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Failed to load ${DATA_URL}: ${response.status}`);
 
-      const data = await response.json();
+        const data = await response.json();
 
-      applyTheme(data.theme);
-      document.title = data.head.title || document.title;
+        applyTheme(data.theme);
+        document.title = data.head.title || document.title;
 
-      const siteTitle = document.getElementById("siteTitle");
-      siteTitle.textContent = data.header.title;
-      siteTitle.setAttribute("data-text", data.header.title);
+        const siteTitle = document.getElementById("siteTitle");
+        siteTitle.textContent = data.header.title;
+        siteTitle.setAttribute("data-text", data.header.title);
 
-      setText("siteSubtitle", data.header.subtitle);
-      renderNav(data.header.nav);
-      renderTopStats(data.header.stats);
+        setText("siteSubtitle", data.header.subtitle);
+        renderNav(data.header.nav);
+        renderTopStats(data.header.stats);
 
-      setText("profilePanelTitle", data.profile.panelTitle);
-      setText("profileChip", data.profile.panelChip);
+        setText("profilePanelTitle", data.profile.panelTitle);
+        setText("profileChip", data.profile.panelChip);
 
-      const avatarImg = document.getElementById("avatarImg");
-      avatarImg.src = data.profile.avatar.src;
+        const avatarImg = document.getElementById("avatarImg");
+        if (avatarImg && data.profile.avatar) {
+          avatarImg.src = data.profile.avatar.src;
+          avatarImg.alt = data.profile.avatar.alt || "";
+        }
 
-      setText("profileName", data.profile.name);
-      setHTML("profileMeta", data.profile.metaHtml);
-      renderBars(data.profile.bars);
-      renderList("loadoutList", data.profile.loadout);
+        setText("profileName", data.profile.name);
+        setHTML("profileMeta", data.profile.metaHtml);
+        renderBars(data.profile.bars);
 
-      renderList("bioEntries", data.bio.entries);
-      renderVibes(data.bio.vibes);
+        setText("loadoutTitle", data.profile.loadoutTitle);
+        renderList("loadoutList", data.profile.loadout);
 
-      renderStatsCards(data.statsPanel.cards);
-      renderList("reportItems", data.statusReport.items);
-      renderSystemLog(data.systemLog.lines);
+        setText("bioPanelTitle", data.bio.panelTitle);
+        setText("bioChip", data.bio.panelChip);
+        renderList("bioEntries", data.bio.entries.map((entry) => typeof entry === "string" ? entry : entry.text));
+        setText("vibesTitle", data.bio.vibesTitle);
+        renderVibes(data.bio.vibes);
 
-      setText("toastHeader", data.toast.header);
+        setText("statsPanelTitle", data.statsPanel.panelTitle);
+        setText("statsChip", data.statsPanel.panelChip);
+        renderStatsCards(data.statsPanel.cards);
 
-      // 🔥 PERFECT CALL
-      runSyncedToast(data.toast.line);
+        setText("reportPanelTitle", data.statusReport.panelTitle);
+        setText("reportChip", data.statusReport.panelChip);
+        renderList("reportItems", data.statusReport.items);
 
-    } catch (err) {
-      console.error(err);
+        setText("systemPanelTitle", data.systemLog.panelTitle);
+        setText("systemChip", data.systemLog.panelChip);
+        renderSystemLog(data.systemLog.lines);
+
+        setText("toastHeader", data.toast.header);
+
+        const toast = document.getElementById("saoToast");
+        if (toast) {
+          toast.classList.remove("love", "system", "danger");
+          if (data.toast.type === "love") {
+            toast.classList.add("love");
+          } else if (data.toast.type === "danger") {
+            toast.classList.add("danger");
+          } else {
+            toast.classList.add("system");
+          }
+        }
+
+        runTypingToast(data.toast.line);
+        setupToastTimer();
+      } catch (error) {
+        console.error(error);
+        setText("toastType", "failed to load middaypuppy.json");
+        setupToastTimer();
+      }
     }
-  }
 
-  loadBioData();
-</script>
+    loadBioData();
+  </script>
 </body>
 </html>
