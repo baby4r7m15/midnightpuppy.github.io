@@ -192,15 +192,15 @@ body::after{
   position:relative;
 
   background:
-    linear-gradient(180deg, var(--cream), #f9f3ea);
+    linear-gradient(180deg, #FFF9F4, #F7EDE3);
 
   border-radius:16px;
   padding:16px;
 
-  border:1px solid rgba(230,190,170,0.35);
+  border:1px solid rgba(210,170,140,0.35);
 
   box-shadow:
-    0 10px 20px rgba(200,140,120,.12),
+    0 10px 20px rgba(180,130,100,.15),
     inset 0 1px 0 rgba(255,255,255,.8);
 
   transition:.25s ease;
@@ -213,7 +213,7 @@ body::after{
   inset:0;
   border-radius:inherit;
 
-  background:radial-gradient(circle at top left, rgba(255,210,190,0.25), transparent 60%);
+  background:radial-gradient(circle at top left, rgba(255,200,160,0.25), transparent 60%);
   opacity:.6;
   pointer-events:none;
 }
@@ -243,15 +243,15 @@ body::after{
 }
 
 .item{
-  background:rgba(255,255,255,0.8);
+  background:rgba(255,252,247,0.9);
 
   border-radius:12px;
   padding:10px 12px;
   font-size:13px;
 
-  border:1px solid rgba(230,190,170,0.3);
+  border:1px solid rgba(210,170,140,0.25);
 
-  box-shadow:0 4px 10px rgba(200,140,120,.10);
+  box-shadow:0 4px 10px rgba(180,130,100,.10);
 }
 
 /* TAGS */
@@ -262,14 +262,13 @@ body::after{
 }
 
 .tag{
-  background:rgba(246,214,230,0.7);
-  backdrop-filter:blur(6px);
+  background:rgba(242,214,194,0.7);
 
   padding:6px 10px;
   border-radius:999px;
   font-size:12px;
 
-  border:1px solid rgba(255,200,230,0.25);
+  border:1px solid rgba(210,170,140,0.3);
 }
 
 /* FULL WIDTH */
