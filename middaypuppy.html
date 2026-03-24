@@ -145,16 +145,25 @@ function renderTopStats(stats){
 function renderBars(bars){
   const el=document.getElementById("profileBars");
   el.innerHTML="";
-  bars.forEach(b=>{
-    el.innerHTML += `
-      <div class="bar-wrap">
-        <div class="bar-label">${b.label}</div>
-        <div class="bar">
-          <div class="fill" style="width:${b.percent}%"></div>
-        </div>
-        <div class="bar-value">${b.value}</div>
+
+  bars.forEach((b,i)=>{
+    const wrap=document.createElement("div");
+    wrap.className="bar-wrap";
+
+    wrap.innerHTML=`
+      <div class="bar-label">${b.label}</div>
+      <div class="bar">
+        <div class="fill" style="width:0%"></div>
       </div>
+      <div class="bar-value">${b.value}</div>
     `;
+
+    el.appendChild(wrap);
+
+    /* animate fill */
+    setTimeout(()=>{
+      wrap.querySelector(".fill").style.width = b.percent + "%";
+    }, 150 + i*120);
   });
 }
 
