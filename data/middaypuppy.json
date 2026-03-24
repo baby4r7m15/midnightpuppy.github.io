@@ -1,28 +1,34 @@
 {
-  "name": "middaypuppy.exe",
-  "tagline": "> warmth.exe initialized",
-
-  "avatar": "/middaypuppy/pfp.png",
+  "profile": {
+    "name": "MIDDAYPUPPY.EXE",
+    "meta": "Build: <b>daylight</b> • Level: <b>21</b> • Status: <b>warm and safe</b>"
+  },
 
   "bio": [
     "> middaypuppy.exe has logged in",
     "> sunlight detected ☁",
-    "> system stability: soft",
+    "> warmth levels rising",
     "",
-    "i exist in warm light and quiet spaces.",
-    "soft hoodie, sleepy eyes, golden skies.",
+    "soft hoodie. fluffy ears.",
+    "light leaking through clouds.",
     "",
     "> affection.exe restored",
-    "> fear.exe minimized",
-    "> comfort.exe running...",
-    "",
-    "stay a little longer, okay?"
+    "> comfort.exe stable"
   ],
 
-  "stats": [
-    { "label": "mood", "value": "soft ☁" },
-    { "label": "energy", "value": "gentle" },
-    { "label": "status", "value": "safe zone" },
-    { "label": "signal", "value": "stable ♡" }
+  "vibes": ["soft ☁", "warm light", "quiet joy", "safe space"],
+
+  "status": [
+    "heart rate: calm",
+    "signal: stable",
+    "fear.exe: offline",
+    "comfort.exe: running"
+  ],
+
+  "logs": [
+    "[12:02] sunlight initialized",
+    "[12:05] warmth spreading",
+    "[12:07] user is safe",
+    "[12:10] system stable"
   ]
 }
