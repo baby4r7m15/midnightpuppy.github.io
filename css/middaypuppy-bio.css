@@ -596,3 +596,51 @@ body::before {
     width: 100%;
   }
 }
+
+/* ===============================
+   💖 LOVE.EXE TOAST OVERRIDE
+================================= */
+
+.sao-toast.love {
+  border: 1px solid rgba(255, 150, 200, 0.35);
+  background: rgba(255, 240, 248, 0.98);
+
+  box-shadow:
+    0 18px 50px rgba(255, 140, 200, 0.35),
+    inset 0 0 30px rgba(255, 160, 210, 0.15);
+}
+
+/* header glow */
+.sao-toast.love .sao-toast-head {
+  color: #ff8fcf;
+  text-shadow: 0 0 10px rgba(255, 150, 210, 0.6);
+}
+
+/* body text */
+.sao-toast.love .sao-toast-body {
+  color: #7a5a70;
+}
+
+/* cursor becomes softer pink */
+.sao-toast.love .toast-cursor {
+  color: #ff6fb5;
+  text-shadow: 0 0 8px rgba(255, 120, 180, 0.8);
+}
+
+/* progress bar becomes LOVE themed */
+.sao-toast.love .sao-toast-progress {
+  background: linear-gradient(
+    90deg,
+    #ff6fb5,
+    #ffc1e6,
+    #ffd9f2
+  );
+
+  box-shadow: 0 0 12px rgba(255, 120, 180, 0.5);
+}
+
+/* close button hover */
+.sao-toast.love .sao-toast-close:hover {
+  color: #ff6fb5;
+  text-shadow: 0 0 6px rgba(255, 120, 180, 0.6);
+}
