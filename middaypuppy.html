@@ -34,7 +34,7 @@
   </div>
 
   <div class="avatar">
-    <img class="avatar-img" src="/images/puppyboypfp.png" />
+    <img id="avatarImg" class="avatar-img" src="/images/puppyboypfp.png" />
   </div>
 
   <div class="profile-name" id="profileName"></div>
@@ -100,18 +100,17 @@
   <button class="sao-toast-close">✕</button>
   <div class="sao-toast-progress"></div>
 </div>
-<script>
+
+  <script>
 const DATA_URL = "/data/middaypuppy.json";
 
-/* ------------------ THEME ENGINE ------------------ */
+/* ------------------ THEME ------------------ */
 function applyTheme(theme){
   const root = document.documentElement;
-
-  Object.entries(theme).forEach(([key,val])=>{
-    root.style.setProperty(`--${key}`, val);
+  Object.entries(theme).forEach(([k,v])=>{
+    root.style.setProperty(`--${k}`, v);
   });
 
-  /* update browser color */
   const meta = document.querySelector("meta[name='theme-color']");
   if(meta && theme.themeColor){
     meta.setAttribute("content", theme.themeColor);
@@ -122,6 +121,44 @@ function applyTheme(theme){
 function setText(id,v){const el=document.getElementById(id);if(el)el.textContent=v;}
 function setHTML(id,v){const el=document.getElementById(id);if(el)el.innerHTML=v;}
 
+/* ------------------ HEADER ------------------ */
+function renderNav(nav){
+  const el=document.getElementById("siteNav");
+  el.innerHTML="";
+  nav.forEach(n=>{
+    el.innerHTML += `
+      <a class="hud-link ${n.active?"active":""}" href="${n.href}">
+        ${n.label}
+      </a>`;
+  });
+}
+
+function renderTopStats(stats){
+  const el=document.getElementById("topStats");
+  el.innerHTML="";
+  stats.forEach(s=>{
+    el.innerHTML += `<div class="stat">${s.label}: <b>${s.value}</b></div>`;
+  });
+}
+
+/* ------------------ PROFILE ------------------ */
+function renderBars(bars){
+  const el=document.getElementById("profileBars");
+  el.innerHTML="";
+  bars.forEach(b=>{
+    el.innerHTML += `
+      <div class="bar-wrap">
+        <div class="bar-label">${b.label}</div>
+        <div class="bar">
+          <div class="fill" style="width:${b.percent}%"></div>
+        </div>
+        <div class="bar-value">${b.value}</div>
+      </div>
+    `;
+  });
+}
+
+/* ------------------ LISTS ------------------ */
 function renderList(id,items){
   const el=document.getElementById(id);
   el.innerHTML="";
@@ -136,9 +173,12 @@ function renderBio(entries){
   const el=document.getElementById("bioLogList");
   el.innerHTML="";
   entries.forEach(e=>{
-    const li=document.createElement("li");
-    li.innerHTML=`<span class="q-dot"></span>${e.text}<span class="tag ${e.tagClass||""}">${e.tag}</span>`;
-    el.appendChild(li);
+    el.innerHTML += `
+      <li>
+        <span class="q-dot"></span>
+        ${e.text}
+        <span class="tag ${e.tagClass||""}">${e.tag}</span>
+      </li>`;
   });
 }
 
@@ -146,36 +186,44 @@ function renderVibes(vibes){
   const el=document.getElementById("vibesList");
   el.innerHTML="";
   vibes.forEach(v=>{
-    const span=document.createElement("span");
-    span.className="soft-chip";
-    span.textContent=v;
-    el.appendChild(span);
+    el.innerHTML += `<span class="soft-chip">${v}</span>`;
   });
 }
 
+/* ------------------ STATS ------------------ */
 function renderStats(cards){
-  const wrap=document.getElementById("statsCards");
-  wrap.innerHTML="";
+  const el=document.getElementById("statsCards");
+  el.innerHTML="";
   cards.forEach(c=>{
-    wrap.innerHTML+=`
-    <div class="member">
-      <div class="m-name">${c.name}</div>
-      <div class="m-bar"><div class="m-fill" style="width:${c.percent}%"></div></div>
-      <div class="m-sub">${c.subtext}</div>
-    </div>`;
+    el.innerHTML += `
+      <div class="member">
+        <div class="m-name">${c.name}</div>
+        <div class="m-bar">
+          <div class="m-fill" style="width:${c.percent}%"></div>
+        </div>
+        <div class="m-sub">${c.subtext}</div>
+      </div>`;
   });
 }
 
+/* ------------------ LOG ------------------ */
 function renderLog(lines){
   const el=document.getElementById("systemLogLines");
   el.innerHTML="";
   lines.forEach(l=>{
-    if(l.type==="gap"){el.innerHTML+="<div class='term-gap'></div>";return;}
-    el.innerHTML+=`<div class="term-line"><span class="term-time">${l.time}</span>${l.message}</div>`;
+    if(l.type==="gap"){
+      el.innerHTML += `<div class="term-gap"></div>`;
+      return;
+    }
+    el.innerHTML += `
+      <div class="term-line">
+        <span class="term-time">${l.time}</span>
+        ${l.message}
+      </div>`;
   });
 }
 
-/* ------------------ TOAST (TYPEWRITER) ------------------ */
+/* ------------------ TOAST ------------------ */
 function runTypingToast(line){
   const el=document.getElementById("toastType");
   let i=0;
@@ -207,17 +255,24 @@ function setupToast(){
 /* ------------------ INIT ------------------ */
 fetch(DATA_URL).then(r=>r.json()).then(data=>{
 
-  /* 🎨 APPLY THEME FIRST */
+  /* THEME */
   if(data.theme) applyTheme(data.theme);
 
   /* HEADER */
   setText("siteTitle",data.header.title);
   setText("siteSubtitle",data.header.subtitle);
+  renderNav(data.header.nav);
+  renderTopStats(data.header.stats);
 
   /* PROFILE */
   setText("profileName",data.profile.name);
   setHTML("profileMeta",data.profile.metaHtml);
 
+  if(data.profile.avatar?.src){
+    document.getElementById("avatarImg").src = data.profile.avatar.src;
+  }
+
+  renderBars(data.profile.bars);
   renderList("loadoutList",data.profile.loadout);
 
   /* BIO */
@@ -239,5 +294,6 @@ fetch(DATA_URL).then(r=>r.json()).then(data=>{
 
 });
 </script>
+  
 </body>
 </html>
