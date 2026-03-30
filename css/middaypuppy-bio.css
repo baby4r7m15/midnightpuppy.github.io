@@ -334,3 +334,16 @@ body::after{
   color:var(--accent);
   font-weight:600;
 }
+
+.list .item{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+
+.list .item:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.03);
+}
