@@ -124,5 +124,14 @@
     "image": "/images/cozycollection.png",
     "link": "https://www.lcpdfr.com/downloads/gta5mods/scripts/47267-lspdfr-enhanced-remastered-massive-update/",
     "badge": "plugin"
+  },
+  {
+    "title": "Los Santos Sheriff Pack",
+    "category": "vehicles",
+    "tags": ["vehicles"],
+    "description": "ELS Vehicle Addon or Replace Pack with a Sheriff Livery.",
+    "image": "/images/cozycollection.png",
+    "link": "https://www.lcpdfr.com/downloads/gta5mods/vehiclemodels/47057-elsaddonreplace-los-santos-county-sheriffs-department/",
+    "badge": "els"
   }
 ]
