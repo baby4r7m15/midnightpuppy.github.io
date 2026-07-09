@@ -1,399 +1,380 @@
 /*
-===========================================================
- Midnight Bunny OS
- core.js
- Long Ears Update - Rev 6.6
-===========================================================
-*/
+ * Midnight Bunny OS
+ * core.js - Rev 6.7
+ * Matches the current HTML layout
+ */
 
-const BunnyOS = (() => {
+const BunnyOS = {
+  config: null,
 
-    const VERSION = "Long Ears Update";
-    const CONFIG = {
-        json: "../data/midnightbunny.json"
-    };
+  async init() {
+    console.log("🐇 Booting Midnight Bunny OS...");
 
-    let data = null;
+    await this.loadConfig();
 
-    /*=====================================
-        Boot
-    =====================================*/
+    this.populatePage();
+    this.boot();
+    this.bindTerminal();
+  },
 
-    async function init() {
+  async loadConfig() {
+    try {
 
-        console.log(
-            `%cMidnight Bunny OS`,
-            "color:#93ecff;font-size:16px;font-weight:bold;"
-        );
+      const res = await fetch("/bunny/night/data/midnightbunny.json", {
+        cache: "no-store"
+      });
 
-        await loadConfig();
+      this.config = await res.json();
 
-        applyTheme();
+      console.log("Loaded config:", this.config.head?.title);
 
-        populatePage();
+    } catch (e) {
 
-        Boot.init({
-            skipIfVisited: false
-        });
+      console.error("Couldn't load midnightbunny.json", e);
 
-        Shell.init();
+    }
+  },
 
-        Widgets.init();
+  populatePage() {
 
-        Effects.init();
+    if (!this.config) return;
 
-        registerGlobalEvents();
+    const data = this.config;
 
-        startupToast();
+    // Page title
+    document.title = data.head?.title || "MidnightBunny.exe";
 
-        console.log("🐇 Bunny OS Ready.");
+    // Header
+    this.setText("siteTitle", data.header.title);
+
+    const title = document.getElementById("siteTitle");
+
+    if (title) {
+      title.setAttribute("data-text", data.header.title);
+    }
+
+    this.setText("siteSubtitle", data.header.subtitle);
+
+    // Avatar
+
+    const avatar = document.getElementById("avatarImg");
+
+    if (avatar && data.profile.avatar) {
+
+      avatar.src = data.profile.avatar.src;
+
+      if (data.profile.avatar.alt) {
+        avatar.alt = data.profile.avatar.alt;
+      }
 
     }
 
-    /*=====================================
-        JSON Loader
-    =====================================*/
+    // Profile
 
-    async function loadConfig() {
+    this.setText("profileName", data.profile.name);
 
-        try {
+    this.setHTML("profileMeta", data.profile.metaHtml);
 
-            const response =
-                await fetch(CONFIG.json);
+    this.renderBars(data.profile.bars);
 
-            data = await response.json();
+    this.renderSimpleList(
+      "loadoutList",
+      data.profile.loadout
+    );
 
-            window.BunnyConfig = data;
+    // Bio
 
-            console.log("Configuration loaded.");
+    this.renderBio(data.bio.entries);
 
-        } catch (error) {
+    this.renderVibes(data.bio.vibes);
 
-            console.error(error);
+    // Stats
+
+    this.renderCards(data.statsPanel.cards);
+
+    this.renderSimpleList(
+      "statusReportList",
+      data.statusReport.items
+    );
+
+    // Toast
+
+    this.setText(
+      "toastHeader",
+      data.toast.header
+    );
+
+    if (typeof typeToast === "function") {
+      typeToast(data.toast.line);
+    }
+
+  },
+
+  boot() {
+
+    const overlay = document.getElementById("boot-overlay");
+
+    if (!overlay) return;
+
+    setTimeout(() => {
+
+      overlay.style.opacity = "0";
+      overlay.style.transition = "opacity .8s";
+
+      setTimeout(() => overlay.remove(), 800);
+
+    }, 2200);
+
+  },
+
+  bindTerminal() {
+
+    const input = document.getElementById("terminal-input");
+
+    if (!input) return;
+
+    input.addEventListener("keydown", (e) => {
+
+      if (e.key !== "Enter") return;
+
+      const cmd = input.value.trim().toLowerCase();
+
+      input.value = "";
+
+      this.runCommand(cmd);
+
+    });
+
+  },
+
+  runCommand(cmd) {
+
+    const out = document.getElementById("terminal-output");
+
+    const print = (text) => {
+
+      if (!out) return;
+
+      out.innerHTML += `<div>${text}</div>`;
+
+      out.scrollTop = out.scrollHeight;
+
+    };
+
+    switch (cmd) {
+
+      case "help":
+
+        print("Commands:");
+        print("help");
+        print("about");
+        print("projects");
+        print("bunnyfetch");
+        print("give_touches");
+        print("clear");
+
+        break;
+
+      case "about":
+
+        print("Midnight Bunny OS");
+        print("After-hours hacker bunny.");
+
+        break;
+
+      case "projects":
+
+        print("• NymFit");
+        print("• Midnight Bunny OS");
+
+        break;
+
+      case "bunnyfetch":
+
+        if (this.config) {
+
+          print("🐇 " + this.config.header.title);
+          print("Kernel: Long Ears Update");
+          print("Status: " + this.config.header.subtitle);
+
+        } else {
+
+          print("Config not loaded.");
+
+        }
+
+        break;
+
+      case "give_touches":
+
+        print("Touch permissions: GRANTED");
+        print("Reward: DENIED");
+
+        break;
+
+      case "clear":
+
+        if (out) out.innerHTML = "";
+
+        break;
+
+      default:
+
+        if (cmd) {
+
+          print(cmd + ": command not found");
 
         }
 
     }
 
-    /*=====================================
-        Theme
-    =====================================*/
+  },
 
-    function applyTheme() {
+  setText(id, value) {
 
-        if (!data || !data.theme) return;
+    const el = document.getElementById(id);
 
-        const root = document.documentElement;
+    if (el) el.textContent = value;
 
-        Object.entries(data.theme).forEach(([key,value]) => {
+  },
 
-            root.style.setProperty(
-                "--"+key,
-                value
-            );
+  setHTML(id, value) {
 
-        });
+    const el = document.getElementById(id);
 
-    }
+    if (el) el.innerHTML = value;
 
-    /*=====================================
-        Populate HTML
-    =====================================*/
+  },
 
-    function populatePage() {
+  renderSimpleList(id, list) {
 
-        if(!data) return;
+    const el = document.getElementById(id);
 
-        setText("page-title",data.header.title);
+    if (!el) return;
 
-        setText("page-subtitle",data.header.subtitle);
+    el.innerHTML = "";
 
-        setText("profile-name",data.profile.name);
+    (list || []).forEach(item => {
 
-        setHTML("profile-meta",data.profile.metaHtml);
+      const li = document.createElement("li");
 
-        setImage(
-            "profile-avatar",
-            data.profile.avatar.src,
-            data.profile.avatar.alt
-        );
+      li.textContent = item;
 
-        buildBars();
+      el.appendChild(li);
 
-        buildBio();
+    });
 
-        buildLoadout();
+  },
 
-        buildSystemLog();
+  renderBars(bars) {
 
-    }
+    const wrap = document.getElementById("profileBars");
 
-    /*=====================================
-        Progress Bars
-    =====================================*/
+    if (!wrap) return;
 
-    function buildBars(){
+    wrap.innerHTML = "";
 
-        const container =
-            document.getElementById("profile-bars");
+    (bars || []).forEach(bar => {
 
-        if(!container) return;
+      wrap.innerHTML += `
+<div class="bar-wrap">
+    <div class="bar-label">${bar.label}</div>
+    <div class="bar">
+        <div class="fill ${bar.fillClass}"
+             style="width:${bar.percent}%">
+        </div>
+    </div>
+    <div class="bar-value">${bar.value}</div>
+</div>`;
 
-        container.innerHTML="";
+    });
 
-        data.profile.bars.forEach(bar=>{
+  },
 
-            const div=document.createElement("div");
+  renderBio(entries) {
 
-            div.className="meter";
+    const wrap = document.getElementById("bioLogList");
 
-            div.innerHTML=`
-                <div class="meter-label">
-                    ${bar.label}
-                </div>
+    if (!wrap) return;
 
-                <div class="meter-track">
+    wrap.innerHTML = "";
 
-                    <div
-                        class="meter-fill ${bar.fillClass}"
-                        style="width:${bar.percent}%">
-                    </div>
+    (entries || []).forEach(entry => {
 
-                </div>
+      wrap.innerHTML += `
+<li>
+<span class="q-dot"></span>
+${entry.text}
+<span class="tag ${entry.tagClass}">
+${entry.tag}
+</span>
+</li>`;
 
-                <div class="meter-value">
-                    ${bar.value}
-                </div>
-            `;
+    });
 
-            container.appendChild(div);
+  },
 
-        });
+  renderVibes(vibes) {
 
-    }
+    const wrap = document.getElementById("vibesList");
 
-    /*=====================================
-        Bio
-    =====================================*/
+    if (!wrap) return;
 
-    function buildBio(){
+    wrap.innerHTML = "";
 
-        const list=
-            document.getElementById("bio-list");
+    (vibes || []).forEach(vibe => {
 
-        if(!list) return;
+      const chip = document.createElement("span");
 
-        list.innerHTML="";
+      chip.className = "chip";
 
-        data.bio.entries.forEach(entry=>{
+      chip.textContent = vibe;
 
-            const item=document.createElement("div");
+      wrap.appendChild(chip);
 
-            item.className="bio-entry";
+    });
 
-            item.innerHTML=`
-                <span>${entry.text}</span>
+  },
 
-                <span class="${entry.tagClass}">
-                    ${entry.tag}
-                </span>
-            `;
+  renderCards(cards) {
 
-            list.appendChild(item);
+    const wrap = document.getElementById("statsCards");
 
-        });
+    if (!wrap) return;
 
-    }
+    wrap.innerHTML = "";
 
-    /*=====================================
-        Loadout
-    =====================================*/
+    (cards || []).forEach(card => {
 
-    function buildLoadout(){
+      wrap.innerHTML += `
+<div class="card">
 
-        const loadout=
-            document.getElementById("loadout");
+<div class="card-title">
 
-        if(!loadout) return;
+${card.name}
 
-        loadout.innerHTML="";
+<span>${card.level}</span>
 
-        data.profile.loadout.forEach(item=>{
+</div>
 
-            const li=document.createElement("li");
+<div class="card-bar">
 
-            li.textContent=item;
+<div style="width:${card.percent}%"></div>
 
-            loadout.appendChild(li);
+</div>
 
-        });
+<div class="card-sub">
 
-    }
+${card.subtext}
 
-    /*=====================================
-        System Log
-    =====================================*/
+</div>
 
-    function buildSystemLog(){
+</div>`;
 
-        const log=
-            document.getElementById("system-log");
+    });
 
-        if(!log) return;
+  }
 
-        log.innerHTML="";
+};
 
-        data.systemLog.lines.forEach(line=>{
-
-            if(line.type==="gap"){
-
-                log.appendChild(document.createElement("br"));
-
-                return;
-
-            }
-
-            const row=document.createElement("div");
-
-            row.className="log-line";
-
-            row.innerHTML=`
-                <span class="time">${line.time||""}</span>
-
-                <span>${line.message||""}</span>
-
-                ${
-                    line.status
-                    ?`<span class="${line.statusClass}">
-                        ${line.status}
-                      </span>`
-                    :""
-                }
-            `;
-
-            log.appendChild(row);
-
-        });
-
-    }
-
-    /*=====================================
-        Startup Toast
-    =====================================*/
-
-    function startupToast(){
-
-        if(!data || !data.toast) return;
-
-        setTimeout(()=>{
-
-            Widgets.toast(
-
-                data.toast.header,
-
-                data.toast.line,
-
-                5500
-
-            );
-
-        },3500);
-
-    }
-
-    /*=====================================
-        Global Events
-    =====================================*/
-
-    function registerGlobalEvents(){
-
-        window.addEventListener("resize",()=>{
-
-            console.log(
-                window.innerWidth,
-                window.innerHeight
-            );
-
-        });
-
-        document.addEventListener("keydown",e=>{
-
-            if(e.key==="F1"){
-
-                e.preventDefault();
-
-                Commands.run("help");
-
-            }
-
-        });
-
-    }
-
-    /*=====================================
-        Helpers
-    =====================================*/
-
-    function setText(id,text){
-
-        const el=document.getElementById(id);
-
-        if(el) el.textContent=text;
-
-    }
-
-    function setHTML(id,html){
-
-        const el=document.getElementById(id);
-
-        if(el) el.innerHTML=html;
-
-    }
-
-    function setImage(id,src,alt){
-
-        const el=document.getElementById(id);
-
-        if(!el) return;
-
-        el.src=src;
-
-        el.alt=alt;
-
-    }
-
-    /*=====================================
-        Public API
-    =====================================*/
-
-    return{
-
-        init,
-
-        get version(){
-
-            return VERSION;
-
-        },
-
-        get config(){
-
-            return data;
-
-        }
-
-    };
-
-})();
-
-/*=====================================
-    Launch Bunny OS
-=====================================*/
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    BunnyOS.init
-
-);
+document.addEventListener("DOMContentLoaded", () => BunnyOS.init());
