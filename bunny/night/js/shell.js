@@ -2,7 +2,7 @@
 ===========================================================
  Midnight Bunny OS
  shell.js
- Long Ears Update - Rev 6.2
+ Rev 6.9
 ===========================================================
 */
 
@@ -12,7 +12,7 @@ const Shell = (() => {
     let output;
     let input;
 
-    let history = [];
+    const history = [];
     let historyIndex = 0;
 
     function init() {
@@ -21,27 +21,18 @@ const Shell = (() => {
         output = document.getElementById("terminal-output");
         input = document.getElementById("terminal-input");
 
-        if (!input) return;
+        if (!terminal || !output || !input)
+            return;
 
         input.addEventListener("keydown", handleKey);
 
+        document.addEventListener("click", () => {
+            input.focus();
+        });
+
         printBanner();
 
-        focus();
-
-    }
-
-    function focus() {
-
-        if (!input) return;
-
         input.focus();
-
-        document.addEventListener("click", () => {
-
-            input.focus();
-
-        });
 
     }
 
@@ -50,35 +41,23 @@ const Shell = (() => {
         switch (e.key) {
 
             case "Enter":
-
                 e.preventDefault();
-
                 execute();
-
                 break;
 
             case "ArrowUp":
-
                 e.preventDefault();
-
                 previous();
-
                 break;
 
             case "ArrowDown":
-
                 e.preventDefault();
-
                 next();
-
                 break;
 
             case "Tab":
-
                 e.preventDefault();
-
                 autocomplete();
-
                 break;
 
         }
@@ -89,13 +68,16 @@ const Shell = (() => {
 
         const command = input.value.trim();
 
-        if (!command) return;
+        if (!command)
+            return;
 
         history.push(command);
 
         historyIndex = history.length;
 
-        println(`<span class="prompt">bunny@night:~$</span> ${escape(command)}`);
+        println(
+            `<span class="prompt">bunny@night:~$</span> ${escape(command)}`
+        );
 
         input.value = "";
 
@@ -105,7 +87,7 @@ const Shell = (() => {
 
         } else {
 
-            println("Command system unavailable.");
+            println("<span class='error'>commands.js not loaded.</span>");
 
         }
 
@@ -115,7 +97,8 @@ const Shell = (() => {
 
     function previous() {
 
-        if (!history.length) return;
+        if (!history.length)
+            return;
 
         historyIndex--;
 
@@ -128,7 +111,8 @@ const Shell = (() => {
 
     function next() {
 
-        if (!history.length) return;
+        if (!history.length)
+            return;
 
         historyIndex++;
 
@@ -148,19 +132,24 @@ const Shell = (() => {
 
     function autocomplete() {
 
-        if (typeof Commands === "undefined") return;
+        if (typeof Commands === "undefined")
+            return;
 
         const value = input.value.trim();
 
-        const matches = Commands.list().filter(cmd =>
-            cmd.startsWith(value)
-        );
+        const matches = Commands
+            .list()
+            .filter(cmd => cmd.startsWith(value));
 
         if (matches.length === 1) {
 
             input.value = matches[0];
 
-        } else if (matches.length > 1) {
+            return;
+
+        }
+
+        if (matches.length > 1) {
 
             println(matches.join("    "));
 
@@ -168,15 +157,16 @@ const Shell = (() => {
 
     }
 
-    function println(text = "") {
+    function println(html = "") {
 
-        if (!output) return;
+        if (!output)
+            return;
 
         const row = document.createElement("div");
 
         row.className = "terminal-line";
 
-        row.innerHTML = text;
+        row.innerHTML = html;
 
         output.appendChild(row);
 
@@ -184,74 +174,65 @@ const Shell = (() => {
 
     }
 
-    function clear() {
+    async function type(text, speed = 18) {
 
-        if (!output) return;
+        const row = document.createElement("div");
 
-        output.innerHTML = "";
+        row.className = "terminal-line";
+
+        output.appendChild(row);
+
+        for (let i = 0; i <= text.length; i++) {
+
+            row.textContent = text.substring(0, i);
+
+            scrollBottom();
+
+            await sleep(speed);
+
+        }
 
     }
 
-    function type(text, speed = 18) {
+    function clear() {
 
-        return new Promise(resolve => {
-
-            const row = document.createElement("div");
-
-            row.className = "terminal-line";
-
-            output.appendChild(row);
-
-            let i = 0;
-
-            const timer = setInterval(() => {
-
-                row.textContent = text.substring(0, i);
-
-                i++;
-
-                scrollBottom();
-
-                if (i > text.length) {
-
-                    clearInterval(timer);
-
-                    resolve();
-
-                }
-
-            }, speed);
-
-        });
+        if (output)
+            output.innerHTML = "";
 
     }
 
     function printBanner() {
 
-        println("╔══════════════════════════════════════╗");
-        println("║      Midnight Bunny OS v2.0          ║");
-        println("║        Long Ears Update              ║");
-        println("╚══════════════════════════════════════╝");
+        println("<span class='accent'>Midnight Bunny OS v2.1.7</span>");
+        println("Long Ears Update");
         println("");
-        println("Type <span class='cmd'>help</span> to view commands.");
+        println("Type <span class='cmd'>help</span> to begin.");
         println("");
 
     }
 
     function scrollBottom() {
 
-        if (!terminal) return;
-
         terminal.scrollTop = terminal.scrollHeight;
+
+    }
+
+    function sleep(ms) {
+
+        return new Promise(resolve => {
+
+            setTimeout(resolve, ms);
+
+        });
 
     }
 
     function escape(text) {
 
         return text
-            .replaceAll("&","&amp;")
-            .replaceAll("<","&lt;")
-            .replaceAll(">","&gt;");
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;");
 
     }
 
@@ -261,7 +242,12 @@ const Shell = (() => {
         println,
         clear,
         type,
-        focus
+        focus() {
+
+            if (input)
+                input.focus();
+
+        }
 
     };
 
