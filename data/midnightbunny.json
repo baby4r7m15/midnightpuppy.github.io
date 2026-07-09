@@ -1,0 +1,207 @@
+{
+  "head": {
+    "title": "midnightbunny.exe"
+  },
+
+  "header": {
+    "title": "midnightbunny.exe",
+    "subtitle": "CONTAINMENT ACTIVE • TOUCH PERMISSIONS REVOKED",
+    "nav": [
+      {
+        "label": "BIO",
+        "href": "https://midnightpuppy.com",
+        "active": true
+      }
+    ],
+    "stats": [
+      {
+        "label": "mood",
+        "value": "feral"
+      },
+      {
+        "label": "ping",
+        "value": "404ms"
+      },
+      {
+        "label": "containment",
+        "value": "LOCKED"
+      }
+    ]
+  },
+
+  "profile": {
+    "panelTitle": "USER PROFILE",
+    "panelChip": "OBSERVED",
+
+    "avatar": {
+      "src": "/images/midnightbunny-avatar.png",
+      "alt": "midnightbunny.exe avatar"
+    },
+
+    "name": "MidnightBunny.exe",
+
+    "metaHtml": "Build: <b>containment</b> • Level: <b>21</b> • Status: <b>DO NOT PET</b>",
+
+    "bars": [
+      {
+        "label": "SANITY.EXE",
+        "percent": 2,
+        "value": "undefined behavior",
+        "fillClass": "hp"
+      },
+      {
+        "label": "CONTAINMENT",
+        "percent": 100,
+        "value": "LOCKED // TOUCH DENIED",
+        "fillClass": "ep"
+      }
+    ],
+
+    "loadoutTitle": "LOADOUT",
+
+    "loadout": [
+      "bunny_ears.obj (glitched)",
+      "internet_brain.sys (overclocked)",
+      "containment_collar.dll",
+      "chastity.sys (LOCKED)"
+    ]
+  },
+
+  "bio": {
+    "panelTitle": "BIO LOG",
+    "panelChip": "LIVE",
+
+    "entries": [
+      "██ Subject MB-01 exhibits excessive silliness.",
+      "██ Chastity protocol ENABLED.",
+      "██ Physical contact privileges permanently revoked.",
+      "██ Observation window remains open."
+    ],
+
+    "vibesTitle": "VIBES",
+
+    "vibes": [
+      "🐇 glitch bunny",
+      "💜 trans colors",
+      "⚡ terminally online",
+      "🩹 bite-sized chaos",
+      "🔒 contained",
+      "📡 unstable signal"
+    ]
+  },
+
+  "statsPanel": {
+    "panelTitle": "Stats",
+    "panelChip": "404",
+
+    "cards": [
+      {
+        "name": "sanity.exe",
+        "level": "undefined",
+        "percent": 1,
+        "subtext": "undefined behavior"
+      },
+      {
+        "name": "containment.sys",
+        "level": "LOCKED",
+        "percent": 100,
+        "subtext": "touch privileges revoked"
+      }
+    ]
+  },
+
+  "statusReport": {
+    "panelTitle": "STATUS REPORT",
+    "panelChip": "LIVE",
+
+    "items": [
+      "Containment glass is load-bearing.",
+      "Touch input rejected.",
+      "Subject continues chewing on reality.dll.",
+      "Observation only."
+    ]
+  },
+
+  "systemLog": {
+    "panelTitle": "SYSTEM LOG",
+    "panelChip": "STREAMING",
+
+    "lines": [
+      {
+        "time": "00:00:01",
+        "message": "booting midnightbunny.exe..."
+      },
+      {
+        "time": "00:00:03",
+        "message": "loading bunny.dll...",
+        "status": "ok",
+        "statusClass": "term-ok"
+      },
+      {
+        "time": "00:00:08",
+        "message": "internet_brain.sys",
+        "status": "overclocked",
+        "statusClass": "term-warn"
+      },
+      {
+        "time": "00:00:14",
+        "message": "touch input detected...",
+        "status": "ACCESS DENIED",
+        "statusClass": "term-bad"
+      },
+      {
+        "time": "00:00:20",
+        "message": "chastity.sys",
+        "status": "LOCKED",
+        "statusClass": "term-warn"
+      },
+      {
+        "time": "00:00:28",
+        "message": "bunny.exe chewing firewall..."
+      },
+      {
+        "time": "00:00:36",
+        "message": "containment glass integrity...",
+        "status": "stable",
+        "statusClass": "term-ok"
+      },
+      {
+        "type": "gap"
+      },
+      {
+        "time": "00:03:12",
+        "message": "reality.dll",
+        "status": "segmentation fault",
+        "statusClass": "term-bad"
+      },
+      {
+        "time": "00:04:56",
+        "message": "petting request...",
+        "status": "rejected",
+        "statusClass": "term-bad"
+      },
+      {
+        "time": "00:06:41",
+        "message": "ESCAPE KEY NOT FOUND"
+      },
+      {
+        "type": "gap"
+      },
+      {
+        "time": "00:08:09",
+        "dimPrefix": "monitor:",
+        "message": "subject is staring directly at the camera."
+      },
+      {
+        "time": "00:10:00",
+        "dimPrefix": "status:",
+        "message": "online • touch denied • observation only"
+      }
+    ]
+  },
+
+  "toast": {
+    "header": "CONTAINMENT",
+    "line": "midnightbunny.exe breached containment • touch permissions revoked • reality.dll missing"
+  }
+}
