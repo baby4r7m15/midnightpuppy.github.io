@@ -2,35 +2,62 @@
 ===========================================================
  Midnight Bunny OS
  commands.js
- Long Ears Update - Rev 6.3
+ Rev 7.0
 ===========================================================
 */
 
 const Commands = (() => {
+
+    const FILESYSTEM = {
+
+        "README.md": [
+            "Welcome to Midnight Bunny OS.",
+            "",
+            "Long Ears Update",
+            "",
+            "Type 'help' to see available commands."
+        ],
+
+        "projects.txt": [
+            "• Midnight Bunny OS",
+            "• NymFit",
+            "• Personal Website"
+        ],
+
+        "status.log": [
+            "Containment........ACTIVE",
+            "Reality.dll........UNSTABLE",
+            "Brain.exe..........404",
+            "Touch Protocol.....GRANTED"
+        ]
+
+    };
 
     const COMMANDS = {
 
         help() {
 
             Shell.println("");
-            Shell.println("Available Commands");
-            Shell.println("────────────────────────────────────");
-            Shell.println("help           Show this menu");
-            Shell.println("about          About Midnight Bunny");
-            Shell.println("status         Current system status");
-            Shell.println("bunnyfetch     Display system info");
-            Shell.println("projects       Show current projects");
-            Shell.println("nymfit         NymFit information");
-            Shell.println("bio            Bunny bio");
-            Shell.println("whoami         Current user");
-            Shell.println("pwd            Current directory");
-            Shell.println("ls             List files");
-            Shell.println("cat README.md  Read README");
-            Shell.println("date           Current time");
-            Shell.println("clear          Clear terminal");
-            Shell.println("reboot         Restart Bunny OS");
-            Shell.println("shutdown       Shutdown Bunny OS");
-            Shell.println("give_touches   Request contact");
+            Shell.println("<span class='accent'>Available Commands</span>");
+            Shell.println("────────────────────────────────────────");
+            Shell.println("help");
+            Shell.println("about");
+            Shell.println("bio");
+            Shell.println("status");
+            Shell.println("bunnyfetch");
+            Shell.println("projects");
+            Shell.println("nymfit");
+            Shell.println("whoami");
+            Shell.println("pwd");
+            Shell.println("ls");
+            Shell.println("cat README.md");
+            Shell.println("date");
+            Shell.println("clear");
+            Shell.println("reboot");
+            Shell.println("shutdown");
+            Shell.println("give_touches");
+            Shell.println("fortune");
+            Shell.println("echo");
             Shell.println("");
 
         },
@@ -39,10 +66,19 @@ const Commands = (() => {
 
             Shell.println("");
             Shell.println("Midnight Bunny OS");
-            Shell.println("----------------------------");
-            Shell.println("A chaotic cyberpunk profile");
-            Shell.println("built by Artemis.");
-            Shell.println("Species: Protogen Rabbit");
+            Shell.println("Cyberpunk profile environment");
+            Shell.println("Created by Artemis");
+            Shell.println("");
+
+        },
+
+        bio() {
+
+            Shell.println("");
+            Shell.println("Chaotic hacker bunny.");
+            Shell.println("Terminal enthusiast.");
+            Shell.println("Professional RGB enjoyer.");
+            Shell.println("Powered almost entirely by carrots.");
             Shell.println("");
 
         },
@@ -52,30 +88,39 @@ const Commands = (() => {
             Shell.println("");
             Shell.println("Containment : ACTIVE");
             Shell.println("Reality.dll : UNSTABLE");
-            Shell.println("RGB         : ONLINE");
-            Shell.println("Brain       : 404");
+            Shell.println("Brain.exe   : 404");
+            Shell.println("Touch       : GRANTED");
             Shell.println("");
 
         },
 
         bunnyfetch() {
 
+            const info =
+                typeof Widgets !== "undefined"
+                    ? Widgets.bunnyFetch()
+                    : null;
+
+            Shell.println("");
+            Shell.println("        (\\_/)");
+            Shell.println("        ( •_•)");
+            Shell.println("       / >🥕");
             Shell.println("");
 
-            Shell.println("          (\\_/)");
-            Shell.println("          ( •_•)");
-            Shell.println("         / >🥕");
+            if (info) {
 
-            Shell.println("");
+                Shell.println("OS         : " + info.os);
+                Shell.println("Version    : " + info.version);
+                Shell.println("Developer  : " + info.developer);
+                Shell.println("Species    : " + info.species);
+                Shell.println("Uptime     : " + info.uptime);
 
-            Shell.println("Midnight Bunny OS");
-            Shell.println("----------------------------");
-            Shell.println("Developer  : Artemis");
-            Shell.println("Species    : Protogen Rabbit");
-            Shell.println("Project    : NymFit");
-            Shell.println("Theme      : Long Ears Update");
-            Shell.println("Containment: ACTIVE");
-            Shell.println("Reward      : DENIED");
+            } else {
+
+                Shell.println("Midnight Bunny OS");
+
+            }
+
             Shell.println("");
 
         },
@@ -84,11 +129,9 @@ const Commands = (() => {
 
             Shell.println("");
 
-            Shell.println("Current Projects");
-            Shell.println("----------------");
-            Shell.println("• Midnight Bunny OS");
-            Shell.println("• NymFit");
-            Shell.println("• Personal Website");
+            FILESYSTEM["projects.txt"].forEach(line =>
+                Shell.println(line)
+            );
 
             Shell.println("");
 
@@ -97,28 +140,13 @@ const Commands = (() => {
         nymfit() {
 
             Shell.println("");
-
             Shell.println("NymFit");
             Shell.println("----------------");
             Shell.println("Workout tracking");
+            Shell.println("Nutrition");
             Shell.println("Hydration");
-            Shell.println("Calories");
             Shell.println("Macros");
-            Shell.println("Workout routines");
-
-            Shell.println("");
-
-        },
-
-        bio() {
-
-            Shell.println("");
-
-            Shell.println("Chaotic hacker bunny.");
-            Shell.println("Terminal addict.");
-            Shell.println("Professional RGB enjoyer.");
-            Shell.println("Powered almost entirely by carrots.");
-
+            Shell.println("Progress");
             Shell.println("");
 
         },
@@ -142,8 +170,9 @@ const Commands = (() => {
             Shell.println("projects.txt");
             Shell.println("status.log");
             Shell.println("carrots/");
-            Shell.println("nymfit/");
             Shell.println("wallpapers/");
+            Shell.println("nymfit/");
+            Shell.println("secrets/");
             Shell.println("");
 
         },
@@ -152,40 +181,27 @@ const Commands = (() => {
 
             if (!args.length) {
 
-                Shell.println("Usage: cat filename");
+                Shell.println("Usage: cat <file>");
 
                 return;
 
             }
 
-            switch (args[0]) {
+            const file = FILESYSTEM[args[0]];
 
-                case "README.md":
+            if (!file) {
 
-                    Shell.println("");
-                    Shell.println("Welcome to Midnight Bunny OS.");
-                    Shell.println("Enjoy your stay.");
-                    Shell.println("");
+                Shell.println("File not found.");
 
-                    break;
-
-                case "projects.txt":
-
-                    COMMANDS.projects();
-
-                    break;
-
-                case "status.log":
-
-                    COMMANDS.status();
-
-                    break;
-
-                default:
-
-                    Shell.println("File not found.");
+                return;
 
             }
+
+            Shell.println("");
+
+            file.forEach(line => Shell.println(line));
+
+            Shell.println("");
 
         },
 
@@ -203,25 +219,72 @@ const Commands = (() => {
 
         reboot() {
 
-            Boot.reboot();
+            if (typeof Boot !== "undefined" &&
+                Boot.reboot) {
+
+                Boot.reboot();
+
+            } else {
+
+                location.reload();
+
+            }
 
         },
 
         shutdown() {
 
-            Boot.shutdown();
+            if (typeof Boot !== "undefined" &&
+                Boot.shutdown) {
+
+                Boot.shutdown();
+
+            } else {
+
+                Shell.println("Goodbye.");
+
+            }
 
         },
 
         give_touches() {
 
             Shell.println("");
-            Shell.println("Requesting permission...");
             Shell.println("Checking containment...");
-            Shell.println("Contact: APPROVED");
+            Shell.println("Touch permissions: GRANTED");
             Shell.println("Reward: DENIED");
-            Shell.println("Containment remains active.");
             Shell.println("");
+
+        },
+
+        fortune() {
+
+            const fortunes = [
+
+                "Reality.dll failed successfully.",
+                "Today is a good day for carrots.",
+                "Hyperfocus detected.",
+                "Containment remains stable.",
+                "RGB increases performance by 12%.",
+                "Professional bunny detected."
+
+            ];
+
+            Shell.println(
+
+                fortunes[
+                    Math.floor(
+                        Math.random() * fortunes.length
+                    )
+                ]
+
+            );
+
+        },
+
+        echo(args) {
+
+            Shell.println(args.join(" "));
 
         }
 
@@ -229,9 +292,11 @@ const Commands = (() => {
 
     function run(commandLine) {
 
-        const parts = commandLine.trim().split(/\s+/);
+        const parts =
+            commandLine.trim().split(/\s+/);
 
-        const command = parts.shift().toLowerCase();
+        const command =
+            (parts.shift() || "").toLowerCase();
 
         if (COMMANDS[command]) {
 
@@ -239,8 +304,13 @@ const Commands = (() => {
 
         } else {
 
-            Shell.println("Unknown command: " + command);
-            Shell.println("Type 'help' for a list of commands.");
+            Shell.println(
+                `${command}: command not found`
+            );
+
+            Shell.println(
+                "Type 'help' for a list of commands."
+            );
 
         }
 
@@ -248,7 +318,7 @@ const Commands = (() => {
 
     function list() {
 
-        return Object.keys(COMMANDS);
+        return Object.keys(COMMANDS).sort();
 
     }
 
