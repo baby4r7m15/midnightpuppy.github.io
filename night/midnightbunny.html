@@ -1,341 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>midnightbunny.exe – Containment Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="/css/midnightbunny-bio.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="512x512"
-    href="/images/midnightbunny-avatar.png" />
+<title>MidnightBunny OS</title>
 
-  <link
-    rel="apple-touch-icon"
-    href="/images/midnightbunny-avatar.png" />
+<link rel="stylesheet" href="/css/midnightbunny-os.css">
 
-  <meta
-    name="theme-color"
-    content="#05030d"
-    id="themeColorMeta" />
+<link rel="icon"
+      href="/images/midnightbunny-avatar.png">
+
+<meta name="theme-color"
+      content="#0b0815"
+      id="themeColorMeta">
+
 </head>
 
 <body>
 
-  <div class="overlay overlay-rain" aria-hidden="true"></div>
-  <div class="overlay overlay-particles" aria-hidden="true"></div>
-  <div class="overlay overlay-vignette" aria-hidden="true"></div>
+<div class="noise"></div>
+<div class="scanlines"></div>
+<div class="glow"></div>
 
-  <header class="hud-top">
+<header class="desktop-bar">
 
-    <div class="hud-brand">
+<div class="logo">
 
-      <div
-        class="hud-title glitch"
-        id="siteTitle"
-        data-text="midnightbunny.exe">
+<div
+id="siteTitle"
+class="logo-title glitch"
+data-text="MidnightBunny OS">
 
-        midnightbunny.exe
+MidnightBunny OS
 
+</div>
+
+<div
+id="siteSubtitle"
+class="logo-sub">
+
+Loading...
+
+</div>
+
+</div>
+
+<nav
+id="siteNav"
+class="desktop-nav">
+
+</nav>
+
+<div
+id="topStats"
+class="desktop-status">
+
+</div>
+
+</header>
+
+<main class="desktop">
+
+<!-- LEFT WINDOW -->
+
+<section class="window about-window">
+
+<div class="window-title">
+
+<div class="lights">
+
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+<span>
+
+about.txt
+
+</span>
+
+</div>
+
+<div class="window-content">
+
+<div class="avatar-panel">
+
+<img
+id="avatarImg"
+src="/images/midnightbunny-avatar.png"
+alt="Midnight Bunny">
+
+</div>
+
+<h1 id="profileName">
+
+MIDNIGHTBUNNY.EXE
+
+</h1>
+
+<div
+id="profileMeta"
+class="profile-meta">
+
+Loading...
+
+</div>
+
+<div
+id="profileBars">
+
+</div>
+
+<hr>
+
+<h3 id="loadoutTitle">
+
+LOADOUT
+
+</h3>
+
+<ul
+id="loadoutList"
+class="simple-list">
+
+</ul>
+
+</div>
+
+</section>
+<!-- CENTER COLUMN -->
+
+<div class="desktop-column">
+
+  <!-- BIO WINDOW -->
+
+  <section class="window">
+
+    <div class="window-title">
+      <div class="lights">
+        <span></span><span></span><span></span>
       </div>
 
+      <span id="bioPanelTitle">
+        bio.log
+      </span>
+
+      <span
+        id="bioChip"
+        class="window-chip">
+        LIVE
+      </span>
+    </div>
+
+    <div class="window-content">
+
+      <ul
+        id="bioLogList"
+        class="bio-list">
+      </ul>
+
+      <hr>
+
+      <h3 id="vibesTitle">
+        VIBES
+      </h3>
+
       <div
-        class="hud-sub"
-        id="siteSubtitle">
-
-        CONTAINMENT ACTIVE • TOUCH PERMISSIONS REVOKED
-
+        id="vibesList"
+        class="chips">
       </div>
 
     </div>
 
-    <nav
-      class="hud-nav"
-      id="siteNav"
-      aria-label="Bio navigation">
-    </nav>
+  </section>
+
+  <!-- SYSTEM STATUS -->
+
+  <section class="window">
+
+    <div class="window-title">
+
+      <div class="lights">
+        <span></span><span></span><span></span>
+      </div>
+
+      <span>
+
+        system.status
+
+      </span>
+
+    </div>
+
+    <div class="window-content">
+
+<pre class="terminal-mini">
+$ status
+
+MidnightBunny OS v2.1.7
+
+service mode............. ACTIVE
+containment.............. ENABLED
+touch permissions........ GRANTED
+release permissions...... DENIED
+keyholder................ OFFLINE
+denial timer............. EXTENDED
+
+brain.exe................ UNSTABLE
+reality.dll.............. NOT FOUND
+femboys.................. APPRECIATED
+bunny ears............... SYNCHRONIZED
+
+Status: functioning within acceptable
+levels of chaos.
+
+$ █
+</pre>
+
+    </div>
+
+  </section>
+
+</div>
+
+<!-- RIGHT COLUMN -->
+
+<div class="desktop-column">
+
+  <!-- STATS -->
+
+  <section class="window">
+
+    <div class="window-title">
+
+      <div class="lights">
+        <span></span><span></span><span></span>
+      </div>
+
+      <span id="statsPanelTitle">
+        stats.sys
+      </span>
+
+      <span
+        id="statsPanelChip"
+        class="window-chip">
+        404
+      </span>
+
+    </div>
 
     <div
-      class="hud-stats"
-      id="topStats">
+      id="statsCards"
+      class="window-content">
     </div>
 
-  </header>
+  </section>
 
-  <main class="grid">
+  <!-- STATUS REPORT -->
 
-    <!-- PROFILE -->
+  <section class="window">
 
-    <section class="panel profile">
+    <div class="window-title">
 
-      <div class="panel-head">
-        <span id="profilePanelTitle">USER PROFILE</span>
-        <span class="chip" id="profileChip">OBSERVED</span>
+      <div class="lights">
+        <span></span><span></span><span></span>
       </div>
 
-      <div class="avatar">
+      <span id="statusPanelTitle">
+        report.log
+      </span>
 
-        <img
-          class="avatar-img"
-          id="avatarImg"
-          src="/images/midnightbunny-avatar.png"
-          alt="midnightbunny.exe avatar"
-          onerror="this.style.display='none';this.parentElement.classList.add('avatar-fallback');">
+      <span
+        id="statusPanelChip"
+        class="window-chip">
+        LIVE
+      </span>
 
-        <div
-          class="avatar-silhouette"
-          aria-hidden="true">
-        </div>
-
-      </div>
-
-      <div
-        class="profile-name"
-        id="profileName">
-
-        MIDNIGHTBUNNY.EXE
-
-      </div>
-
-      <div
-        class="profile-meta"
-        id="profileMeta">
-
-        Build:
-        <b>containment</b>
-        •
-        Level:
-        <b>21</b>
-        •
-        Status:
-        <b>DO NOT PET</b>
-
-      </div>
-
-      <div
-        class="bars"
-        id="profileBars">
-      </div>
-
-      <div class="divider"></div>
-
-      <div
-        class="mini-title"
-        id="loadoutTitle">
-
-        LOADOUT
-
-      </div>
-
-      <ul
-        class="list"
-        id="loadoutList">
-      </ul>
-
-    </section>
-
-    <!-- BIO -->
-
-    <section class="panel quest">
-
-      <div class="panel-head">
-        <span id="bioPanelTitle">BIO LOG</span>
-        <span class="chip pink" id="bioChip">LIVE</span>
-      </div>
-
-      <ul
-        class="quests"
-        id="bioLogList">
-      </ul>
-
-      <div class="divider"></div>
-
-      <div
-        class="mini-title"
-        id="vibesTitle">
-
-        VIBES
-
-      </div>
-
-      <div
-        class="chips-row"
-        id="vibesList">
-      </div>
-
-    </section>
-
-    <!-- STATS -->
-
-    <section class="panel party">
-
-      <div class="panel-head">
-        <span id="statsPanelTitle">Stats</span>
-        <span class="chip pink" id="statsPanelChip">404</span>
-      </div>
-
-      <div id="statsCards"></div>
-
-    </section>
-
-    <!-- STATUS -->
-
-    <section class="panel battle">
-
-      <div class="panel-head">
-        <span id="statusPanelTitle">STATUS REPORT</span>
-        <span class="chip" id="statusPanelChip">LIVE</span>
-      </div>
-
-      <ul
-        class="list"
-        id="statusReportList">
-      </ul>
-
-    </section>
-
-    <!-- TERMINAL -->
-
-    <section class="panel syslog">
-
-      <div class="panel-head">
-        <span id="systemLogTitle">SYSTEM LOG</span>
-        <span class="chip pink" id="systemLogChip">STREAMING</span>
-      </div>
-
-      <div
-        class="terminal"
-        aria-label="System log terminal"
-        id="systemLogLines">
-      </div>
-
-    </section>
-
-  </main>
-  <div class="sao-toast show" role="status" aria-live="polite">
-    <div class="sao-toast-header" id="toastHeader">SYSTEM</div>
-
-    <div class="sao-toast-body">
-      <span class="type" id="toastType"></span><span class="caret">▍</span>
     </div>
 
-    <button
-      class="sao-toast-close"
-      type="button"
-      aria-label="Close notification">
-      ✕
-    </button>
+    <div class="window-content">
 
-    <div class="sao-toast-progress"></div>
+      <ul
+        id="statusReportList"
+        class="simple-list">
+      </ul>
+
+    </div>
+
+  </section>
+
+</div>
+<!-- FULL WIDTH TERMINAL -->
+
+<section class="window terminal-window">
+
+  <div class="window-title">
+
+    <div class="lights">
+      <span></span><span></span><span></span>
+    </div>
+
+    <span id="systemLogTitle">
+      terminal
+    </span>
+
+    <span
+      id="systemLogChip"
+      class="window-chip">
+      STREAMING
+    </span>
+
   </div>
 
+  <div class="window-content terminal-content">
+
+<pre class="boot-screen">
+MidnightBunny OS v2.1.7
+Copyright (C) Bunny Systems
+
+Boot sequence initiated...
+
+Loading kernel...
+Loading personality.dll...
+Loading bunny_ears.sys...
+Loading containment.service...
+
+Initializing reality.dll...
+FAILED
+
+Continuing anyway...
+
+Welcome back,
+MidnightBunny.
+</pre>
+
+<div
+id="systemLogLines"
+class="terminal-log">
+</div>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- SYSTEM NOTIFICATION -->
+
+<div class="toast show">
+
+<div class="toast-title"
+id="toastHeader">
+
+SYSTEM
+
+</div>
+
+<div class="toast-body">
+
+<span
+id="toastType"></span><span class="caret">█</span>
+
+</div>
+
+<div class="toast-progress"></div>
+
+</div>
 <script>
 
 const DATA_URL="/data/midnightbunny.json";
 
 function escapeHtml(str){
-  return String(str)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#39;");
+return String(str)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#39;");
 }
 
 function setText(id,value){
-  const el=document.getElementById(id);
-  if(el&&value!==undefined&&value!==null)el.textContent=value;
+const e=document.getElementById(id);
+if(e)e.textContent=value;
 }
 
 function setHTML(id,value){
-  const el=document.getElementById(id);
-  if(el&&value!==undefined&&value!==null)el.innerHTML=value;
+const e=document.getElementById(id);
+if(e)e.innerHTML=value;
 }
 
-function applyTheme(theme){
+function renderSimpleList(id,list){
 
-if(!theme)return;
+const el=document.getElementById(id);
 
-const root=document.documentElement;
+el.innerHTML="";
 
-const map={
-bg:"--bg",
-bg2:"--bg2",
-panel:"--panel",
-panel2:"--panel2",
-cyan:"--cyan",
-cyan2:"--cyan2",
-blue:"--blue",
-violet:"--violet",
-purple:"--purple",
-pink:"--pink",
-pink2:"--pink2",
-line:"--line",
-line2:"--line2",
-text:"--text",
-muted:"--muted",
-shadow:"--shadow"
-};
+list.forEach(item=>{
 
-Object.entries(map).forEach(([json,css])=>{
-if(theme[json])root.style.setProperty(css,theme[json]);
-});
+const li=document.createElement("li");
 
-if(theme.themeColor){
-document.getElementById("themeColorMeta")
-.setAttribute("content",theme.themeColor);
-}
+li.textContent=item;
 
-if(theme.titleGlow)
-root.style.setProperty("--title-glow",theme.titleGlow);
-
-if(theme.glitchTop)
-root.style.setProperty("--glitch-top",theme.glitchTop);
-
-if(theme.glitchBottom)
-root.style.setProperty("--glitch-bottom",theme.glitchBottom);
-
-}
-
-function renderNav(items){
-
-const nav=document.getElementById("siteNav");
-nav.innerHTML="";
-
-items.forEach(item=>{
-
-const a=document.createElement("a");
-
-a.href=item.href||"#";
-
-a.className="hud-link"+(item.active?" active":"");
-
-a.textContent=item.label||"LINK";
-
-nav.appendChild(a);
-
-});
-
-}
-
-function renderTopStats(stats){
-
-const wrap=document.getElementById("topStats");
-
-wrap.innerHTML="";
-
-stats.forEach(stat=>{
-
-const div=document.createElement("div");
-
-div.className="stat";
-
-div.innerHTML=`${escapeHtml(stat.label)} <b>${escapeHtml(stat.value)}</b>`;
-
-wrap.appendChild(div);
+el.appendChild(li);
 
 });
 
@@ -349,78 +419,59 @@ wrap.innerHTML="";
 
 bars.forEach(bar=>{
 
-const outer=document.createElement("div");
+wrap.innerHTML+=`
 
-outer.className="bar-wrap";
+<div class="bar-wrap">
 
-const width=Math.max(0,Math.min(bar.percent||0,100));
-
-outer.innerHTML=`
 <div class="bar-label">${escapeHtml(bar.label)}</div>
 
 <div class="bar">
-<div class="fill ${bar.fillClass||""}" style="width:${width}%"></div>
+
+<div class="fill ${bar.fillClass}"
+style="width:${bar.percent}%">
+
 </div>
 
-<div class="bar-value">${escapeHtml(bar.value)}</div>
+</div>
+
+<div class="bar-value">
+
+${escapeHtml(bar.value)}
+
+</div>
+
+</div>
+
 `;
 
-wrap.appendChild(outer);
-
 });
 
 }
+function renderBio(entries){
 
-function renderSimpleList(id,list){
+const wrap=document.getElementById("bioLogList");
 
-const ul=document.getElementById(id);
-
-ul.innerHTML="";
-
-list.forEach(item=>{
-
-const li=document.createElement("li");
-
-li.textContent=item;
-
-ul.appendChild(li);
-
-});
-
-}
-
-function renderBioLog(entries){
-
-const list=document.getElementById("bioLogList");
-
-list.innerHTML="";
+wrap.innerHTML="";
 
 entries.forEach(entry=>{
 
-const li=document.createElement("li");
+wrap.innerHTML+=`
 
-if(typeof entry==="string"){
+<li>
 
-li.innerHTML=`
 <span class="q-dot"></span>
-${escapeHtml(entry)}
-`;
 
-}else{
-
-li.innerHTML=`
-<span class="q-dot"></span>
 ${escapeHtml(entry.text)}
 
-${entry.tag?
-`<span class="tag ${entry.tagClass||""}">
-${escapeHtml(entry.tag)}
-</span>`:""}
+<span class="tag ${entry.tagClass}">
+
+${entry.tag}
+
+</span>
+
+</li>
+
 `;
-
-}
-
-list.appendChild(li);
 
 });
 
@@ -432,13 +483,13 @@ const wrap=document.getElementById("vibesList");
 
 wrap.innerHTML="";
 
-vibes.forEach(vibe=>{
+vibes.forEach(v=>{
 
 const chip=document.createElement("span");
 
-chip.className="soft-chip";
+chip.className="chip";
 
-chip.textContent=vibe;
+chip.textContent=v;
 
 wrap.appendChild(chip);
 
@@ -446,43 +497,39 @@ wrap.appendChild(chip);
 
 }
 
-function renderStatsCards(cards){
+function renderCards(cards){
 
 const wrap=document.getElementById("statsCards");
 
 wrap.innerHTML="";
 
-cards.forEach((card,index)=>{
+cards.forEach(card=>{
 
-const div=document.createElement("div");
+wrap.innerHTML+=`
 
-const width=Math.max(0,Math.min(card.percent||0,100));
+<div class="card">
 
-div.className="member";
+<div class="card-title">
 
-div.innerHTML=`
+${card.name}
 
-<div class="pfp ${index>0?"pfp"+(index+1):""}"></div>
+<span>
 
-<div class="m-info">
+${card.level}
 
-<div class="m-name">
-
-${escapeHtml(card.name)}
-
-<span class="lvl">${escapeHtml(card.level)}</span>
+</span>
 
 </div>
 
-<div class="m-bar">
+<div class="card-bar">
 
-<div class="m-fill" style="width:${width}%"></div>
+<div style="width:${card.percent}%"></div>
 
 </div>
 
-<div class="m-sub">
+<div class="card-sub">
 
-${escapeHtml(card.subtext)}
+${card.subtext}
 
 </div>
 
@@ -490,13 +537,10 @@ ${escapeHtml(card.subtext)}
 
 `;
 
-wrap.appendChild(div);
-
 });
 
 }
-
-function renderSystemLog(lines){
+function renderTerminal(lines){
 
 const wrap=document.getElementById("systemLogLines");
 
@@ -506,151 +550,114 @@ lines.forEach(line=>{
 
 if(line.type==="gap"){
 
-const gap=document.createElement("div");
-
-gap.className="term-gap";
-
-wrap.appendChild(gap);
+wrap.innerHTML+="<br>";
 
 return;
 
 }
 
-const div=document.createElement("div");
+const row=document.createElement("div");
 
-div.className="term-line";
+row.className="term-line";
 
-div.innerHTML=`
+let html=`<span class="time">${line.time}</span> `;
 
-<span class="term-time">${escapeHtml(line.time)}</span>
+if(line.dimPrefix){
 
-${line.dimPrefix?
-`<span class="term-dim">${escapeHtml(line.dimPrefix)}</span>`:""}
+html+=`<span class="dim">${escapeHtml(line.dimPrefix)}</span> `;
 
-${escapeHtml(line.message)}
+}
 
-${line.status?
-`<span class="${line.statusClass}">
-${escapeHtml(line.status)}
-</span>`:""}
+html+=escapeHtml(line.message);
 
-`;
+if(line.status){
 
-wrap.appendChild(div);
+html+=` <span class="${line.statusClass}">${escapeHtml(line.status)}</span>`;
+
+}
+
+row.innerHTML=html;
+
+wrap.appendChild(row);
 
 });
 
 }
 
-function typingToast(text){
+function typeToast(text){
 
-const out=document.getElementById("toastType");
+const toast=document.getElementById("toastType");
 
-out.textContent="";
+toast.textContent="";
 
 let i=0;
 
 (function type(){
 
-out.textContent=text.slice(0,i++);
+toast.textContent=text.slice(0,i++);
 
-if(i<=text.length)setTimeout(type,24);
+if(i<=text.length){
+
+setTimeout(type,22);
+
+}
 
 })();
 
 }
 
-async function loadBio(){
+async function loadData(){
 
 try{
 
-const response=await fetch(DATA_URL,{cache:"no-store"});
+const res=await fetch(DATA_URL,{cache:"no-store"});
 
-const data=await response.json();
-
-applyTheme(data.theme);
+const data=await res.json();
 
 document.title=data.head.title;
 
-const title=document.getElementById("siteTitle");
+document.getElementById("siteTitle").textContent=data.header.title;
 
-title.textContent=data.header.title;
-
-title.dataset.text=data.header.title;
+document.getElementById("siteTitle")
+.setAttribute("data-text",data.header.title);
 
 setText("siteSubtitle",data.header.subtitle);
 
-renderNav(data.header.nav);
-
-renderTopStats(data.header.stats);
-
-setText("profilePanelTitle",data.profile.panelTitle);
-
-setText("profileChip",data.profile.panelChip);
-
-const avatar=document.getElementById("avatarImg");
-
-if(avatar&&data.profile.avatar){
-
-avatar.src=data.profile.avatar.src;
-
-avatar.alt=data.profile.avatar.alt||"avatar";
-
-}
+renderBars(data.profile.bars);
 
 setText("profileName",data.profile.name);
 
 setHTML("profileMeta",data.profile.metaHtml);
 
-renderBars(data.profile.bars);
-
-setText("loadoutTitle",data.profile.loadoutTitle);
-
 renderSimpleList("loadoutList",data.profile.loadout);
 
-setText("bioPanelTitle",data.bio.panelTitle);
-
-setText("bioChip",data.bio.panelChip);
-
-renderBioLog(data.bio.entries);
-
-setText("vibesTitle",data.bio.vibesTitle);
+renderBio(data.bio.entries);
 
 renderVibes(data.bio.vibes);
 
-setText("statsPanelTitle",data.statsPanel.panelTitle);
-
-setText("statsPanelChip",data.statsPanel.panelChip);
-
-renderStatsCards(data.statsPanel.cards);
-
-setText("statusPanelTitle",data.statusReport.panelTitle);
-
-setText("statusPanelChip",data.statusReport.panelChip);
+renderCards(data.statsPanel.cards);
 
 renderSimpleList("statusReportList",data.statusReport.items);
 
-setText("systemLogTitle",data.systemLog.panelTitle);
-
-setText("systemLogChip",data.systemLog.panelChip);
-
-renderSystemLog(data.systemLog.lines);
+renderTerminal(data.systemLog.lines);
 
 setText("toastHeader",data.toast.header);
 
-typingToast(data.toast.line);
+typeToast(data.toast.line);
 
-}catch(e){
+document.getElementById("avatarImg").src=data.profile.avatar.src;
 
-console.error(e);
+}catch(err){
 
-setText("toastType","failed to load midnightbunny.json");
+console.error(err);
+
+document.getElementById("toastType").textContent="failed to load midnightbunny.json";
 
 }
 
 }
 
-loadBio();
+loadData();
 
 </script>
 
