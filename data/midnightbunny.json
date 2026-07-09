@@ -1,4 +1,27 @@
 {
+  "theme": {
+    "themeColor": "#070914",
+    "bg": "#03040a",
+    "bg2": "#090b16",
+    "panel": "rgba(8, 10, 20, 0.84)",
+    "panel2": "rgba(8, 10, 20, 0.72)",
+    "cyan": "#47d8ff",
+    "cyan2": "#93ecff",
+    "blue": "#5b6cff",
+    "violet": "#7a57d1",
+    "purple": "#a56cff",
+    "pink": "#7d4ba8",
+    "pink2": "#b188ff",
+    "line": "rgba(98,148,255,.16)",
+    "line2": "rgba(177,136,255,.16)",
+    "text": "#eef5ff",
+    "muted": "rgba(220,230,255,.72)",
+    "shadow": "rgba(71,216,255,.18)",
+    "titleGlow": "rgba(71,216,255,.20)",
+    "glitchTop": "rgba(71,216,255,.62)",
+    "glitchBottom": "rgba(177,136,255,.75)"
+  },
+
   "head": {
     "title": "midnightbunny.exe"
   },
@@ -72,10 +95,26 @@
     "panelChip": "LIVE",
 
     "entries": [
-      "██ Subject MB-01 exhibits excessive silliness.",
-      "██ Chastity protocol ENABLED.",
-      "██ Physical contact privileges permanently revoked.",
-      "██ Observation window remains open."
+      {
+        "text": "Subject MB-01 exhibits excessive silliness.",
+        "tag": "OBSERVE",
+        "tagClass": "blue"
+      },
+      {
+        "text": "Chastity protocol ENABLED.",
+        "tag": "LOCKED",
+        "tagClass": "red"
+      },
+      {
+        "text": "Physical contact privileges permanently revoked.",
+        "tag": "DENIED",
+        "tagClass": "yellow"
+      },
+      {
+        "text": "Observation window remains open.",
+        "tag": "LIVE",
+        "tagClass": "blue"
+      }
     ],
 
     "vibesTitle": "VIBES",
@@ -128,104 +167,100 @@
 
     "lines": [
       {
-  "panelTitle": "SYSTEM LOG",
-  "panelChip": "STREAMING",
-  "lines": [
-    {
-      "time": "00:00:01",
-      "message": "booting midnightbunny.exe…"
-    },
-    {
-      "time": "00:00:20",
-      "message": "loading personality.dll…",
-      "status": "warning",
-      "statusClass": "term-warn"
-    },
-    {
-      "time": "00:00:25",
-      "message": "reality filter...",
-      "status": "unstable",
-      "statusClass": "term-bad"
-    },
-    {
-      "time": "00:00:30",
-      "message": "containment protocols enabled..."
-    },
-    {
-      "time": "00:00:35",
-      "message": "bunny ears synchronized...",
-      "status": "ok",
-      "statusClass": "term-ok"
-    },
-    {
-      "type": "gap"
-    },
-    {
-      "time": "00:01:00",
-      "message": "autism.exe...",
-      "status": "loaded!",
-      "statusClass": "term-warn"
-    },
-    {
-      "time": "00:06:07",
-      "message": "adhd.txt loading...",
-      "status": "Brain Not Found (404)",
-      "statusClass": "term-bad"
-    },
-    {
-      "time": "00:10:08",
-      "message": "loneliness.js...",
-      "status": "Loaded!",
-      "statusClass": "term-ok"
-    },
-    {
-      "type": "gap"
-    },
-    {
-      "time": "00:15:09",
-      "dimPrefix": "heartbeat:",
-      "message": "buffering..."
-    },
-    {
-      "time": "00:20:00",
-      "dimPrefix": "status:",
-      "message": "online • quietly contained"
-    },
-    {
-      "type": "gap"
-    },
-    {
-      "time": "00:23:17",
-      "message": "touch requested..."
-    },
-    {
-      "time": "00:23:18",
-      "message": "checking permissions..."
-    },
-    {
-      "time": "00:23:19",
-      "message": "locating keyholder..."
-    },
-    {
-      "time": "00:23:20",
-      "message": "keyholder missing.",
-      "status": "ERROR",
-      "statusClass": "term-bad"
-    },
-    {
-      "time": "00:23:21",
-      "message": "touch prohibited.",
-      "status": "LOCKED",
-      "statusClass": "term-warn"
-    },
-    {
-      "time": "00:23:22",
-      "message": "denial extended indefinitely.",
-      "status": "ACTIVE",
-      "statusClass": "term-ok"
-    }
-  ]
-},
+        "time": "00:00:01",
+        "message": "booting midnightbunny.exe..."
+      },
+      {
+        "time": "00:00:20",
+        "message": "loading personality.dll...",
+        "status": "warning",
+        "statusClass": "term-warn"
+      },
+      {
+        "time": "00:00:25",
+        "message": "reality filter...",
+        "status": "unstable",
+        "statusClass": "term-bad"
+      },
+      {
+        "time": "00:00:30",
+        "message": "containment protocols enabled..."
+      },
+      {
+        "time": "00:00:35",
+        "message": "bunny ears synchronized...",
+        "status": "ok",
+        "statusClass": "term-ok"
+      },
+      {
+        "type": "gap"
+      },
+      {
+        "time": "00:01:00",
+        "message": "autism.exe...",
+        "status": "loaded!",
+        "statusClass": "term-warn"
+      },
+      {
+        "time": "00:06:07",
+        "message": "adhd.txt loading...",
+        "status": "Brain Not Found (404)",
+        "statusClass": "term-bad"
+      },
+      {
+        "time": "00:10:08",
+        "message": "loneliness.js...",
+        "status": "Loaded!",
+        "statusClass": "term-ok"
+      },
+      {
+        "type": "gap"
+      },
+      {
+        "time": "00:15:09",
+        "dimPrefix": "heartbeat:",
+        "message": "buffering..."
+      },
+      {
+        "time": "00:20:00",
+        "dimPrefix": "status:",
+        "message": "online • quietly contained"
+      },
+      {
+        "type": "gap"
+      },
+      {
+        "time": "00:23:17",
+        "message": "touch requested..."
+      },
+      {
+        "time": "00:23:18",
+        "message": "checking permissions..."
+      },
+      {
+        "time": "00:23:19",
+        "message": "locating keyholder..."
+      },
+      {
+        "time": "00:23:20",
+        "message": "keyholder missing.",
+        "status": "ERROR",
+        "statusClass": "term-bad"
+      },
+      {
+        "time": "00:23:21",
+        "message": "touch prohibited.",
+        "status": "LOCKED",
+        "statusClass": "term-warn"
+      },
+      {
+        "time": "00:23:22",
+        "message": "denial extended indefinitely.",
+        "status": "ACTIVE",
+        "statusClass": "term-ok"
+      }
+    ]
+  },
 
   "toast": {
     "header": "CONTAINMENT",
