@@ -23,10 +23,21 @@
 </style></head>
 
 <body>
-<div id="boot-overlay" class="boot-overlay"><div class="boot-box"><h1>LONG EARS UPDATE</h1><pre>loading bunny kernel...
-checking ear calibration...
-mounting burrow...
-launching Midnight Bunny OS...</pre></div></div>
+<div id="boot-overlay" class="boot-overlay">
+    <div class="boot-box">
+
+        <h1 class="boot-title">
+            LONG EARS UPDATE
+        </h1>
+
+        <div class="boot-terminal"></div>
+
+        <div class="boot-progress-wrap">
+            <div class="boot-progress"></div>
+        </div>
+
+    </div>
+</div>
 
 
 <div class="noise"></div>
@@ -347,9 +358,26 @@ Welcome back,
 MidnightBunny.
 </pre>
 
-<div
-id="systemLogLines"
-class="terminal-log">
+<div id="terminal" class="terminal-log">
+
+    <div id="terminal-output"></div>
+
+    <div class="terminal-input-row">
+
+        <span class="prompt">
+            bunny@night:~$
+        </span>
+
+        <input
+            id="terminal-input"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false">
+
+    </div>
+
 </div>
 
   </div>
@@ -379,134 +407,7 @@ id="toastType"></span><span class="caret">█</span>
 <div class="toast-progress"></div>
 
 </div>
-<script>
-
-const DATA_URL="/bunny/night/data/midnightbunny.json";
-
-function escapeHtml(str){
-return String(str)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#39;");
-}
-
-function setText(id,value){
-const e=document.getElementById(id);
-if(e)e.textContent=value;
-}
-
-function setHTML(id,value){
-const e=document.getElementById(id);
-if(e)e.innerHTML=value;
-}
-
-function renderSimpleList(id,list){
-
-const el=document.getElementById(id);
-
-el.innerHTML="";
-
-list.forEach(item=>{
-
-const li=document.createElement("li");
-
-li.textContent=item;
-
-el.appendChild(li);
-
-});
-
-}
-
-function renderBars(bars){
-
-const wrap=document.getElementById("profileBars");
-
-wrap.innerHTML="";
-
-bars.forEach(bar=>{
-
-wrap.innerHTML+=`
-
-<div class="bar-wrap">
-
-<div class="bar-label">${escapeHtml(bar.label)}</div>
-
-<div class="bar">
-
-<div class="fill ${bar.fillClass}"
-style="width:${bar.percent}%">
-
-</div>
-
-</div>
-
-<div class="bar-value">
-
-${escapeHtml(bar.value)}
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
-function renderBio(entries){
-
-const wrap=document.getElementById("bioLogList");
-
-wrap.innerHTML="";
-
-entries.forEach(entry=>{
-
-wrap.innerHTML+=`
-
-<li>
-
-<span class="q-dot"></span>
-
-${escapeHtml(entry.text)}
-
-<span class="tag ${entry.tagClass}">
-
-${entry.tag}
-
-</span>
-
-</li>
-
-`;
-
-});
-
-}
-
-function renderVibes(vibes){
-
-const wrap=document.getElementById("vibesList");
-
-wrap.innerHTML="";
-
-vibes.forEach(v=>{
-
-const chip=document.createElement("span");
-
-chip.className="chip";
-
-chip.textContent=v;
-
-wrap.appendChild(chip);
-
-});
-
-}
-
-function renderCards(cards){
+ renderCards(cards){
 
 const wrap=document.getElementById("statsCards");
 
@@ -544,131 +445,12 @@ ${card.subtext}
 
 </div>
 
-`;
-
-});
-
-}
-function renderTerminal(lines){
-
-const wrap=document.getElementById("systemLogLines");
-
-wrap.innerHTML="";
-
-lines.forEach(line=>{
-
-if(line.type==="gap"){
-
-wrap.innerHTML+="<br>";
-
-return;
-
-}
-
-const row=document.createElement("div");
-
-row.className="term-line";
-
-let html=`<span class="time">${line.time}</span> `;
-
-if(line.dimPrefix){
-
-html+=`<span class="dim">${escapeHtml(line.dimPrefix)}</span> `;
-
-}
-
-html+=escapeHtml(line.message);
-
-if(line.status){
-
-html+=` <span class="${line.statusClass}">${escapeHtml(line.status)}</span>`;
-
-}
-
-row.innerHTML=html;
-
-wrap.appendChild(row);
-
-});
-
-}
-
-function typeToast(text){
-
-const toast=document.getElementById("toastType");
-
-toast.textContent="";
-
-let i=0;
-
-(function type(){
-
-toast.textContent=text.slice(0,i++);
-
-if(i<=text.length){
-
-setTimeout(type,22);
-
-}
-
-})();
-
-}
-
-async function loadData(){
-
-try{
-
-const res=await fetch(DATA_URL,{cache:"no-store"});
-
-const data=await res.json();
-
-document.title=data.head.title;
-
-document.getElementById("siteTitle").textContent=data.header.title;
-
-document.getElementById("siteTitle")
-.setAttribute("data-text",data.header.title);
-
-setText("siteSubtitle",data.header.subtitle);
-
-renderBars(data.profile.bars);
-
-setText("profileName",data.profile.name);
-
-setHTML("profileMeta",data.profile.metaHtml);
-
-renderSimpleList("loadoutList",data.profile.loadout);
-
-renderBio(data.bio.entries);
-
-renderVibes(data.bio.vibes);
-
-renderCards(data.statsPanel.cards);
-
-renderSimpleList("statusReportList",data.statusReport.items);
-
-renderTerminal(data.systemLog.lines);
-
-setText("toastHeader",data.toast.header);
-
-typeToast(data.toast.line);
-
-document.getElementById("avatarImg").src=data.profile.avatar.src;
-
-}catch(err){
-
-console.error(err);
-
-document.getElementById("toastType").textContent="failed to load midnightbunny.json";
-
-}
-
-}
-
-loadData();
-
-</script>
+<script src="/bunny/night/js/boot.js"></script>
+<script src="/bunny/night/js/shell.js"></script>
+<script src="/bunny/night/js/commands.js"></script>
+<script src="/bunny/night/js/widgets.js"></script>
+<script src="/bunny/night/js/effects.js"></script>
+<script src="/bunny/night/js/core.js"></script>
 
 </body>
 </html>
