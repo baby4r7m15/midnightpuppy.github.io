@@ -1897,3 +1897,40 @@ body::after{
  .desktop,.layout,.grid{display:flex!important;flex-direction:column!important;gap:16px!important}
  .panel,.window,.card{width:100%!important;max-width:none!important}
 }
+
+/* =====================================================
+   MOBILE LAYOUT
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .desktop{
+        display:flex;
+        flex-direction:column;
+        gap:18px;
+        padding:16px;
+    }
+
+    .window{
+        width:100%;
+        max-width:100%;
+    }
+
+    .avatar-panel{
+        display:flex;
+        justify-content:center;
+    }
+
+    #avatarImg{
+        width:140px;
+        height:140px;
+        max-width:45vw;
+        object-fit:cover;
+    }
+
+    #profileName,
+    .profile-meta{
+        text-align:center;
+    }
+
+}
