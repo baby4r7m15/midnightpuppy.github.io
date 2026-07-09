@@ -2,14 +2,15 @@
 ===========================================================
  Midnight Bunny OS
  boot.js
- Long Ears Update - Rev 6.1
+ Rev 7.0
 ===========================================================
 */
 
 const Boot = (() => {
 
     const DEFAULT_LINES = [
-        "Bunny BIOS v2.0",
+
+        "Bunny BIOS v2.1.7",
         "",
         "Checking bunny ears...",
         "Ear calibration complete.",
@@ -17,34 +18,39 @@ const Boot = (() => {
         "Mounting /burrow...",
         "Loading reality.dll...",
         "WARNING: reality.dll unstable",
-        "Starting Hyperfocus Daemon...",
+        "Loading Hyperfocus Daemon...",
         "Loading autism.exe...",
         "Loading adhd.sys...",
         "Loading NymFit...",
         "Connecting to carrot servers...",
         "Containment protocol enabled.",
-        "Touch permissions configured.",
+        "Touch permissions granted.",
         "",
         "Launching Midnight Bunny OS..."
+
     ];
 
     const RANDOM_LINES = [
-        "Coffee levels critically low.",
-        "Compiling chaos...",
-        "Searching for motivation...",
-        "Motivation not found.",
-        "Synchronizing bunny fluff...",
-        "Petting permissions revoked.",
-        "Loading more RAM...",
+
         "Downloading carrots...",
-        "Updating long ears...",
-        "Initializing hacker bunny mode..."
+        "Professional internet rabbit detected.",
+        "Reality.dll still missing.",
+        "Compiling chaos...",
+        "Synchronizing bunny fluff...",
+        "Loading more RAM...",
+        "Initializing hacker bunny mode...",
+        "Calibrating RGB...",
+        "Petting permissions revoked.",
+        "Updating long ears..."
+
     ];
 
     const config = {
-        lineDelay: 140,
-        finishDelay: 900,
+
+        lineDelay: 90,
+        finishDelay: 700,
         skipIfVisited: false
+
     };
 
     let overlay;
@@ -52,78 +58,62 @@ const Boot = (() => {
     let progress;
     let title;
 
-    function randomMessage() {
-        return RANDOM_LINES[Math.floor(Math.random() * RANDOM_LINES.length)];
-    }
+    function init(options = {}) {
 
-    function wait(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+        Object.assign(config, options);
 
-    function typeLine(text) {
+        overlay = document.getElementById("boot-overlay");
 
-        return new Promise(resolve => {
+        if (!overlay)
+            return;
 
-            const row = document.createElement("div");
-            row.className = "boot-line";
+        title = overlay.querySelector(".boot-title");
+        terminal = overlay.querySelector(".boot-terminal");
+        progress = overlay.querySelector(".boot-progress");
 
-            terminal.appendChild(row);
+        if (
+            config.skipIfVisited &&
+            sessionStorage.getItem("mb_boot") === "1"
+        ) {
 
-            let i = 0;
+            overlay.remove();
+            return;
 
-            function type() {
+        }
 
-                row.textContent = text.substring(0, i);
+        sessionStorage.setItem("mb_boot", "1");
 
-                i++;
-
-                if (i <= text.length) {
-
-                    requestAnimationFrame(type);
-
-                } else {
-
-                    terminal.scrollTop = terminal.scrollHeight;
-                    resolve();
-
-                }
-
-            }
-
-            type();
-
-        });
+        play();
 
     }
 
     async function play() {
 
-        overlay = document.getElementById("boot-overlay");
-
-        if (!overlay) return;
-
-        title = overlay.querySelector(".boot-title");
-        terminal = overlay.querySelector(".boot-terminal");
-        progress = overlay.querySelector(".boot-progress");
+        if (!terminal)
+            return;
 
         terminal.innerHTML = "";
 
         const lines = [...DEFAULT_LINES];
 
         lines.splice(
-            Math.floor(Math.random() * lines.length),
+
+            random(2, lines.length - 2),
+
             0,
-            randomMessage()
+
+            RANDOM_LINES[random(0, RANDOM_LINES.length - 1)]
+
         );
 
         for (let i = 0; i < lines.length; i++) {
 
-            await typeLine(lines[i]);
+            await type(lines[i]);
 
             if (progress) {
 
                 progress.style.width =
-                    ((i + 1) / lines.length) * 100 + "%";
+                    ((i + 1) / lines.length * 100) + "%";
 
             }
 
@@ -133,25 +123,36 @@ const Boot = (() => {
 
         await wait(config.finishDelay);
 
-        overlay.classList.add("boot-fade");
-
-        await wait(800);
-
-        overlay.remove();
+        fadeOut();
 
     }
 
-    function skip() {
+    function fadeOut() {
 
-        overlay = document.getElementById("boot-overlay");
+        if (!overlay)
+            return;
 
-        if (!overlay) return;
+        overlay.style.transition = "opacity .8s";
 
-        overlay.remove();
+        overlay.style.opacity = "0";
+
+        setTimeout(() => {
+
+            overlay.remove();
+
+            if (typeof Widgets !== "undefined") {
+
+                Widgets.notifyRandom();
+
+            }
+
+        }, 800);
 
     }
 
     function reboot() {
+
+        sessionStorage.removeItem("mb_boot");
 
         location.reload();
 
@@ -160,31 +161,65 @@ const Boot = (() => {
     function shutdown() {
 
         document.body.innerHTML = `
-            <div class="shutdown-screen">
-                <h1>Midnight Bunny OS</h1>
-                <p>It is now safe to boop your monitor.</p>
-            </div>
-        `;
+
+<div class="shutdown-screen">
+
+<h1>Midnight Bunny OS</h1>
+
+<p>System halted.</p>
+
+<p>It is now safe to boop your monitor.</p>
+
+</div>
+
+`;
 
     }
 
-    function init(options = {}) {
+    function skip() {
 
-        Object.assign(config, options);
+        if (overlay)
+            overlay.remove();
 
-        if (
-            config.skipIfVisited &&
-            sessionStorage.getItem("bunnyBoot") === "1"
-        ) {
+    }
 
-            skip();
-            return;
+    async function type(text) {
+
+        const row = document.createElement("div");
+
+        row.className = "boot-line";
+
+        terminal.appendChild(row);
+
+        for (let i = 0; i <= text.length; i++) {
+
+            row.textContent = text.substring(0, i);
+
+            terminal.scrollTop = terminal.scrollHeight;
+
+            await wait(8);
 
         }
 
-        sessionStorage.setItem("bunnyBoot", "1");
+    }
 
-        play();
+    function wait(ms) {
+
+        return new Promise(resolve => {
+
+            setTimeout(resolve, ms);
+
+        });
+
+    }
+
+    function random(min, max) {
+
+        return Math.floor(
+
+            Math.random() * (max - min + 1)
+
+        ) + min;
 
     }
 
