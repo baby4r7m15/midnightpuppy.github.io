@@ -1,0 +1,231 @@
+/* ==========================================================
+   Midnight Bunny OS
+   variables.css
+========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap");
+
+:root{
+
+/* wallpaper */
+
+--bg:#07080d;
+--bg2:#111426;
+--bg3:#1b1032;
+
+/* windows */
+
+--window:#121522;
+--window2:#181c2d;
+--glass:rgba(18,22,36,.84);
+
+/* accent */
+
+--cyan:#7be7ff;
+--cyan-soft:#c8f7ff;
+
+--purple:#a884ff;
+--purple2:#c5a4ff;
+
+--pink:#ff83da;
+
+--blue:#6d86ff;
+
+/* text */
+
+--text:#edf4ff;
+--muted:#94a3c5;
+--terminal:#98ffd0;
+
+/* borders */
+
+--border:rgba(255,255,255,.07);
+--border2:rgba(123,231,255,.18);
+
+/* shadows */
+
+--shadow:
+
+0 10px 30px rgba(0,0,0,.45),
+
+0 0 24px rgba(123,231,255,.08);
+
+--shadow-hover:
+
+0 20px 40px rgba(0,0,0,.55),
+
+0 0 28px rgba(123,231,255,.18);
+
+/* sizing */
+
+--radius:16px;
+
+--title:13px;
+
+--body:14px;
+
+--mono:12px;
+
+}
+
+/* ==========================================================
+Reset
+========================================================== */
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+}
+
+html{
+
+height:100%;
+
+}
+
+body{
+
+width:100%;
+
+height:100%;
+
+overflow:hidden;
+
+background:var(--bg);
+
+color:var(--text);
+
+font-family:"Inter",sans-serif;
+
+font-size:var(--body);
+
+}
+
+/* ==========================================================
+Typography
+========================================================== */
+
+h1,
+h2,
+h3{
+
+font-weight:800;
+
+letter-spacing:.5px;
+
+}
+
+p{
+
+line-height:1.7;
+
+}
+
+small{
+
+color:var(--muted);
+
+}
+
+code,
+pre,
+.mono{
+
+font-family:"JetBrains Mono",monospace;
+
+}
+
+/* ==========================================================
+Scrollbar
+========================================================== */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+height:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:rgba(255,255,255,.15);
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:rgba(123,231,255,.4);
+
+}
+
+/* ==========================================================
+Selection
+========================================================== */
+
+::selection{
+
+background:var(--cyan);
+
+color:#000;
+
+}
+
+/* ==========================================================
+Utility
+========================================================== */
+
+.hidden{
+
+display:none !important;
+
+}
+
+.flex{
+
+display:flex;
+
+}
+
+.column{
+
+flex-direction:column;
+
+}
+
+.center{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.mono{
+
+font-family:"JetBrains Mono",monospace;
+
+}
+
+.glow{
+
+text-shadow:
+
+0 0 8px rgba(123,231,255,.45);
+
+}
