@@ -1,91 +1,292 @@
 /* ==========================================================
    Midnight Bunny OS
-   Rev 9
    desktop.js
 ========================================================== */
 
 "use strict";
 
 /* ==========================================================
-Create Desktop
+Initialize Desktop
 ========================================================== */
 
-function createDesktop(data){
+function initializeDesktop(data){
 
     const desktop = document.getElementById("desktop");
 
     if(!desktop) return;
 
-    desktop.innerHTML = "";
+    buildDesktopWindows(data);
 
-    if(!data.icons) return;
+}
 
-    data.icons.forEach(icon => {
+/* ==========================================================
+Build Layout
+========================================================== */
 
-        desktop.appendChild(
-            createDesktopIcon(icon)
-        );
+function buildDesktopWindows(data){
 
+    const layer = document.getElementById("window-layer");
+
+    layer.innerHTML = "";
+
+    createWindow("profile",{
+        title:"profile.sys",
+        x:40,
+        y:70,
+        width:320,
+        height:540
     });
 
+    createWindow("avatar",{
+        title:"avatar.png",
+        x:390,
+        y:70,
+        width:520,
+        height:540
+    });
+
+    createWindow("terminal",{
+        title:"terminal",
+        x:40,
+        y:630,
+        width:560,
+        height:280
+    });
+
+    createWindow("quests",{
+        title:"quests.log",
+        x:930,
+        y:70,
+        width:320,
+        height:240
+    });
+
+    createWindow("music",{
+        title:"music.exe",
+        x:930,
+        y:330,
+        width:320,
+        height:160
+    });
+
+    createWindow("status",{
+        title:"status.sys",
+        x:930,
+        y:510,
+        width:320,
+        height:200
+    });
+
+    populateProfile(data);
+
+    populateAvatar(data);
+
+    populateQuests(data);
+
+    populateMusic(data);
+
+    populateStatus(data);
+
 }
 
 /* ==========================================================
-Create One Icon
+Profile
 ========================================================== */
 
-function createDesktopIcon(icon){
+function populateProfile(data){
 
-    const item = document.createElement("div");
+    const el=getWindowContent("profile");
 
-    item.className = "desktop-icon";
+    if(!el) return;
 
-    item.style.left = icon.x + "px";
+    el.innerHTML=`
 
-    item.style.top = icon.y + "px";
+<h2>${data.profile.name}</h2>
 
-    item.style.position = "absolute";
+<p class="window-subtext">
 
-    item.dataset.window = icon.window;
+${data.profile.title}
 
-    item.innerHTML = `
+</p>
 
-        <div class="icon">
+<br>
 
-            ${icon.icon}
+<table class="table">
 
-        </div>
+<tr>
 
-        <div class="label">
+<td>Status</td>
 
-            ${icon.title}
+<td>${data.profile.status}</td>
 
-        </div>
+</tr>
 
-    `;
+<tr>
 
-    item.addEventListener(
+<td>Pronouns</td>
 
-        "click",
+<td>${data.profile.pronouns}</td>
 
-        () => openWindow(icon.window)
+</tr>
 
-    );
+<tr>
 
-    return item;
+<td>Mood</td>
+
+<td>${data.about.mood}</td>
+
+</tr>
+
+<tr>
+
+<td>Level</td>
+
+<td>${data.about.level}</td>
+
+</tr>
+
+<tr>
+
+<td>Food</td>
+
+<td>${data.about.favoriteFood}</td>
+
+</tr>
+
+</table>
+
+`;
 
 }
 
 /* ==========================================================
-Refresh Desktop
+Avatar
 ========================================================== */
 
-function refreshDesktop(){
+function populateAvatar(data){
 
-    if(window.BUNNY){
+    const el=getWindowContent("avatar");
 
-        createDesktop(window.BUNNY);
+    if(!el) return;
 
-    }
+    el.innerHTML=`
+
+<img
+class="window-image"
+src="${data.system.avatar}">
+
+`;
+
+}
+
+/* ==========================================================
+Quests
+========================================================== */
+
+function populateQuests(data){
+
+    const el=getWindowContent("quests");
+
+    if(!el) return;
+
+    el.innerHTML=data.notifications.map(n=>`
+
+<div class="card">
+
+${n}
+
+</div>
+
+`).join("");
+
+}
+
+/* ==========================================================
+Music
+========================================================== */
+
+function populateMusic(data){
+
+    const el=getWindowContent("music");
+
+    if(!el) return;
+
+    el.innerHTML=`
+
+<div class="window-text">
+
+${data.music.nowPlaying}
+
+</div>
+
+<div class="window-subtext">
+
+${data.music.artist}
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-fill"
+style="width:${data.music.progress}%">
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* ==========================================================
+Status
+========================================================== */
+
+function populateStatus(data){
+
+    const el=getWindowContent("status");
+
+    if(!el) return;
+
+    el.innerHTML=`
+
+<table class="table">
+
+<tr>
+
+<td>Version</td>
+
+<td>${data.system.version}</td>
+
+</tr>
+
+<tr>
+
+<td>Theme</td>
+
+<td>${data.system.theme}</td>
+
+</tr>
+
+<tr>
+
+<td>Chaos</td>
+
+<td>99%</td>
+
+</tr>
+
+<tr>
+
+<td>Containment</td>
+
+<td>ACTIVE</td>
+
+</tr>
+
+</table>
+
+`;
 
 }
