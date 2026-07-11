@@ -1,315 +1,160 @@
-/*
-===========================================================
- Midnight Bunny OS
- effects.js
- Rev 7.0
-===========================================================
-*/
+/* ==========================================================
+   Midnight Bunny OS
+   Rev 9
+   effects.js
+========================================================== */
 
-const Effects = (() => {
+"use strict";
 
-    let mouseGlow;
-    let idleTimer;
+let glitchTimer = null;
+let clockTimer = null;
 
-    const GLITCH_CLASSES = [
-        "glitch-1",
-        "glitch-2",
-        "glitch-3"
-    ];
+/* ==========================================================
+Initialize
+========================================================== */
 
-    const SECRET_MESSAGES = [
+function initializeEffects(data){
 
-        "🐇 Long ears synchronized.",
-        "🥕 Carrot reserves nominal.",
-        "💜 Reality.dll still missing.",
-        "⚡ Hyperfocus engaged.",
-        "🔒 Containment holding.",
-        "🌙 Midnight Bunny online.",
-        "🖥 RGB calibrated."
+    initializeClock();
 
-    ];
+    if(data.system.glitchEnabled){
 
-    function init() {
-
-        createMouseGlow();
-
-        bindMouse();
-
-        wallpaperParallax();
-
-        randomGlitches();
-
-        randomHeaderGlitch();
-
-        randomCRT();
-
-        randomToast();
-
-        idleWatcher();
-
-        randomSecret();
-
-        console.log("✨ Midnight Bunny effects initialized.");
+        startGlitchLoop();
 
     }
 
-    /*=====================================
-        Mouse Glow
-    =====================================*/
+}
 
-    function createMouseGlow() {
+/* ==========================================================
+Desktop Clock
+========================================================== */
 
-        mouseGlow = document.createElement("div");
+function initializeClock(){
 
-        mouseGlow.id = "bunny-mouse-glow";
+    updateClock();
 
-        document.body.appendChild(mouseGlow);
+    clockTimer = setInterval(updateClock,1000);
 
-    }
+}
 
-    function bindMouse() {
+function updateClock(){
 
-        document.addEventListener("mousemove", e => {
+    const clock = document.getElementById("desktop-clock");
 
-            if (!mouseGlow) return;
+    if(!clock) return;
 
-            mouseGlow.style.left = e.clientX + "px";
-            mouseGlow.style.top = e.clientY + "px";
+    const now = new Date();
 
-        });
+    clock.textContent = now.toLocaleTimeString([],{
 
-    }
+        hour:"2-digit",
 
-    /*=====================================
-        Wallpaper Drift
-    =====================================*/
+        minute:"2-digit"
 
-    function wallpaperParallax() {
+    });
 
-        document.addEventListener("mousemove", e => {
+}
 
-            const x =
-                (e.clientX / window.innerWidth - .5) * 8;
+/* ==========================================================
+Random Glitch
+========================================================== */
 
-            const y =
-                (e.clientY / window.innerHeight - .5) * 8;
+function startGlitchLoop(){
 
-            document.body.style.backgroundPosition =
-                `${50 + x}% ${50 + y}%`;
+    glitchTimer = setInterval(()=>{
 
-        });
+        triggerGlitch();
 
-    }
+    },random(6000,14000));
 
-    /*=====================================
-        Random Screen Glitch
-    =====================================*/
+}
 
-    function randomGlitches() {
+function triggerGlitch(){
 
-        setInterval(() => {
+    document.body.classList.add("glitch");
 
-            if (Math.random() > .82) {
+    setTimeout(()=>{
 
-                glitch();
+        document.body.classList.remove("glitch");
 
-            }
+    },220);
 
-        }, 3500);
+}
 
-    }
+/* ==========================================================
+Random Notification
+========================================================== */
 
-    function glitch() {
+function randomNotification(){
 
-        const cls =
-            GLITCH_CLASSES[
-                random(0, GLITCH_CLASSES.length - 1)
-            ];
+    if(!window.BUNNY) return;
 
-        document.body.classList.add(cls);
+    const list = window.BUNNY.notifications;
 
-        setTimeout(() => {
+    if(!list || !list.length) return;
 
-            document.body.classList.remove(
-                "glitch-1",
-                "glitch-2",
-                "glitch-3"
-            );
+    const index = Math.floor(
 
-        }, 180);
+        Math.random()*list.length
 
-    }
+    );
 
-    /*=====================================
-        Header Flicker
-    =====================================*/
+    notify(list[index]);
 
-    function randomHeaderGlitch() {
+}
 
-        const title =
-            document.getElementById("siteTitle");
+/* ==========================================================
+Wallpaper Drift
+========================================================== */
 
-        if (!title) return;
+function wallpaperShift(){
 
-        setInterval(() => {
+    document.body.style.backgroundPosition =
 
-            if (Math.random() > .90) {
+        random(-20,20)+"px "+
 
-                title.classList.add("title-glitch");
+        random(-20,20)+"px";
 
-                setTimeout(() => {
+}
 
-                    title.classList.remove("title-glitch");
+/* ==========================================================
+RGB Flash
+========================================================== */
 
-                }, 300);
+function rgbFlash(){
 
-            }
+    document.body.classList.add("rgb-flash");
 
-        }, 3000);
+    setTimeout(()=>{
 
-    }
+        document.body.classList.remove("rgb-flash");
 
-    /*=====================================
-        CRT Flash
-    =====================================*/
+    },150);
 
-    function randomCRT() {
+}
 
-        setInterval(() => {
+/* ==========================================================
+Utility
+========================================================== */
 
-            if (Math.random() > .94) {
+function random(min,max){
 
-                crtFlash();
+    return Math.floor(
 
-            }
+        Math.random()*(max-min+1)
 
-        }, 5000);
+    )+min;
 
-    }
+}
 
-    function crtFlash() {
+/* ==========================================================
+Cleanup
+========================================================== */
 
-        document.body.classList.add("crt-flash");
+function stopEffects(){
 
-        setTimeout(() => {
+    clearInterval(glitchTimer);
 
-            document.body.classList.remove("crt-flash");
+    clearInterval(clockTimer);
 
-        }, 120);
-
-    }
-
-    /*=====================================
-        Random Notifications
-    =====================================*/
-
-    function randomToast() {
-
-        if (typeof Widgets === "undefined") return;
-
-        const notifications = [
-
-            ["Containment","Stable."],
-            ["RabbitOS","Long ears synchronized."],
-            ["Reality.dll","Still broken."],
-            ["Reminder","Hydrate."],
-            ["NymFit","Workout available."],
-            ["Brain","404 Not Found."],
-            ["RGB","Looking fabulous."],
-            ["Carrots","Inventory replenished."],
-            ["Kernel","Everything seems normal."]
-
-        ];
-
-        setInterval(() => {
-
-            if (Math.random() > .72) {
-
-                const n =
-                    notifications[
-                        random(0, notifications.length - 1)
-                    ];
-
-                Widgets.toast(n[0], n[1]);
-
-            }
-
-        }, 20000);
-
-    }
-
-    /*=====================================
-        Idle Mode
-    =====================================*/
-
-    function idleWatcher() {
-
-        resetIdle();
-
-        [
-            "mousemove",
-            "keydown",
-            "touchstart"
-        ].forEach(event => {
-
-            document.addEventListener(
-                event,
-                resetIdle
-            );
-
-        });
-
-    }
-
-    function resetIdle() {
-
-        clearTimeout(idleTimer);
-
-        document.body.classList.remove("idle");
-
-        idleTimer = setTimeout(() => {
-
-            document.body.classList.add("idle");
-
-        }, 60000);
-
-    }
-
-    /*=====================================
-        Console Easter Eggs
-    =====================================*/
-
-    function randomSecret() {
-
-        console.log(
-
-            SECRET_MESSAGES[
-                random(
-                    0,
-                    SECRET_MESSAGES.length - 1
-                )
-            ]
-
-        );
-
-    }
-
-    function random(min, max) {
-
-        return Math.floor(
-            Math.random() * (max - min + 1)
-        ) + min;
-
-    }
-
-    return {
-
-        init,
-        glitch,
-        crtFlash,
-        wallpaperParallax,
-        randomSecret
-
-    };
-
-})();
+}
