@@ -1,0 +1,488 @@
+/* ==========================================================
+   Midnight Bunny OS
+   Rev 9
+   animations.css
+========================================================== */
+
+/* ==========================================================
+Window Opening
+========================================================== */
+
+@keyframes windowOpen{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(16px) scale(.96);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+/* ==========================================================
+Window Closing
+========================================================== */
+
+@keyframes windowClose{
+
+    from{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:scale(.96);
+
+    }
+
+}
+
+/* ==========================================================
+Boot Fade
+========================================================== */
+
+.boot-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:#04050b;
+
+    color:var(--terminal,#8dffc2);
+
+    font-family:"JetBrains Mono",monospace;
+
+}
+
+.boot-logo{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:var(--cyanSoft);
+
+}
+
+.boot-version{
+
+    opacity:.7;
+
+}
+
+.boot-terminal{
+
+    width:min(720px,90vw);
+
+    height:260px;
+
+    overflow:hidden;
+
+    padding:20px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.boot-line{
+
+    margin-bottom:8px;
+
+    animation:bootLine .25s ease;
+
+}
+
+@keyframes bootLine{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(-10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.boot-fade{
+
+    animation:bootFade .8s forwards;
+
+}
+
+@keyframes bootFade{
+
+    to{
+
+        opacity:0;
+
+        visibility:hidden;
+
+    }
+
+}
+
+/* ==========================================================
+Toast
+========================================================== */
+
+.toast{
+
+    width:300px;
+
+    border-radius:14px;
+
+    background:rgba(16,18,28,.96);
+
+    border:1px solid rgba(113,233,255,.16);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+
+        0 0 20px rgba(113,233,255,.12),
+
+        0 10px 30px rgba(0,0,0,.45);
+
+    overflow:hidden;
+
+    transform:translateX(360px);
+
+    opacity:0;
+
+}
+
+.toast.show{
+
+    animation:toastIn .35s forwards;
+
+}
+
+.toast.hide{
+
+    animation:toastOut .35s forwards;
+
+}
+
+.toast-header{
+
+    padding:10px 14px;
+
+    font-size:12px;
+
+    font-family:"JetBrains Mono",monospace;
+
+    color:var(--cyanSoft);
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.toast-body{
+
+    padding:14px;
+
+    line-height:1.6;
+
+}
+
+.toast-progress{
+
+    height:3px;
+
+    background:
+
+        linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--purple));
+
+    animation:toastTimer 5s linear forwards;
+
+}
+
+@keyframes toastIn{
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+@keyframes toastOut{
+
+    to{
+
+        opacity:0;
+
+        transform:translateX(360px);
+
+    }
+
+}
+
+@keyframes toastTimer{
+
+    from{
+
+        width:100%;
+
+    }
+
+    to{
+
+        width:0;
+
+    }
+
+}
+
+/* ==========================================================
+Terminal
+========================================================== */
+
+.terminal-output{
+
+    height:100%;
+
+    overflow:auto;
+
+    font-family:"JetBrains Mono",monospace;
+
+    font-size:13px;
+
+}
+
+.terminal-line{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:8px;
+
+    animation:terminalLine .2s ease;
+
+}
+
+.terminal-time{
+
+    color:var(--cyan);
+
+}
+
+.terminal-prompt{
+
+    color:#8dffc2;
+
+}
+
+.terminal-message{
+
+    color:var(--text);
+
+}
+
+@keyframes terminalLine{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(5px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+/* ==========================================================
+CRT Flicker
+========================================================== */
+
+@keyframes crt{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    98%{
+
+        opacity:1;
+
+    }
+
+    99%{
+
+        opacity:.97;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}
+
+body{
+
+    animation:crt .18s infinite;
+
+}
+
+/* ==========================================================
+RGB Flash
+========================================================== */
+
+.rgb-flash{
+
+    animation:rgbFlash .18s;
+
+}
+
+@keyframes rgbFlash{
+
+    0%{
+
+        filter:hue-rotate(0deg);
+
+    }
+
+    50%{
+
+        filter:hue-rotate(20deg);
+
+    }
+
+    100%{
+
+        filter:none;
+
+    }
+
+}
+
+/* ==========================================================
+Glitch
+========================================================== */
+
+.glitch{
+
+    animation:glitch .18s;
+
+}
+
+@keyframes glitch{
+
+    0%{
+
+        transform:none;
+
+    }
+
+    25%{
+
+        transform:translateX(2px);
+
+    }
+
+    50%{
+
+        transform:translateX(-2px);
+
+    }
+
+    75%{
+
+        transform:translateY(1px);
+
+    }
+
+    100%{
+
+        transform:none;
+
+    }
+
+}
+
+/* ==========================================================
+Desktop Icons
+========================================================== */
+
+.desktop-icon{
+
+    animation:iconAppear .35s ease;
+
+}
+
+@keyframes iconAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
