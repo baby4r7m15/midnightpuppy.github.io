@@ -1,0 +1,404 @@
+/* ==========================================================
+   Midnight Bunny OS
+   Rev 9
+   windows.css
+========================================================== */
+
+/* ==========================================================
+Window Base
+========================================================== */
+
+.window{
+
+    position:absolute;
+
+    display:none;
+
+    flex-direction:column;
+
+    background:var(--glass);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    backdrop-filter:blur(18px);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    min-width:280px;
+
+    min-height:180px;
+
+    animation:windowOpen .25s ease;
+
+}
+
+/* ==========================================================
+Window Titlebar
+========================================================== */
+
+.window-titlebar{
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 14px;
+
+    background:
+
+        linear-gradient(
+        180deg,
+        rgba(255,255,255,.06),
+        rgba(255,255,255,.02));
+
+    border-bottom:1px solid var(--border);
+
+    cursor:move;
+
+    user-select:none;
+
+}
+
+/* ==========================================================
+Buttons
+========================================================== */
+
+.window-buttons{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+.window-buttons span{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    display:block;
+
+}
+
+.window-buttons .red{
+
+    background:#ff5f57;
+
+}
+
+.window-buttons .yellow{
+
+    background:#febc2e;
+
+}
+
+.window-buttons .green{
+
+    background:#28c840;
+
+}
+
+/* ==========================================================
+Title
+========================================================== */
+
+.window-title{
+
+    flex:1;
+
+    text-align:center;
+
+    font-family:"JetBrains Mono",monospace;
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+    color:var(--cyanSoft);
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+}
+
+.window-buttons + .window-title{
+
+    margin-left:14px;
+
+}
+
+/* ==========================================================
+Content
+========================================================== */
+
+.window-content{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:18px;
+
+}
+
+/* ==========================================================
+Focus
+========================================================== */
+
+.window.active{
+
+    border-color:rgba(113,233,255,.45);
+
+    box-shadow:
+
+        0 0 25px rgba(113,233,255,.18),
+
+        0 20px 45px rgba(0,0,0,.45);
+
+}
+
+/* ==========================================================
+Hidden
+========================================================== */
+
+.window.hidden{
+
+    display:none;
+
+}
+
+/* ==========================================================
+Sections
+========================================================== */
+
+.window-section{
+
+    margin-bottom:20px;
+
+}
+
+.window-section:last-child{
+
+    margin-bottom:0;
+
+}
+
+.window-heading{
+
+    margin-bottom:12px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:var(--cyanSoft);
+
+}
+
+.window-text{
+
+    line-height:1.7;
+
+    color:var(--text);
+
+}
+
+.window-subtext{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+/* ==========================================================
+Cards
+========================================================== */
+
+.card{
+
+    background:
+
+        linear-gradient(
+        180deg,
+        rgba(255,255,255,.03),
+        rgba(255,255,255,.015));
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:14px;
+
+    padding:14px;
+
+    margin-bottom:14px;
+
+}
+
+.card:last-child{
+
+    margin-bottom:0;
+
+}
+
+/* ==========================================================
+Lists
+========================================================== */
+
+.list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.list-item{
+
+    padding:10px 12px;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    background:rgba(255,255,255,.02);
+
+}
+
+/* ==========================================================
+Tags
+========================================================== */
+
+.tag{
+
+    display:inline-block;
+
+    padding:4px 8px;
+
+    border-radius:999px;
+
+    border:1px solid rgba(113,233,255,.25);
+
+    background:rgba(113,233,255,.08);
+
+    color:var(--cyanSoft);
+
+    font-size:11px;
+
+    font-family:"JetBrains Mono",monospace;
+
+}
+
+/* ==========================================================
+Progress
+========================================================== */
+
+.progress{
+
+    width:100%;
+
+    height:10px;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.05);
+
+    margin-top:10px;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    width:0;
+
+    background:
+
+        linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--purple));
+
+}
+
+/* ==========================================================
+Images
+========================================================== */
+
+.window-image{
+
+    width:100%;
+
+    border-radius:12px;
+
+    display:block;
+
+}
+
+/* ==========================================================
+Tables
+========================================================== */
+
+.table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.table td{
+
+    padding:8px;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.table td:first-child{
+
+    color:var(--muted);
+
+    width:35%;
+
+}
+
+/* ==========================================================
+Responsive
+========================================================== */
+
+@media(max-width:900px){
+
+    .window{
+
+        left:16px !important;
+
+        top:16px !important;
+
+        width:calc(100vw - 32px) !important;
+
+        height:auto !important;
+
+        max-height:calc(100vh - 32px);
+
+    }
+
+}
