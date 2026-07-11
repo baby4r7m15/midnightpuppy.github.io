@@ -66,9 +66,9 @@ Initialize OS
 
 function initializeOS(){
 
-    if(typeof initializeDesktop === "function"){
+    if(typeof createDesktop === "function"){
 
-        initializeDesktop(window.BUNNY);
+        createDesktop(window.BUNNY);
 
     }
 
