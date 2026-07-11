@@ -1,34 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <title>Midnight Bunny OS</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/windows.css">
+<link rel="stylesheet" href="css/effects.css">
 <link rel="stylesheet" href="css/animations.css">
+
 </head>
+
 <body>
 
-<div id="boot-layer"></div>
-<main id="desktop"></main>
-<div id="window-layer"></div>
-<div id="toast-layer"></div>
-<div id="effects-layer"></div>
+<!-- ======================================================
+Desktop Background
+====================================================== -->
 
-<script src="js/app.js" defer></script>
-<script src="js/desktop.js" defer></script>
-<script src="js/windows.js" defer></script>
-<script src="js/drag.js" defer></script>
+<div id="wallpaper"></div>
 
-<script src="js/about.js" defer></script>
-<script src="js/music.js" defer></script>
-<script src="js/terminal.js" defer></script>
+<div id="noise"></div>
 
-<script src="js/boot.js" defer></script>
-<script src="js/toast.js" defer></script>
-<script src="js/effects.js" defer></script>
+<div id="glow"></div>
+
+<!-- ======================================================
+Top HUD
+====================================================== -->
+
+<header id="hud">
+
+    <div class="hud-left">
+
+        <span id="os-name">
+
+            Midnight Bunny OS
+
+        </span>
+
+        <span id="os-version">
+
+            Rev 10
+
+        </span>
+
+    </div>
+
+    <div class="hud-right">
+
+        <span id="desktop-clock">
+
+            --:--
+
+        </span>
+
+    </div>
+
+</header>
+
+<!-- ======================================================
+Desktop
+====================================================== -->
+
+<main id="desktop">
+
+    <section id="window-layer">
+
+        <!-- windows generated here -->
+
+    </section>
+
+</main>
+
+<!-- ======================================================
+Toast Notifications
+====================================================== -->
+
+<div id="toast-layer">
+
+</div>
+
+<!-- ======================================================
+Context Menu
+====================================================== -->
+
+<div id="context-menu">
+
+</div>
+
+<!-- ======================================================
+Boot Screen
+====================================================== -->
+
+<div id="boot-layer">
+
+</div>
+
+<!-- ======================================================
+JS
+====================================================== -->
+
+<script src="js/app.js"></script>
+
+<script src="js/desktop.js"></script>
+
+<script src="js/windows.js"></script>
+
+<script src="js/terminal.js"></script>
 
 </body>
+
 </html>
