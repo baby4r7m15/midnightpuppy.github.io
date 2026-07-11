@@ -1,488 +1,428 @@
 /* ==========================================================
    Midnight Bunny OS
-   Rev 9
    animations.css
 ========================================================== */
 
 /* ==========================================================
-Window Opening
-========================================================== */
-
-@keyframes windowOpen{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(16px) scale(.96);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-}
-
-/* ==========================================================
-Window Closing
-========================================================== */
-
-@keyframes windowClose{
-
-    from{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-    to{
-
-        opacity:0;
-
-        transform:scale(.96);
-
-    }
-
-}
-
-/* ==========================================================
-Boot Fade
+Boot
 ========================================================== */
 
 .boot-screen{
 
-    position:fixed;
+position:fixed;
 
-    inset:0;
+inset:0;
 
-    display:flex;
+display:flex;
 
-    flex-direction:column;
+flex-direction:column;
 
-    justify-content:center;
+justify-content:center;
 
-    align-items:center;
+align-items:center;
 
-    gap:20px;
+gap:18px;
 
-    background:#04050b;
+background:#05060c;
 
-    color:var(--terminal,#8dffc2);
+font-family:"JetBrains Mono",monospace;
 
-    font-family:"JetBrains Mono",monospace;
+color:var(--terminal);
+
+z-index:999999;
 
 }
 
 .boot-logo{
 
-    font-size:34px;
+font-size:34px;
 
-    font-weight:700;
+font-weight:700;
 
-    color:var(--cyanSoft);
+color:var(--cyan-soft);
+
+text-shadow:
+
+0 0 18px rgba(123,231,255,.35);
+
+animation:bootGlow 2s infinite alternate;
 
 }
 
-.boot-version{
+@keyframes bootGlow{
 
-    opacity:.7;
+from{
+
+text-shadow:
+
+0 0 8px rgba(123,231,255,.25);
+
+}
+
+to{
+
+text-shadow:
+
+0 0 20px rgba(123,231,255,.45);
+
+}
 
 }
 
 .boot-terminal{
 
-    width:min(720px,90vw);
+width:min(720px,92vw);
 
-    height:260px;
+height:260px;
 
-    overflow:hidden;
+overflow:hidden;
 
-    padding:20px;
+padding:18px;
 
-    border:1px solid rgba(255,255,255,.08);
+border-radius:14px;
 
-    background:rgba(255,255,255,.02);
+border:1px solid rgba(255,255,255,.08);
+
+background:rgba(255,255,255,.02);
 
 }
 
 .boot-line{
 
-    margin-bottom:8px;
+margin-bottom:8px;
 
-    animation:bootLine .25s ease;
+opacity:0;
+
+animation:bootLine .25s forwards;
 
 }
 
 @keyframes bootLine{
 
-    from{
+from{
 
-        opacity:0;
+opacity:0;
 
-        transform:translateX(-10px);
+transform:translateX(-12px);
 
-    }
+}
 
-    to{
+to{
 
-        opacity:1;
+opacity:1;
 
-        transform:none;
+transform:none;
 
-    }
+}
 
 }
 
 .boot-fade{
 
-    animation:bootFade .8s forwards;
+animation:bootFade .8s forwards;
 
 }
 
 @keyframes bootFade{
 
-    to{
+to{
 
-        opacity:0;
+opacity:0;
 
-        visibility:hidden;
+visibility:hidden;
 
-    }
+}
 
 }
 
 /* ==========================================================
-Toast
+Window Animations
 ========================================================== */
 
-.toast{
+.window{
 
-    width:300px;
-
-    border-radius:14px;
-
-    background:rgba(16,18,28,.96);
-
-    border:1px solid rgba(113,233,255,.16);
-
-    backdrop-filter:blur(18px);
-
-    box-shadow:
-
-        0 0 20px rgba(113,233,255,.12),
-
-        0 10px 30px rgba(0,0,0,.45);
-
-    overflow:hidden;
-
-    transform:translateX(360px);
-
-    opacity:0;
+animation:windowAppear .35s ease;
 
 }
 
-.toast.show{
+@keyframes windowAppear{
 
-    animation:toastIn .35s forwards;
+from{
 
-}
+opacity:0;
 
-.toast.hide{
+transform:
 
-    animation:toastOut .35s forwards;
+translateY(20px)
 
-}
-
-.toast-header{
-
-    padding:10px 14px;
-
-    font-size:12px;
-
-    font-family:"JetBrains Mono",monospace;
-
-    color:var(--cyanSoft);
-
-    border-bottom:1px solid rgba(255,255,255,.05);
+scale(.97);
 
 }
 
-.toast-body{
+to{
 
-    padding:14px;
+opacity:1;
 
-    line-height:1.6;
-
-}
-
-.toast-progress{
-
-    height:3px;
-
-    background:
-
-        linear-gradient(
-        90deg,
-        var(--cyan),
-        var(--purple));
-
-    animation:toastTimer 5s linear forwards;
+transform:none;
 
 }
 
-@keyframes toastIn{
+}
 
-    to{
+.window.minimized{
 
-        opacity:1;
-
-        transform:none;
-
-    }
+animation:windowHide .2s forwards;
 
 }
 
-@keyframes toastOut{
+@keyframes windowHide{
 
-    to{
+to{
 
-        opacity:0;
+opacity:0;
 
-        transform:translateX(360px);
-
-    }
+transform:scale(.96);
 
 }
-
-@keyframes toastTimer{
-
-    from{
-
-        width:100%;
-
-    }
-
-    to{
-
-        width:0;
-
-    }
 
 }
 
 /* ==========================================================
-Terminal
+Hover Float
 ========================================================== */
 
-.terminal-output{
+.card:hover{
 
-    height:100%;
+transform:translateY(-2px);
 
-    overflow:auto;
-
-    font-family:"JetBrains Mono",monospace;
-
-    font-size:13px;
+transition:.2s;
 
 }
 
-.terminal-line{
+.window:hover{
 
-    display:flex;
-
-    gap:10px;
-
-    margin-bottom:8px;
-
-    animation:terminalLine .2s ease;
-
-}
-
-.terminal-time{
-
-    color:var(--cyan);
-
-}
-
-.terminal-prompt{
-
-    color:#8dffc2;
-
-}
-
-.terminal-message{
-
-    color:var(--text);
-
-}
-
-@keyframes terminalLine{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(5px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
+transform:translateY(-2px);
 
 }
 
 /* ==========================================================
-CRT Flicker
+Progress
 ========================================================== */
 
-@keyframes crt{
+.progress-fill{
 
-    0%{
-
-        opacity:1;
-
-    }
-
-    98%{
-
-        opacity:1;
-
-    }
-
-    99%{
-
-        opacity:.97;
-
-    }
-
-    100%{
-
-        opacity:1;
-
-    }
+animation:progressGlow 3s infinite alternate;
 
 }
 
-body{
+@keyframes progressGlow{
 
-    animation:crt .18s infinite;
+0%{
+
+filter:brightness(1);
+
+}
+
+100%{
+
+filter:brightness(1.25);
+
+}
 
 }
 
 /* ==========================================================
-RGB Flash
+Desktop Clock
 ========================================================== */
 
-.rgb-flash{
+#desktop-clock{
 
-    animation:rgbFlash .18s;
-
-}
-
-@keyframes rgbFlash{
-
-    0%{
-
-        filter:hue-rotate(0deg);
-
-    }
-
-    50%{
-
-        filter:hue-rotate(20deg);
-
-    }
-
-    100%{
-
-        filter:none;
-
-    }
+animation:clockPulse 1s infinite;
 
 }
 
-/* ==========================================================
-Glitch
-========================================================== */
+@keyframes clockPulse{
 
-.glitch{
+0%{
 
-    animation:glitch .18s;
+opacity:1;
 
 }
 
-@keyframes glitch{
+50%{
 
-    0%{
+opacity:.7;
 
-        transform:none;
+}
 
-    }
+100%{
 
-    25%{
+opacity:1;
 
-        transform:translateX(2px);
-
-    }
-
-    50%{
-
-        transform:translateX(-2px);
-
-    }
-
-    75%{
-
-        transform:translateY(1px);
-
-    }
-
-    100%{
-
-        transform:none;
-
-    }
+}
 
 }
 
 /* ==========================================================
-Desktop Icons
+Icons
 ========================================================== */
 
 .desktop-icon{
 
-    animation:iconAppear .35s ease;
+animation:iconFade .4s ease;
+
+transition:
+
+transform .2s,
+
+filter .2s;
 
 }
 
-@keyframes iconAppear{
+.desktop-icon:hover{
 
-    from{
+transform:translateY(-4px) scale(1.05);
 
-        opacity:0;
+filter:drop-shadow(0 0 10px rgba(123,231,255,.35));
 
-        transform:translateY(10px);
+}
 
-    }
+@keyframes iconFade{
 
-    to{
+from{
 
-        opacity:1;
+opacity:0;
 
-        transform:none;
+transform:translateY(12px);
 
-    }
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+/* ==========================================================
+Terminal Cursor
+========================================================== */
+
+.cursor{
+
+display:inline-block;
+
+width:8px;
+
+height:15px;
+
+background:var(--cyan);
+
+margin-left:3px;
+
+animation:cursorBlink .8s infinite;
+
+}
+
+@keyframes cursorBlink{
+
+50%{
+
+opacity:0;
+
+}
+
+}
+
+/* ==========================================================
+Wallpaper Drift
+========================================================== */
+
+#glow{
+
+animation:glowFloat 20s ease-in-out infinite alternate;
+
+}
+
+@keyframes glowFloat{
+
+from{
+
+transform:translateY(0);
+
+}
+
+to{
+
+transform:translateY(-20px);
+
+}
+
+}
+
+/* ==========================================================
+Notification Pulse
+========================================================== */
+
+.toast{
+
+animation:
+
+toastEnter .3s ease,
+
+toastPulse 3s infinite alternate;
+
+}
+
+@keyframes toastPulse{
+
+from{
+
+box-shadow:
+
+0 0 18px rgba(123,231,255,.08);
+
+}
+
+to{
+
+box-shadow:
+
+0 0 28px rgba(123,231,255,.18);
+
+}
+
+}
+
+/* ==========================================================
+Status Glow
+========================================================== */
+
+.glow-text{
+
+animation:textGlow 2s infinite alternate;
+
+}
+
+@keyframes textGlow{
+
+from{
+
+text-shadow:
+
+0 0 6px rgba(123,231,255,.2);
+
+}
+
+to{
+
+text-shadow:
+
+0 0 16px rgba(123,231,255,.45);
+
+}
 
 }
