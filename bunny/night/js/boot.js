@@ -1,236 +1,159 @@
-/*
-===========================================================
- Midnight Bunny OS
- boot.js
- Rev 7.0
-===========================================================
-*/
+/* ==========================================================
+   Midnight Bunny OS
+   Rev 9
+   boot.js
+========================================================== */
 
-const Boot = (() => {
+"use strict";
 
-    const DEFAULT_LINES = [
+let bootFinished = false;
 
-        "Bunny BIOS v2.1.7",
-        "",
-        "Checking bunny ears...",
-        "Ear calibration complete.",
-        "Initializing RGB controller...",
-        "Mounting /burrow...",
-        "Loading reality.dll...",
-        "WARNING: reality.dll unstable",
-        "Loading Hyperfocus Daemon...",
-        "Loading autism.exe...",
-        "Loading adhd.sys...",
-        "Loading NymFit...",
-        "Connecting to carrot servers...",
-        "Containment protocol enabled.",
-        "Touch permissions granted.",
-        "",
-        "Launching Midnight Bunny OS..."
+/* ==========================================================
+Initialize
+========================================================== */
+
+function initializeBoot(data){
+
+    if(!data.system.bootEnabled){
+
+        return;
+
+    }
+
+    const layer = document.getElementById("boot-layer");
+
+    if(!layer) return;
+
+    renderBoot(layer, data);
+
+}
+
+/* ==========================================================
+Render Boot Screen
+========================================================== */
+
+function renderBoot(layer, data){
+
+    layer.innerHTML = `
+
+    <div class="boot-screen">
+
+        <div class="boot-logo">
+
+            ${data.system.name}
+
+        </div>
+
+        <div class="boot-version">
+
+            Version ${data.system.version}
+
+        </div>
+
+        <div
+            class="boot-terminal"
+            id="boot-terminal">
+
+        </div>
+
+    </div>
+
+    `;
+
+    playBoot(data);
+
+}
+
+/* ==========================================================
+Boot Sequence
+========================================================== */
+
+function playBoot(data){
+
+    const terminal = document.getElementById("boot-terminal");
+
+    if(!terminal) return;
+
+    const lines = [
+
+        "Initializing Bunny Kernel...",
+        "Loading filesystem...",
+        "Mounting carrots...",
+        "Starting desktop manager...",
+        "Loading wallpaper...",
+        "Loading profile...",
+        "Loading windows...",
+        "Loading notifications...",
+        "Reality.dll loaded.",
+        "Containment stable.",
+        "Welcome back, " + data.profile.name + "."
 
     ];
 
-    const RANDOM_LINES = [
+    let index = 0;
 
-        "Downloading carrots...",
-        "Professional internet rabbit detected.",
-        "Reality.dll still missing.",
-        "Compiling chaos...",
-        "Synchronizing bunny fluff...",
-        "Loading more RAM...",
-        "Initializing hacker bunny mode...",
-        "Calibrating RGB...",
-        "Petting permissions revoked.",
-        "Updating long ears..."
+    function nextLine(){
 
-    ];
+        if(index >= lines.length){
 
-    const config = {
+            finishBoot();
 
-        lineDelay: 90,
-        finishDelay: 700,
-        skipIfVisited: false
-
-    };
-
-    let overlay;
-    let terminal;
-    let progress;
-    let title;
-
-    function init(options = {}) {
-
-        Object.assign(config, options);
-
-        overlay = document.getElementById("boot-overlay");
-
-        if (!overlay)
-            return;
-
-        title = overlay.querySelector(".boot-title");
-        terminal = overlay.querySelector(".boot-terminal");
-        progress = overlay.querySelector(".boot-progress");
-
-        if (
-            config.skipIfVisited &&
-            sessionStorage.getItem("mb_boot") === "1"
-        ) {
-
-            overlay.remove();
             return;
 
         }
 
-        sessionStorage.setItem("mb_boot", "1");
+        const line = document.createElement("div");
 
-        play();
+        line.className = "boot-line";
 
-    }
+        line.textContent = lines[index];
 
-    async function play() {
+        terminal.appendChild(line);
 
-        if (!terminal)
-            return;
+        terminal.scrollTop = terminal.scrollHeight;
 
-        terminal.innerHTML = "";
+        index++;
 
-        const lines = [...DEFAULT_LINES];
-
-        lines.splice(
-
-            random(2, lines.length - 2),
-
-            0,
-
-            RANDOM_LINES[random(0, RANDOM_LINES.length - 1)]
-
-        );
-
-        for (let i = 0; i < lines.length; i++) {
-
-            await type(lines[i]);
-
-            if (progress) {
-
-                progress.style.width =
-                    ((i + 1) / lines.length * 100) + "%";
-
-            }
-
-            await wait(config.lineDelay);
-
-        }
-
-        await wait(config.finishDelay);
-
-        fadeOut();
+        setTimeout(nextLine, 180);
 
     }
 
-    function fadeOut() {
+    nextLine();
 
-        if (!overlay)
-            return;
+}
 
-        overlay.style.transition = "opacity .8s";
+/* ==========================================================
+Finish
+========================================================== */
 
-        overlay.style.opacity = "0";
+function finishBoot(){
 
-        setTimeout(() => {
+    if(bootFinished) return;
 
-            overlay.remove();
+    bootFinished = true;
 
-            if (typeof Widgets !== "undefined") {
+    const layer = document.getElementById("boot-layer");
 
-                Widgets.notifyRandom();
+    if(!layer) return;
 
-            }
+    layer.classList.add("boot-fade");
 
-        }, 800);
+    setTimeout(()=>{
 
-    }
+        layer.remove();
 
-    function reboot() {
+    },900);
 
-        sessionStorage.removeItem("mb_boot");
+}
 
-        location.reload();
+/* ==========================================================
+Replay
+========================================================== */
 
-    }
+function replayBoot(){
 
-    function shutdown() {
+    bootFinished = false;
 
-        document.body.innerHTML = `
+    initializeBoot(window.BUNNY);
 
-<div class="shutdown-screen">
-
-<h1>Midnight Bunny OS</h1>
-
-<p>System halted.</p>
-
-<p>It is now safe to boop your monitor.</p>
-
-</div>
-
-`;
-
-    }
-
-    function skip() {
-
-        if (overlay)
-            overlay.remove();
-
-    }
-
-    async function type(text) {
-
-        const row = document.createElement("div");
-
-        row.className = "boot-line";
-
-        terminal.appendChild(row);
-
-        for (let i = 0; i <= text.length; i++) {
-
-            row.textContent = text.substring(0, i);
-
-            terminal.scrollTop = terminal.scrollHeight;
-
-            await wait(8);
-
-        }
-
-    }
-
-    function wait(ms) {
-
-        return new Promise(resolve => {
-
-            setTimeout(resolve, ms);
-
-        });
-
-    }
-
-    function random(min, max) {
-
-        return Math.floor(
-
-            Math.random() * (max - min + 1)
-
-        ) + min;
-
-    }
-
-    return {
-
-        init,
-        play,
-        skip,
-        reboot,
-        shutdown
-
-    };
-
-})();
+}
