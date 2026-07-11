@@ -1,111 +1,143 @@
 /* ==========================================================
    Midnight Bunny OS
-   Rev 9
    windows.css
 ========================================================== */
 
 /* ==========================================================
-Window Base
+Base Window
 ========================================================== */
 
 .window{
 
-    position:absolute;
+position:absolute;
 
-    display:none;
+display:flex;
 
-    flex-direction:column;
+flex-direction:column;
 
-    background:var(--glass);
+overflow:hidden;
 
-    border:1px solid var(--border);
+background:var(--glass);
 
-    border-radius:var(--radius);
+border:1px solid var(--border);
 
-    backdrop-filter:blur(18px);
+border-radius:18px;
 
-    overflow:hidden;
+backdrop-filter:blur(18px);
 
-    box-shadow:var(--shadow);
+box-shadow:var(--shadow);
 
-    min-width:280px;
+transition:
 
-    min-height:180px;
+transform .18s,
 
-    animation:windowOpen .25s ease;
+box-shadow .18s,
+
+border-color .18s;
+
+animation:windowSpawn .35s ease;
+
+}
+
+.window:hover{
+
+box-shadow:var(--shadow-hover);
+
+border-color:var(--border2);
+
+}
+
+.window.active{
+
+border-color:rgba(123,231,255,.35);
 
 }
 
 /* ==========================================================
-Window Titlebar
+Titlebar
 ========================================================== */
 
 .window-titlebar{
 
-    height:42px;
+height:42px;
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+align-items:center;
 
-    justify-content:space-between;
+justify-content:space-between;
 
-    padding:0 14px;
+padding:0 14px;
 
-    background:
+background:
 
-        linear-gradient(
-        180deg,
-        rgba(255,255,255,.06),
-        rgba(255,255,255,.02));
+linear-gradient(
 
-    border-bottom:1px solid var(--border);
+180deg,
 
-    cursor:move;
+rgba(255,255,255,.06),
 
-    user-select:none;
+rgba(255,255,255,.02)
+
+);
+
+border-bottom:
+
+1px solid rgba(255,255,255,.05);
+
+cursor:grab;
+
+user-select:none;
+
+}
+
+.window-titlebar:active{
+
+cursor:grabbing;
 
 }
 
 /* ==========================================================
-Buttons
+Traffic Lights
 ========================================================== */
 
 .window-buttons{
 
-    display:flex;
+display:flex;
 
-    gap:8px;
+align-items:center;
+
+gap:7px;
 
 }
 
 .window-buttons span{
 
-    width:12px;
+width:10px;
 
-    height:12px;
+height:10px;
 
-    border-radius:50%;
+border-radius:50%;
 
-    display:block;
-
-}
-
-.window-buttons .red{
-
-    background:#ff5f57;
+display:block;
 
 }
 
-.window-buttons .yellow{
+.window-close{
 
-    background:#febc2e;
+background:#ff6d91;
 
 }
 
-.window-buttons .green{
+.window-min{
 
-    background:#28c840;
+background:#ffd96d;
+
+}
+
+.window-max{
+
+background:#7dffb0;
 
 }
 
@@ -115,29 +147,17 @@ Title
 
 .window-title{
 
-    flex:1;
+flex:1;
 
-    text-align:center;
+text-align:center;
 
-    font-family:"JetBrains Mono",monospace;
+font-family:"JetBrains Mono",monospace;
 
-    font-size:13px;
+font-size:12px;
 
-    letter-spacing:1px;
+letter-spacing:1px;
 
-    color:var(--cyanSoft);
-
-    overflow:hidden;
-
-    white-space:nowrap;
-
-    text-overflow:ellipsis;
-
-}
-
-.window-buttons + .window-title{
-
-    margin-left:14px;
+color:var(--cyan-soft);
 
 }
 
@@ -147,37 +167,11 @@ Content
 
 .window-content{
 
-    flex:1;
+flex:1;
 
-    overflow:auto;
+overflow:auto;
 
-    padding:18px;
-
-}
-
-/* ==========================================================
-Focus
-========================================================== */
-
-.window.active{
-
-    border-color:rgba(113,233,255,.45);
-
-    box-shadow:
-
-        0 0 25px rgba(113,233,255,.18),
-
-        0 20px 45px rgba(0,0,0,.45);
-
-}
-
-/* ==========================================================
-Hidden
-========================================================== */
-
-.window.hidden{
-
-    display:none;
+padding:18px;
 
 }
 
@@ -187,41 +181,49 @@ Sections
 
 .window-section{
 
-    margin-bottom:20px;
+margin-bottom:18px;
 
 }
 
 .window-section:last-child{
 
-    margin-bottom:0;
+margin-bottom:0;
 
 }
+
+/* ==========================================================
+Typography
+========================================================== */
 
 .window-heading{
 
-    margin-bottom:12px;
+font-size:18px;
 
-    font-size:15px;
+font-weight:700;
 
-    font-weight:700;
+margin-bottom:10px;
 
-    color:var(--cyanSoft);
-
-}
-
-.window-text{
-
-    line-height:1.7;
-
-    color:var(--text);
+color:var(--cyan-soft);
 
 }
 
 .window-subtext{
 
-    color:var(--muted);
+margin-top:6px;
 
-    font-size:13px;
+font-family:"JetBrains Mono",monospace;
+
+font-size:12px;
+
+color:var(--muted);
+
+}
+
+.window-text{
+
+line-height:1.8;
+
+color:var(--text);
 
 }
 
@@ -231,52 +233,35 @@ Cards
 
 .card{
 
-    background:
+padding:14px;
 
-        linear-gradient(
-        180deg,
-        rgba(255,255,255,.03),
-        rgba(255,255,255,.015));
+border-radius:12px;
 
-    border:1px solid rgba(255,255,255,.06);
+background:
 
-    border-radius:14px;
+rgba(255,255,255,.03);
 
-    padding:14px;
+border:
 
-    margin-bottom:14px;
-
-}
-
-.card:last-child{
-
-    margin-bottom:0;
+1px solid rgba(255,255,255,.05);
 
 }
 
 /* ==========================================================
-Lists
+Image
 ========================================================== */
 
-.list{
+.window-image{
 
-    display:flex;
+display:block;
 
-    flex-direction:column;
+width:100%;
 
-    gap:10px;
+border-radius:12px;
 
-}
+border:
 
-.list-item{
-
-    padding:10px 12px;
-
-    border-radius:10px;
-
-    border:1px solid rgba(255,255,255,.05);
-
-    background:rgba(255,255,255,.02);
+1px solid rgba(255,255,255,.05);
 
 }
 
@@ -286,21 +271,25 @@ Tags
 
 .tag{
 
-    display:inline-block;
+display:inline-block;
 
-    padding:4px 8px;
+padding:5px 10px;
 
-    border-radius:999px;
+border-radius:999px;
 
-    border:1px solid rgba(113,233,255,.25);
+font-size:11px;
 
-    background:rgba(113,233,255,.08);
+font-family:"JetBrains Mono",monospace;
 
-    color:var(--cyanSoft);
+background:
 
-    font-size:11px;
+rgba(123,231,255,.08);
 
-    font-family:"JetBrains Mono",monospace;
+border:
+
+1px solid rgba(123,231,255,.18);
+
+color:var(--cyan);
 
 }
 
@@ -310,46 +299,35 @@ Progress
 
 .progress{
 
-    width:100%;
+margin-top:12px;
 
-    height:10px;
+height:8px;
 
-    border-radius:999px;
+border-radius:999px;
 
-    overflow:hidden;
+overflow:hidden;
 
-    background:rgba(255,255,255,.05);
+background:
 
-    margin-top:10px;
+rgba(255,255,255,.05);
 
 }
 
 .progress-fill{
 
-    height:100%;
+height:100%;
 
-    width:0;
+background:
 
-    background:
+linear-gradient(
 
-        linear-gradient(
-        90deg,
-        var(--cyan),
-        var(--purple));
+90deg,
 
-}
+var(--cyan),
 
-/* ==========================================================
-Images
-========================================================== */
+var(--purple)
 
-.window-image{
-
-    width:100%;
-
-    border-radius:12px;
-
-    display:block;
+);
 
 }
 
@@ -359,46 +337,104 @@ Tables
 
 .table{
 
-    width:100%;
+width:100%;
 
-    border-collapse:collapse;
+border-collapse:collapse;
+
+font-size:13px;
 
 }
 
 .table td{
 
-    padding:8px;
+padding:8px 0;
 
-    border-bottom:1px solid rgba(255,255,255,.05);
+border-bottom:
+
+1px solid rgba(255,255,255,.05);
 
 }
 
 .table td:first-child{
 
-    color:var(--muted);
+width:42%;
 
-    width:35%;
+color:var(--muted);
+
+font-family:"JetBrains Mono",monospace;
 
 }
 
 /* ==========================================================
-Responsive
+Terminal
 ========================================================== */
 
-@media(max-width:900px){
+.terminal-output{
 
-    .window{
+height:100%;
 
-        left:16px !important;
+font-family:"JetBrains Mono",monospace;
 
-        top:16px !important;
+font-size:12px;
 
-        width:calc(100vw - 32px) !important;
+line-height:1.9;
 
-        height:auto !important;
+overflow:auto;
 
-        max-height:calc(100vh - 32px);
+}
 
-    }
+.terminal-line{
+
+display:flex;
+
+gap:10px;
+
+margin-bottom:6px;
+
+}
+
+.terminal-time{
+
+color:var(--cyan);
+
+}
+
+.terminal-prompt{
+
+color:var(--terminal);
+
+}
+
+.terminal-message{
+
+color:var(--text);
+
+}
+
+/* ==========================================================
+Spawn
+========================================================== */
+
+@keyframes windowSpawn{
+
+from{
+
+opacity:0;
+
+transform:
+
+translateY(20px)
+
+scale(.97);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
 
 }
