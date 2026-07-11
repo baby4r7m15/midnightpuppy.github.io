@@ -1,41 +1,49 @@
 /* ==========================================================
    Midnight Bunny OS
-   Rev 9
    app.js
 ========================================================== */
 
 "use strict";
 
 /* ==========================================================
-Global Data
+Global
 ========================================================== */
 
 window.BUNNY = null;
 
 /* ==========================================================
+Boot
+========================================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    bootOS
+
+);
+
+/* ==========================================================
 Load JSON
 ========================================================== */
 
-async function loadBunnyData(){
+async function bootOS(){
 
     try{
 
-        const response = await fetch("data/midnightbunny.json");
+        const response = await fetch(
+            "data/midnightbunny.json"
+        );
 
         if(!response.ok){
 
             throw new Error(
-                `Unable to load midnightbunny.json (${response.status})`
+                "Unable to load midnightbunny.json"
             );
 
         }
 
         window.BUNNY = await response.json();
-
-        console.log(
-            "🐇 Midnight Bunny loaded.",
-            window.BUNNY
-        );
 
         initializeOS();
 
@@ -46,14 +54,23 @@ async function loadBunnyData(){
         console.error(error);
 
         document.body.innerHTML = `
-            <div style="
-                color:white;
-                font-family:monospace;
-                padding:40px;
-            ">
-                <h2>Boot Failure</h2>
-                <p>${error.message}</p>
+
+            <div class="boot-screen">
+
+                <div class="boot-logo">
+
+                    BOOT FAILURE
+
+                </div>
+
+                <div class="boot-terminal">
+
+                    ${error.message}
+
+                </div>
+
             </div>
+
         `;
 
     }
@@ -61,69 +78,75 @@ async function loadBunnyData(){
 }
 
 /* ==========================================================
-Initialize OS
+Initialize
 ========================================================== */
 
 function initializeOS(){
 
-    if(typeof createDesktop === "function"){
+    if(typeof initializeDesktop==="function"){
 
-        createDesktop(window.BUNNY);
+        initializeDesktop(window.BUNNY);
 
     }
 
-    if(typeof initializeWindows === "function"){
+    if(typeof initializeWindows==="function"){
 
         initializeWindows(window.BUNNY);
 
     }
 
-    if(typeof initializeAbout === "function"){
-
-        initializeAbout(window.BUNNY);
-
-    }
-
-    if(typeof initializeTerminal === "function"){
+    if(typeof initializeTerminal==="function"){
 
         initializeTerminal(window.BUNNY);
 
     }
 
-    if(typeof initializeMusic === "function"){
-
-        initializeMusic(window.BUNNY);
-
-    }
-
-    if(typeof initializeBoot === "function"){
-
-        initializeBoot(window.BUNNY);
-
-    }
-
-    if(typeof initializeToasts === "function"){
-
-        initializeToasts(window.BUNNY);
-
-    }
-
-    if(typeof initializeEffects === "function"){
-
-        initializeEffects(window.BUNNY);
-
-    }
+    startClock();
 
 }
 
 /* ==========================================================
-Start
+Clock
 ========================================================== */
 
-document.addEventListener(
+function startClock(){
 
-    "DOMContentLoaded",
+    updateClock();
 
-    loadBunnyData
+    setInterval(
 
-);
+        updateClock,
+
+        1000
+
+    );
+
+}
+
+function updateClock(){
+
+    const clock = document.getElementById(
+
+        "desktop-clock"
+
+    );
+
+    if(!clock) return;
+
+    const now = new Date();
+
+    clock.textContent = now.toLocaleTimeString(
+
+        [],
+
+        {
+
+            hour:"2-digit",
+
+            minute:"2-digit"
+
+        }
+
+    );
+
+}
