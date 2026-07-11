@@ -66,21 +66,33 @@ Initialize OS
 
 function initializeOS(){
 
-    if(typeof createDesktop === "function"){
+    if(typeof initializeDesktop === "function"){
 
-        createDesktop(window.BUNNY);
+        initializeDesktop(window.BUNNY);
 
     }
 
-    if(typeof createWindows === "function"){
+    if(typeof initializeWindows === "function"){
 
-        createWindows(window.BUNNY);
+        initializeWindows(window.BUNNY);
+
+    }
+
+    if(typeof initializeAbout === "function"){
+
+        initializeAbout(window.BUNNY);
 
     }
 
     if(typeof initializeTerminal === "function"){
 
         initializeTerminal(window.BUNNY);
+
+    }
+
+    if(typeof initializeMusic === "function"){
+
+        initializeMusic(window.BUNNY);
 
     }
 
