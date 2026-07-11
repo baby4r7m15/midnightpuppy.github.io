@@ -1,156 +1,77 @@
 /* ==========================================================
    Midnight Bunny OS
-   Rev 9
    windows.js
 ========================================================== */
 
 "use strict";
 
-let highestZ = 100;
-
-/* ==========================================================
-Initialize
-========================================================== */
-
-function initializeWindows(data){
-
-    const layer = document.getElementById("window-layer");
-
-    if(!layer) return;
-
-    layer.innerHTML = "";
-
-    const windows = data.windows;
-
-    Object.keys(windows).forEach(id=>{
-
-        createWindow(id, windows[id]);
-
-    });
-
-}
+let highestWindow = 10;
 
 /* ==========================================================
 Create Window
 ========================================================== */
 
-function createWindow(id, info){
+function createWindow(id, options){
 
     const layer = document.getElementById("window-layer");
 
-    const windowElement = document.createElement("div");
+    const win = document.createElement("section");
 
-    windowElement.className = "window";
+    win.className = "window";
 
-    windowElement.dataset.window = id;
+    win.dataset.window = id;
 
-    windowElement.style.width = info.width + "px";
-    windowElement.style.height = info.height + "px";
+    win.style.left = options.x + "px";
+    win.style.top = options.y + "px";
 
-    windowElement.style.left = info.x + "px";
-    windowElement.style.top = info.y + "px";
+    win.style.width = options.width + "px";
+    win.style.height = options.height + "px";
 
-    windowElement.style.zIndex = ++highestZ;
+    win.style.zIndex = ++highestWindow;
 
-    windowElement.innerHTML = `
+    win.innerHTML = `
 
         <div class="window-titlebar">
 
-            <div class="window-title">
-
-                ${info.title}
-
-            </div>
-
             <div class="window-buttons">
 
-                <button
-                    class="window-close"
-                    data-close="${id}">
+                <span class="window-close"></span>
+                <span class="window-min"></span>
+                <span class="window-max"></span>
 
-                    ✕
+            </div>
 
-                </button>
+            <div class="window-title">
+
+                ${options.title}
 
             </div>
 
         </div>
 
-        <div class="window-content">
-
-        </div>
+        <div class="window-content"></div>
 
     `;
 
-    layer.appendChild(windowElement);
+    layer.appendChild(win);
 
-    attachWindowEvents(windowElement);
+    makeWindowDraggable(win);
+
+    focusWindow(win);
 
 }
 
 /* ==========================================================
-Events
+Initialize
 ========================================================== */
 
-function attachWindowEvents(windowElement){
+function initializeWindows(){
 
-    windowElement.addEventListener("mousedown",()=>{
+    document.querySelectorAll(".window").forEach(win=>{
 
-        bringToFront(windowElement);
+        focusWindow(win);
 
     });
-
-    const closeButton = windowElement.querySelector(".window-close");
-
-    closeButton.addEventListener("click",()=>{
-
-        closeWindow(
-
-            windowElement.dataset.window
-
-        );
-
-    });
-
-}
-
-/* ==========================================================
-Open
-========================================================== */
-
-function openWindow(id){
-
-    const windowElement = getWindow(id);
-
-    if(!windowElement) return;
-
-    windowElement.style.display = "block";
-
-    bringToFront(windowElement);
-
-}
-
-/* ==========================================================
-Close
-========================================================== */
-
-function closeWindow(id){
-
-    const windowElement = getWindow(id);
-
-    if(!windowElement) return;
-
-    windowElement.style.display = "none";
-
-}
-
-/* ==========================================================
-Focus
-========================================================== */
-
-function bringToFront(windowElement){
-
-    windowElement.style.zIndex = ++highestZ;
 
 }
 
@@ -170,11 +91,11 @@ function getWindow(id){
 
 function getWindowContent(id){
 
-    const windowElement = getWindow(id);
+    const win = getWindow(id);
 
-    if(!windowElement) return null;
+    if(!win) return null;
 
-    return windowElement.querySelector(
+    return win.querySelector(
 
         ".window-content"
 
@@ -182,48 +103,105 @@ function getWindowContent(id){
 
 }
 
-function focusWindow(id){
+/* ==========================================================
+Focus
+========================================================== */
 
-    const windowElement = getWindow(id);
+function focusWindow(win){
 
-    if(!windowElement) return;
+    win.addEventListener(
 
-    bringToFront(windowElement);
+        "mousedown",
+
+        ()=>{
+
+            highestWindow++;
+
+            win.style.zIndex = highestWindow;
+
+        }
+
+    );
 
 }
 
 /* ==========================================================
-Toggle
+Drag
 ========================================================== */
 
-function toggleWindow(id){
+function makeWindowDraggable(win){
 
-    const windowElement = getWindow(id);
+    const bar = win.querySelector(
 
-    if(!windowElement) return;
+        ".window-titlebar"
 
-    if(windowElement.style.display==="none"){
+    );
 
-        openWindow(id);
+    let dragging = false;
 
-    }
+    let startX = 0;
 
-    else{
+    let startY = 0;
 
-        closeWindow(id);
+    let left = 0;
 
-    }
+    let top = 0;
+
+    bar.addEventListener(
+
+        "mousedown",
+
+        e=>{
+
+            dragging = true;
+
+            startX = e.clientX;
+
+            startY = e.clientY;
+
+            left = win.offsetLeft;
+
+            top = win.offsetTop;
+
+            highestWindow++;
+
+            win.style.zIndex = highestWindow;
+
+        }
+
+    );
+
+    document.addEventListener(
+
+        "mousemove",
+
+        e=>{
+
+            if(!dragging) return;
+
+            win.style.left =
+
+                left + (e.clientX-startX) + "px";
+
+            win.style.top =
+
+                top + (e.clientY-startY) + "px";
+
+        }
+
+    );
+
+    document.addEventListener(
+
+        "mouseup",
+
+        ()=>{
+
+            dragging = false;
+
+        }
+
+    );
 
 }
-
-/* ==========================================================
-Refresh
-========================================================== */
-
-function refreshWindows(){
-
-    if(!window.BUNNY) return;
-
-    initializeWindows(window.BUNNY);
-
-}
+```
