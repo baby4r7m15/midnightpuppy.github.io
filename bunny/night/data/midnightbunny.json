@@ -1,13 +1,11 @@
 {
   "system": {
     "name": "Midnight Bunny OS",
-    "version": "9.0",
+    "version": "10.0",
     "codename": "CHAOS",
-    "wallpaper": "assets/wallpaper.png",
-    "avatar": "assets/avatar.png",
     "theme": "purple",
-    "bootEnabled": true,
-    "glitchEnabled": true
+    "avatar": "assets/avatar.png",
+    "wallpaper": "assets/wallpaper.png"
   },
 
   "profile": {
@@ -18,132 +16,40 @@
     "bio": "Over-caffeinated cyber bunny rewriting reality one commit at a time."
   },
 
-  "desktop": {
-    "clock": true,
-    "showIcons": true,
-    "grid": true
-  },
-
-  "icons": [
-    {
-      "id": "about",
-      "title": "about.txt",
-      "icon": "🐇",
-      "window": "about",
-      "x": 40,
-      "y": 100
-    },
-    {
-      "id": "terminal",
-      "title": "terminal",
-      "icon": "🖥️",
-      "window": "terminal",
-      "x": 40,
-      "y": 210
-    },
-    {
-      "id": "music",
-      "title": "music.exe",
-      "icon": "🎵",
-      "window": "music",
-      "x": 40,
-      "y": 320
-    },
-    {
-      "id": "gallery",
-      "title": "gallery",
-      "icon": "📷",
-      "window": "gallery",
-      "x": 40,
-      "y": 430
-    },
-    {
-      "id": "containment",
-      "title": "containment.log",
-      "icon": "🔒",
-      "window": "containment",
-      "x": 40,
-      "y": 540
-    }
-  ],
-
-  "windows": {
-
-    "about": {
-      "title": "about.txt",
-      "width": 520,
-      "height": 580,
-      "x": 220,
-      "y": 90
-    },
-
-    "terminal": {
-      "title": "bash",
-      "width": 700,
-      "height": 420,
-      "x": 520,
-      "y": 420
-    },
-
-    "music": {
-      "title": "music.exe",
-      "width": 340,
-      "height": 220,
-      "x": 900,
-      "y": 70
-    },
-
-    "gallery": {
-      "title": "gallery",
-      "width": 420,
-      "height": 420,
-      "x": 820,
-      "y": 210
-    },
-
-    "containment": {
-      "title": "containment.log",
-      "width": 300,
-      "height": 280,
-      "x": 1140,
-      "y": 120
-    }
-
-  },
-
   "about": {
     "level": 99,
     "mood": "Chaotic",
-    "favoriteColor": "Purple",
     "favoriteFood": "Carrots",
-    "location": "Midnight Bunny OS"
-  },
-
-  "terminal": {
-    "prompt": "bunny@night:~$",
-    "messages": [
-      "Loading Bunny...",
-      "Reality.dll loaded.",
-      "Containment stable.",
-      "Brain.exe online.",
-      "RGB overload detected."
-    ]
+    "favoriteColor": "Purple"
   },
 
   "music": {
     "nowPlaying": "Lofi.exe",
-    "artist": "Unknown",
-    "progress": 37
+    "artist": "Unknown Artist",
+    "progress": 38
+  },
+
+  "terminal": {
+    "messages": [
+      "Reality.dll loaded.",
+      "Containment stable.",
+      "Brain.exe online.",
+      "Injecting caffeine...",
+      "Carrot reserves replenished.",
+      "Loading fluff.sys",
+      "Compiling chaos...",
+      "Kernel patched successfully.",
+      "Warning: Bunny energy exceeding limits.",
+      "Opening dimensional carrots..."
+    ]
   },
 
   "notifications": [
     "Containment stable.",
     "Brain activity increased.",
     "Carrot inventory updated.",
-    "Reality.dll restarted."
-  ],
-
-  "gallery": [
-    "assets/avatar.png"
+    "Reality.dll restarted.",
+    "Quantum fluff synchronized.",
+    "Warning: Bunny is unsupervised."
   ]
 }
