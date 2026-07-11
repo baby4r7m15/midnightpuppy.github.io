@@ -1,242 +1,149 @@
 {
-  "theme": {
-    "themeColor": "#0b0914",
-    "bg": "#070710",
-    "bg2": "#0d0b18",
-    "panel": "rgba(14,14,24,0.84)",
-    "panel2": "rgba(12,12,22,0.72)",
-    "cyan": "#8ce7ff",
-    "cyan2": "#d7f8ff",
-    "blue": "#8f92ff",
-    "violet": "#a37cff",
-    "purple": "#ca95ff",
-    "pink": "#d58cff",
-    "pink2": "#f2bfff",
-    "line": "rgba(180,180,255,.12)",
-    "line2": "rgba(255,180,255,.12)",
-    "text": "#f3f6ff",
-    "muted": "rgba(230,230,255,.65)",
-    "shadow": "rgba(180,150,255,.18)",
-    "titleGlow": "rgba(215,248,255,.18)",
-    "glitchTop": "rgba(170,235,255,.65)",
-    "glitchBottom": "rgba(235,170,255,.70)"
+  "system": {
+    "name": "Midnight Bunny OS",
+    "version": "9.0",
+    "codename": "CHAOS",
+    "wallpaper": "assets/wallpaper.png",
+    "avatar": "assets/avatar.png",
+    "theme": "purple",
+    "bootEnabled": true,
+    "glitchEnabled": true
   },
-  "head": {
-    "title": "Midnight Bunny OS"
-  },
-  "header": {
-    "title": "Midnight Bunny OS",
-    "subtitle": "LONG EARS UPDATE \u2022 Bunny Kernel Online",
-    "nav": [
-      {
-        "label": "ABOUT",
-        "href": "https://midnightpuppy.com",
-        "active": true
-      }
-    ],
-    "stats": [
-      {
-        "label": "kernel",
-        "value": "stable-ish"
-      },
-      {
-        "label": "sleep",
-        "value": "404"
-      },
-      {
-        "label": "containment",
-        "value": "ACTIVE"
-      }
-    ]
-  },
+
   "profile": {
-    "panelTitle": "SYSTEM PROFILE",
-    "panelChip": "ONLINE",
-    "avatar": {
-      "src": "/images/midnightbunny-avatar.png",
-      "alt": "Midnight Bunny avatar"
+    "name": "Artemis",
+    "title": "Midnight Bunny",
+    "status": "Containment Active",
+    "pronouns": "she/her",
+    "bio": "Over-caffeinated cyber bunny rewriting reality one commit at a time."
+  },
+
+  "desktop": {
+    "clock": true,
+    "showIcons": true,
+    "grid": true
+  },
+
+  "icons": [
+    {
+      "id": "about",
+      "title": "about.txt",
+      "icon": "🐇",
+      "window": "about",
+      "x": 40,
+      "y": 100
     },
-    "name": "Midnight Bunny",
-    "metaHtml": "Build: <b>Long Ears Update</b> \u2022 Shell: <b>Bunny OS</b> \u2022 Status: <b>Contained</b>",
-    "bars": [
-      {
-        "label": "SOCIAL BATTERY",
-        "percent": 42,
-        "value": "charging...",
-        "fillClass": "hp"
-      },
-      {
-        "label": "AUTISM",
-        "percent": 100,
-        "value": "maximum power",
-        "fillClass": "ep"
-      }
-    ],
-    "loadoutTitle": "INSTALLED PACKAGES",
-    "loadout": [
-      "arch-linux",
-      "kitty-terminal",
-      "neovim (opened accidentally)",
-      "programming socks",
-      "bunny ears",
-      "service-sub mode"
+    {
+      "id": "terminal",
+      "title": "terminal",
+      "icon": "🖥️",
+      "window": "terminal",
+      "x": 40,
+      "y": 210
+    },
+    {
+      "id": "music",
+      "title": "music.exe",
+      "icon": "🎵",
+      "window": "music",
+      "x": 40,
+      "y": 320
+    },
+    {
+      "id": "gallery",
+      "title": "gallery",
+      "icon": "📷",
+      "window": "gallery",
+      "x": 40,
+      "y": 430
+    },
+    {
+      "id": "containment",
+      "title": "containment.log",
+      "icon": "🔒",
+      "window": "containment",
+      "x": 40,
+      "y": 540
+    }
+  ],
+
+  "windows": {
+
+    "about": {
+      "title": "about.txt",
+      "width": 520,
+      "height": 580,
+      "x": 220,
+      "y": 90
+    },
+
+    "terminal": {
+      "title": "bash",
+      "width": 700,
+      "height": 420,
+      "x": 520,
+      "y": 420
+    },
+
+    "music": {
+      "title": "music.exe",
+      "width": 340,
+      "height": 220,
+      "x": 900,
+      "y": 70
+    },
+
+    "gallery": {
+      "title": "gallery",
+      "width": 420,
+      "height": 420,
+      "x": 820,
+      "y": 210
+    },
+
+    "containment": {
+      "title": "containment.log",
+      "width": 300,
+      "height": 280,
+      "x": 1140,
+      "y": 120
+    }
+
+  },
+
+  "about": {
+    "level": 99,
+    "mood": "Chaotic",
+    "favoriteColor": "Purple",
+    "favoriteFood": "Carrots",
+    "location": "Midnight Bunny OS"
+  },
+
+  "terminal": {
+    "prompt": "bunny@night:~$",
+    "messages": [
+      "Loading Bunny...",
+      "Reality.dll loaded.",
+      "Containment stable.",
+      "Brain.exe online.",
+      "RGB overload detected."
     ]
   },
-  "bio": {
-    "panelTitle": "ABOUT THIS SYSTEM",
-    "panelChip": "README",
-    "entries": [
-      {
-        "text": "I installed Arch Linux because the logo was cute.",
-        "tag": "TRUE",
-        "tagClass": "blue"
-      },
-      {
-        "text": "Professional collector of hobbies and unfinished side projects.",
-        "tag": "ACTIVE",
-        "tagClass": "yellow"
-      },
-      {
-        "text": "Femboys.exe is permanently pinned in memory.",
-        "tag": "PRIORITY",
-        "tagClass": "red"
-      },
-      {
-        "text": "Surprisingly functional despite the error messages.",
-        "tag": "STABLE",
-        "tagClass": "blue"
-      }
-    ],
-    "vibesTitle": "CURRENT MODULES",
-    "vibes": [
-      "\ud83d\udc07 after-hours hacker bunny",
-      "\u2328\ufe0f pink keyboard enthusiast",
-      "\ud83d\udc9c protogen rabbit",
-      "\ud83e\udd55 powered by hyperfocus",
-      "\ud83c\udf19 builds at 3 AM",
-      "\u2728 femboys will literally rewrite the kernel"
-    ]
+
+  "music": {
+    "nowPlaying": "Lofi.exe",
+    "artist": "Unknown",
+    "progress": 37
   },
-  "statsPanel": {
-    "panelTitle": "SYSTEM MODULES",
-    "panelChip": "6",
-    "cards": [
-      {
-        "name": "Autism",
-        "level": "MAX",
-        "percent": 100,
-        "subtext": "working exactly as intended"
-      },
-      {
-        "name": "ADHD",
-        "level": "404",
-        "percent": 12,
-        "subtext": "what was i doing again?"
-      },
-      {
-        "name": "Sleep",
-        "level": "LOW",
-        "percent": 7,
-        "subtext": "optional dependency"
-      }
-    ]
-  },
-  "statusReport": {
-    "panelTitle": "KNOWN FEATURES",
-    "panelChip": "INFO",
-    "items": [
-      "Carrot reserves: sufficient.",
-      "Hyperfocus daemon: RUNNING.",
-      "Touch reward request: DENIED.",
-      "Visitor interaction: Welcome!"
-    ]
-  },
-  "systemLog": {
-    "panelTitle": "SYSTEM LOG",
-    "panelChip": "LIVE",
-    "lines": [
-      {
-        "time": "00:00:01",
-        "message": "booting Midnight Bunny OS..."
-      },
-      {
-        "time": "00:00:04",
-        "message": "loading autism.sys...",
-        "status": "OK",
-        "statusClass": "term-ok"
-      },
-      {
-        "time": "00:00:07",
-        "message": "loading adhd.dll...",
-        "status": "where was i?",
-        "statusClass": "term-warn"
-      },
-      {
-        "type": "gap"
-      },
-      {
-        "time": "00:02:13",
-        "message": "starting terminal..."
-      },
-      {
-        "time": "00:02:15",
-        "message": "opening 14 tabs...",
-        "status": "SUCCESS",
-        "statusClass": "term-ok"
-      },
-      {
-        "time": "00:02:17",
-        "message": "starting hyperfixation daemon...",
-        "status": "RUNNING",
-        "statusClass": "term-ok"
-      },
-      {
-        "type": "gap"
-      },
-      {
-        "time": "00:18:41",
-        "message": "give touches requested..."
-      },
-      {
-        "time": "00:18:42",
-        "message": "checking permissions..."
-      },
-      {
-        "time": "00:18:43",
-        "message": "locating keyholder..."
-      },
-      {
-        "time": "00:18:44",
-        "message": "keyholder authenticated.",
-        "status": "FOUND",
-        "statusClass": "term-ok"
-      },
-      {
-        "time": "00:18:45",
-        "message": "evaluating request..."
-      },
-      {
-        "time": "00:18:46",
-        "message": "touches redirected to others.",
-        "status": "SERVICE MODE",
-        "statusClass": "term-ok"
-      },
-      {
-        "time": "00:18:47",
-        "message": "self reward denied.",
-        "status": "LOCK ACTIVE",
-        "statusClass": "term-warn"
-      },
-      {
-        "time": "00:18:48",
-        "message": "denial streak extended.",
-        "status": "SUCCESS",
-        "statusClass": "term-ok"
-      }
-    ]
-  },
-  "toast": {
-    "header": "LONG EARS UPDATE",
-    "line": "bunny kernel booted \u2022 ear calibration complete \u2022 welcome to Midnight Bunny OS"
-  }
+
+  "notifications": [
+    "Containment stable.",
+    "Brain activity increased.",
+    "Carrot inventory updated.",
+    "Reality.dll restarted."
+  ],
+
+  "gallery": [
+    "assets/avatar.png"
+  ]
 }
