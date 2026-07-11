@@ -1,12 +1,9 @@
 /* ==========================================================
    Midnight Bunny OS
-   Rev 9
    terminal.js
 ========================================================== */
 
 "use strict";
-
-let terminalTimer = null;
 
 /* ==========================================================
 Initialize
@@ -18,46 +15,87 @@ function initializeTerminal(data){
 
     if(!terminal) return;
 
-    renderTerminal(terminal, data);
+    terminal.innerHTML = `
 
-}
+        <div class="terminal-output"
 
-/* ==========================================================
-Render
-========================================================== */
-
-function renderTerminal(container, data){
-
-    container.innerHTML = `
-
-        <div id="terminal-output"
-             class="terminal-output">
+             id="terminal-output">
 
         </div>
 
     `;
 
-    const output = document.getElementById("terminal-output");
+    startTerminal(data);
+
+}
+
+/* ==========================================================
+Terminal
+========================================================== */
+
+let terminalIndex = 0;
+
+let terminalLines = [];
+
+function startTerminal(data){
+
+    terminalLines = [
+
+        "Initializing Bunny OS...",
+
+        "Loading reality.dll",
+
+        "Mounting /carrots",
+
+        "Checking containment...",
+
+        "Containment stable.",
+
+        "Brain.exe online.",
+
+        "RGB overload detected.",
+
+        "Quantum fluff synchronized.",
+
+        ...data.terminal.messages
+
+    ];
+
+    terminalIndex = 0;
+
+    typeNextLine();
+
+}
+
+/* ==========================================================
+Typing
+========================================================== */
+
+function typeNextLine(){
+
+    const output = document.getElementById(
+
+        "terminal-output"
+
+    );
 
     if(!output) return;
 
-    output.innerHTML = "";
+    if(terminalIndex >= terminalLines.length){
 
-    const messages = data.terminal?.messages || [];
+        terminalIndex = 0;
 
-    let index = 0;
-
-    if(terminalTimer){
-
-        clearInterval(terminalTimer);
+        output.innerHTML = "";
 
     }
 
-    function addLine(text){
+    const now = new Date();
 
-        const now = new Date();
+    const time = now.toLocaleTimeString(
 
-        const time = now.toLocaleTimeString([],{
+        [],
+
+        {
 
             hour:"2-digit",
 
@@ -65,13 +103,13 @@ function renderTerminal(container, data){
 
             second:"2-digit"
 
-        });
+        }
 
-        const line = document.createElement("div");
+    );
 
-        line.className = "terminal-line";
+    output.innerHTML += `
 
-        line.innerHTML = `
+        <div class="terminal-line">
 
             <span class="terminal-time">
 
@@ -81,66 +119,30 @@ function renderTerminal(container, data){
 
             <span class="terminal-prompt">
 
-                ${data.terminal.prompt}
+                bunny@night:~$
 
             </span>
 
             <span class="terminal-message">
 
-                ${text}
+                ${terminalLines[terminalIndex]}
 
             </span>
 
-        `;
+        </div>
 
-        output.appendChild(line);
+    `;
 
-        output.scrollTop = output.scrollHeight;
+    output.scrollTop = output.scrollHeight;
 
-    }
+    terminalIndex++;
 
-    messages.forEach(addLine);
+    setTimeout(
 
-    terminalTimer = setInterval(()=>{
+        typeNextLine,
 
-        if(messages.length===0) return;
+        900 + Math.random()*1400
 
-        addLine(messages[index]);
-
-        index++;
-
-        if(index>=messages.length){
-
-            index=0;
-
-        }
-
-    },4000);
-
-}
-
-/* ==========================================================
-Stop
-========================================================== */
-
-function stopTerminal(){
-
-    if(terminalTimer){
-
-        clearInterval(terminalTimer);
-
-    }
-
-}
-
-/* ==========================================================
-Refresh
-========================================================== */
-
-function refreshTerminal(){
-
-    if(!window.BUNNY) return;
-
-    initializeTerminal(window.BUNNY);
+    );
 
 }
