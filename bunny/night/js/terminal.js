@@ -1,9 +1,22 @@
 /* ==========================================================
    Midnight Bunny OS
+   Rev 10
    terminal.js
 ========================================================== */
 
 "use strict";
+
+debug("Loading terminal.js...");
+
+/* ==========================================================
+Globals
+========================================================== */
+
+let terminalLines = [];
+
+let terminalIndex = 0;
+
+let terminalTimer = null;
 
 /* ==========================================================
 Initialize
@@ -11,51 +24,61 @@ Initialize
 
 function initializeTerminal(data){
 
+    debug("initializeTerminal()");
+
     const terminal = getWindowContent("terminal");
 
-    if(!terminal) return;
+    if(!terminal){
+
+        throw new Error(
+
+            "Terminal window does not exist."
+
+        );
+
+    }
 
     terminal.innerHTML = `
 
-        <div class="terminal-output"
+        <div
 
-             id="terminal-output">
+            id="terminal-output"
+
+            class="terminal-output">
 
         </div>
 
     `;
 
-    startTerminal(data);
+    if(
 
-}
+        !data ||
 
-/* ==========================================================
-Terminal
-========================================================== */
+        !data.terminal ||
 
-let terminalIndex = 0;
+        !Array.isArray(data.terminal.messages)
 
-let terminalLines = [];
+    ){
 
-function startTerminal(data){
+        throw new Error(
+
+            "terminal.messages missing from JSON."
+
+        );
+
+    }
 
     terminalLines = [
 
         "Initializing Bunny OS...",
 
-        "Loading reality.dll",
+        "Loading reality.dll...",
 
-        "Mounting /carrots",
+        "Checking carrots...",
 
-        "Checking containment...",
+        "Mounting midnight filesystem...",
 
-        "Containment stable.",
-
-        "Brain.exe online.",
-
-        "RGB overload detected.",
-
-        "Quantum fluff synchronized.",
+        "Synchronizing fluff...",
 
         ...data.terminal.messages
 
@@ -63,15 +86,37 @@ function startTerminal(data){
 
     terminalIndex = 0;
 
-    typeNextLine();
+    if(terminalTimer){
+
+        clearTimeout(terminalTimer);
+
+    }
+
+    debug(
+
+        "Terminal initialized with "
+
+        +
+
+        terminalLines.length
+
+        +
+
+        " messages.",
+
+        "SUCCESS"
+
+    );
+
+    printNextLine();
 
 }
 
 /* ==========================================================
-Typing
+Print One Line
 ========================================================== */
 
-function typeNextLine(){
+function printNextLine(){
 
     const output = document.getElementById(
 
@@ -79,9 +124,33 @@ function typeNextLine(){
 
     );
 
-    if(!output) return;
+    if(!output){
 
-    if(terminalIndex >= terminalLines.length){
+        debug(
+
+            "#terminal-output missing.",
+
+            "ERROR"
+
+        );
+
+        return;
+
+    }
+
+    if(
+
+        terminalIndex >=
+
+        terminalLines.length
+
+    ){
+
+        debug(
+
+            "Restarting terminal loop."
+
+        );
 
         terminalIndex = 0;
 
@@ -107,42 +176,66 @@ function typeNextLine(){
 
     );
 
-    output.innerHTML += `
+    const line = document.createElement("div");
 
-        <div class="terminal-line">
+    line.className = "terminal-line";
 
-            <span class="terminal-time">
+    line.innerHTML = `
 
-                ${time}
+        <span class="terminal-time">
 
-            </span>
+            ${time}
 
-            <span class="terminal-prompt">
+        </span>
 
-                bunny@night:~$
+        <span class="terminal-prompt">
 
-            </span>
+            bunny@night:~$
 
-            <span class="terminal-message">
+        </span>
 
-                ${terminalLines[terminalIndex]}
+        <span class="terminal-message">
 
-            </span>
+            ${terminalLines[terminalIndex]}
 
-        </div>
+        </span>
 
     `;
 
+    output.appendChild(line);
+
     output.scrollTop = output.scrollHeight;
+
+    debug(
+
+        "Terminal line "
+
+        +
+
+        terminalIndex
+
+    );
 
     terminalIndex++;
 
-    setTimeout(
+    terminalTimer = setTimeout(
 
-        typeNextLine,
+        printNextLine,
 
-        900 + Math.random()*1400
+        1000
 
     );
 
 }
+
+/* ==========================================================
+Loaded
+========================================================== */
+
+debug(
+
+    "terminal.js loaded",
+
+    "SUCCESS"
+
+);
