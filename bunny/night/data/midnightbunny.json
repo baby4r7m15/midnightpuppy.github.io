@@ -1,75 +1,275 @@
 {
   "system": {
-    "name": "Midnight Bunny OS",
-    "version": "11.0",
+    "title": "Midnight Bunny",
+    "version": "Rev 11",
     "codename": "CHAOS",
-    "theme": "purple",
-    "avatar": "assets/avatar.png",
-    "wallpaper": "assets/wallpaper.png",
-    "glitchEnabled": true
+    "theme": "cyberpunk"
+  },
+
+  "desktop": {
+    "width": 1920,
+    "height": 1080,
+    "background": "assets/background.png",
+    "avatar": {
+      "image": "assets/avatar.png",
+      "x": 520,
+      "y": 90,
+      "width": 840,
+      "height": 930
+    }
   },
 
   "profile": {
     "name": "Artemis",
-    "title": "Midnight Bunny",
-    "status": "Containment Active",
+    "alias": "Midnight Bunny",
     "pronouns": "she/her",
+    "level": 99,
+    "status": "Containment Active",
+    "occupation": "Reality Rewriter",
+    "location": "The Rabbit Hole",
     "bio": "Over-caffeinated cyber bunny rewriting reality one commit at a time."
   },
 
-  "about": {
-    "level": 99,
-    "mood": "Chaotic",
-    "favoriteFood": "Carrots",
-    "favoriteColor": "Purple"
-  },
+  "cards": [
 
-  "windows": {
-    "profile": {
-      "title": "about.txt"
+    {
+      "id": "profile",
+      "type": "table",
+      "title": "PROJECT ARTEMIS",
+      "theme": "purple",
+
+      "x": 70,
+      "y": 120,
+
+      "width": 360,
+      "height": 320,
+
+      "rows": [
+        ["Alias","Midnight Bunny"],
+        ["Level","99"],
+        ["Status","Containment Active"],
+        ["Pronouns","She / Her"],
+        ["Threat","HIGH"],
+        ["Occupation","Reality Rewriter"]
+      ]
     },
-    "avatar": {
-      "title": "avatar.png"
+
+    {
+      "id": "about",
+      "type": "text",
+      "title": "ABOUT",
+
+      "theme": "pink",
+
+      "x": 70,
+      "y": 470,
+
+      "width": 360,
+      "height": 240,
+
+      "text": [
+        "Digital artist.",
+        "Frontend developer.",
+        "Cyber bunny.",
+        "Professional caffeine consumer.",
+        "Currently rebuilding reality."
+      ]
     },
-    "terminal": {
-      "title": "terminal.exe"
+
+    {
+      "id": "stats",
+
+      "type": "stats",
+
+      "title": "SYSTEM STATUS",
+
+      "theme": "cyan",
+
+      "x": 1430,
+
+      "y": 100,
+
+      "width": 340,
+
+      "height": 260,
+
+      "stats": [
+
+        {
+          "label":"Creativity",
+          "value":98
+        },
+
+        {
+          "label":"Chaos",
+          "value":100
+        },
+
+        {
+          "label":"Sleep",
+          "value":8
+        },
+
+        {
+          "label":"Caffeine",
+          "value":95
+        }
+
+      ]
     },
-    "music": {
-      "title": "music.exe"
+
+    {
+      "id":"terminal",
+
+      "type":"terminal",
+
+      "title":"TERMINAL",
+
+      "theme":"green",
+
+      "x":90,
+
+      "y":760,
+
+      "width":620,
+
+      "height":250,
+
+      "lines":[
+
+        "Reality.dll loaded.",
+
+        "Containment stable.",
+
+        "Brain.exe online.",
+
+        "Loading bunny.sys",
+
+        "Compiling chaos...",
+
+        "Kernel patched successfully.",
+
+        "Injecting caffeine..."
+
+      ]
+
     },
-    "notifications": {
-      "title": "notifications.log"
+
+    {
+      "id":"music",
+
+      "type":"music",
+
+      "title":"NOW PLAYING",
+
+      "theme":"pink",
+
+      "x":1430,
+
+      "y":390,
+
+      "width":340,
+
+      "height":200,
+
+      "track":"Lofi.exe",
+
+      "artist":"Unknown Artist",
+
+      "progress":42
+
+    },
+
+    {
+      "id":"discord",
+
+      "type":"discord",
+
+      "title":"DISCORD",
+
+      "theme":"cyan",
+
+      "x":1430,
+
+      "y":620,
+
+      "width":340,
+
+      "height":170
+
+    },
+
+    {
+      "id":"quotes",
+
+      "type":"list",
+
+      "title":"FAVORITE QUOTES",
+
+      "theme":"purple",
+
+      "x":1430,
+
+      "y":820,
+
+      "width":340,
+
+      "height":180,
+
+      "items":[
+
+        "Reality is optional.",
+
+        "Carrots before chaos.",
+
+        "Sleep is a suggestion."
+
+      ]
+
+    },
+
+    {
+      "id":"tasks",
+
+      "type":"checklist",
+
+      "title":"CURRENT QUESTS",
+
+      "theme":"pink",
+
+      "x":760,
+
+      "y":820,
+
+      "width":520,
+
+      "height":180,
+
+      "items":[
+
+        {
+          "text":"Finish Midnight Bunny",
+          "done":false
+        },
+
+        {
+          "text":"Draw new avatar",
+          "done":true
+        },
+
+        {
+          "text":"Add Lanyard support",
+          "done":false
+        },
+
+        {
+          "text":"Rewrite CSS",
+          "done":false
+        }
+
+      ]
+
     }
-  },
 
-  "music": {
-    "nowPlaying": "Lofi.exe",
-    "artist": "Unknown Artist",
-    "progress": 38
-  },
-
-  "terminal": {
-    "prompt": "bunny@night:~$",
-    "messages": [
-      "Reality.dll loaded.",
-      "Containment stable.",
-      "Brain.exe online.",
-      "Injecting caffeine...",
-      "Carrot reserves replenished.",
-      "Loading fluff.sys",
-      "Compiling chaos...",
-      "Kernel patched successfully.",
-      "Warning: Bunny energy exceeding limits.",
-      "Opening dimensional carrots..."
-    ]
-  },
-
-  "notifications": [
-    "Containment stable.",
-    "Brain activity increased.",
-    "Carrot inventory updated.",
-    "Reality.dll restarted.",
-    "Quantum fluff synchronized.",
-    "Warning: Bunny is unsupervised."
   ]
 }
