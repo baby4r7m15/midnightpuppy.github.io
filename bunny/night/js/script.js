@@ -206,29 +206,71 @@ function createCard(card){
 
     element.className =
 
-        `card ${card.theme}`;
+        `card theme-${card.theme}`;
 
     element.id = card.id;
 
-    element.style.left = card.x + "px";
+    /* Position */
 
-    element.style.top = card.y + "px";
+    element.style.left =
 
-    element.style.width = card.width + "px";
+        card.style.x + "px";
 
-    element.style.height = card.height + "px";
+    element.style.top =
+
+        card.style.y + "px";
+
+    element.style.width =
+
+        card.style.width + "px";
+
+    element.style.height =
+
+        card.style.height + "px";
+
+    element.style.zIndex =
+
+        card.style.z || 1;
+
+    element.style.opacity =
+
+        card.style.opacity || 1;
+
+    element.style.transform =
+
+        `rotate(${card.style.rotation || 0}deg)`;
+
+    /* Header */
 
     element.innerHTML = `
 
-        <div class="card-title">
+        <div class="card-header">
 
-            ${card.title}
+            <div class="card-icon">
+
+                ${card.icon || ""}
+
+            </div>
+
+            <div class="card-heading">
+
+                <div class="card-title">
+
+                    ${card.title}
+
+                </div>
+
+                <div class="card-subtitle">
+
+                    ${card.subtitle || ""}
+
+                </div>
+
+            </div>
 
         </div>
 
-        <div class="card-content">
-
-        </div>
+        <div class="card-content"></div>
 
     `;
 
@@ -242,105 +284,51 @@ function createCard(card){
 
         case "table":
 
-            renderTable(
-
-                content,
-
-                card
-
-            );
+            renderTable(content, card);
 
             break;
 
         case "text":
 
-            renderText(
-
-                content,
-
-                card
-
-            );
+            renderText(content, card);
 
             break;
 
         case "list":
 
-            renderList(
-
-                content,
-
-                card
-
-            );
+            renderList(content, card);
 
             break;
 
         case "stats":
 
-            renderStats(
-
-                content,
-
-                card
-
-            );
+            renderStats(content, card);
 
             break;
 
         case "terminal":
 
-            renderTerminal(
-
-                content,
-
-                card
-
-            );
+            renderTerminal(content, card);
 
             break;
 
         case "music":
 
-            renderMusic(
-
-                content,
-
-                card
-
-            );
+            renderMusic(content, card);
 
             break;
 
         case "discord":
 
-            renderDiscord(
-
-                content,
-
-                card
-
-            );
+            renderDiscord(content, card);
 
             break;
 
         case "checklist":
 
-            renderChecklist(
-
-                content,
-
-                card
-
-            );
+            renderChecklist(content, card);
 
             break;
-
-        default:
-
-            content.innerHTML =
-
-                "Unknown card type.";
 
     }
 
