@@ -1,5 +1,3 @@
-debug("✅ windows.js loaded");
-debug("createWindow = " + typeof createWindow);
 
 /* ==========================================================
    Midnight Bunny OS
@@ -208,3 +206,10 @@ function makeWindowDraggable(win){
 
 }
 ```
+if(typeof debug === "function"){
+
+    debug("✅ windows.js loaded");
+
+    debug("createWindow = " + typeof createWindow);
+
+}
