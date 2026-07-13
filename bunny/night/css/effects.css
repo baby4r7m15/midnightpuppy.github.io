@@ -1,170 +1,67 @@
 /* ==========================================================
    Midnight Bunny OS
+   Rev 11
    effects.css
 ========================================================== */
 
 /* ==========================================================
-CRT Scanlines
+Glass
 ========================================================== */
 
-body::before{
+.window{
+
+backdrop-filter:
+
+blur(22px)
+
+saturate(140%);
+
+-webkit-backdrop-filter:
+
+blur(22px)
+
+saturate(140%);
+
+}
+
+/* ==========================================================
+Window Shine
+========================================================== */
+
+.window::before{
 
 content:"";
 
-position:fixed;
+position:absolute;
 
-inset:0;
+left:0;
+
+right:0;
+
+top:0;
+
+height:70px;
 
 pointer-events:none;
 
 background:
 
-repeating-linear-gradient(
+linear-gradient(
 
 180deg,
 
-transparent 0px,
+rgba(255,255,255,.12),
 
-transparent 3px,
-
-rgba(255,255,255,.025) 4px,
-
-transparent 5px
+transparent
 
 );
 
 opacity:.35;
 
-mix-blend-mode:overlay;
-
-animation:scanlines 10s linear infinite;
-
-z-index:9000;
-
-}
-
-@keyframes scanlines{
-
-from{
-
-transform:translateY(0);
-
-}
-
-to{
-
-transform:translateY(10px);
-
-}
-
 }
 
 /* ==========================================================
-Screen Flicker
-========================================================== */
-
-body{
-
-animation:crtFlicker .18s infinite alternate;
-
-}
-
-@keyframes crtFlicker{
-
-0%{
-
-filter:brightness(1);
-
-}
-
-100%{
-
-filter:brightness(.995);
-
-}
-
-}
-
-/* ==========================================================
-RGB Glitch
-========================================================== */
-
-.glitch{
-
-animation:rgbGlitch .18s linear;
-
-}
-
-@keyframes rgbGlitch{
-
-0%{
-
-transform:none;
-
-filter:none;
-
-}
-
-25%{
-
-transform:translateX(2px);
-
-filter:hue-rotate(18deg);
-
-}
-
-50%{
-
-transform:translateX(-2px);
-
-filter:saturate(1.3);
-
-}
-
-75%{
-
-transform:translateY(1px);
-
-}
-
-100%{
-
-transform:none;
-
-filter:none;
-
-}
-
-}
-
-/* ==========================================================
-Floating Wallpaper Glow
-========================================================== */
-
-#wallpaper{
-
-animation:wallpaperFloat 18s ease-in-out infinite alternate;
-
-}
-
-@keyframes wallpaperFloat{
-
-0%{
-
-transform:translateY(0);
-
-}
-
-100%{
-
-transform:translateY(-18px);
-
-}
-
-}
-
-/* ==========================================================
-Window Glow
+Neon Outline
 ========================================================== */
 
 .window::after{
@@ -175,111 +72,229 @@ position:absolute;
 
 inset:0;
 
+border-radius:inherit;
+
 pointer-events:none;
 
-background:
+box-shadow:
 
-linear-gradient(
+inset 0 0 0 1px
 
-120deg,
-
-transparent,
-
-rgba(255,255,255,.04),
-
-transparent
-
-);
-
-transform:translateX(-140%);
-
-animation:windowSweep 8s linear infinite;
-
-}
-
-@keyframes windowSweep{
-
-0%{
-
-transform:translateX(-140%);
-
-}
-
-40%{
-
-transform:translateX(140%);
-
-}
-
-100%{
-
-transform:translateX(140%);
-
-}
+rgba(255,255,255,.04);
 
 }
 
 /* ==========================================================
-Notification
+Desktop Glow
 ========================================================== */
 
-.toast{
+#desktop::before{
 
-width:320px;
+content:"";
 
-border-radius:16px;
+position:absolute;
 
-overflow:hidden;
+left:-20%;
+
+top:-20%;
+
+width:140%;
+
+height:140%;
 
 background:
 
-rgba(14,18,28,.94);
+radial-gradient(
 
-backdrop-filter:blur(18px);
+circle,
 
-border:1px solid rgba(123,231,255,.15);
+rgba(181,108,255,.12),
+
+transparent 55%
+
+);
+
+filter:blur(120px);
+
+pointer-events:none;
+
+animation:
+
+purpleGlow
+
+10s ease-in-out infinite;
+
+z-index:0;
+
+}
+
+#desktop::after{
+
+content:"";
+
+position:absolute;
+
+right:-20%;
+
+bottom:-20%;
+
+width:120%;
+
+height:120%;
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(111,220,255,.10),
+
+transparent 60%
+
+);
+
+filter:blur(120px);
+
+pointer-events:none;
+
+animation:
+
+cyanGlow
+
+12s ease-in-out infinite;
+
+z-index:0;
+
+}
+
+/* ==========================================================
+Scanlines
+========================================================== */
+
+#noise{
+
+background:
+
+repeating-linear-gradient(
+
+180deg,
+
+rgba(255,255,255,.02) 0px,
+
+rgba(255,255,255,.02) 1px,
+
+transparent 2px,
+
+transparent 4px
+
+);
+
+opacity:.08;
+
+mix-blend-mode:soft-light;
+
+animation:
+
+scanMove
+
+12s linear infinite;
+
+}
+
+/* ==========================================================
+Window Bloom
+========================================================== */
+
+.window:hover{
+
+filter:
+
+brightness(1.05)
+
+saturate(120%);
+
+}
+
+/* ==========================================================
+Terminal Glow
+========================================================== */
+
+.terminal{
 
 box-shadow:
 
-0 0 24px rgba(123,231,255,.12),
+0 0 40px
 
-0 12px 30px rgba(0,0,0,.45);
+rgba(0,255,150,.10),
 
-animation:toastIn .3s ease;
-
-}
-
-.toast.hide{
-
-animation:toastOut .3s forwards;
+var(--glow-soft);
 
 }
 
-.toast-header{
+.terminal-line{
 
-padding:10px 14px;
+text-shadow:
 
-font-size:12px;
+0 0 8px
 
-font-family:"JetBrains Mono",monospace;
-
-color:var(--cyan);
-
-border-bottom:1px solid rgba(255,255,255,.05);
+rgba(0,255,120,.25);
 
 }
 
-.toast-body{
+/* ==========================================================
+Avatar Glow
+========================================================== */
 
-padding:14px;
+.avatar-image{
 
-line-height:1.6;
+box-shadow:
+
+0 0 50px
+
+rgba(181,108,255,.25);
 
 }
 
-.toast-progress{
+/* ==========================================================
+Music Glow
+========================================================== */
 
-height:3px;
+.progress-fill{
+
+animation:
+
+musicPulse
+
+2.5s ease-in-out infinite;
+
+}
+
+/* ==========================================================
+Notification Cards
+========================================================== */
+
+.notification-card{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.notification-card::before{
+
+content:"";
+
+position:absolute;
+
+left:-120%;
+
+top:0;
+
+width:80%;
+
+height:100%;
 
 background:
 
@@ -287,179 +302,68 @@ linear-gradient(
 
 90deg,
 
-var(--cyan),
+transparent,
 
-var(--pink)
+rgba(255,255,255,.15),
+
+transparent
 
 );
 
-animation:toastTimer 5s linear forwards;
+transition:.7s;
 
 }
 
-@keyframes toastIn{
+.notification-card:hover::before{
 
-from{
-
-opacity:0;
-
-transform:translateX(80px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-}
-
-@keyframes toastOut{
-
-to{
-
-opacity:0;
-
-transform:translateX(120px);
-
-}
-
-}
-
-@keyframes toastTimer{
-
-from{
-
-width:100%;
-
-}
-
-to{
-
-width:0;
-
-}
+left:140%;
 
 }
 
 /* ==========================================================
-Cursor Blink
+Glitch
 ========================================================== */
 
-.cursor{
+.glitch{
 
-display:inline-block;
+animation:
 
-width:8px;
+rgbGlitch
 
-height:15px;
-
-margin-left:3px;
-
-background:var(--cyan);
-
-animation:blink .8s steps(2) infinite;
-
-}
-
-@keyframes blink{
-
-50%{
-
-opacity:0;
-
-}
+180ms linear;
 
 }
 
 /* ==========================================================
-Noise Pulse
+Active Window
 ========================================================== */
 
-#noise{
+.window.active{
 
-animation:noisePulse 6s ease-in-out infinite;
+box-shadow:
 
-}
+0 0 35px
 
-@keyframes noisePulse{
+rgba(111,220,255,.18),
 
-0%{
+0 0 60px
 
-opacity:.03;
+rgba(181,108,255,.15),
 
-}
-
-50%{
-
-opacity:.05;
-
-}
-
-100%{
-
-opacity:.03;
-
-}
+var(--glow-soft);
 
 }
 
 /* ==========================================================
-Avatar Hover
+Boot Error
 ========================================================== */
 
-.window-image{
+.boot-error{
 
-transition:
+animation:
 
-transform .35s,
+bootFlicker
 
-filter .35s;
-
-}
-
-.window-image:hover{
-
-transform:scale(1.02);
-
-filter:
-
-brightness(1.05)
-
-contrast(1.05);
+1.5s ease-in-out infinite;
 
 }
-
-/* ==========================================================
-Terminal Typing Glow
-========================================================== */
-
-.terminal-line{
-
-animation:terminalFade .18s ease;
-
-}
-
-@keyframes terminalFade{
-
-from{
-
-opacity:0;
-
-transform:translateY(4px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-}
-```
