@@ -1,3 +1,6 @@
+debug("✅ windows.js loaded");
+debug("createWindow = " + typeof createWindow);
+
 /* ==========================================================
    Midnight Bunny OS
    windows.js
