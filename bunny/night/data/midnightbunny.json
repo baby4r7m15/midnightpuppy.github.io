@@ -1,11 +1,12 @@
 {
   "system": {
     "name": "Midnight Bunny OS",
-    "version": "10.0",
+    "version": "11.0",
     "codename": "CHAOS",
     "theme": "purple",
     "avatar": "assets/avatar.png",
-    "wallpaper": "assets/wallpaper.png"
+    "wallpaper": "assets/wallpaper.png",
+    "glitchEnabled": true
   },
 
   "profile": {
@@ -23,6 +24,24 @@
     "favoriteColor": "Purple"
   },
 
+  "windows": {
+    "profile": {
+      "title": "about.txt"
+    },
+    "avatar": {
+      "title": "avatar.png"
+    },
+    "terminal": {
+      "title": "terminal.exe"
+    },
+    "music": {
+      "title": "music.exe"
+    },
+    "notifications": {
+      "title": "notifications.log"
+    }
+  },
+
   "music": {
     "nowPlaying": "Lofi.exe",
     "artist": "Unknown Artist",
@@ -30,6 +49,7 @@
   },
 
   "terminal": {
+    "prompt": "bunny@night:~$",
     "messages": [
       "Reality.dll loaded.",
       "Containment stable.",
