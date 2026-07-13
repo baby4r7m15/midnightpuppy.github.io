@@ -1,3 +1,5 @@
+debug("✅ desktop.js loaded");
+
 /* ==========================================================
    Midnight Bunny OS
    desktop.js
