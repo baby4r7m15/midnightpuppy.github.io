@@ -1,5 +1,6 @@
 /* ==========================================================
    Midnight Bunny OS
+   Rev 11
    windows.css
 ========================================================== */
 
@@ -11,53 +12,51 @@ Base Window
 
 position:absolute;
 
-display:flex;
+background:var(--panel);
 
-flex-direction:column;
+backdrop-filter:blur(24px);
+
+-webkit-backdrop-filter:blur(24px);
+
+border:var(--border);
+
+border-radius:var(--radius-md);
+
+box-shadow:
+
+var(--glow-soft);
 
 overflow:hidden;
 
-background:var(--glass);
-
-border:1px solid var(--border);
-
-border-radius:18px;
-
-backdrop-filter:blur(18px);
-
-box-shadow:var(--shadow);
-
 transition:
 
-transform .18s,
+transform var(--speed),
 
-box-shadow .18s,
+box-shadow var(--speed),
 
-border-color .18s;
-
-animation:windowSpawn .35s ease;
+border var(--speed);
 
 }
 
 .window:hover{
 
-box-shadow:var(--shadow-hover);
+transform:translateY(-4px);
 
-border-color:var(--border2);
+border:var(--border-active);
 
-}
+box-shadow:
 
-.window.active{
+var(--glow-soft),
 
-border-color:rgba(123,231,255,.35);
+var(--glow-purple);
 
 }
 
 /* ==========================================================
-Titlebar
+Title Bar
 ========================================================== */
 
-.window-titlebar{
+.titlebar{
 
 height:42px;
 
@@ -65,9 +64,15 @@ display:flex;
 
 align-items:center;
 
-justify-content:space-between;
+padding:0 18px;
 
-padding:0 14px;
+font-size:.85rem;
+
+font-weight:700;
+
+letter-spacing:.06em;
+
+color:var(--cyan);
 
 background:
 
@@ -75,7 +80,7 @@ linear-gradient(
 
 180deg,
 
-rgba(255,255,255,.06),
+rgba(255,255,255,.08),
 
 rgba(255,255,255,.02)
 
@@ -83,147 +88,187 @@ rgba(255,255,255,.02)
 
 border-bottom:
 
-1px solid rgba(255,255,255,.05);
-
-cursor:grab;
+1px solid rgba(255,255,255,.06);
 
 user-select:none;
 
 }
 
-.window-titlebar:active{
-
-cursor:grabbing;
-
-}
-
 /* ==========================================================
-Traffic Lights
+Window Content
 ========================================================== */
 
-.window-buttons{
+.content{
 
-display:flex;
+padding:22px;
 
-align-items:center;
-
-gap:7px;
-
-}
-
-.window-buttons span{
-
-width:10px;
-
-height:10px;
-
-border-radius:50%;
-
-display:block;
-
-}
-
-.window-close{
-
-background:#ff6d91;
-
-}
-
-.window-min{
-
-background:#ffd96d;
-
-}
-
-.window-max{
-
-background:#7dffb0;
-
-}
-
-/* ==========================================================
-Title
-========================================================== */
-
-.window-title{
-
-flex:1;
-
-text-align:center;
-
-font-family:"JetBrains Mono",monospace;
-
-font-size:12px;
-
-letter-spacing:1px;
-
-color:var(--cyan-soft);
-
-}
-
-/* ==========================================================
-Content
-========================================================== */
-
-.window-content{
-
-flex:1;
+height:calc(100% - 42px);
 
 overflow:auto;
 
-padding:18px;
-
 }
 
 /* ==========================================================
-Sections
+Profile Window
 ========================================================== */
 
-.window-section{
+.profile{
+
+left:35px;
+
+top:95px;
+
+width:320px;
+
+height:560px;
+
+z-index:5;
+
+}
+
+.profile h1{
+
+font-size:2rem;
+
+margin-bottom:6px;
+
+}
+
+.profile h2{
+
+font-size:1rem;
+
+font-weight:500;
+
+color:var(--purple);
 
 margin-bottom:18px;
 
 }
 
-.window-section:last-child{
+.profile p{
 
-margin-bottom:0;
+color:var(--text-soft);
+
+line-height:1.7;
+
+margin-bottom:24px;
 
 }
 
 /* ==========================================================
-Typography
+Avatar Window
 ========================================================== */
 
-.window-heading{
+.avatar{
 
-font-size:18px;
+left:385px;
 
-font-weight:700;
+top:70px;
+
+width:520px;
+
+height:560px;
+
+z-index:3;
+
+transform:rotate(-1deg);
+
+}
+
+.avatar-image{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+border-radius:14px;
+
+}
+
+/* ==========================================================
+Terminal
+========================================================== */
+
+.terminal{
+
+left:30px;
+
+bottom:35px;
+
+width:650px;
+
+height:240px;
+
+z-index:8;
+
+background:
+
+rgba(5,8,14,.92);
+
+}
+
+.terminal .content{
+
+font-family:var(--font-mono);
+
+font-size:.83rem;
+
+color:#7dffb4;
+
+line-height:1.7;
+
+}
+
+/* ==========================================================
+Music
+========================================================== */
+
+.music{
+
+right:35px;
+
+top:95px;
+
+width:300px;
+
+height:190px;
+
+transform:rotate(1deg);
+
+}
+
+.music h3{
 
 margin-bottom:10px;
 
-color:var(--cyan-soft);
+font-size:1.1rem;
 
 }
 
-.window-subtext{
+.music p{
 
-margin-top:6px;
+color:var(--text-soft);
 
-font-family:"JetBrains Mono",monospace;
-
-font-size:12px;
-
-color:var(--muted);
+margin-bottom:18px;
 
 }
 
-.window-text{
+/* ==========================================================
+Notifications
+========================================================== */
 
-line-height:1.8;
+.notifications{
 
-color:var(--text);
+right:35px;
+
+top:315px;
+
+width:300px;
+
+height:340px;
 
 }
 
@@ -231,85 +276,55 @@ color:var(--text);
 Cards
 ========================================================== */
 
-.card{
+.notification-card{
 
 padding:14px;
 
-border-radius:12px;
-
-background:
-
-rgba(255,255,255,.03);
-
-border:
-
-1px solid rgba(255,255,255,.05);
-
-}
-
-/* ==========================================================
-Image
-========================================================== */
-
-.window-image{
-
-display:block;
-
-width:100%;
+margin-bottom:12px;
 
 border-radius:12px;
-
-border:
-
-1px solid rgba(255,255,255,.05);
-
-}
-
-/* ==========================================================
-Tags
-========================================================== */
-
-.tag{
-
-display:inline-block;
-
-padding:5px 10px;
-
-border-radius:999px;
-
-font-size:11px;
-
-font-family:"JetBrains Mono",monospace;
-
-background:
-
-rgba(123,231,255,.08);
-
-border:
-
-1px solid rgba(123,231,255,.18);
-
-color:var(--cyan);
-
-}
-
-/* ==========================================================
-Progress
-========================================================== */
-
-.progress{
-
-margin-top:12px;
-
-height:8px;
-
-border-radius:999px;
-
-overflow:hidden;
 
 background:
 
 rgba(255,255,255,.05);
+
+border:
+
+1px solid rgba(255,255,255,.06);
+
+transition:
+
+all .25s;
+
+}
+
+.notification-card:hover{
+
+background:
+
+rgba(181,108,255,.12);
+
+transform:translateX(4px);
+
+}
+
+/* ==========================================================
+Progress Bar
+========================================================== */
+
+.progress{
+
+height:10px;
+
+background:
+
+rgba(255,255,255,.08);
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin-top:16px;
 
 }
 
@@ -323,31 +338,37 @@ linear-gradient(
 
 90deg,
 
-var(--cyan),
+var(--purple),
 
-var(--purple)
+var(--cyan)
 
 );
+
+border-radius:20px;
+
+box-shadow:
+
+0 0 12px
+
+rgba(111,220,255,.45);
 
 }
 
 /* ==========================================================
-Tables
+Profile Table
 ========================================================== */
 
-.table{
+table{
 
 width:100%;
 
 border-collapse:collapse;
 
-font-size:13px;
-
 }
 
-.table td{
+td{
 
-padding:8px 0;
+padding:10px 0;
 
 border-bottom:
 
@@ -355,86 +376,46 @@ border-bottom:
 
 }
 
-.table td:first-child{
+td:first-child{
 
-width:42%;
+color:var(--text-soft);
 
-color:var(--muted);
+width:45%;
 
-font-family:"JetBrains Mono",monospace;
+}
+
+td:last-child{
+
+font-weight:600;
 
 }
 
 /* ==========================================================
-Terminal
+Terminal Lines
 ========================================================== */
-
-.terminal-output{
-
-height:100%;
-
-font-family:"JetBrains Mono",monospace;
-
-font-size:12px;
-
-line-height:1.9;
-
-overflow:auto;
-
-}
 
 .terminal-line{
 
-display:flex;
+margin-bottom:8px;
 
-gap:10px;
+white-space:pre-wrap;
 
-margin-bottom:6px;
-
-}
-
-.terminal-time{
-
-color:var(--cyan);
-
-}
-
-.terminal-prompt{
-
-color:var(--terminal);
-
-}
-
-.terminal-message{
-
-color:var(--text);
+word-break:break-word;
 
 }
 
 /* ==========================================================
-Spawn
+Window States
 ========================================================== */
 
-@keyframes windowSpawn{
+.window.active{
 
-from{
+border:var(--border-active);
 
-opacity:0;
+box-shadow:
 
-transform:
+var(--glow-soft),
 
-translateY(20px)
-
-scale(.97);
-
-}
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
+var(--glow-cyan);
 
 }
