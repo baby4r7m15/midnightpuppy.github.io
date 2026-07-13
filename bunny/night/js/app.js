@@ -16,65 +16,57 @@ window.BUNNY = null;
 Debug Console
 ========================================================== */
 
-function createDebugConsole(){
+window.debug = function(message,type="INFO"){
 
-    if(document.getElementById("debug-console")) return;
+    const output = document.getElementById(
 
-    const panel = document.createElement("div");
+        "debug-output"
 
-    panel.id = "debug-console";
-
-    panel.style.position = "fixed";
-    panel.style.left = "10px";
-    panel.style.right = "10px";
-    panel.style.bottom = "10px";
-    panel.style.height = "220px";
-    panel.style.overflowY = "auto";
-    panel.style.padding = "10px";
-    panel.style.background = "rgba(0,0,0,.88)";
-    panel.style.color = "#8cffb5";
-    panel.style.fontFamily = "monospace";
-    panel.style.fontSize = "12px";
-    panel.style.border = "1px solid #555";
-    panel.style.borderRadius = "12px";
-    panel.style.zIndex = "999999";
-    panel.style.whiteSpace = "pre-wrap";
-
-    document.body.appendChild(panel);
-
-}
-
-window.debug = function(message, type="INFO"){
-
-    const panel = document.getElementById("debug-console");
+    );
 
     const time = new Date().toLocaleTimeString();
 
-    const line = `[${time}] [${type}] ${message}`;
+    const line = document.createElement("div");
 
-    console.log(line);
+    let css = "debug-info";
 
-    if(panel){
+    if(type==="SUCCESS") css="debug-success";
 
-        panel.innerHTML += line + "<br>";
+    if(type==="WARN") css="debug-warn";
 
-        panel.scrollTop = panel.scrollHeight;
+    if(type==="ERROR") css="debug-error";
+
+    line.className = css;
+
+    line.textContent = `[${time}] ${type}  ${message}`;
+
+    console.log(
+
+        `[${type}] ${message}`
+
+    );
+
+    if(output){
+
+        output.appendChild(line);
+
+        output.scrollTop = output.scrollHeight;
 
     }
 
 };
 
 /* ==========================================================
-Global Error Handler
+Global Error Handlers
 ========================================================== */
 
-window.onerror = function(message, source, line, column, error){
+window.onerror = function(message,source,line,column,error){
 
     debug("========== CRASH ==========","ERROR");
     debug(message,"ERROR");
-    debug("File: " + source,"ERROR");
-    debug("Line: " + line,"ERROR");
-    debug("Column: " + column,"ERROR");
+    debug("File: "+source,"ERROR");
+    debug("Line: "+line,"ERROR");
+    debug("Column: "+column,"ERROR");
 
     if(error){
 
@@ -90,7 +82,7 @@ window.onunhandledrejection = function(event){
 
     debug("Unhandled Promise","ERROR");
 
-    debug(event.reason,"ERROR");
+    debug(String(event.reason),"ERROR");
 
 };
 
@@ -112,9 +104,27 @@ Boot OS
 
 async function bootOS(){
 
-    createDebugConsole();
-
     debug("app.js loaded","SUCCESS");
+
+    const clearButton = document.getElementById(
+
+        "debug-clear"
+
+    );
+
+    if(clearButton){
+
+        clearButton.onclick = ()=>{
+
+            document.getElementById(
+
+                "debug-output"
+
+            ).innerHTML = "";
+
+        };
+
+    }
 
     try{
 
@@ -126,7 +136,7 @@ async function bootOS(){
 
         );
 
-        debug("HTTP Status: " + response.status);
+        debug("HTTP Status: "+response.status);
 
         if(!response.ok){
 
@@ -140,7 +150,7 @@ async function bootOS(){
 
         window.BUNNY = await response.json();
 
-        debug("JSON loaded successfully","SUCCESS");
+        debug("JSON loaded.","SUCCESS");
 
         initializeOS();
 
@@ -200,7 +210,13 @@ function initializeOS(){
 
     );
 
-    debug("Initialization complete.","SUCCESS");
+    debug(
+
+        "Initialization Complete",
+
+        "SUCCESS"
+
+    );
 
 }
 
@@ -208,17 +224,17 @@ function initializeOS(){
 Subsystem Runner
 ========================================================== */
 
-function runSystem(name, fn){
+function runSystem(name,fn){
 
     try{
 
-        debug("Starting " + name + "...");
+        debug("Starting "+name+"...");
 
-        if(typeof fn !== "function"){
+        if(typeof fn!=="function"){
 
             throw new Error(
 
-                name + " function missing."
+                name+" function missing."
 
             );
 
@@ -226,13 +242,13 @@ function runSystem(name, fn){
 
         fn(window.BUNNY);
 
-        debug(name + " OK","SUCCESS");
+        debug(name+" OK","SUCCESS");
 
     }
 
     catch(error){
 
-        debug(name + " FAILED","ERROR");
+        debug(name+" FAILED","ERROR");
 
         debug(error.message,"ERROR");
 
@@ -250,21 +266,13 @@ Boot Failure
 
 function showBootFailure(error){
 
-    let boot = document.getElementById(
+    const boot = document.getElementById(
 
         "boot-layer"
 
     );
 
-    if(!boot){
-
-        boot = document.createElement("div");
-
-        boot.id = "boot-layer";
-
-        document.body.appendChild(boot);
-
-    }
+    if(!boot) return;
 
     boot.innerHTML = `
 
@@ -316,7 +324,13 @@ function updateClock(){
 
     if(!clock){
 
-        debug("Clock element missing.","WARN");
+        debug(
+
+            "#desktop-clock missing",
+
+            "WARN"
+
+        );
 
         return;
 
@@ -337,3 +351,5 @@ function updateClock(){
     );
 
 }
+
+debug("app.js parsed","SUCCESS");
