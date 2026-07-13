@@ -1,11 +1,12 @@
-debug("✅ desktop.js loaded");
-
 /* ==========================================================
    Midnight Bunny OS
+   Rev 10
    desktop.js
 ========================================================== */
 
 "use strict";
+
+debug("Loading desktop.js...");
 
 /* ==========================================================
 Initialize Desktop
@@ -13,71 +14,151 @@ Initialize Desktop
 
 function initializeDesktop(data){
 
-    const desktop = document.getElementById("desktop");
+    debug("initializeDesktop()");
 
-    if(!desktop) return;
+    if(!data){
+
+        throw new Error("No Bunny data supplied.");
+
+    }
 
     buildDesktopWindows(data);
 
 }
 
 /* ==========================================================
-Build Layout
+Desktop Layout
 ========================================================== */
 
 function buildDesktopWindows(data){
 
+    debug("Building desktop layout...");
+
     const layer = document.getElementById("window-layer");
+
+    if(!layer){
+
+        throw new Error("#window-layer not found.");
+
+    }
 
     layer.innerHTML = "";
 
-    createWindow("profile",{
-        title:"profile.sys",
-        x:40,
-        y:70,
-        width:320,
-        height:540
+    const windows = [
+
+        {
+
+            id:"profile",
+
+            title:"profile.sys",
+
+            x:30,
+
+            y:40,
+
+            width:310,
+
+            height:520
+
+        },
+
+        {
+
+            id:"avatar",
+
+            title:"avatar.png",
+
+            x:360,
+
+            y:40,
+
+            width:470,
+
+            height:520
+
+        },
+
+        {
+
+            id:"terminal",
+
+            title:"terminal",
+
+            x:20,
+
+            y:580,
+
+            width:610,
+
+            height:270
+
+        },
+
+        {
+
+            id:"quests",
+
+            title:"quests.log",
+
+            x:850,
+
+            y:40,
+
+            width:320,
+
+            height:230
+
+        },
+
+        {
+
+            id:"music",
+
+            title:"music.exe",
+
+            x:850,
+
+            y:290,
+
+            width:320,
+
+            height:160
+
+        },
+
+        {
+
+            id:"status",
+
+            title:"status.sys",
+
+            x:850,
+
+            y:470,
+
+            width:320,
+
+            height:220
+
+        }
+
+    ];
+
+    windows.forEach(win=>{
+
+        debug("Calling createWindow(): " + win.id);
+
+        createWindow(
+
+            win.id,
+
+            win
+
+        );
+
     });
 
-    createWindow("avatar",{
-        title:"avatar.png",
-        x:390,
-        y:70,
-        width:520,
-        height:540
-    });
-
-    createWindow("terminal",{
-        title:"terminal",
-        x:40,
-        y:630,
-        width:560,
-        height:280
-    });
-
-    createWindow("quests",{
-        title:"quests.log",
-        x:930,
-        y:70,
-        width:320,
-        height:240
-    });
-
-    createWindow("music",{
-        title:"music.exe",
-        x:930,
-        y:330,
-        width:320,
-        height:160
-    });
-
-    createWindow("status",{
-        title:"status.sys",
-        x:930,
-        y:510,
-        width:320,
-        height:200
-    });
+    debug("Populating windows...");
 
     populateProfile(data);
 
@@ -89,6 +170,8 @@ function buildDesktopWindows(data){
 
     populateStatus(data);
 
+    debug("Desktop complete.","SUCCESS");
+
 }
 
 /* ==========================================================
@@ -97,11 +180,21 @@ Profile
 
 function populateProfile(data){
 
-    const el=getWindowContent("profile");
+    debug("Profile...");
 
-    if(!el) return;
+    const el = getWindowContent("profile");
 
-    el.innerHTML=`
+    if(!el){
+
+        throw new Error(
+
+            "Profile window missing."
+
+        );
+
+    }
+
+    el.innerHTML = `
 
 <h2>${data.profile.name}</h2>
 
@@ -133,17 +226,17 @@ ${data.profile.title}
 
 <tr>
 
-<td>Mood</td>
+<td>Level</td>
 
-<td>${data.about.mood}</td>
+<td>${data.about.level}</td>
 
 </tr>
 
 <tr>
 
-<td>Level</td>
+<td>Mood</td>
 
-<td>${data.about.level}</td>
+<td>${data.about.mood}</td>
 
 </tr>
 
@@ -167,15 +260,29 @@ Avatar
 
 function populateAvatar(data){
 
-    const el=getWindowContent("avatar");
+    debug("Avatar...");
 
-    if(!el) return;
+    const el = getWindowContent("avatar");
 
-    el.innerHTML=`
+    if(!el){
+
+        throw new Error(
+
+            "Avatar window missing."
+
+        );
+
+    }
+
+    el.innerHTML = `
 
 <img
+
 class="window-image"
-src="${data.system.avatar}">
+
+src="${data.system.avatar}"
+
+alt="Avatar">
 
 `;
 
@@ -187,19 +294,35 @@ Quests
 
 function populateQuests(data){
 
-    const el=getWindowContent("quests");
+    debug("Quests...");
 
-    if(!el) return;
+    const el = getWindowContent("quests");
 
-    el.innerHTML=data.notifications.map(n=>`
+    if(!el){
+
+        throw new Error(
+
+            "Quest window missing."
+
+        );
+
+    }
+
+    el.innerHTML = "";
+
+    data.notifications.forEach(note=>{
+
+        el.innerHTML += `
 
 <div class="card">
 
-${n}
+${note}
 
 </div>
 
-`).join("");
+`;
+
+    });
 
 }
 
@@ -209,15 +332,29 @@ Music
 
 function populateMusic(data){
 
-    const el=getWindowContent("music");
+    debug("Music...");
 
-    if(!el) return;
+    const el = getWindowContent("music");
 
-    el.innerHTML=`
+    if(!el){
 
-<div class="window-text">
+        throw new Error(
+
+            "Music window missing."
+
+        );
+
+    }
+
+    el.innerHTML = `
+
+<div>
+
+<strong>
 
 ${data.music.nowPlaying}
+
+</strong>
 
 </div>
 
@@ -230,7 +367,9 @@ ${data.music.artist}
 <div class="progress">
 
 <div
+
 class="progress-fill"
+
 style="width:${data.music.progress}%">
 
 </div>
@@ -247,11 +386,21 @@ Status
 
 function populateStatus(data){
 
-    const el=getWindowContent("status");
+    debug("Status...");
 
-    if(!el) return;
+    const el = getWindowContent("status");
 
-    el.innerHTML=`
+    if(!el){
+
+        throw new Error(
+
+            "Status window missing."
+
+        );
+
+    }
+
+    el.innerHTML = `
 
 <table class="table">
 
@@ -292,3 +441,5 @@ function populateStatus(data){
 `;
 
 }
+
+debug("desktop.js loaded.","SUCCESS");
