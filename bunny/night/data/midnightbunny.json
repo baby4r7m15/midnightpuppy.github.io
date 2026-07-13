@@ -1,33 +1,36 @@
 {
   "system": {
     "title": "Midnight Bunny",
-    "version": "Rev 11",
-    "codename": "CHAOS",
-    "theme": "cyberpunk"
+    "version": "Rev 12",
+    "codename": "CHAOS"
+  },
+
+  "theme": {
+    "primary": "#ff4dc4",
+    "secondary": "#47dfff",
+    "white": "#ffffff",
+    "background": "#08080d",
+    "glass": "rgba(255,255,255,0.08)",
+    "blur": 24,
+    "radius": 18,
+    "glow": 35,
+    "noise": true,
+    "scanlines": true,
+    "grid": true
   },
 
   "desktop": {
     "width": 1920,
     "height": 1080,
     "background": "assets/background.png",
+
     "avatar": {
       "image": "assets/avatar.png",
-      "x": 520,
-      "y": 90,
-      "width": 840,
-      "height": 930
+      "x": 470,
+      "y": 50,
+      "width": 900,
+      "height": 980
     }
-  },
-
-  "profile": {
-    "name": "Artemis",
-    "alias": "Midnight Bunny",
-    "pronouns": "she/her",
-    "level": 99,
-    "status": "Containment Active",
-    "occupation": "Reality Rewriter",
-    "location": "The Rabbit Hole",
-    "bio": "Over-caffeinated cyber bunny rewriting reality one commit at a time."
   },
 
   "cards": [
@@ -36,21 +39,27 @@
       "id": "profile",
       "type": "table",
       "title": "PROJECT ARTEMIS",
-      "theme": "purple",
+      "subtitle": "Containment File",
+      "icon": "★",
+      "theme": "pink",
 
-      "x": 70,
-      "y": 120,
-
-      "width": 360,
-      "height": 320,
+      "style": {
+        "x": 60,
+        "y": 110,
+        "width": 350,
+        "height": 320,
+        "rotation": -2,
+        "z": 2,
+        "opacity": 0.95
+      },
 
       "rows": [
         ["Alias","Midnight Bunny"],
-        ["Level","99"],
-        ["Status","Containment Active"],
+        ["Name","Artemis"],
         ["Pronouns","She / Her"],
+        ["Level","99"],
         ["Threat","HIGH"],
-        ["Occupation","Reality Rewriter"]
+        ["Status","ONLINE"]
       ]
     },
 
@@ -58,217 +67,239 @@
       "id": "about",
       "type": "text",
       "title": "ABOUT",
+      "icon": "✦",
+      "theme": "purple",
 
-      "theme": "pink",
-
-      "x": 70,
-      "y": 470,
-
-      "width": 360,
-      "height": 240,
+      "style": {
+        "x": 80,
+        "y": 470,
+        "width": 340,
+        "height": 250,
+        "rotation": 1,
+        "z": 2
+      },
 
       "text": [
-        "Digital artist.",
         "Frontend developer.",
-        "Cyber bunny.",
+        "Digital artist.",
         "Professional caffeine consumer.",
-        "Currently rebuilding reality."
+        "Cyber bunny.",
+        "Currently rewriting reality."
       ]
     },
 
     {
       "id": "stats",
-
       "type": "stats",
-
       "title": "SYSTEM STATUS",
-
+      "icon": "◈",
       "theme": "cyan",
 
-      "x": 1430,
-
-      "y": 100,
-
-      "width": 340,
-
-      "height": 260,
+      "style": {
+        "x": 1450,
+        "y": 100,
+        "width": 330,
+        "height": 280,
+        "rotation": 2,
+        "z": 2
+      },
 
       "stats": [
-
         {
-          "label":"Creativity",
-          "value":98
+          "label": "Creativity",
+          "value": 99
         },
-
         {
-          "label":"Chaos",
-          "value":100
+          "label": "Chaos",
+          "value": 100
         },
-
         {
-          "label":"Sleep",
-          "value":8
+          "label": "Coding",
+          "value": 95
         },
-
         {
-          "label":"Caffeine",
-          "value":95
+          "label": "Sleep",
+          "value": 6
+        },
+        {
+          "label": "Caffeine",
+          "value": 100
         }
-
       ]
     },
 
     {
-      "id":"terminal",
+      "id": "terminal",
+      "type": "terminal",
+      "title": "TERMINAL",
+      "icon": ">",
+      "theme": "green",
 
-      "type":"terminal",
+      "style": {
+        "x": 90,
+        "y": 760,
+        "width": 600,
+        "height": 250,
+        "rotation": -1,
+        "z": 2
+      },
 
-      "title":"TERMINAL",
-
-      "theme":"green",
-
-      "x":90,
-
-      "y":760,
-
-      "width":620,
-
-      "height":250,
-
-      "lines":[
-
+      "lines": [
         "Reality.dll loaded.",
-
         "Containment stable.",
-
         "Brain.exe online.",
-
-        "Loading bunny.sys",
-
+        "Loading bunny.sys...",
         "Compiling chaos...",
-
-        "Kernel patched successfully.",
-
-        "Injecting caffeine..."
-
+        "Injecting caffeine...",
+        "Portal initialized.",
+        "Waiting for user..."
       ]
-
     },
 
     {
-      "id":"music",
+      "id": "music",
+      "type": "music",
+      "title": "NOW PLAYING",
+      "icon": "♫",
+      "theme": "pink",
 
-      "type":"music",
+      "style": {
+        "x": 1450,
+        "y": 410,
+        "width": 330,
+        "height": 190,
+        "rotation": -2,
+        "z": 2
+      },
 
-      "title":"NOW PLAYING",
-
-      "theme":"pink",
-
-      "x":1430,
-
-      "y":390,
-
-      "width":340,
-
-      "height":200,
-
-      "track":"Lofi.exe",
-
-      "artist":"Unknown Artist",
-
-      "progress":42
-
+      "track": "Lofi.exe",
+      "artist": "Unknown Artist",
+      "progress": 42
     },
 
     {
-      "id":"discord",
+      "id": "discord",
+      "type": "discord",
+      "title": "DISCORD",
+      "icon": "◉",
+      "theme": "cyan",
 
-      "type":"discord",
-
-      "title":"DISCORD",
-
-      "theme":"cyan",
-
-      "x":1430,
-
-      "y":620,
-
-      "width":340,
-
-      "height":170
-
+      "style": {
+        "x": 1450,
+        "y": 630,
+        "width": 330,
+        "height": 180,
+        "rotation": 1,
+        "z": 2
+      }
     },
 
     {
-      "id":"quotes",
+      "id": "quotes",
+      "type": "list",
+      "title": "FAVORITE QUOTES",
+      "icon": "❝",
+      "theme": "purple",
 
-      "type":"list",
+      "style": {
+        "x": 1450,
+        "y": 840,
+        "width": 330,
+        "height": 190,
+        "rotation": -1,
+        "z": 2
+      },
 
-      "title":"FAVORITE QUOTES",
-
-      "theme":"purple",
-
-      "x":1430,
-
-      "y":820,
-
-      "width":340,
-
-      "height":180,
-
-      "items":[
-
+      "items": [
         "Reality is optional.",
-
         "Carrots before chaos.",
-
-        "Sleep is a suggestion."
-
+        "Sleep is a suggestion.",
+        "Everything compiles eventually."
       ]
-
     },
 
     {
-      "id":"tasks",
+      "id": "quests",
+      "type": "checklist",
+      "title": "CURRENT QUESTS",
+      "icon": "☑",
+      "theme": "pink",
 
-      "type":"checklist",
+      "style": {
+        "x": 770,
+        "y": 830,
+        "width": 520,
+        "height": 180,
+        "rotation": 0,
+        "z": 3
+      },
 
-      "title":"CURRENT QUESTS",
-
-      "theme":"pink",
-
-      "x":760,
-
-      "y":820,
-
-      "width":520,
-
-      "height":180,
-
-      "items":[
-
+      "items": [
         {
-          "text":"Finish Midnight Bunny",
-          "done":false
+          "text": "Finish Midnight Bunny",
+          "done": false
         },
-
         {
-          "text":"Draw new avatar",
-          "done":true
+          "text": "Draw new avatar",
+          "done": true
         },
-
         {
-          "text":"Add Lanyard support",
-          "done":false
+          "text": "Implement Lanyard",
+          "done": false
         },
-
         {
-          "text":"Rewrite CSS",
-          "done":false
+          "text": "Rewrite CSS",
+          "done": false
         }
-
       ]
+    },
 
+    {
+      "id": "socials",
+      "type": "table",
+      "title": "SOCIAL LINKS",
+      "icon": "☍",
+      "theme": "white",
+
+      "style": {
+        "x": 60,
+        "y": 750,
+        "width": 350,
+        "height": 220,
+        "rotation": 2,
+        "z": 2
+      },
+
+      "rows": [
+        ["GitHub","github.com/..."],
+        ["Discord","@artemis"],
+        ["Bluesky","coming soon"],
+        ["Website","midnightbunny.dev"]
+      ]
+    },
+
+    {
+      "id": "projects",
+      "type": "list",
+      "title": "PROJECTS",
+      "icon": "◆",
+      "theme": "cyan",
+
+      "style": {
+        "x": 1320,
+        "y": 830,
+        "width": 300,
+        "height": 180,
+        "rotation": 2,
+        "z": 2
+      },
+
+      "items": [
+        "Midnight Bunny",
+        "Midnight Puppy",
+        "Portfolio",
+        "Future ARG"
+      ]
     }
 
   ]
