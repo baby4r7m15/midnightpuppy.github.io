@@ -5,6 +5,22 @@
 
 "use strict";
 
+window.onerror = function(message, source, line, column, error){
+
+    console.group("🐇 Bunny OS Crash");
+
+    console.error("Message:", message);
+    console.error("File:", source);
+    console.error("Line:", line);
+    console.error("Column:", column);
+    console.error(error);
+
+    console.groupEnd();
+
+    return false;
+
+};
+
 /* ==========================================================
 Global
 ========================================================== */
