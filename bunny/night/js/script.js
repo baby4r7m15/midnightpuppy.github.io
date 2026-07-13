@@ -1,5 +1,5 @@
 /* ==========================================================
-   Midnight Bunny OS
+   Midnight Bunny
    Rev 11
    script.js
 ========================================================== */
@@ -7,737 +7,741 @@
 "use strict";
 
 /* ==========================================================
-Global
+CONFIG
+========================================================== */
+
+const CONFIG = {
+
+    json: "data/bunny.json",
+
+    discord: {
+
+        enabled: true,
+
+        userID: "YOUR_DISCORD_ID",
+
+        refresh: 15000
+
+    }
+
+};
+
+/* ==========================================================
+GLOBAL DATA
 ========================================================== */
 
 let BUNNY = null;
 
+let DISCORD = null;
+
 /* ==========================================================
-Start
+BOOT
 ========================================================== */
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    loadBunny
+    boot
 
 );
 
 /* ==========================================================
-Load JSON
+BOOT
 ========================================================== */
 
-async function loadBunny(){
+async function boot(){
 
     try{
 
-        const response = await fetch(
-
-            "data/midnightbunny.json"
-
-        );
-
-        if(!response.ok){
-
-            throw new Error(
-
-                "Unable to load midnightbunny.json"
-
-            );
-
-        }
-
-        BUNNY = await response.json();
-
-        console.log(
-
-            "🐇 Bunny Loaded",
-
-            BUNNY
-
-        );
+        await loadJSON();
 
         buildDesktop();
 
-        startClock();
-
-        startTerminal();
-
-        startNotifications();
+        startDiscord();
 
     }
 
     catch(error){
 
-        document.getElementById(
+        console.error(error);
 
-            "desktop"
+    }
 
-        ).innerHTML = `
+}
 
-            <div class="boot-error">
+/* ==========================================================
+LOAD JSON
+========================================================== */
 
-                <h1>BOOT FAILURE</h1>
+async function loadJSON(){
 
-                <p>${error.message}</p>
+    const response = await fetch(
+
+        CONFIG.json
+
+    );
+
+    if(!response.ok){
+
+        throw new Error(
+
+            "Unable to load bunny.json"
+
+        );
+
+    }
+
+    BUNNY = await response.json();
+
+    console.log(
+
+        "🐇 Bunny Loaded",
+
+        BUNNY
+
+    );
+
+}
+/* ==========================================================
+BUILD DESKTOP
+========================================================== */
+
+function buildDesktop(){
+
+    buildBackground();
+
+    buildAvatar();
+
+    buildCards();
+
+}
+
+/* ==========================================================
+BACKGROUND
+========================================================== */
+
+function buildBackground(){
+
+    const background = document.getElementById(
+
+        "background"
+
+    );
+
+    if(!background) return;
+
+    background.style.backgroundImage =
+
+        `url("${BUNNY.desktop.background}")`;
+
+}
+
+/* ==========================================================
+AVATAR
+========================================================== */
+
+function buildAvatar(){
+
+    const avatar = document.getElementById(
+
+        "avatar"
+
+    );
+
+    if(!avatar) return;
+
+    const data = BUNNY.desktop.avatar;
+
+    avatar.src = data.image;
+
+    avatar.style.left = data.x + "px";
+
+    avatar.style.top = data.y + "px";
+
+    avatar.style.width = data.width + "px";
+
+    avatar.style.height = data.height + "px";
+
+}
+
+/* ==========================================================
+CARDS
+========================================================== */
+
+function buildCards(){
+
+    const container = document.getElementById(
+
+        "cards"
+
+    );
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    BUNNY.cards.forEach(card=>{
+
+        container.appendChild(
+
+            createCard(card)
+
+        );
+
+    });
+
+}
+/* ==========================================================
+CREATE CARD
+========================================================== */
+
+function createCard(card){
+
+    const element = document.createElement(
+
+        "section"
+
+    );
+
+    element.className =
+
+        `card ${card.theme}`;
+
+    element.id = card.id;
+
+    element.style.left = card.x + "px";
+
+    element.style.top = card.y + "px";
+
+    element.style.width = card.width + "px";
+
+    element.style.height = card.height + "px";
+
+    element.innerHTML = `
+
+        <div class="card-title">
+
+            ${card.title}
+
+        </div>
+
+        <div class="card-content">
+
+        </div>
+
+    `;
+
+    const content = element.querySelector(
+
+        ".card-content"
+
+    );
+
+    switch(card.type){
+
+        case "table":
+
+            renderTable(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        case "text":
+
+            renderText(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        case "list":
+
+            renderList(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        case "stats":
+
+            renderStats(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        case "terminal":
+
+            renderTerminal(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        case "music":
+
+            renderMusic(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        case "discord":
+
+            renderDiscord(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        case "checklist":
+
+            renderChecklist(
+
+                content,
+
+                card
+
+            );
+
+            break;
+
+        default:
+
+            content.innerHTML =
+
+                "Unknown card type.";
+
+    }
+
+    return element;
+
+}
+/* ==========================================================
+TABLE
+========================================================== */
+
+function renderTable(container, card){
+
+    const table = document.createElement("table");
+
+    card.rows.forEach(row=>{
+
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${row[0]}</td>
+
+            <td>${row[1]}</td>
+
+        `;
+
+        table.appendChild(tr);
+
+    });
+
+    container.appendChild(table);
+
+}
+
+/* ==========================================================
+TEXT
+========================================================== */
+
+function renderText(container, card){
+
+    card.text.forEach(line=>{
+
+        const p = document.createElement("p");
+
+        p.textContent = line;
+
+        container.appendChild(p);
+
+    });
+
+}
+
+/* ==========================================================
+LIST
+========================================================== */
+
+function renderList(container, card){
+
+    const ul = document.createElement("ul");
+
+    card.items.forEach(item=>{
+
+        const li = document.createElement("li");
+
+        li.textContent = item;
+
+        ul.appendChild(li);
+
+    });
+
+    container.appendChild(ul);
+
+}
+/* ==========================================================
+STATS
+========================================================== */
+
+function renderStats(container, card){
+
+    card.stats.forEach(stat=>{
+
+        const item = document.createElement("div");
+
+        item.className = "stat";
+
+        item.innerHTML = `
+
+            <div class="stat-label">
+
+                ${stat.label}
+
+                <span>${stat.value}%</span>
+
+            </div>
+
+            <div class="stat-bar">
+
+                <div
+                    class="stat-fill"
+                    style="width:${stat.value}%">
+                </div>
 
             </div>
 
         `;
 
-    }
-
-}
-
-/* ==========================================================
-Build Desktop
-========================================================== */
-
-function buildDesktop(){
-
-    const desktop = document.getElementById(
-
-        "desktop"
-
-    );
-
-    desktop.innerHTML = `
-
-<div id="wallpaper"></div>
-
-<div id="noise"></div>
-
-<div id="glow"></div>
-
-<header id="hud">
-
-    <div>
-
-        ${BUNNY.system.name}
-
-        <span>
-
-            Rev ${BUNNY.system.version}
-
-        </span>
-
-    </div>
-
-    <div id="desktop-clock">
-
-        --:--
-
-    </div>
-
-</header>
-
-<div id="workspace">
-
-</div>
-
-`;
-
-    buildWindows();
-
-}
-
-/* ==========================================================
-Build Windows
-========================================================== */
-
-function buildWindows(){
-
-    const workspace = document.getElementById(
-
-        "workspace"
-
-    );
-
-    workspace.innerHTML = `
-
-<!-- ======================================================
-Profile
-====================================================== -->
-
-<section class="window profile">
-
-    <div class="titlebar">
-
-        about.txt
-
-    </div>
-
-    <div class="content">
-
-        <h1>
-
-            ${BUNNY.profile.name}
-
-        </h1>
-
-        <h2>
-
-            ${BUNNY.profile.title}
-
-        </h2>
-
-        <p>
-
-            ${BUNNY.profile.bio}
-
-        </p>
-
-        <table>
-
-            <tr>
-
-                <td>Status</td>
-
-                <td>${BUNNY.profile.status}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Pronouns</td>
-
-                <td>${BUNNY.profile.pronouns}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Level</td>
-
-                <td>${BUNNY.about.level}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Mood</td>
-
-                <td>${BUNNY.about.mood}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Food</td>
-
-                <td>${BUNNY.about.favoriteFood}</td>
-
-            </tr>
-
-        </table>
-
-    </div>
-
-</section>
-
-<!-- ======================================================
-Avatar
-====================================================== -->
-
-<section class="window avatar">
-
-    <div class="titlebar">
-
-        avatar.png
-
-    </div>
-
-    <div class="content">
-
-        <img
-
-        src="${BUNNY.system.avatar}"
-
-        alt="Avatar"
-
-        class="avatar-image">
-
-    </div>
-
-</section>
-
-<!-- ======================================================
-Terminal
-====================================================== -->
-
-<section class="window terminal">
-
-    <div class="titlebar">
-
-        terminal.exe
-
-    </div>
-
-    <div
-
-        class="content"
-
-        id="terminal-output">
-
-    </div>
-
-</section>
-
-<!-- ======================================================
-Music
-====================================================== -->
-
-<section class="window music">
-
-    <div class="titlebar">
-
-        music.exe
-
-    </div>
-
-    <div class="content">
-
-        <h3>
-
-            ${BUNNY.music.nowPlaying}
-
-        </h3>
-
-        <p>
-
-            ${BUNNY.music.artist}
-
-        </p>
-
-        <div class="progress">
-
-            <div
-
-            class="progress-fill"
-
-            style="width:${BUNNY.music.progress}%">
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ======================================================
-Notifications
-====================================================== -->
-
-<section class="window notifications">
-
-    <div class="titlebar">
-
-        notifications.log
-
-    </div>
-
-    <div
-
-        class="content"
-
-        id="notification-list">
-
-    </div>
-
-</section>
-
-`;
-
-    buildNotifications();
-
-}
-
-/* ==========================================================
-Build Notifications
-========================================================== */
-
-function buildNotifications(){
-
-    const list = document.getElementById(
-
-        "notification-list"
-
-    );
-
-    if(!list) return;
-
-    list.innerHTML = "";
-
-    BUNNY.notifications.forEach(note=>{
-
-        list.innerHTML += `
-
-<div class="notification-card">
-
-    ${note}
-
-</div>
-
-`;
+        container.appendChild(item);
 
     });
 
 }
 
 /* ==========================================================
-Clock
+TERMINAL
 ========================================================== */
 
-function startClock(){
+function renderTerminal(container, card){
 
-    updateClock();
+    container.classList.add(
 
-    setInterval(
-
-        updateClock,
-
-        1000
+        "terminal"
 
     );
 
-}
+    card.lines.forEach(line=>{
 
-function updateClock(){
+        const div = document.createElement("div");
 
-    const clock = document.getElementById(
+        div.className =
 
-        "desktop-clock"
+            "terminal-line";
 
-    );
+        div.textContent =
 
-    if(!clock) return;
+            "> " + line;
 
-    const now = new Date();
+        container.appendChild(div);
 
-    clock.textContent = now.toLocaleTimeString(
-
-        [],
-
-        {
-
-            hour:"2-digit",
-
-            minute:"2-digit"
-
-        }
-
-    );
+    });
 
 }
 
 /* ==========================================================
-Terminal
+MUSIC
 ========================================================== */
 
-function startTerminal(){
+function renderMusic(container, card){
 
-    const terminal = document.getElementById(
+    container.innerHTML = `
 
-        "terminal-output"
+        <div class="music-track">
 
-    );
+            ${card.track}
 
-    if(!terminal) return;
+        </div>
 
-    terminal.innerHTML = "";
+        <div class="music-artist">
 
-    let index = 0;
+            ${card.artist}
 
-    function nextLine(){
+        </div>
 
-        if(index >= BUNNY.terminal.messages.length){
+        <div class="music-progress">
+
+            <div
+                class="music-progress-fill"
+                style="width:${card.progress}%">
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+/* ==========================================================
+CHECKLIST
+========================================================== */
+
+function renderChecklist(container, card){
+
+    const ul = document.createElement("ul");
+
+    card.items.forEach(item=>{
+
+        const li = document.createElement("li");
+
+        li.className =
+
+            item.done
+
+            ? "done"
+
+            : "";
+
+        li.innerHTML =
+
+            `${item.done ? "☑" : "☐"} ${item.text}`;
+
+        ul.appendChild(li);
+
+    });
+
+    container.appendChild(ul);
+
+}
+/* ==========================================================
+DISCORD (LANYARD)
+========================================================== */
+
+async function updateDiscord(){
+
+    if(!CONFIG.discord.enabled){
+
+        return;
+
+    }
+
+    try{
+
+        const response = await fetch(
+
+            `https://api.lanyard.rest/v1/users/${CONFIG.discord.userID}`
+
+        );
+
+        const json = await response.json();
+
+        if(!json.success){
 
             return;
 
         }
 
-        const line = document.createElement(
+        DISCORD = json.data;
 
-            "div"
+        refreshDiscordCard();
 
-        );
+    }
 
-        line.className = "terminal-line";
+    catch(error){
 
-        line.textContent =
+        console.error(
 
-            BUNNY.terminal.prompt +
+            "Discord Error",
 
-            " " +
-
-            BUNNY.terminal.messages[index];
-
-        terminal.appendChild(
-
-            line
-
-        );
-
-        terminal.scrollTop =
-
-            terminal.scrollHeight;
-
-        index++;
-
-        setTimeout(
-
-            nextLine,
-
-            700
+            error
 
         );
 
     }
 
-    nextLine();
-
 }
 
-/* ==========================================================
-Notifications Animation
-========================================================== */
+function startDiscord(){
 
-function startNotifications(){
+    updateDiscord();
 
-    const cards = document.querySelectorAll(
+    setInterval(
 
-        ".notification-card"
+        updateDiscord,
+
+        CONFIG.discord.refresh
 
     );
 
-    cards.forEach((card,index)=>{
-
-        card.style.animationDelay =
-
-            (index * .15) + "s";
-
-    });
-
 }
 
-console.log(
-
-    "🐇 Midnight Bunny Rev 11 Ready"
-
-);
-
 /* ==========================================================
-Optional Effects
+RENDER DISCORD
 ========================================================== */
 
-startWallpaper();
+function renderDiscord(container){
 
-enableGlitch();
+    container.classList.add(
 
-enableWindowGlow();
-
-/* ==========================================================
-Wallpaper
-========================================================== */
-
-function startWallpaper(){
-
-    const wallpaper = document.getElementById(
-
-        "wallpaper"
+        "discord-card"
 
     );
 
-    if(!wallpaper) return;
+    container.innerHTML =
 
-    wallpaper.style.backgroundImage =
-
-        `url(${BUNNY.system.wallpaper})`;
+        "<div class='discord-loading'>Connecting to Discord...</div>";
 
 }
 
-/* ==========================================================
-Window Glow
-========================================================== */
+function refreshDiscordCard(){
 
-function enableWindowGlow(){
+    if(!DISCORD) return;
 
-    const windows = document.querySelectorAll(
+    const card = document.querySelector(
 
-        ".window"
+        "#discord .card-content"
 
     );
 
-    windows.forEach(win=>{
+    if(!card) return;
 
-        win.addEventListener(
+    const statusColors={
 
-            "mouseenter",
+        online:"#43b581",
 
-            ()=>{
+        idle:"#faa61a",
 
-                win.classList.add("active");
+        dnd:"#f04747",
 
-            }
+        offline:"#747f8d"
 
-        );
+    };
 
-        win.addEventListener(
+    const color=
 
-            "mouseleave",
+        statusColors[DISCORD.discord_status]
 
-            ()=>{
+        || "#747f8d";
 
-                win.classList.remove("active");
+    let activity="Nothing right now";
 
-            }
+    if(
 
-        );
+        DISCORD.activities
 
-    });
+        &&
 
-}
+        DISCORD.activities.length
 
-/* ==========================================================
-Glitch
-========================================================== */
+    ){
 
-function enableGlitch(){
+        const custom=
 
-    if(!BUNNY.system.glitchEnabled) return;
+            DISCORD.activities.find(
 
-    setInterval(()=>{
-
-        const windows = document.querySelectorAll(
-
-            ".window"
-
-        );
-
-        const random = windows[
-
-            Math.floor(
-
-                Math.random()*windows.length
-
-            )
-
-        ];
-
-        if(!random) return;
-
-        random.classList.add(
-
-            "glitch"
-
-        );
-
-        setTimeout(()=>{
-
-            random.classList.remove(
-
-                "glitch"
+                a=>a.type===4
 
             );
 
-        },150);
+        const playing=
 
-    },4000);
+            DISCORD.activities.find(
+
+                a=>a.type===0
+
+            );
+
+        const spotify=
+
+            DISCORD.listening_to_spotify;
+
+        if(spotify){
+
+            activity=
+
+                "🎵 " +
+
+                DISCORD.spotify.song +
+
+                "<br>" +
+
+                DISCORD.spotify.artist;
+
+        }
+
+        else if(playing){
+
+            activity=
+
+                "🎮 " +
+
+                playing.name;
+
+        }
+
+        else if(custom){
+
+            activity=
+
+                custom.state;
+
+        }
+
+    }
+
+    card.innerHTML=`
+
+        <div class="discord-status">
+
+            <span
+                class="status-dot"
+                style="background:${color}">
+            </span>
+
+            ${DISCORD.discord_status.toUpperCase()}
+
+        </div>
+
+        <div class="discord-activity">
+
+            ${activity}
+
+        </div>
+
+    `;
 
 }
-
-/* ==========================================================
-Random Notifications
-========================================================== */
-
-setInterval(()=>{
-
-    const cards = document.querySelectorAll(
-
-        ".notification-card"
-
-    );
-
-    if(cards.length===0) return;
-
-    const card = cards[
-
-        Math.floor(
-
-            Math.random()*cards.length
-
-        )
-
-    ];
-
-    card.classList.add(
-
-        "pulse"
-
-    );
-
-    setTimeout(()=>{
-
-        card.classList.remove(
-
-            "pulse"
-
-        );
-
-    },700);
-
-},5000);
-
-/* ==========================================================
-Random Terminal Activity
-========================================================== */
-
-setInterval(()=>{
-
-    const terminal = document.getElementById(
-
-        "terminal-output"
-
-    );
-
-    if(!terminal) return;
-
-    const line = document.createElement(
-
-        "div"
-
-    );
-
-    line.className = "terminal-line";
-
-    line.textContent =
-
-        BUNNY.terminal.prompt +
-
-        " ping " +
-
-        Math.floor(
-
-            Math.random()*9999
-
-        );
-
-    terminal.appendChild(
-
-        line
-
-    );
-
-    terminal.scrollTop =
-
-        terminal.scrollHeight;
-
-},9000);
-
-console.log(
-
-    "🐇 Midnight Bunny OS Ready"
-
-);
