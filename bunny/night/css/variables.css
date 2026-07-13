@@ -1,231 +1,117 @@
 /* ==========================================================
    Midnight Bunny OS
+   Rev 11
    variables.css
 ========================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap");
-
 :root{
 
-/* wallpaper */
-
---bg:#07080d;
---bg2:#111426;
---bg3:#1b1032;
-
-/* windows */
-
---window:#121522;
---window2:#181c2d;
---glass:rgba(18,22,36,.84);
-
-/* accent */
-
---cyan:#7be7ff;
---cyan-soft:#c8f7ff;
-
---purple:#a884ff;
---purple2:#c5a4ff;
-
---pink:#ff83da;
-
---blue:#6d86ff;
-
-/* text */
-
---text:#edf4ff;
---muted:#94a3c5;
---terminal:#98ffd0;
-
-/* borders */
-
---border:rgba(255,255,255,.07);
---border2:rgba(123,231,255,.18);
-
-/* shadows */
-
---shadow:
-
-0 10px 30px rgba(0,0,0,.45),
-
-0 0 24px rgba(123,231,255,.08);
-
---shadow-hover:
-
-0 20px 40px rgba(0,0,0,.55),
-
-0 0 28px rgba(123,231,255,.18);
-
-/* sizing */
-
---radius:16px;
-
---title:13px;
-
---body:14px;
-
---mono:12px;
-
-}
-
 /* ==========================================================
-Reset
+Fonts
 ========================================================== */
 
-*{
+--font-ui:
+"Inter",
+system-ui,
+sans-serif;
 
-margin:0;
-
-padding:0;
-
-box-sizing:border-box;
-
-}
-
-html{
-
-height:100%;
-
-}
-
-body{
-
-width:100%;
-
-height:100%;
-
-overflow:hidden;
-
-background:var(--bg);
-
-color:var(--text);
-
-font-family:"Inter",sans-serif;
-
-font-size:var(--body);
-
-}
+--font-mono:
+"JetBrains Mono",
+"Consolas",
+monospace;
 
 /* ==========================================================
-Typography
+Main Colors
 ========================================================== */
 
-h1,
-h2,
-h3{
+--bg:#08090d;
 
-font-weight:800;
+--bg2:#11131d;
 
-letter-spacing:.5px;
+--panel:rgba(22,26,38,.72);
 
-}
+--panel-light:rgba(34,40,56,.78);
 
-p{
+--glass:rgba(255,255,255,.04);
 
-line-height:1.7;
+--white:#ffffff;
 
-}
+--text:#e6ebff;
 
-small{
-
-color:var(--muted);
-
-}
-
-code,
-pre,
-.mono{
-
-font-family:"JetBrains Mono",monospace;
-
-}
+--text-soft:#9ea8c7;
 
 /* ==========================================================
-Scrollbar
+Accent
 ========================================================== */
 
-::-webkit-scrollbar{
+--purple:#b56cff;
 
-width:8px;
+--pink:#ff5cb8;
 
-height:8px;
+--cyan:#6fdcff;
 
-}
-
-::-webkit-scrollbar-track{
-
-background:transparent;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:rgba(255,255,255,.15);
-
-border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-background:rgba(123,231,255,.4);
-
-}
+--blue:#61a6ff;
 
 /* ==========================================================
-Selection
+Borders
 ========================================================== */
 
-::selection{
+--border:
 
-background:var(--cyan);
+1px solid rgba(255,255,255,.08);
 
-color:#000;
+--border-active:
 
-}
+1px solid rgba(111,220,255,.35);
 
 /* ==========================================================
-Utility
+Glow
 ========================================================== */
 
-.hidden{
+--glow-purple:
 
-display:none !important;
+0 0 24px rgba(181,108,255,.35);
 
-}
+--glow-cyan:
 
-.flex{
+0 0 24px rgba(111,220,255,.30);
 
-display:flex;
+--glow-soft:
 
-}
+0 10px 50px rgba(0,0,0,.45);
 
-.column{
+/* ==========================================================
+Radius
+========================================================== */
 
-flex-direction:column;
+--radius-xs:8px;
 
-}
+--radius-sm:12px;
 
-.center{
+--radius-md:18px;
 
-display:flex;
+--radius-lg:26px;
 
-align-items:center;
+/* ==========================================================
+Spacing
+========================================================== */
 
-justify-content:center;
+--space1:8px;
 
-}
+--space2:14px;
 
-.mono{
+--space3:20px;
 
-font-family:"JetBrains Mono",monospace;
+--space4:30px;
 
-}
+/* ==========================================================
+Animation
+========================================================== */
 
-.glow{
+--speed-fast:.18s;
 
-text-shadow:
+--speed:.30s;
 
-0 0 8px rgba(123,231,255,.45);
+--speed-slow:.60s;
 
 }
