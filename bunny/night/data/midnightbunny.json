@@ -22,10 +22,10 @@
   "desktop": {
     "width": 1920,
     "height": 1080,
-    "background": "assets/background.png",
+    "background": "images/background.png",
 
     "avatar": {
-      "image": "assets/avatar.png",
+      "image": "images/midnightbunny-avatar.png",
       "x": 470,
       "y": 50,
       "width": 900,
