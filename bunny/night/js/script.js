@@ -12,7 +12,7 @@ CONFIG
 
 const CONFIG = {
 
-    json: "data/bunny.json",
+    json: "data/midnightbunny.json",
 
     discord: {
 
@@ -86,7 +86,7 @@ async function loadJSON(){
 
         throw new Error(
 
-            "Unable to load bunny.json"
+            "Unable to load midnightbunny.json"
 
         );
 
