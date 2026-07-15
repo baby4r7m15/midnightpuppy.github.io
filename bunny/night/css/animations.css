@@ -1,473 +1,278 @@
 /* ==========================================================
-   Midnight Bunny OS
-   Rev 11
+   Midnight Bunny
    animations.css
 ========================================================== */
 
 /* ==========================================================
-Floating Windows
+CARD FLOAT
 ========================================================== */
 
-@keyframes float{
+.card{
 
-0%{
+    animation:
 
-transform:translateY(0px);
-
-}
-
-50%{
-
-transform:translateY(-5px);
+        floatCard 8s ease-in-out infinite;
 
 }
 
-100%{
+.card:nth-child(even){
 
-transform:translateY(0px);
-
-}
+    animation-delay:-4s;
 
 }
 
 /* ==========================================================
-Purple Glow
+AVATAR
 ========================================================== */
 
-@keyframes purpleGlow{
+#avatar{
 
-0%{
+    animation:
 
-transform:translate(0,0);
-
-opacity:.35;
-
-}
-
-50%{
-
-transform:translate(-40px,-25px);
-
-opacity:.60;
-
-}
-
-100%{
-
-transform:translate(0,0);
-
-opacity:.35;
-
-}
+        avatarFloat 10s ease-in-out infinite;
 
 }
 
 /* ==========================================================
-Cyan Glow
+GLOW
 ========================================================== */
 
-@keyframes cyanGlow{
+#glow{
 
-0%{
+    animation:
 
-transform:translate(0,0);
-
-opacity:.25;
-
-}
-
-50%{
-
-transform:translate(40px,30px);
-
-opacity:.55;
-
-}
-
-100%{
-
-transform:translate(0,0);
-
-opacity:.25;
-
-}
+        glowPulse 6s ease-in-out infinite;
 
 }
 
 /* ==========================================================
-RGB Glitch
+GRID
 ========================================================== */
 
-@keyframes rgbGlitch{
+#grid{
 
-0%{
+    animation:
 
-transform:translate(0);
-
-filter:none;
-
-}
-
-20%{
-
-transform:translate(-2px,2px);
-
-filter:hue-rotate(35deg);
-
-}
-
-40%{
-
-transform:translate(2px,-2px);
-
-filter:hue-rotate(-35deg);
-
-}
-
-60%{
-
-transform:translate(-1px,1px);
-
-filter:saturate(180%);
-
-}
-
-80%{
-
-transform:translate(2px,0);
-
-}
-
-100%{
-
-transform:translate(0);
-
-filter:none;
-
-}
+        gridMove 20s linear infinite;
 
 }
 
 /* ==========================================================
-Music Pulse
+NOISE
 ========================================================== */
 
-@keyframes musicPulse{
+#noise{
 
-0%{
+    animation:
 
-opacity:.8;
-
-}
-
-50%{
-
-opacity:1;
-
-box-shadow:
-
-0 0 20px
-
-rgba(111,220,255,.6);
-
-}
-
-100%{
-
-opacity:.8;
-
-}
+        noiseFlicker .18s infinite;
 
 }
 
 /* ==========================================================
-Notification Pulse
+SCANLINES
 ========================================================== */
 
-@keyframes pulse{
+#scanlines{
 
-0%{
+    animation:
 
-transform:scale(1);
-
-}
-
-50%{
-
-transform:scale(1.03);
-
-}
-
-100%{
-
-transform:scale(1);
-
-}
-
-}
-
-.pulse{
-
-animation:
-
-pulse
-
-700ms ease;
+        scanMove 8s linear infinite;
 
 }
 
 /* ==========================================================
-Terminal Cursor
+CARD HOVER
 ========================================================== */
 
-@keyframes blink{
+.card:hover{
 
-0%{
+    animation:
 
-opacity:1;
-
-}
-
-50%{
-
-opacity:0;
-
-}
-
-100%{
-
-opacity:1;
-
-}
-
-}
-
-.terminal-line:last-child::after{
-
-content:"▋";
-
-margin-left:3px;
-
-color:var(--cyan);
-
-animation:
-
-blink
-
-1s infinite;
+        hoverGlitch .35s;
 
 }
 
 /* ==========================================================
-Scanline Movement
+KEYFRAMES
 ========================================================== */
+
+@keyframes floatCard{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+@keyframes avatarFloat{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+@keyframes glowPulse{
+
+    0%{
+
+        opacity:.7;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.7;
+
+    }
+
+}
+
+@keyframes gridMove{
+
+    from{
+
+        background-position:
+
+            0 0,
+
+            0 0;
+
+    }
+
+    to{
+
+        background-position:
+
+            50px 50px,
+
+            50px 50px;
+
+    }
+
+}
+
+@keyframes noiseFlicker{
+
+    0%{
+
+        opacity:.04;
+
+    }
+
+    25%{
+
+        opacity:.06;
+
+    }
+
+    50%{
+
+        opacity:.03;
+
+    }
+
+    75%{
+
+        opacity:.05;
+
+    }
+
+    100%{
+
+        opacity:.04;
+
+    }
+
+}
 
 @keyframes scanMove{
 
-0%{
+    from{
 
-background-position:0 0;
+        background-position:0 0;
 
-}
+    }
 
-100%{
+    to{
 
-background-position:0 300px;
+        background-position:0 8px;
 
-}
-
-}
-
-/* ==========================================================
-Window Entrance
-========================================================== */
-
-@keyframes windowAppear{
-
-0%{
-
-opacity:0;
-
-transform:
-
-translateY(25px)
-
-scale(.96);
+    }
 
 }
 
-100%{
+@keyframes hoverGlitch{
 
-opacity:1;
+    0%{
 
-transform:
+        transform:translateX(0);
 
-translateY(0)
+    }
 
-scale(1);
+    20%{
 
-}
+        transform:translateX(-2px);
 
-}
+    }
 
-.window{
+    40%{
 
-animation:
+        transform:translateX(2px);
 
-windowAppear
+    }
 
-700ms ease,
+    60%{
 
-float
+        transform:translateX(-1px);
 
-8s ease-in-out infinite;
+    }
 
-}
+    80%{
 
-/* ==========================================================
-Boot Flicker
-========================================================== */
+        transform:translateX(1px);
 
-@keyframes bootFlicker{
+    }
 
-0%{
+    100%{
 
-opacity:1;
+        transform:translateX(0);
 
-}
-
-48%{
-
-opacity:1;
-
-}
-
-49%{
-
-opacity:.2;
-
-}
-
-50%{
-
-opacity:1;
-
-}
-
-85%{
-
-opacity:1;
-
-}
-
-86%{
-
-opacity:.5;
-
-}
-
-87%{
-
-opacity:1;
-
-}
-
-100%{
-
-opacity:1;
-
-}
-
-}
-
-/* ==========================================================
-Hover Float
-========================================================== */
-
-.window:hover{
-
-animation-play-state:paused;
-
-}
-
-/* ==========================================================
-Image Fade
-========================================================== */
-
-@keyframes imageFade{
-
-from{
-
-opacity:0;
-
-transform:scale(.98);
-
-}
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-}
-
-}
-
-.avatar-image{
-
-animation:
-
-imageFade
-
-1s ease;
-
-}
-
-/* ==========================================================
-HUD Glow
-========================================================== */
-
-@keyframes hudGlow{
-
-0%{
-
-box-shadow:
-
-0 0 20px
-
-rgba(181,108,255,.18);
-
-}
-
-50%{
-
-box-shadow:
-
-0 0 35px
-
-rgba(111,220,255,.28);
-
-}
-
-100%{
-
-box-shadow:
-
-0 0 20px
-
-rgba(181,108,255,.18);
-
-}
-
-}
-
-#hud{
-
-animation:
-
-hudGlow
-
-6s ease-in-out infinite;
+    }
 
 }
