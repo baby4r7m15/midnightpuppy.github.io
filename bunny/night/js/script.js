@@ -6,7 +6,7 @@ CONFIG
 
 const CONFIG = {
 
-    json: "bunny/night/data/midnightbunny.json"
+    json: "/bunny/night/data/midnightbunny.json"
 
 };]
 
