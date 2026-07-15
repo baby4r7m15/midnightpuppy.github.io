@@ -17,18 +17,49 @@
     "muted": "rgba(255,255,255,0.70)"
 },
 
-  "desktop": {
+ "desktop": {
+
     "width": 1920,
+
     "height": 1080,
+
     "background": "images/background.png",
+
     "avatar": {
-      "image": "images/midnightbunny-avatar.png",
-      "x": 470,
-      "y": 50,
-      "width": 900,
-      "height": 980
+
+        "image": "images/midnightbunny-avatar.png",
+
+        "x": 510,
+
+        "y": 40,
+
+        "width": 900,
+
+        "height": 1040,
+
+        "opacity": 1,
+
+        "rotation": 0,
+
+        "glow": true
+
+    },
+
+    "effects": {
+
+        "grid": true,
+
+        "noise": true,
+
+        "scanlines": true,
+
+        "vignette": true,
+
+        "glow": true
+
     }
-  },
+
+},
 
   "cards": [
 
