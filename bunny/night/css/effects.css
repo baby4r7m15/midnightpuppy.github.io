@@ -1,369 +1,268 @@
 /* ==========================================================
-   Midnight Bunny OS
-   Rev 11
+   Midnight Bunny
    effects.css
 ========================================================== */
 
 /* ==========================================================
-Glass
+BACKGROUND GLOW
 ========================================================== */
 
-.window{
+#glow{
 
-backdrop-filter:
+    background:
 
-blur(22px)
+        radial-gradient(
 
-saturate(140%);
+            circle at center,
 
--webkit-backdrop-filter:
+            rgba(255,70,220,.20),
 
-blur(22px)
+            transparent 55%
 
-saturate(140%);
+        ),
+
+        radial-gradient(
+
+            circle at 80% 20%,
+
+            rgba(71,223,255,.18),
+
+            transparent 45%
+
+        ),
+
+        radial-gradient(
+
+            circle at 20% 80%,
+
+            rgba(156,108,255,.18),
+
+            transparent 40%
+
+        );
+
+    mix-blend-mode:screen;
+
+    z-index:2;
 
 }
 
 /* ==========================================================
-Window Shine
+GRID
 ========================================================== */
 
-.window::before{
+#grid{
 
-content:"";
+    background-image:
 
-position:absolute;
+        linear-gradient(
 
-left:0;
+            rgba(255,255,255,.03) 1px,
 
-right:0;
+            transparent 1px
 
-top:0;
+        ),
 
-height:70px;
+        linear-gradient(
 
-pointer-events:none;
+            90deg,
 
-background:
+            rgba(255,255,255,.03) 1px,
 
-linear-gradient(
+            transparent 1px
 
-180deg,
+        );
 
-rgba(255,255,255,.12),
+    background-size:
 
-transparent
+        50px 50px;
 
-);
+    opacity:.45;
 
-opacity:.35;
+    z-index:3;
 
 }
 
 /* ==========================================================
-Neon Outline
+SCANLINES
 ========================================================== */
 
-.window::after{
+#scanlines{
 
-content:"";
+    background:
 
-position:absolute;
+        repeating-linear-gradient(
 
-inset:0;
+            to bottom,
 
-border-radius:inherit;
+            rgba(255,255,255,.02) 0px,
 
-pointer-events:none;
+            rgba(255,255,255,.02) 1px,
 
-box-shadow:
+            transparent 2px,
 
-inset 0 0 0 1px
+            transparent 4px
 
-rgba(255,255,255,.04);
+        );
+
+    opacity:.25;
+
+    mix-blend-mode:overlay;
+
+    z-index:90;
+
+    pointer-events:none;
 
 }
 
 /* ==========================================================
-Desktop Glow
-========================================================== */
-
-#desktop::before{
-
-content:"";
-
-position:absolute;
-
-left:-20%;
-
-top:-20%;
-
-width:140%;
-
-height:140%;
-
-background:
-
-radial-gradient(
-
-circle,
-
-rgba(181,108,255,.12),
-
-transparent 55%
-
-);
-
-filter:blur(120px);
-
-pointer-events:none;
-
-animation:
-
-purpleGlow
-
-10s ease-in-out infinite;
-
-z-index:0;
-
-}
-
-#desktop::after{
-
-content:"";
-
-position:absolute;
-
-right:-20%;
-
-bottom:-20%;
-
-width:120%;
-
-height:120%;
-
-background:
-
-radial-gradient(
-
-circle,
-
-rgba(111,220,255,.10),
-
-transparent 60%
-
-);
-
-filter:blur(120px);
-
-pointer-events:none;
-
-animation:
-
-cyanGlow
-
-12s ease-in-out infinite;
-
-z-index:0;
-
-}
-
-/* ==========================================================
-Scanlines
+NOISE
 ========================================================== */
 
 #noise{
 
-background:
+    background-image:
 
-repeating-linear-gradient(
+        radial-gradient(
 
-180deg,
+            rgba(255,255,255,.08) 1px,
 
-rgba(255,255,255,.02) 0px,
+            transparent 1px
 
-rgba(255,255,255,.02) 1px,
+        );
 
-transparent 2px,
+    background-size:5px 5px;
 
-transparent 4px
+    opacity:.04;
 
-);
+    mix-blend-mode:screen;
 
-opacity:.08;
+    z-index:91;
 
-mix-blend-mode:soft-light;
-
-animation:
-
-scanMove
-
-12s linear infinite;
+    pointer-events:none;
 
 }
 
 /* ==========================================================
-Window Bloom
+CARD GLOW
 ========================================================== */
 
-.window:hover{
+.card::before{
 
-filter:
+    content:"";
 
-brightness(1.05)
+    position:absolute;
 
-saturate(120%);
+    inset:0;
+
+    border-radius:inherit;
+
+    pointer-events:none;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(255,255,255,.10),
+
+            transparent 40%
+
+        );
 
 }
 
 /* ==========================================================
-Terminal Glow
+CARD BLOOM
 ========================================================== */
 
-.terminal{
+.card::after{
 
-box-shadow:
+    content:"";
 
-0 0 40px
+    position:absolute;
 
-rgba(0,255,150,.10),
+    inset:-2px;
 
-var(--glow-soft);
+    border-radius:inherit;
 
-}
+    background:
 
-.terminal-line{
+        linear-gradient(
 
-text-shadow:
+            90deg,
 
-0 0 8px
+            #ff4dc4,
 
-rgba(0,255,120,.25);
+            #47dfff,
+
+            #9c6cff
+
+        );
+
+    opacity:.10;
+
+    filter:blur(18px);
+
+    z-index:-1;
 
 }
 
 /* ==========================================================
-Avatar Glow
+HOVER RGB SHIFT
 ========================================================== */
 
-.avatar-image{
+.card:hover{
 
-box-shadow:
+    filter:
 
-0 0 50px
+        drop-shadow(0 0 20px rgba(255,70,220,.55))
 
-rgba(181,108,255,.25);
+        drop-shadow(0 0 28px rgba(71,223,255,.35));
 
 }
 
 /* ==========================================================
-Music Glow
+AVATAR BLOOM
 ========================================================== */
 
-.progress-fill{
+#avatar{
 
-animation:
+    filter:
 
-musicPulse
+        drop-shadow(0 0 50px rgba(255,70,220,.35))
 
-2.5s ease-in-out infinite;
+        drop-shadow(0 0 70px rgba(71,223,255,.25));
 
 }
 
 /* ==========================================================
-Notification Cards
+PAGE VIGNETTE
 ========================================================== */
 
-.notification-card{
+body::after{
 
-position:relative;
+    content:"";
 
-overflow:hidden;
+    position:fixed;
 
-}
+    inset:0;
 
-.notification-card::before{
+    pointer-events:none;
 
-content:"";
+    background:
 
-position:absolute;
+        radial-gradient(
 
-left:-120%;
+            circle,
 
-top:0;
+            transparent 55%,
 
-width:80%;
+            rgba(0,0,0,.55)
 
-height:100%;
+        );
 
-background:
-
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,.15),
-
-transparent
-
-);
-
-transition:.7s;
-
-}
-
-.notification-card:hover::before{
-
-left:140%;
-
-}
-
-/* ==========================================================
-Glitch
-========================================================== */
-
-.glitch{
-
-animation:
-
-rgbGlitch
-
-180ms linear;
-
-}
-
-/* ==========================================================
-Active Window
-========================================================== */
-
-.window.active{
-
-box-shadow:
-
-0 0 35px
-
-rgba(111,220,255,.18),
-
-0 0 60px
-
-rgba(181,108,255,.15),
-
-var(--glow-soft);
-
-}
-
-/* ==========================================================
-Boot Error
-========================================================== */
-
-.boot-error{
-
-animation:
-
-bootFlicker
-
-1.5s ease-in-out infinite;
+    z-index:999;
 
 }
