@@ -53,7 +53,7 @@ async function boot(){
         await loadJSON();
 
         buildDesktop();
-
+        scaleDesktop();
         startDiscord();
 
     }
@@ -729,3 +729,41 @@ function refreshDiscordCard(){
     `;
 
 }
+
+/* ==========================================================
+AUTO SCALE DESKTOP
+========================================================== */
+
+window.addEventListener(
+
+    "resize",
+
+    scaleDesktop
+
+);
+
+function scaleDesktop(){
+
+    const desktop=document.getElementById(
+
+        "desktop"
+
+    );
+
+    if(!desktop) return;
+
+    const scale=Math.min(
+
+        window.innerWidth/1920,
+
+        window.innerHeight/1080
+
+    );
+
+    desktop.style.transform=
+
+        `scale(${scale})`;
+
+}
+
+scaleDesktop();
