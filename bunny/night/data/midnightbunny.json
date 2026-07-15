@@ -1,185 +1,260 @@
 {
   "theme": {
-    "themeColor": "#070914",
-    "bg": "#03040a",
-    "bg2": "#090b16",
-    "panel": "rgba(8, 10, 20, 0.84)",
-    "panel2": "rgba(8, 10, 20, 0.72)",
-    "cyan": "#47d8ff",
-    "cyan2": "#93ecff",
-    "blue": "#5b6cff",
-    "violet": "#7a57d1",
-    "purple": "#a56cff",
-    "pink": "#7d4ba8",
-    "pink2": "#b188ff",
-    "line": "rgba(98, 148, 255, 0.16)",
-    "line2": "rgba(177, 136, 255, 0.16)",
-    "text": "#eef5ff",
-    "muted": "rgba(220, 230, 255, 0.72)",
-    "shadow": "rgba(71, 216, 255, 0.18)",
-    "titleGlow": "rgba(71, 216, 255, 0.20)",
-    "glitchTop": "rgba(71, 216, 255, 0.62)",
-    "glitchBottom": "rgba(177, 136, 255, 0.75)"
+
+    "primary": "#ff4dc4",
+
+    "secondary": "#47dfff",
+
+    "accent": "#9c6cff",
+
+    "background": "#08080d",
+
+    "glass": "rgba(12,12,24,.60)",
+
+    "border": "rgba(255,255,255,.15)",
+
+    "text": "#ffffff",
+
+    "muted": "rgba(255,255,255,.70)"
+
   },
-  "head": {
-    "title": "midnightbunny.exe"
+
+  "background": {
+
+    "image": "images/background.png"
+
   },
-  "header": {
-    "title": "midnightbunny.exe",
-    "subtitle": "SIGNAL UNSTABLE • HEART IN SAFE MODE",]
-    "nav": [
-      {
-        "label": "BIO",
-        "href": "https://midnightpuppy.com",
-        "active": true
+
+  "avatar": {
+
+    "image": "images/avatar.png",
+
+    "x": 520,
+
+    "y": 40,
+
+    "width": 900
+
+  },
+
+  "cards": [
+
+    {
+
+      "id": "profile",
+
+      "title": "PROJECT ARTEMIS",
+
+      "subtitle": "Containment File",
+
+      "icon": "★",
+
+      "theme": "pink",
+
+      "x": 60,
+
+      "y": 80,
+
+      "width": 340,
+
+      "height": 320,
+
+      "rotation": -2,
+
+      "content": {
+
+        "type": "table",
+
+        "rows":[
+
+          ["Alias","Midnight Bunny"],
+
+          ["Name","Artemis"],
+
+          ["Threat","HIGH"],
+
+          ["Status","ONLINE"]
+
+        ]
+
       }
-    ],
-    "stats": [
-      {
-        "label": "mood",
-        "value": "low"
-      },
-      {
-        "label": "ping",
-        "value": "unstable"
-      },
-      {
-        "label": "heart",
-        "value": "fractured"
-      }
-    ]
-  },
-  "profile": {
-    "panelTitle": "USER PROFILE",
-    "panelChip": "ONLINE",
-    "avatar": {
-      "src": "/images/midnightbunny-avatar.png",
-      "alt": "midnightbunny.exe avatar"
+
     },
-    "name": "midnightbunny.exe",
-    "metaHtml": "Build: <b>midnight</b> • Level: <b>21</b> • Status: <b>softly breaking</b>",
-    "bars": [
-      {
-        "label": "SOCIAL BATTERY",
-        "percent": 25,
-        "value": "25 / 100",
-        "fillClass": "hp"
-      },
-      {
-        "label": "AFFECTION.EXE",
-        "percent": 3,
-        "value": "corrupted / restore point missing",
-        "fillClass": "ep"
+
+    {
+
+      "id":"about",
+
+      "title":"ABOUT",
+
+      "icon":"✦",
+
+      "theme":"purple",
+
+      "x":70,
+
+      "y":440,
+
+      "width":340,
+
+      "height":250,
+
+      "rotation":1,
+
+      "content":{
+
+        "type":"text",
+
+        "lines":[
+
+          "Frontend developer.",
+
+          "Digital artist.",
+
+          "Cyber bunny.",
+
+          "Professional caffeine consumer."
+
+        ]
+
       }
-    ],
-    "loadoutTitle": "LOADOUT",
-    "loadout": [
-      "hoodie.zip (oversized)",
-      "music_loop.mp3 (repeat x999)",
-      "comfort_emote.dll (missing)",
-      "tears.tmp (locked)"
-    ]
-  },
-  "bio": {
-    "panelTitle": "BIO LOG",
-    "panelChip": "LIVE",
-    "entries": [
-    ],
-    "vibesTitle": "VIBES",
-    "vibes": [
-      "♡ soft",
-      "☾ nocturnal",
-      "✦ clingy",
-      "⛓ quiet",
-      "🫧 fragile"
-    ]
-  },
-  "statsPanel": {
-    "panelTitle": "Stats",
-    "panelChip": "status",
-    "cards": [
-      {
-        "name": "sleep.exe",
-        "level": "denied",
-        "percent": 9,
-        "subtext": "3:17am / still awake"
+
+    },
+
+    {
+
+      "id":"stats",
+
+      "title":"SYSTEM STATUS",
+
+      "icon":"◈",
+
+      "theme":"cyan",
+
+      "x":1480,
+
+      "y":90,
+
+      "width":320,
+
+      "height":260,
+
+      "rotation":2,
+
+      "content":{
+
+        "type":"stats",
+
+        "items":[
+
+          {
+
+            "label":"Chaos",
+
+            "value":100
+
+          },
+
+          {
+
+            "label":"Coding",
+
+            "value":96
+
+          },
+
+          {
+
+            "label":"Creativity",
+
+            "value":99
+
+          }
+
+        ]
+
       }
-    ]
-  },
-  "statusReport": {
-    "panelTitle": "STATUS REPORT",
-    "panelChip": "LAST 24H",
-    "items": [
-    ]
-  },
-  "systemLog": {
-    "panelTitle": "SYSTEM LOG",
-    "panelChip": "STREAMING",
-    "lines": [
-      {
-        "time": "00:00:01",
-        "message": "booting midnightpuppy.exe…"
-      },
-      {
-        "time": "00:00:20",
-        "message": "loading feelings.dll…",
-        "status": "warning",
-        "statusClass": "term-warn"
-      },
-      {
-        "time": "00:00:25",
-        "message": "affection.exe",
-        "status": "corrupted",
-        "statusClass": "term-bad"
-      },
-      {
-        "time": "00:00:30",
-        "message": "halo integrity unstable…"
-      },
-      {
-        "time": "00:00:35",
-        "message": "tears renderer active…",
-        "status": "ok",
-        "statusClass": "term-ok"
-      },
-      {
-        "type": "gap"
-      },
-      {
-        "time": "00:01:00",
-        "message": "autism.exe...",
-        "status": "loaded!",
-        "statusClass": "term-warn"
-      },
-      {
-        "time": "00:06:07",
-        "message": "adhd.txt loading...",
-        "status": "Brain Not Found (404)",
-        "statusClass": "term-bad"
-      },
-      {
-        "time": "00:10:08",
-        "message": "loneliness.js...",
-        "status": "Loaded!",
-        "statusClass": "term-ok"
-      },
-      {
-        "type": "gap"
-      },
-      {
-        "time": "00:15:09",
-        "dimPrefix": "heartbeat:",
-        "message": "buffering…"
-      },
-      {
-        "time": "00:20:00",
-        "dimPrefix": "status:",
-        "message": "online • quietly longing"
+
+    },
+
+    {
+
+      "id":"terminal",
+
+      "title":"TERMINAL",
+
+      "icon":">",
+
+      "theme":"green",
+
+      "x":100,
+
+      "y":740,
+
+      "width":600,
+
+      "height":240,
+
+      "rotation":-1,
+
+      "content":{
+
+        "type":"terminal",
+
+        "lines":[
+
+          "Loading bunny.sys...",
+
+          "Injecting chaos...",
+
+          "Reality.dll loaded.",
+
+          "Waiting for user..."
+
+        ]
+
       }
-    ]
-  },
-  "toast": {
-    "header": "SYSTEM",
-    "line": "bunny has been locked"
-  }
+
+    },
+
+    {
+
+      "id":"quotes",
+
+      "title":"QUOTES",
+
+      "icon":"❝",
+
+      "theme":"pink",
+
+      "x":1460,
+
+      "y":380,
+
+      "width":320,
+
+      "height":220,
+
+      "rotation":-2,
+
+      "content":{
+
+        "type":"list",
+
+        "items":[
+
+          "Reality is optional.",
+
+          "Sleep is a suggestion.",
+
+          "Everything compiles eventually."
+
+        ]
+
+      }
+
+    }
+
+  ]
+
 }
