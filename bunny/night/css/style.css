@@ -1,425 +1,342 @@
 /* ==========================================================
-   Midnight Bunny OS
-   Rev 11
+   Midnight Bunny
    style.css
 ========================================================== */
 
 /* ==========================================================
-Body
+FONT
 ========================================================== */
 
 body{
 
-font-family:var(--font-ui);
+    font-family:
 
-color:var(--text);
+        "Inter",
 
-user-select:none;
+        "Segoe UI",
 
-cursor:default;
+        sans-serif;
 
-}
-
-/* ==========================================================
-Headings
-========================================================== */
-
-h1{
-
-font-size:2rem;
-
-font-weight:800;
-
-letter-spacing:-.03em;
-
-margin-bottom:6px;
-
-}
-
-h2{
-
-font-size:1rem;
-
-font-weight:500;
-
-color:var(--purple);
-
-margin-bottom:20px;
-
-}
-
-h3{
-
-font-size:1.05rem;
-
-font-weight:700;
-
-margin-bottom:8px;
-
-}
-
-p{
-
-line-height:1.7;
-
-color:var(--text-soft);
+    color:white;
 
 }
 
 /* ==========================================================
-Links
-========================================================== */
-
-a{
-
-color:var(--cyan);
-
-text-decoration:none;
-
-transition:.25s;
-
-}
-
-a:hover{
-
-color:var(--purple);
-
-}
-
-/* ==========================================================
-Profile Table
+TABLE
 ========================================================== */
 
 table{
 
-width:100%;
+    width:100%;
 
-border-collapse:collapse;
-
-margin-top:18px;
+    border-collapse:collapse;
 
 }
 
 td{
 
-padding:12px 0;
+    padding:8px 0;
 
-border-bottom:
+    border-bottom:
 
-1px solid rgba(255,255,255,.06);
-
-font-size:.92rem;
+        1px solid rgba(255,255,255,.08);
 
 }
 
 td:first-child{
 
-width:42%;
+    width:42%;
 
-color:var(--text-soft);
+    color:#47dfff;
 
-font-weight:500;
+    font-weight:600;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
 
 }
 
 td:last-child{
 
-font-weight:700;
+    color:white;
 
 }
 
 /* ==========================================================
-Avatar
+TEXT
 ========================================================== */
 
-.avatar-image{
+.card-content p{
 
-display:block;
+    margin-bottom:12px;
 
-width:100%;
+    line-height:1.7;
 
-height:100%;
+    color:
 
-object-fit:cover;
-
-border-radius:12px;
+        rgba(255,255,255,.88);
 
 }
 
 /* ==========================================================
-Music Widget
+LIST
 ========================================================== */
 
-.music h3{
+.card-content ul{
 
-color:var(--white);
+    list-style:none;
 
 }
 
-.music p{
+.card-content li{
 
-margin-bottom:18px;
+    margin-bottom:10px;
+
+    padding-left:18px;
+
+    position:relative;
 
 }
 
-/* ==========================================================
-Notification Cards
-========================================================== */
+.card-content li::before{
 
-.notification-card{
+    content:"✦";
 
-display:flex;
+    position:absolute;
 
-align-items:center;
+    left:0;
 
-padding:14px 16px;
-
-margin-bottom:12px;
-
-background:
-
-rgba(255,255,255,.04);
-
-border-radius:12px;
-
-font-size:.9rem;
-
-color:var(--text);
+    color:#ff4dc4;
 
 }
 
 /* ==========================================================
-Terminal
+TERMINAL
 ========================================================== */
 
-#terminal-output{
+.terminal{
 
-height:100%;
+    font-family:
 
-overflow-y:auto;
+        monospace;
 
-padding-right:8px;
+    color:#47dfff;
 
-font-family:var(--font-mono);
+    line-height:1.8;
+
+    font-size:13px;
 
 }
 
 .terminal-line{
 
-font-size:.82rem;
-
-line-height:1.7;
-
-color:#86ffb3;
-
-margin-bottom:6px;
-
-word-break:break-word;
+    margin-bottom:6px;
 
 }
 
-.terminal-line:nth-child(even){
+.terminal-line::before{
 
-opacity:.85;
+    content:"> ";
+
+    color:#ff4dc4;
 
 }
 
 /* ==========================================================
-Progress
+STATS
 ========================================================== */
+
+.stat{
+
+    margin-bottom:18px;
+
+}
+
+.stat-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:6px;
+
+    font-size:13px;
+
+}
+
+.stat-bar{
+
+    width:100%;
+
+    height:8px;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+}
+
+.stat-fill{
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            #ff4dc4,
+
+            #47dfff
+
+        );
+
+    box-shadow:
+
+        0 0 10px #47dfff;
+
+}
+
+/* ==========================================================
+CHECKLIST
+========================================================== */
+
+.check{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:12px;
+
+}
+
+.check.done{
+
+    opacity:.45;
+
+}
+
+.check-box{
+
+    width:18px;
+
+    height:18px;
+
+    border:
+
+        2px solid #47dfff;
+
+    border-radius:4px;
+
+}
+
+.check.done .check-box{
+
+    background:#47dfff;
+
+}
+
+/* ==========================================================
+MUSIC
+========================================================== */
+
+.music-track{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.music-artist{
+
+    margin-top:4px;
+
+    color:#47dfff;
+
+}
 
 .progress{
 
-margin-top:16px;
+    margin-top:18px;
 
-height:10px;
+    height:8px;
 
-background:
+    border-radius:999px;
 
-rgba(255,255,255,.06);
+    background:
 
-border-radius:999px;
-
-overflow:hidden;
+        rgba(255,255,255,.08);
 
 }
 
 .progress-fill{
 
-height:100%;
+    height:100%;
 
-border-radius:999px;
+    border-radius:999px;
 
-}
+    background:
 
-/* ==========================================================
-Titlebar
-========================================================== */
+        linear-gradient(
 
-.titlebar{
+            90deg,
 
-font-family:var(--font-mono);
+            #ff4dc4,
 
-font-size:.78rem;
+            #47dfff
 
-text-transform:uppercase;
-
-letter-spacing:.08em;
+        );
 
 }
 
 /* ==========================================================
-Selection
+DISCORD
 ========================================================== */
 
-::selection{
+.discord-status{
 
-background:
+    display:flex;
 
-rgba(181,108,255,.45);
+    align-items:center;
 
-color:white;
+    gap:10px;
 
-}
+    margin-bottom:14px;
 
-/* ==========================================================
-Focus
-========================================================== */
-
-button,
-
-input,
-
-textarea{
-
-outline:none;
-
-border:none;
-
-font:inherit;
+    font-weight:700;
 
 }
 
-/* ==========================================================
-Responsive
-========================================================== */
+.status-dot{
 
-@media (max-width:1100px){
+    width:12px;
 
-.window{
+    height:12px;
 
-transform:scale(.95);
+    border-radius:50%;
 
-transform-origin:top left;
+    box-shadow:
 
-}
+        0 0 12px currentColor;
 
 }
 
-@media (max-width:900px){
+.discord-activity{
 
-#workspace{
+    color:
 
-overflow:auto;
+        rgba(255,255,255,.82);
 
-padding:80px 20px 20px;
-
-}
-
-.profile{
-
-position:relative;
-
-left:auto;
-
-top:auto;
-
-width:100%;
-
-height:auto;
-
-margin-bottom:20px;
-
-}
-
-.avatar{
-
-position:relative;
-
-left:auto;
-
-top:auto;
-
-width:100%;
-
-height:420px;
-
-margin-bottom:20px;
-
-transform:none;
-
-}
-
-.terminal{
-
-position:relative;
-
-left:auto;
-
-bottom:auto;
-
-width:100%;
-
-height:260px;
-
-margin-bottom:20px;
-
-}
-
-.music{
-
-position:relative;
-
-right:auto;
-
-top:auto;
-
-width:100%;
-
-height:auto;
-
-margin-bottom:20px;
-
-transform:none;
-
-}
-
-.notifications{
-
-position:relative;
-
-right:auto;
-
-top:auto;
-
-width:100%;
-
-height:auto;
-
-}
-
-}
-
-/* ==========================================================
-Fin
-========================================================== */
-
-.window{
-
-will-change:
-
-transform,
-
-box-shadow;
+    line-height:1.6;
 
 }
