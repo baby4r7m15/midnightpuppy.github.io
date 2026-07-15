@@ -1,421 +1,190 @@
 /* ==========================================================
-   Midnight Bunny OS
-   Rev 11
+   Midnight Bunny
    windows.css
 ========================================================== */
 
 /* ==========================================================
-Base Window
+CARD
 ========================================================== */
 
-.window{
+.card{
 
-position:absolute;
+    position:absolute;
 
-background:var(--panel);
+    display:flex;
+    flex-direction:column;
 
-backdrop-filter:blur(24px);
+    overflow:hidden;
 
--webkit-backdrop-filter:blur(24px);
+    background:rgba(12,12,24,.55);
 
-border:var(--border);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
-border-radius:var(--radius-md);
+    border:2px solid rgba(255,80,210,.55);
 
-box-shadow:
+    border-radius:18px;
 
-var(--glow-soft);
+    box-shadow:
+        0 0 14px rgba(255,70,200,.35),
+        0 0 40px rgba(71,223,255,.15);
 
-overflow:hidden;
+    color:#ffffff;
 
-transition:
-
-transform var(--speed),
-
-box-shadow var(--speed),
-
-border var(--speed);
-
-}
-
-.window:hover{
-
-transform:translateY(-4px);
-
-border:var(--border-active);
-
-box-shadow:
-
-var(--glow-soft),
-
-var(--glow-purple);
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
 
 }
 
 /* ==========================================================
-Title Bar
+HOVER
 ========================================================== */
 
-.titlebar{
+.card:hover{
 
-height:42px;
+    transform:
+        scale(1.02);
 
-display:flex;
+    box-shadow:
 
-align-items:center;
+        0 0 20px rgba(255,70,220,.7),
 
-padding:0 18px;
-
-font-size:.85rem;
-
-font-weight:700;
-
-letter-spacing:.06em;
-
-color:var(--cyan);
-
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(255,255,255,.08),
-
-rgba(255,255,255,.02)
-
-);
-
-border-bottom:
-
-1px solid rgba(255,255,255,.06);
-
-user-select:none;
+        0 0 70px rgba(71,223,255,.35);
 
 }
 
 /* ==========================================================
-Window Content
+HEADER
 ========================================================== */
 
-.content{
+.card-header{
 
-padding:22px;
+    display:flex;
 
-height:calc(100% - 42px);
+    align-items:center;
 
-overflow:auto;
+    gap:12px;
+
+    padding:14px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(255,70,220,.22),
+
+            rgba(71,223,255,.18)
+
+        );
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
 
 }
 
 /* ==========================================================
-Profile Window
+ICON
 ========================================================== */
 
-.profile{
+.card-icon{
 
-left:35px;
+    font-size:22px;
 
-top:95px;
+    color:#47dfff;
 
-width:320px;
+    text-shadow:
 
-height:560px;
-
-z-index:5;
-
-}
-
-.profile h1{
-
-font-size:2rem;
-
-margin-bottom:6px;
-
-}
-
-.profile h2{
-
-font-size:1rem;
-
-font-weight:500;
-
-color:var(--purple);
-
-margin-bottom:18px;
-
-}
-
-.profile p{
-
-color:var(--text-soft);
-
-line-height:1.7;
-
-margin-bottom:24px;
+        0 0 10px #47dfff;
 
 }
 
 /* ==========================================================
-Avatar Window
+TITLE
 ========================================================== */
 
-.avatar{
+.card-title{
 
-left:385px;
+    font-size:18px;
 
-top:70px;
+    font-weight:700;
 
-width:520px;
+    letter-spacing:2px;
 
-height:560px;
+    color:white;
 
-z-index:3;
+    text-shadow:
 
-transform:rotate(-1deg);
-
-}
-
-.avatar-image{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-border-radius:14px;
+        0 0 8px rgba(255,255,255,.4);
 
 }
 
 /* ==========================================================
-Terminal
+SUBTITLE
 ========================================================== */
 
-.terminal{
+.card-subtitle{
 
-left:30px;
+    margin-top:2px;
 
-bottom:35px;
+    font-size:11px;
 
-width:650px;
+    opacity:.7;
 
-height:240px;
+    text-transform:uppercase;
 
-z-index:8;
-
-background:
-
-rgba(5,8,14,.92);
-
-}
-
-.terminal .content{
-
-font-family:var(--font-mono);
-
-font-size:.83rem;
-
-color:#7dffb4;
-
-line-height:1.7;
+    letter-spacing:1px;
 
 }
 
 /* ==========================================================
-Music
+CONTENT
 ========================================================== */
 
-.music{
+.card-content{
 
-right:35px;
+    flex:1;
 
-top:95px;
+    overflow:auto;
 
-width:300px;
-
-height:190px;
-
-transform:rotate(1deg);
-
-}
-
-.music h3{
-
-margin-bottom:10px;
-
-font-size:1.1rem;
-
-}
-
-.music p{
-
-color:var(--text-soft);
-
-margin-bottom:18px;
+    padding:18px;
 
 }
 
 /* ==========================================================
-Notifications
+THEMES
 ========================================================== */
 
-.notifications{
+.theme-pink{
 
-right:35px;
-
-top:315px;
-
-width:300px;
-
-height:340px;
+    border-color:#ff4dc4;
 
 }
 
-/* ==========================================================
-Cards
-========================================================== */
+.theme-cyan{
 
-.notification-card{
-
-padding:14px;
-
-margin-bottom:12px;
-
-border-radius:12px;
-
-background:
-
-rgba(255,255,255,.05);
-
-border:
-
-1px solid rgba(255,255,255,.06);
-
-transition:
-
-all .25s;
+    border-color:#47dfff;
 
 }
 
-.notification-card:hover{
+.theme-purple{
 
-background:
-
-rgba(181,108,255,.12);
-
-transform:translateX(4px);
+    border-color:#9c6cff;
 
 }
 
-/* ==========================================================
-Progress Bar
-========================================================== */
+.theme-green{
 
-.progress{
-
-height:10px;
-
-background:
-
-rgba(255,255,255,.08);
-
-border-radius:20px;
-
-overflow:hidden;
-
-margin-top:16px;
+    border-color:#4cff8c;
 
 }
 
-.progress-fill{
+.theme-white{
 
-height:100%;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-var(--purple),
-
-var(--cyan)
-
-);
-
-border-radius:20px;
-
-box-shadow:
-
-0 0 12px
-
-rgba(111,220,255,.45);
-
-}
-
-/* ==========================================================
-Profile Table
-========================================================== */
-
-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-}
-
-td{
-
-padding:10px 0;
-
-border-bottom:
-
-1px solid rgba(255,255,255,.05);
-
-}
-
-td:first-child{
-
-color:var(--text-soft);
-
-width:45%;
-
-}
-
-td:last-child{
-
-font-weight:600;
-
-}
-
-/* ==========================================================
-Terminal Lines
-========================================================== */
-
-.terminal-line{
-
-margin-bottom:8px;
-
-white-space:pre-wrap;
-
-word-break:break-word;
-
-}
-
-/* ==========================================================
-Window States
-========================================================== */
-
-.window.active{
-
-border:var(--border-active);
-
-box-shadow:
-
-var(--glow-soft),
-
-var(--glow-cyan);
+    border-color:#ffffff;
 
 }
