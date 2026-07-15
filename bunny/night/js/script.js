@@ -54,15 +54,35 @@ async function boot(){
 
     try{
 
+        alert("Boot started");
+
         await loadJSON();
+
+        alert("JSON loaded");
 
         buildDesktop();
 
+        alert("Desktop built");
+
         startDiscord();
+
+        alert("Discord started");
 
     }
 
     catch(error){
+
+        alert(
+
+            "BOOT ERROR\n\n" +
+
+            error.message +
+
+            "\n\n" +
+
+            error.stack
+
+        );
 
         console.error(error);
 
@@ -76,23 +96,35 @@ LOAD JSON
 
 async function loadJSON(){
 
+    alert("Loading: " + CONFIG.json);
+
     const response = await fetch(
 
         CONFIG.json
 
     );
 
+    alert("HTTP Status: " + response.status);
+
     if(!response.ok){
 
         throw new Error(
 
-            "Unable to load midnightbunny.json"
+            "Unable to load " + CONFIG.json
 
         );
 
     }
 
     BUNNY = await response.json();
+
+    alert(
+
+        "JSON Loaded!\n\n" +
+
+        "Cards: " + BUNNY.cards.length
+
+    );
 
     console.log(
 
