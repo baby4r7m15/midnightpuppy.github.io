@@ -51,7 +51,7 @@ async function boot(){
     try{
 
         await loadJSON();
-
+        applyTheme();
         buildDesktop();
         scaleDesktop();
         startDiscord();
