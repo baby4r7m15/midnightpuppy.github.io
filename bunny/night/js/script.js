@@ -18,7 +18,7 @@ const CONFIG = {
 
         enabled: true,
 
-        userID: "YOUR_DISCORD_ID",
+        userID: "963296700812886066",
 
         refresh: 15000
 
