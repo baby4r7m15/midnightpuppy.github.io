@@ -22,10 +22,10 @@
     "glitchBottom": "rgba(177, 136, 255, 0.75)"
   },
   "head": {
-    "title": "midnightpuppy.exe"
+    "title": "midnightbunny.exe"
   },
   "header": {
-    "title": "midnightpuppy.exe",
+    "title": "midnightbunny.exe",
     "subtitle": "SIGNAL UNSTABLE • HEART IN SAFE MODE",
     "nav": [
       {
@@ -53,10 +53,10 @@
     "panelTitle": "USER PROFILE",
     "panelChip": "ONLINE",
     "avatar": {
-      "src": "/images/mindnightpuppy-avatar.png",
-      "alt": "midnightpuppy.exe avatar"
+      "src": "/bunny/night/images/mindnightbunny-avatar.png",
+      "alt": "midnightbunny.exe avatar"
     },
-    "name": "MidnightPuppy.exe",
+    "name": "midnightbunny.exe",
     "metaHtml": "Build: <b>midnight</b> • Level: <b>21</b> • Status: <b>softly breaking</b>",
     "bars": [
       {
@@ -186,6 +186,6 @@
   },
   "toast": {
     "header": "SYSTEM",
-    "line": "midnightpuppy.exe has entered the void • halo unstable • affection.exe corrupted"
+    "line": "bunny has been locked"
   }
 }
