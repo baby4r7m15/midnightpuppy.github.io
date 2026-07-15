@@ -1,0 +1,504 @@
+/* ==========================================================
+   Midnight Bunny
+   style.css
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        sans-serif;
+
+    background:#05050a;
+
+    color:#fff;
+
+}
+
+/* ==========================================================
+DESKTOP
+========================================================== */
+
+#desktop{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+}
+
+/* ==========================================================
+BACKGROUND
+========================================================== */
+
+#background{
+
+    position:absolute;
+
+    inset:0;
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:1;
+
+}
+
+/* ==========================================================
+OVERLAY
+========================================================== */
+
+#background::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(circle at center,
+        rgba(255,0,180,.10),
+        transparent 45%),
+
+        radial-gradient(circle at top right,
+        rgba(0,220,255,.12),
+        transparent 35%),
+
+        rgba(0,0,0,.28);
+
+}
+
+/* ==========================================================
+AVATAR
+========================================================== */
+
+#avatar{
+
+    position:absolute;
+
+    object-fit:contain;
+
+    pointer-events:none;
+
+    z-index:10;
+
+    filter:
+
+        drop-shadow(0 0 25px #ff33cc)
+
+        drop-shadow(0 0 60px #00e5ff);
+
+}
+
+/* ==========================================================
+CARD CONTAINER
+========================================================== */
+
+#cards{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:20;
+
+}
+
+/* ==========================================================
+CARDS
+========================================================== */
+
+.card{
+
+    position:absolute;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    background:
+
+        rgba(10,10,22,.60);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border-radius:18px;
+
+    border:2px solid #ff44cc;
+
+    box-shadow:
+
+        0 0 10px rgba(255,0,200,.45),
+
+        0 0 35px rgba(0,220,255,.18);
+
+    transition:
+
+        transform .2s,
+
+        box-shadow .2s,
+
+        border-color .2s;
+
+}
+
+/* ==========================================================
+CARD HOVER
+========================================================== */
+
+.card:hover{
+
+    transform:
+
+        scale(1.02);
+
+    box-shadow:
+
+        0 0 18px #ff44cc,
+
+        0 0 50px #00e5ff;
+
+}
+
+/* ==========================================================
+HEADER
+========================================================== */
+
+.card-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(255,70,200,.22),
+
+            rgba(0,220,255,.15)
+
+        );
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
+
+}
+
+/* ==========================================================
+ICON
+========================================================== */
+
+.card-icon{
+
+    font-size:22px;
+
+    color:#00e5ff;
+
+    text-shadow:
+
+        0 0 8px #00e5ff,
+
+        0 0 16px #00e5ff;
+
+}
+
+/* ==========================================================
+TITLE
+========================================================== */
+
+.card-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    color:#fff;
+
+    text-shadow:
+
+        0 0 10px rgba(255,255,255,.25);
+
+}
+
+.card-subtitle{
+
+    font-size:11px;
+
+    opacity:.7;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+/* ==========================================================
+CONTENT
+========================================================== */
+
+.card-content{
+
+    padding:18px;
+
+    flex:1;
+
+    overflow:auto;
+
+    font-size:14px;
+
+    line-height:1.65;
+
+}
+
+/* ==========================================================
+TABLE
+========================================================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+td{
+
+    padding:7px 0;
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.06);
+
+}
+
+td:first-child{
+
+    color:#00e5ff;
+
+    font-weight:700;
+
+    width:42%;
+
+    text-transform:uppercase;
+
+    font-size:12px;
+
+}
+
+td:last-child{
+
+    color:#fff;
+
+}
+
+/* ==========================================================
+LISTS
+========================================================== */
+
+ul{
+
+    list-style:none;
+
+}
+
+li{
+
+    margin-bottom:10px;
+
+    position:relative;
+
+    padding-left:16px;
+
+}
+
+li::before{
+
+    content:"✦";
+
+    position:absolute;
+
+    left:0;
+
+    color:#ff44cc;
+
+}
+
+/* ==========================================================
+TERMINAL
+========================================================== */
+
+.terminal{
+
+    font-family:monospace;
+
+    color:#00ff95;
+
+}
+
+.terminal div{
+
+    margin-bottom:6px;
+
+}
+
+.terminal div::before{
+
+    content:"> ";
+
+    color:#ff44cc;
+
+}
+
+/* ==========================================================
+STAT BARS
+========================================================== */
+
+.stat{
+
+    margin-bottom:16px;
+
+}
+
+.stat-label{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:6px;
+
+}
+
+.stat-bar{
+
+    height:8px;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+}
+
+.stat-fill{
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            #ff44cc,
+
+            #00e5ff
+
+        );
+
+    box-shadow:
+
+        0 0 12px #00e5ff;
+
+}
+
+/* ==========================================================
+SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ff44cc;
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/* ==========================================================
+THEMES
+========================================================== */
+
+.theme-pink{
+
+    border-color:#ff44cc;
+
+}
+
+.theme-cyan{
+
+    border-color:#00e5ff;
+
+}
+
+.theme-purple{
+
+    border-color:#aa66ff;
+
+}
+
+.theme-green{
+
+    border-color:#44ff99;
+
+}
+
+.theme-red{
+
+    border-color:#ff5555;
+
+}
+
+.theme-white{
+
+    border-color:#ffffff;
+
+}
