@@ -53,7 +53,7 @@
     "panelTitle": "USER PROFILE",
     "panelChip": "ONLINE",
     "avatar": {
-      "src": "/bunny/night/images/mindnightbunny-avatar.png",
+      "src": "/images/mindnightbunny-avatar.png",
       "alt": "midnightbunny.exe avatar"
     },
     "name": "midnightbunny.exe",
@@ -96,19 +96,13 @@
   },
   "statsPanel": {
     "panelTitle": "Stats",
-    "panelChip": "3",
+    "panelChip": "status",
     "cards": [
       {
         "name": "sleep.exe",
         "level": "denied",
         "percent": 9,
         "subtext": "3:17am / still awake"
-      },
-{
-        "name": "depression.xml",
-        "level": "active",
-        "percent": 98,
-        "subtext": "alone and broken"
       }
     ]
   },
