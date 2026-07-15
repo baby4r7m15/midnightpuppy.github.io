@@ -99,7 +99,82 @@ async function loadJSON(){
     );
 
 }
+/*
 /* ==========================================================
+APPLY THEME
+========================================================== */
+
+function applyTheme(){
+
+    const theme = BUNNY.theme;
+
+    const root = document.documentElement;
+
+    root.style.setProperty(
+
+        "--primary",
+
+        theme.primary
+
+    );
+
+    root.style.setProperty(
+
+        "--secondary",
+
+        theme.secondary
+
+    );
+
+    root.style.setProperty(
+
+        "--accent",
+
+        theme.accent
+
+    );
+
+    root.style.setProperty(
+
+        "--background",
+
+        theme.background
+
+    );
+
+    root.style.setProperty(
+
+        "--glass",
+
+        theme.glass
+
+    );
+
+    root.style.setProperty(
+
+        "--border",
+
+        theme.border
+
+    );
+
+    root.style.setProperty(
+
+        "--text",
+
+        theme.text
+
+    );
+
+    root.style.setProperty(
+
+        "--muted",
+
+        theme.muted
+
+    );
+
+} ==========================================================
 BUILD DESKTOP
 ========================================================== */
 
