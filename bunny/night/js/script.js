@@ -6,9 +6,9 @@ CONFIG
 
 const CONFIG = {
 
-    json: "midnightbunny.json"
+    json: "/bunny/night/data/midnightbunny.json"
 
-};
+};]
 
 let BUNNY = null;
 
