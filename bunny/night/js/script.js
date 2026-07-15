@@ -508,10 +508,10 @@ function renderMusic(container, card){
 
         </div>
 
-        <div class="music-progress">
+        <div class="progress">
 
             <div
-                class="music-progress-fill"
+                class="progress-fill"
                 style="width:${card.progress}%">
             </div>
 
