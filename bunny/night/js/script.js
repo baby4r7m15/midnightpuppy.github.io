@@ -1,10 +1,22 @@
 "use strict";
 
-const JSON_FILE="data/midnightbunny.json";
+/* ==========================================================
+CONFIG
+========================================================== */
 
-let DATA=null;
+const CONFIG = {
 
-document.addEventListener(
+    json: "midnightbunny.json"
+
+};
+
+let BUNNY = null;
+
+/* ==========================================================
+BOOT
+========================================================== */
+
+window.addEventListener(
 
     "DOMContentLoaded",
 
@@ -14,9 +26,11 @@ document.addEventListener(
 
 async function init(){
 
-    const response=await fetch(JSON_FILE);
+    const response = await fetch(CONFIG.json);
 
-    DATA=await response.json();
+    BUNNY = await response.json();
+
+    applyTheme();
 
     buildBackground();
 
@@ -25,95 +39,273 @@ async function init(){
     buildCards();
 
 }
-function buildBackground(){
 
-    const bg=document.getElementById(
+/* ==========================================================
+THEME
+========================================================== */
 
-        "background"
+function applyTheme(){
+
+    const root = document.documentElement;
+
+    Object.entries(BUNNY.theme).forEach(
+
+        ([key,value])=>{
+
+            root.style.setProperty(
+
+                "--"+key,
+
+                value
+
+            );
+
+        }
 
     );
 
-    bg.src=DATA.background;
+}
+
+/* ==========================================================
+BACKGROUND
+========================================================== */
+
+function buildBackground(){
+
+    document.getElementById(
+
+        "background"
+
+    ).style.backgroundImage =
+
+        `url("${BUNNY.background.image}")`;
 
 }
+
+/* ==========================================================
+AVATAR
+========================================================== */
+
 function buildAvatar(){
 
-    const avatar=document.getElementById(
+    const avatar = document.getElementById(
 
         "avatar"
 
     );
 
-    avatar.src=DATA.avatar.image;
+    avatar.src =
 
-    avatar.style.left=
+        BUNNY.avatar.image;
 
-        DATA.avatar.x+"px";
+    avatar.style.left =
 
-    avatar.style.top=
+        BUNNY.avatar.x + "px";
 
-        DATA.avatar.y+"px";
+    avatar.style.top =
 
-    avatar.style.width=
+        BUNNY.avatar.y + "px";
 
-        DATA.avatar.width+"px";
+    avatar.style.width =
+
+        BUNNY.avatar.width + "px";
 
 }
+
+/* ==========================================================
+CARDS
+========================================================== */
+
 function buildCards(){
 
-    const cards=document.getElementById(
+    const container = document.getElementById(
 
         "cards"
 
     );
 
-    cards.innerHTML="";
+    container.innerHTML = "";
 
-    DATA.cards.forEach(card=>{
+    BUNNY.cards.forEach(
 
-        cards.appendChild(
+        card=>{
 
-            createCard(card)
+            container.appendChild(
 
-        );
+                createCard(card)
 
-    });
+            );
+
+        }
+
+    );
 
 }
+
+/* ==========================================================
+CREATE CARD
+========================================================== */
+
 function createCard(card){
 
-    const div=document.createElement(
+    const box = document.createElement(
 
         "section"
 
     );
 
-    div.className="card";
+    box.className = "card";
 
-    div.style.left=
+    box.style.left = card.x + "px";
 
-        card.x+"px";
+    box.style.top = card.y + "px";
 
-    div.style.top=
+    box.style.width = card.width + "px";
 
-        card.y+"px";
+    box.style.height = card.height + "px";
 
-    div.style.width=
-
-        card.width+"px";
-
-    div.style.height=
-
-        card.height+"px";
-
-    div.style.transform=
+    box.style.transform =
 
         `rotate(${card.rotation}deg)`;
 
-    div.innerHTML=
+    box.innerHTML = `
 
-    `<h2>${card.title}</h2>`;
+        <div class="card-header">
 
-    return div;
+            <div class="card-icon">
 
-      }
+                ${card.icon || ""}
+
+            </div>
+
+            <div>
+
+                <div class="card-title">
+
+                    ${card.title}
+
+                </div>
+
+                <div class="card-subtitle">
+
+                    ${card.subtitle || ""}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-content">
+
+            ${renderContent(card.content)}
+
+        </div>
+
+    `;
+
+    return box;
+
+}
+
+/* ==========================================================
+CONTENT
+========================================================== */
+
+function renderContent(content){
+
+    switch(content.type){
+
+        case "text":
+
+            return content.lines
+
+                .map(
+
+                    line=>`<p>${line}</p>`
+
+                )
+
+                .join("");
+
+        case "list":
+
+            return "<ul>" +
+
+                content.items
+
+                .map(
+
+                    item=>`<li>${item}</li>`
+
+                )
+
+                .join("") +
+
+                "</ul>";
+
+        case "table":
+
+            return "<table>" +
+
+                content.rows
+
+                .map(
+
+                    row=>
+
+                    `<tr>
+
+                        <td>${row[0]}</td>
+
+                        <td>${row[1]}</td>
+
+                    </tr>`
+
+                )
+
+                .join("") +
+
+                "</table>";
+
+        case "terminal":
+
+            return content.lines
+
+                .map(
+
+                    line=>
+
+                    `<div>> ${line}</div>`
+
+                )
+
+                .join("");
+
+        case "stats":
+
+            return content.items
+
+                .map(
+
+                    stat=>
+
+                    `<p>
+
+                        <strong>${stat.label}</strong>
+
+                        ${stat.value}%
+
+                    </p>`
+
+                )
+
+                .join("");
+
+        default:
+
+            return "";
+
+    }
+
+}
