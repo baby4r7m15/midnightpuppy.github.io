@@ -161,9 +161,20 @@
       ],
       "copyright": "midnightbunny.exe — built with 🥕 and undefined behavior",
       "pos": {
-        "desktop": { "left": 0, "top": 50, "width": 100, "rotate": 0, "z": 7 },
-        "mobile":  { "left": 0,  "top": 50, "width": 100, "rotate": 0, "z": 7 }
-      }
+        "desktop": {
+          "left": 29,
+          "top": 90,
+          "width": 42,
+          "rotate": 0,
+          "z": 7
+        },
+        "mobile": {
+          "left": 8,
+          "top": 91,
+          "width": 84,
+          "rotate": 0,
+          "z": 7
+        }
     }
   ]
 }
