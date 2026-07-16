@@ -1,6 +1,7 @@
 /* ==========================================================
-   Bunny Hop Rev 1
+   Bunny Hop Rev 2
    style.css
+   Generic renderer (JSON controls the theme)
 ========================================================== */
 
 /* ==========================================================
@@ -24,23 +25,25 @@ body{
 }
 
 /* ==========================================================
-THEME VARIABLES
+DEFAULT VARIABLES
 (JS overwrites these from JSON)
 ========================================================== */
 
 :root{
 
-    --primary:#ff4dc4;
-    --secondary:#47dfff;
-    --accent:#9c6cff;
+    --primary:#ffffff;
+    --secondary:#ffffff;
+    --accent:#ffffff;
 
-    --background:#08080d;
+    --background:#000000;
 
     --glass:rgba(255,255,255,.08);
-    --border:rgba(255,255,255,.14);
+    --border:rgba(255,255,255,.10);
 
     --text:#ffffff;
-    --muted:rgba(255,255,255,.70);
+    --muted:rgba(255,255,255,.65);
+
+    --font:Inter,Segoe UI,sans-serif;
 
 }
 
@@ -56,11 +59,7 @@ body{
 
     color:var(--text);
 
-    font-family:
-
-        Inter,
-        Segoe UI,
-        sans-serif;
+    font-family:var(--font);
 
 }
 
@@ -90,10 +89,8 @@ BACKGROUND
     inset:0;
 
     background-position:center;
-
-    background-size:cover;
-
     background-repeat:no-repeat;
+    background-size:cover;
 
     z-index:0;
 
@@ -107,18 +104,17 @@ AVATAR
 
     position:absolute;
 
-    z-index:5;
-
     object-fit:contain;
 
     user-select:none;
-
     pointer-events:none;
+
+    z-index:5;
 
 }
 
 /* ==========================================================
-CARDS
+CARDS CONTAINER
 ========================================================== */
 
 #cards{
@@ -147,18 +143,20 @@ CARD
 
     background:var(--glass);
 
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    border:
-
-        1px solid var(--border);
+    border:1px solid var(--border);
 
     border-radius:18px;
 
-    box-shadow:
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
-        0 0 30px rgba(0,0,0,.35);
+    color:var(--text);
+
+    transition:
+
+        transform .25s ease,
+        border-color .25s ease,
+        opacity .25s ease;
 
 }
 
@@ -176,9 +174,7 @@ HEADER
 
     padding:16px;
 
-    border-bottom:
-
-        1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid var(--border);
 
 }
 
@@ -188,7 +184,9 @@ ICON
 
 .card-icon{
 
-    font-size:22px;
+    font-size:1.4rem;
+
+    color:var(--secondary);
 
 }
 
@@ -198,19 +196,19 @@ TITLE
 
 .card-title{
 
-    font-size:18px;
+    font-size:1.1rem;
 
     font-weight:700;
 
-    letter-spacing:1px;
+    color:var(--text);
 
 }
 
 .card-subtitle{
 
-    margin-top:3px;
+    margin-top:2px;
 
-    font-size:12px;
+    font-size:.75rem;
 
     color:var(--muted);
 
@@ -224,14 +222,28 @@ CONTENT
 
     flex:1;
 
+    overflow:auto;
+
     padding:18px;
 
-    overflow:auto;
+    font-size:1rem;
+
+    line-height:1.6;
 
 }
 
 /* ==========================================================
-TABLES
+TEXT
+========================================================== */
+
+.card-content p{
+
+    margin-bottom:12px;
+
+}
+
+/* ==========================================================
+TABLE
 ========================================================== */
 
 table{
@@ -246,14 +258,20 @@ td{
 
     padding:8px 0;
 
-    border-bottom:
+    border-bottom:1px solid var(--border);
 
-        1px solid rgba(255,255,255,.08);
+}
+
+td:first-child{
+
+    font-weight:600;
+
+    color:var(--secondary);
 
 }
 
 /* ==========================================================
-LISTS
+LIST
 ========================================================== */
 
 ul{
@@ -265,6 +283,202 @@ ul{
 li{
 
     margin-bottom:10px;
+
+}
+
+/* ==========================================================
+TERMINAL
+========================================================== */
+
+.terminal-line{
+
+    margin-bottom:6px;
+
+    font-family:monospace;
+
+    color:var(--secondary);
+
+}
+
+/* ==========================================================
+STATS
+========================================================== */
+
+.stat{
+
+    margin-bottom:16px;
+
+}
+
+.stat-label{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:6px;
+
+}
+
+.stat-bar{
+
+    width:100%;
+
+    height:8px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:var(--border);
+
+}
+
+.stat-fill{
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+}
+
+/* ==========================================================
+CHECKLIST
+========================================================== */
+
+.check{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:10px;
+
+}
+
+.done{
+
+    opacity:.5;
+
+}
+
+/* ==========================================================
+MUSIC
+========================================================== */
+
+.music-track{
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+}
+
+.music-artist{
+
+    color:var(--muted);
+
+    margin-top:4px;
+
+}
+
+.music-progress{
+
+    width:100%;
+
+    height:8px;
+
+    margin-top:16px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:var(--border);
+
+}
+
+.music-progress-fill{
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+}
+
+/* ==========================================================
+DISCORD
+========================================================== */
+
+.discord-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:12px;
+
+}
+
+.status-dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+}
+
+.discord-activity{
+
+    color:var(--muted);
+
+    line-height:1.5;
+
+}
+
+/* ==========================================================
+SCROLLBAR
+========================================================== */
+
+.card-content::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.card-content::-webkit-scrollbar-thumb{
+
+    background:var(--border);
+
+    border-radius:999px;
+
+}
+
+.card-content::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/* ==========================================================
+HOVER
+========================================================== */
+
+.card:hover{
+
+    transform:translateY(-4px);
 
 }
 
@@ -302,17 +516,15 @@ MOBILE
 
         display:block;
 
-        width:min(90vw,420px) !important;
-
-        height:auto !important;
-
         left:auto !important;
 
         top:auto !important;
 
-        margin:
+        width:min(90vw,420px) !important;
 
-            30px auto;
+        height:auto !important;
+
+        margin:24px auto;
 
     }
 
