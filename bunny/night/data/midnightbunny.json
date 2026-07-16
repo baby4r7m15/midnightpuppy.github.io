@@ -21,13 +21,13 @@
 
   "background": {
 
-    "image": "images/background.png"
+    "image": "/bunny/night/images/midnightbunny-avatar.png"
 
   },
 
   "avatar": {
 
-    "image": "images/avatar.png",
+    "image": "/bunny/night/images/midnightbunny-avatar.png",
 
     "x": 520,
 
@@ -55,9 +55,9 @@
 
       "y": 80,
 
-      "width": 340,
+      "width": 40,
 
-      "height": 320,
+      "height": 20,
 
       "rotation": -2,
 
@@ -93,11 +93,11 @@
 
       "x":70,
 
-      "y":440,
+      "y":100,
 
-      "width":340,
+      "width":40,
 
-      "height":250,
+      "height":50,
 
       "rotation":1,
 
