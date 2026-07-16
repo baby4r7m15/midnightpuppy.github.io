@@ -27,7 +27,7 @@
 
   "avatar": {
 
-    "image": "/bunny/night/images/midnightbunny-avatar.png",
+    "image": "/bunny/night/images/avatar.png",
 
     "x": 520,
 
@@ -55,9 +55,9 @@
 
       "y": 80,
 
-      "width": 100,
+      "width": 200,
 
-      "height": 150,
+      "height": 100,
 
       "rotation": -2,
 
@@ -95,9 +95,9 @@
 
       "y":100,
 
-      "width":100,
+      "width":200,
 
-      "height":150,
+      "height":100,
 
       "rotation":1,
 
