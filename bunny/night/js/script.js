@@ -1,7 +1,7 @@
 /* Midnight Bunny — loads midnightbunny.json and builds the page from it.
    Edit midnightbunny.json to change colors, text, or cards — no HTML editing needed. */
 
-const DATA_URL = "midnightbunny.json";
+const DATA_URL = "/bunny/night/data/midnightbunny.json";
 
 init();
 
