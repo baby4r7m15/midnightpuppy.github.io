@@ -1,20 +1,33 @@
 /* Midnight Bunny — loads midnightbunny.json and builds the page from it.
-   Edit midnightbunny.json to change colors, text, or cards — no HTML editing needed. */
+   The whole page is one fixed-size "poster" (#canvas) that gets uniformly
+   scaled with CSS to exactly fit the viewport — that's what guarantees no
+   scrolling on any screen. Edit midnightbunny.json to change colors, text,
+   the background photo, or where each card sits — no HTML editing needed. */
 
 const DATA_URL = "/bunny/night/data/midnightbunny.json";
+
+let DATA = null;
+let currentLayout = null; // "desktop" | "mobile"
+let canvasEl = null;
+let resizeTimer = null;
 
 init();
 
 async function init() {
-  const stage = document.getElementById("stage");
+  const viewport = document.getElementById("viewport");
   try {
     const res = await fetch(DATA_URL, { cache: "no-store" });
     if (!res.ok) throw new Error(`Could not load ${DATA_URL} (${res.status})`);
-    const data = await res.json();
-    render(data, stage);
+    DATA = await res.json();
+    applyTheme(DATA.theme);
+    document.title = DATA.site?.title || document.title;
+    await resolveBackground(DATA.character);
+    buildPoster(viewport);
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
   } catch (err) {
-    stage.innerHTML = `
-      <div class="loading" style="position:static;min-height:60vh;flex-direction:column;gap:10px;">
+    viewport.innerHTML = `
+      <div class="loading" style="flex-direction:column;gap:10px;">
         <div>⚠ profile.exe failed to load</div>
         <div style="font-family:var(--f-mono);font-size:0.8rem;color:var(--text-dim);">${escapeHtml(err.message)}</div>
       </div>`;
@@ -22,28 +35,7 @@ async function init() {
   }
 }
 
-function render(data, stage) {
-  applyTheme(data.theme);
-  document.title = data.site?.title || document.title;
-
-  stage.innerHTML = "";
-
-  const cardsById = {};
-  (data.cards || []).forEach(c => (cardsById[c.id] = c));
-
-  // 1. hero always leads
-  const hero = data.cards.find(c => c.variant === "glitch-banner");
-  if (hero) stage.appendChild(buildCard(hero));
-
-  // 2. portrait + floating badges sit right after the hero
-  stage.appendChild(buildPortrait(data.character, data.badges));
-
-  // 3. remaining cards, in the order authored in the JSON
-  data.cards
-    .filter(c => c.variant !== "glitch-banner")
-    .forEach(c => stage.appendChild(buildCard(c)));
-}
-
+/* ---------- theme ---------- */
 function applyTheme(theme) {
   if (!theme) return;
   const root = document.documentElement.style;
@@ -62,49 +54,103 @@ function applyTheme(theme) {
   if (theme.fonts?.pixel) root.setProperty("--f-pixel", theme.fonts.pixel);
 }
 
-function buildPortrait(character, badges) {
-  const wrap = document.createElement("div");
-  wrap.className = "portrait";
-
-  const frame = document.createElement("div");
-  frame.className = "portrait__frame";
-
-  const img = document.createElement("img");
-  img.src = character?.portrait || "";
-  img.alt = character?.portraitAlt || character?.name || "portrait";
-  img.loading = "eager";
-  img.onerror = () => {
-    frame.innerHTML = `<div class="portrait__fallback">${character?.fallbackEmoji || "🐰"}</div>`;
-  };
-  frame.appendChild(img);
-  wrap.appendChild(frame);
-
-  const caption = document.createElement("div");
-  caption.className = "portrait__caption";
-  caption.textContent = character?.name || "";
-  wrap.appendChild(caption);
-
-  if (badges?.length) {
-    const row = document.createElement("div");
-    row.className = "badges";
-    badges.forEach(b => {
-      const span = document.createElement("span");
-      span.className = "badge";
-      span.textContent = b.text;
-      span.style.color = `var(--${accentVar(b.accent)})`;
-      row.appendChild(span);
-    });
-    wrap.appendChild(row);
-  }
-
-  return wrap;
+/* Test-load the character photo; fall back to a generated look if missing
+   so the poster never ends up with a broken background. */
+function resolveBackground(character) {
+  return new Promise(resolve => {
+    const src = character?.portrait || "";
+    const img = new Image();
+    img.onload = () => {
+      document.documentElement.style.setProperty("--bg-url", `url("${src}")`);
+      resolve();
+    };
+    img.onerror = () => {
+      // no portrait yet — fall back to a neon gradient so layout still works
+      document.documentElement.style.setProperty(
+        "--bg-url",
+        "radial-gradient(circle at 30% 20%, #2a1a44, #050308 70%)"
+      );
+      resolve();
+    };
+    img.src = src;
+  });
 }
 
-function buildCard(c) {
+/* ---------- layout selection ---------- */
+function pickLayout() {
+  return window.innerWidth <= window.innerHeight ? "mobile" : "desktop";
+}
+
+function buildPoster(viewport) {
+  currentLayout = pickLayout();
+  viewport.innerHTML = "";
+
+  const dims = DATA.canvas?.[currentLayout] || { width: 1500, height: 950 };
+
+  canvasEl = document.createElement("div");
+  canvasEl.id = "canvas";
+  canvasEl.style.width = dims.width + "px";
+  canvasEl.style.height = dims.height + "px";
+  canvasEl.style.marginLeft = -(dims.width / 2) + "px";
+  canvasEl.style.marginTop = -(dims.height / 2) + "px";
+
+  const pulse = document.createElement("div");
+  pulse.className = "glitch-pulse";
+  canvasEl.appendChild(pulse);
+
+  (DATA.cards || []).forEach(c => canvasEl.appendChild(buildCard(c, currentLayout)));
+  (DATA.badges || []).forEach(b => canvasEl.appendChild(buildBadge(b, currentLayout)));
+
+  viewport.appendChild(canvasEl);
+  applyScale();
+}
+
+function applyScale() {
+  if (!canvasEl) return;
+  const dims = DATA.canvas?.[currentLayout] || { width: 1500, height: 950 };
+  const scale = Math.min(
+    window.innerWidth / dims.width,
+    window.innerHeight / dims.height
+  ) * 0.98;
+  canvasEl.style.setProperty("--scale", scale);
+}
+
+function onResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const newLayout = pickLayout();
+    if (newLayout !== currentLayout) {
+      buildPoster(document.getElementById("viewport")); // orientation actually flipped — rebuild with the other coordinate set
+    } else {
+      applyScale();
+    }
+  }, 120);
+}
+
+/* ---------- element builders ---------- */
+function positionEl(el, pos, extraWidth) {
+  el.style.position = "absolute";
+  el.style.left = pos.left + "%";
+  el.style.top = pos.top + "%";
+  if (extraWidth && pos.width != null) el.style.width = pos.width + "%";
+  el.style.setProperty("--rot", (pos.rotate || 0) + "deg");
+  if (pos.z != null) el.style.zIndex = pos.z;
+}
+
+function buildBadge(b, layout) {
+  const span = document.createElement("span");
+  span.className = "badge";
+  span.textContent = b.text;
+  span.dataset.accent = b.accent || "";
+  positionEl(span, b.pos[layout], false);
+  return span;
+}
+
+function buildCard(c, layout) {
   const card = document.createElement("article");
   card.className = `card card--${c.variant}`;
-  card.dataset.area = c.area;
   card.dataset.accent = c.accent || "";
+  positionEl(card, c.pos[layout], true);
 
   if (c.variant === "glitch-banner") {
     const h1 = document.createElement("h1");
@@ -146,7 +192,6 @@ function buildCard(c) {
       break;
 
     case "quote":
-      card.classList.add("card--quote");
       body.innerHTML = `<p class="quote__text">${escapeHtml(c.text)}</p>` +
         (c.signature ? `<p class="quote__sig">${escapeHtml(c.signature)}</p>` : "");
       break;
@@ -173,9 +218,6 @@ function buildCard(c) {
     }
 
     case "links":
-      card.classList.remove("card");
-      card.className = "card--links";
-      body.className = "";
       body.innerHTML = `
         <div class="links__row">
           ${(c.items || []).map(l => `<a class="links__item" href="${escapeAttr(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`).join("")}
@@ -195,14 +237,6 @@ function buildTitleBar(title) {
     <span class="dot dot--r"></span><span class="dot dot--y"></span><span class="dot dot--g"></span>
     <span class="card__bar-title">${escapeHtml(title)}</span>`;
   return bar;
-}
-
-function accentVar(name) {
-  const map = {
-    neonPink: "pink", neonCyan: "cyan", neonPurple: "purple",
-    neonGreen: "green", neonYellow: "yellow"
-  };
-  return map[name] || "text-main";
 }
 
 function escapeHtml(str = "") {
