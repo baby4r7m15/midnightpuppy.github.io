@@ -26,7 +26,7 @@
 
   "character": {
     "name": "Midnight Bunny",
-    "portrait": "assets/midnight-bunny.png",
+    "portrait": "/bunny/night/images/midnightbunny-avatar.png",
     "portraitAlt": "Pixel-glitch portrait of Midnight Bunny",
     "fallbackEmoji": "🐰"
   },
