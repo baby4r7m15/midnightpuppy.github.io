@@ -6,16 +6,16 @@
 
   "theme": {
     "colors": {
-      "void": "#0a0614",
-      "panel": "#150c26",
-      "panelEdge": "#2a1a44",
-      "neonPink": "#ff3fb4",
-      "neonCyan": "#3ff2ff",
-      "neonPurple": "#a95bff",
-      "neonGreen": "#3dffa0",
-      "neonYellow": "#ffe066",
-      "textMain": "#efe4ff",
-      "textDim": "#9a86c2"
+      "void": "#050308",
+      "panel": "#0f0818",
+      "panelEdge": "#3a2160",
+      "neonPink": "#ff2fc4",
+      "neonCyan": "#2ff2ff",
+      "neonPurple": "#b04bff",
+      "neonGreen": "#39ff9e",
+      "neonYellow": "#ffe66d",
+      "textMain": "#f5ecff",
+      "textDim": "#b6a3dd"
     },
     "fonts": {
       "display": "'VT323', monospace",
@@ -24,32 +24,43 @@
     }
   },
 
+  "canvas": {
+    "desktop": { "width": 1500, "height": 950 },
+    "mobile": { "width": 700, "height": 1400 }
+  },
+
   "character": {
     "name": "Midnight Bunny",
     "portrait": "/bunny/night/images/midnightbunny-avatar.png",
-    "portraitAlt": "Pixel-glitch portrait of Midnight Bunny",
+    "portraitAlt": "Midnight Bunny — glitch-pink hacker rabbit",
     "fallbackEmoji": "🐰"
   },
 
   "badges": [
-    { "text": "hop.exe running", "accent": "neonGreen" },
-    { "text": "sudo pet_bunny", "accent": "neonPink" },
-    { "text": "certified night owl", "accent": "neonCyan" },
-    { "text": "404: sleep not found", "accent": "neonPurple" }
+    { "text": "hop.exe running", "accent": "neonGreen",
+      "pos": { "desktop": { "left": 43, "top": 1, "rotate": -7 }, "mobile": { "left": 62, "top": 3, "rotate": -8 } } },
+    { "text": "sudo pet_bunny", "accent": "neonPink",
+      "pos": { "desktop": { "left": 1, "top": 46, "rotate": 6 }, "mobile": { "left": 3, "top": 35, "rotate": 6 } } },
+    { "text": "404: sleep not found", "accent": "neonPurple",
+      "pos": { "desktop": { "left": 90, "top": 34, "rotate": -6 }, "mobile": { "left": 66, "top": 47, "rotate": -6 } } },
+    { "text": "certified night owl", "accent": "neonCyan",
+      "pos": { "desktop": { "left": 58, "top": 88, "rotate": 5 }, "mobile": { "left": 10, "top": 61, "rotate": 5 } } }
   ],
 
   "cards": [
     {
       "id": "hero",
-      "area": "hero",
       "variant": "glitch-banner",
       "accent": "neonPink",
       "title": "SYSTEM.PROFILE :: Midnight_Bunny.exe",
-      "subtitle": "identity loaded — 100% chaos, 0% sleep"
+      "subtitle": "identity loaded — 100% chaos, 0% sleep",
+      "pos": {
+        "desktop": { "left": 21, "top": 2, "width": 58, "rotate": -1.5, "z": 5 },
+        "mobile":  { "left": 4,  "top": 1, "width": 92, "rotate": -1,   "z": 5 }
+      }
     },
     {
       "id": "whoami",
-      "area": "tl",
       "variant": "terminal",
       "accent": "neonCyan",
       "titleBar": "bunny@warren:~",
@@ -60,11 +71,14 @@
         { "prompt": ">", "text": "/burrow/underground" },
         { "prompt": "$", "text": "status --check" },
         { "prompt": ">", "text": "probably debugging at 3am" }
-      ]
+      ],
+      "pos": {
+        "desktop": { "left": 1, "top": 17, "width": 27, "rotate": -3, "z": 4 },
+        "mobile":  { "left": 3, "top": 12, "width": 62, "rotate": -2, "z": 4 }
+      }
     },
     {
       "id": "neofetch",
-      "area": "tr",
       "variant": "stat-block",
       "accent": "neonPurple",
       "titleBar": "neofetch",
@@ -75,30 +89,39 @@
         { "key": "Uptime", "value": "since dusk" },
         { "key": "Shell", "value": "zsh (ears enabled)" },
         { "key": "CPU", "value": "Carrot-core i-nap" },
-        { "key": "Memory", "value": "2/8 GB, rest is daydreams" }
-      ]
+        { "key": "Memory", "value": "2/8 GB, rest daydreams" }
+      ],
+      "pos": {
+        "desktop": { "left": 70, "top": 13, "width": 29, "rotate": 2,  "z": 4 },
+        "mobile":  { "left": 32, "top": 25, "width": 65, "rotate": 2,  "z": 3 }
+      }
     },
     {
       "id": "quote",
-      "area": "ml",
       "variant": "quote",
       "accent": "neonGreen",
       "text": "not lost. exploring the burrow at 3am.",
-      "signature": "// git blame: midnight_bunny"
+      "signature": "// git blame: midnight_bunny",
+      "pos": {
+        "desktop": { "left": 1,  "top": 57, "width": 24, "rotate": 3,  "z": 3 },
+        "mobile":  { "left": 4,  "top": 42, "width": 58, "rotate": -2, "z": 3 }
+      }
     },
     {
       "id": "error",
-      "area": "mr",
       "variant": "error-window",
       "accent": "neonPink",
       "titleBar": "SLEEP.EXE",
       "message": "SLEEP.EXE has stopped responding.",
       "detail": "REASON = \"one more level\"",
-      "buttons": ["Snooze", "Ignore Forever"]
+      "buttons": ["Snooze", "Ignore Forever"],
+      "pos": {
+        "desktop": { "left": 72, "top": 47, "width": 27, "rotate": -2, "z": 6 },
+        "mobile":  { "left": 30, "top": 52, "width": 67, "rotate": 2,  "z": 6 }
+      }
     },
     {
       "id": "likes",
-      "area": "bl",
       "variant": "list",
       "accent": "neonYellow",
       "titleBar": "likes.md",
@@ -108,11 +131,14 @@
         "soft pastel neon everything",
         "carrot-shaped mechanical keycaps",
         "naps in the one sunbeam that exists"
-      ]
+      ],
+      "pos": {
+        "desktop": { "left": 1,  "top": 75, "width": 26, "rotate": -2,  "z": 3 },
+        "mobile":  { "left": 3,  "top": 66, "width": 62, "rotate": -1.5,"z": 3 }
+      }
     },
     {
       "id": "currently",
-      "area": "br",
       "variant": "list",
       "accent": "neonCyan",
       "titleBar": "currently.log",
@@ -121,11 +147,14 @@
         "playing :: debug_life.exe",
         "reading :: RFC 9999 (fictional)",
         "mood :: chaotic soft"
-      ]
+      ],
+      "pos": {
+        "desktop": { "left": 71, "top": 73, "width": 27, "rotate": 2.5, "z": 3 },
+        "mobile":  { "left": 33, "top": 78, "width": 64, "rotate": 2,   "z": 3 }
+      }
     },
     {
       "id": "links",
-      "area": "foot",
       "variant": "links",
       "accent": "neonPurple",
       "items": [
@@ -134,7 +163,11 @@
         { "label": "discord", "url": "#" },
         { "label": "carrd", "url": "#" }
       ],
-      "copyright": "midnight_bunny.exe — built with 🥕 and undefined behavior"
+      "copyright": "midnight_bunny.exe — built with 🥕 and undefined behavior",
+      "pos": {
+        "desktop": { "left": 29, "top": 90, "width": 42, "rotate": 0, "z": 7 },
+        "mobile":  { "left": 8,  "top": 91, "width": 84, "rotate": 0, "z": 7 }
+      }
     }
   ]
 }
