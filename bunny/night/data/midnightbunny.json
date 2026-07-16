@@ -158,12 +158,8 @@
       "variant": "links",
       "accent": "neonPurple",
       "items": [
-        { "label": "github", "url": "#" },
-        { "label": "twitter", "url": "#" },
-        { "label": "discord", "url": "#" },
-        { "label": "carrd", "url": "#" }
       ],
-      "copyright": "midnight_bunny.exe — built with 🥕 and undefined behavior",
+      "copyright": "midnightbunny.exe — built with 🥕 and undefined behavior",
       "pos": {
         "desktop": { "left": 29, "top": 90, "width": 42, "rotate": 0, "z": 7 },
         "mobile":  { "left": 8,  "top": 91, "width": 84, "rotate": 0, "z": 7 }
