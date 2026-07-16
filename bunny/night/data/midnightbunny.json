@@ -83,7 +83,7 @@
       "accent": "neonPurple",
       "titleBar": "neofetch",
       "stats": [
-        { "key": "OS", "value": "WarrenOS 3.a.m" },
+        { "key": "OS", "value": "BunnyOS 3.a.m" },
         { "key": "Host", "value": "Moonlit Burrow" },
         { "key": "Kernel", "value": "6.9-hop" },
         { "key": "Uptime", "value": "since dusk" },
@@ -143,7 +143,7 @@
       "accent": "neonCyan",
       "titleBar": "currently.log",
       "items": [
-        "listening :: lo-fi hop beats",
+        "listening :: IronMouse- Devil",
         "playing :: debug_life.exe",
         "reading :: RFC 9999 (fictional)",
         "mood :: chaotic soft"
