@@ -1,0 +1,140 @@
+{
+  "site": {
+    "title": "Midnight Bunny // profile.exe",
+    "loadingText": "booting midnight_bunny.exe ..."
+  },
+
+  "theme": {
+    "colors": {
+      "void": "#0a0614",
+      "panel": "#150c26",
+      "panelEdge": "#2a1a44",
+      "neonPink": "#ff3fb4",
+      "neonCyan": "#3ff2ff",
+      "neonPurple": "#a95bff",
+      "neonGreen": "#3dffa0",
+      "neonYellow": "#ffe066",
+      "textMain": "#efe4ff",
+      "textDim": "#9a86c2"
+    },
+    "fonts": {
+      "display": "'VT323', monospace",
+      "mono": "'JetBrains Mono', monospace",
+      "pixel": "'Press Start 2P', monospace"
+    }
+  },
+
+  "character": {
+    "name": "Midnight Bunny",
+    "portrait": "assets/midnight-bunny.png",
+    "portraitAlt": "Pixel-glitch portrait of Midnight Bunny",
+    "fallbackEmoji": "🐰"
+  },
+
+  "badges": [
+    { "text": "hop.exe running", "accent": "neonGreen" },
+    { "text": "sudo pet_bunny", "accent": "neonPink" },
+    { "text": "certified night owl", "accent": "neonCyan" },
+    { "text": "404: sleep not found", "accent": "neonPurple" }
+  ],
+
+  "cards": [
+    {
+      "id": "hero",
+      "area": "hero",
+      "variant": "glitch-banner",
+      "accent": "neonPink",
+      "title": "SYSTEM.PROFILE :: Midnight_Bunny.exe",
+      "subtitle": "identity loaded — 100% chaos, 0% sleep"
+    },
+    {
+      "id": "whoami",
+      "area": "tl",
+      "variant": "terminal",
+      "accent": "neonCyan",
+      "titleBar": "bunny@warren:~",
+      "lines": [
+        { "prompt": "$", "text": "whoami" },
+        { "prompt": ">", "text": "midnight_bunny" },
+        { "prompt": "$", "text": "pwd" },
+        { "prompt": ">", "text": "/burrow/underground" },
+        { "prompt": "$", "text": "status --check" },
+        { "prompt": ">", "text": "probably debugging at 3am" }
+      ]
+    },
+    {
+      "id": "neofetch",
+      "area": "tr",
+      "variant": "stat-block",
+      "accent": "neonPurple",
+      "titleBar": "neofetch",
+      "stats": [
+        { "key": "OS", "value": "WarrenOS 3.a.m" },
+        { "key": "Host", "value": "Moonlit Burrow" },
+        { "key": "Kernel", "value": "6.9-hop" },
+        { "key": "Uptime", "value": "since dusk" },
+        { "key": "Shell", "value": "zsh (ears enabled)" },
+        { "key": "CPU", "value": "Carrot-core i-nap" },
+        { "key": "Memory", "value": "2/8 GB, rest is daydreams" }
+      ]
+    },
+    {
+      "id": "quote",
+      "area": "ml",
+      "variant": "quote",
+      "accent": "neonGreen",
+      "text": "not lost. exploring the burrow at 3am.",
+      "signature": "// git blame: midnight_bunny"
+    },
+    {
+      "id": "error",
+      "area": "mr",
+      "variant": "error-window",
+      "accent": "neonPink",
+      "titleBar": "SLEEP.EXE",
+      "message": "SLEEP.EXE has stopped responding.",
+      "detail": "REASON = \"one more level\"",
+      "buttons": ["Snooze", "Ignore Forever"]
+    },
+    {
+      "id": "likes",
+      "area": "bl",
+      "variant": "list",
+      "accent": "neonYellow",
+      "titleBar": "likes.md",
+      "items": [
+        "moonlit walks & warm energy drinks",
+        "rewriting code at 2am for no reason",
+        "soft pastel neon everything",
+        "carrot-shaped mechanical keycaps",
+        "naps in the one sunbeam that exists"
+      ]
+    },
+    {
+      "id": "currently",
+      "area": "br",
+      "variant": "list",
+      "accent": "neonCyan",
+      "titleBar": "currently.log",
+      "items": [
+        "listening :: lo-fi hop beats",
+        "playing :: debug_life.exe",
+        "reading :: RFC 9999 (fictional)",
+        "mood :: chaotic soft"
+      ]
+    },
+    {
+      "id": "links",
+      "area": "foot",
+      "variant": "links",
+      "accent": "neonPurple",
+      "items": [
+        { "label": "github", "url": "#" },
+        { "label": "twitter", "url": "#" },
+        { "label": "discord", "url": "#" },
+        { "label": "carrd", "url": "#" }
+      ],
+      "copyright": "midnight_bunny.exe — built with 🥕 and undefined behavior"
+    }
+  ]
+}
