@@ -94,9 +94,12 @@ function buildPoster(viewport) {
   canvasEl.style.marginLeft = -(dims.width / 2) + "px";
   canvasEl.style.marginTop = -(dims.height / 2) + "px";
 
+  const bgLayer = document.createElement("div");
+  bgLayer.className = "bg-layer";
   const pulse = document.createElement("div");
   pulse.className = "glitch-pulse";
-  canvasEl.appendChild(pulse);
+  bgLayer.appendChild(pulse);
+  canvasEl.appendChild(bgLayer);
 
   (DATA.cards || []).forEach(c => canvasEl.appendChild(buildCard(c, currentLayout)));
   (DATA.badges || []).forEach(b => canvasEl.appendChild(buildBadge(b, currentLayout)));
@@ -111,7 +114,7 @@ function applyScale() {
   const scale = Math.min(
     window.innerWidth / dims.width,
     window.innerHeight / dims.height
-  ) * 0.98;
+  ) * 0.94;
   canvasEl.style.setProperty("--scale", scale);
 }
 
