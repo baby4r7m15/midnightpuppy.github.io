@@ -31,7 +31,7 @@
 
   "character": {
     "name": "Midnight Bunny",
-    "portrait": "/bunny/night/images/midnightbunny-avatar.png",
+    "portrait": "/bunny/night/images/midnightbunny-proto.png",
     "portraitAlt": "Midnight Bunny — glitch-pink hacker rabbit",
     "fallbackEmoji": "🐰"
   },
