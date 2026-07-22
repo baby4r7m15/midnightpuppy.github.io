@@ -1,191 +1,165 @@
 {
   "theme": {
-    "themeColor": "#070914",
-    "bg": "#03040a",
-    "bg2": "#090b16",
-    "panel": "rgba(8, 10, 20, 0.84)",
-    "panel2": "rgba(8, 10, 20, 0.72)",
-    "cyan": "#47d8ff",
-    "cyan2": "#93ecff",
-    "blue": "#5b6cff",
-    "violet": "#7a57d1",
-    "purple": "#a56cff",
-    "pink": "#7d4ba8",
-    "pink2": "#b188ff",
-    "line": "rgba(98, 148, 255, 0.16)",
-    "line2": "rgba(177, 136, 255, 0.16)",
-    "text": "#eef5ff",
-    "muted": "rgba(220, 230, 255, 0.72)",
-    "shadow": "rgba(71, 216, 255, 0.18)",
-    "titleGlow": "rgba(71, 216, 255, 0.20)",
-    "glitchTop": "rgba(71, 216, 255, 0.62)",
-    "glitchBottom": "rgba(177, 136, 255, 0.75)"
+    "themeColor": "#fff3f8",
+
+    "bg": "#fff6fb",
+    "bg2": "#fff0f7",
+
+    "panel": "rgba(252, 251, 244, 0.82)",
+    "panel2": "rgba(252, 251, 244, 0.72)",
+
+    "cyan": "#ff9ecb",
+    "cyan2": "#ffc7e3",
+
+    "blue": "#ffd6ec",
+    "violet": "#ffc1dd",
+    "purple": "#ffb6d9",
+
+    "pink": "#ffb6d9",
+    "pink2": "#ffd6ec",
+
+    "line": "rgba(255, 180, 220, 0.22)",
+    "line2": "rgba(255, 200, 230, 0.22)",
+
+    "text": "#5c4b56",
+    "muted": "#9a7d8c",
+
+    "shadow": "rgba(255, 180, 220, 0.25)",
+
+    "titleGlow": "rgba(255, 200, 230, 0.6)",
+
+    "glitchTop": "rgba(255, 210, 230, 0.7)",
+    "glitchBottom": "rgba(255, 180, 220, 0.7)"
   },
+
   "head": {
-    "title": "midnightpuppy.exe"
+    "title": "middaypuppy.exe"
   },
+
   "header": {
-    "title": "midnightpuppy.exe",
-    "subtitle": "SIGNAL UNSTABLE • HEART IN SAFE MODE",
+    "title": "middaypuppy.exe",
+    "subtitle": "SIGNAL STABLE • HEART WARM • SUNLIGHT LOADED",
+
     "nav": [
-      {
-        "label": "BIO",
-        "href": "https://midnightpuppy.com",
-        "active": true
-      }
+      { "label": "BIO", "href": "/", "active": true }
     ],
+
     "stats": [
-      {
-        "label": "mood",
-        "value": "low"
-      },
-      {
-        "label": "ping",
-        "value": "unstable"
-      },
-      {
-        "label": "heart",
-        "value": "fractured"
-      }
+      { "label": "mood", "value": "soft ☁" },
+      { "label": "ping", "value": "stable" },
+      { "label": "heart", "value": "safe ♡" }
     ]
   },
+
   "profile": {
     "panelTitle": "USER PROFILE",
     "panelChip": "ONLINE",
+
     "avatar": {
-      "src": "/images/mindnightpuppy-avatar.png",
-      "alt": "midnightpuppy.exe avatar"
+      "src": "/images/puppyboypfp.png",
+      "alt": "middaypuppy avatar"
     },
-    "name": "MidnightPuppy.exe",
-    "metaHtml": "Build: <b>midnight</b> • Level: <b>21</b> • Status: <b>softly breaking</b>",
+
+    "name": "MiddayPuppy.exe",
+
+    "metaHtml": "Build: <b>daylight</b> • Level: <b>21</b> • Status: <b>warm and safe</b>",
+
     "bars": [
       {
         "label": "SOCIAL BATTERY",
-        "percent": 25,
-        "value": "25 / 100",
+        "percent": 78,
+        "value": "78 / 100",
         "fillClass": "hp"
       },
       {
         "label": "AFFECTION.EXE",
-        "percent": 3,
-        "value": "corrupted / restore point missing",
+        "percent": 92,
+        "value": "restored ♡",
         "fillClass": "ep"
       }
     ],
+
     "loadoutTitle": "LOADOUT",
+
     "loadout": [
-      "hoodie.zip (oversized)",
-      "music_loop.mp3 (repeat x999)",
-      "comfort_emote.dll (missing)",
-      "tears.tmp (locked)"
+      "hoodie.zip (soft + oversized)",
+      "sunlight.png (warm)",
+      "comfort.exe (running)",
+      "snacks.dat (shared)"
     ]
   },
+
   "bio": {
     "panelTitle": "BIO LOG",
     "panelChip": "LIVE",
+
     "entries": [
+      { "text": "middaypuppy.exe has logged in", "tag": "OK", "tagClass": "blue" },
+      { "text": "sunlight detected ☁", "tag": "OK", "tagClass": "blue" },
+      { "text": "warmth spreading through system", "tag": "OK", "tagClass": "yellow" },
+      { "text": "user is safe here", "tag": "OK", "tagClass": "blue" }
     ],
+
     "vibesTitle": "VIBES",
+
     "vibes": [
-      "♡ soft",
-      "☾ nocturnal",
-      "✦ clingy",
-      "⛓ quiet",
-      "🫧 fragile"
+      "☁ soft",
+      "☀ warm",
+      "♡ safe",
+      "🫧 calm",
+      "🐾 gentle"
     ]
   },
+
   "statsPanel": {
     "panelTitle": "Stats",
-    "panelChip": "3",
+    "panelChip": "soft",
+
     "cards": [
       {
         "name": "sleep.exe",
-        "level": "denied",
-        "percent": 9,
-        "subtext": "3:17am / still awake"
-      },
-{
-        "name": "depression.xml",
-        "level": "active",
-        "percent": 98,
-        "subtext": "alone and broken"
+        "level": "healthy",
+        "percent": 82,
+        "subtext": "rested + cozy"
       }
     ]
   },
+
   "statusReport": {
     "panelTitle": "STATUS REPORT",
-    "panelChip": "LAST 24H",
+    "panelChip": "CURRENT",
+
     "items": [
+      "heart rate: calm",
+      "anxiety.exe: minimized",
+      "comfort.exe: active",
+      "environment: safe"
     ]
   },
+
   "systemLog": {
     "panelTitle": "SYSTEM LOG",
-    "panelChip": "STREAMING",
+    "panelChip": "RUNNING",
+
     "lines": [
-      {
-        "time": "00:00:01",
-        "message": "booting midnightpuppy.exe…"
-      },
-      {
-        "time": "00:00:20",
-        "message": "loading feelings.dll…",
-        "status": "warning",
-        "statusClass": "term-warn"
-      },
-      {
-        "time": "00:00:25",
-        "message": "affection.exe",
-        "status": "corrupted",
-        "statusClass": "term-bad"
-      },
-      {
-        "time": "00:00:30",
-        "message": "halo integrity unstable…"
-      },
-      {
-        "time": "00:00:35",
-        "message": "tears renderer active…",
-        "status": "ok",
-        "statusClass": "term-ok"
-      },
-      {
-        "type": "gap"
-      },
-      {
-        "time": "00:01:00",
-        "message": "autism.exe...",
-        "status": "loaded!",
-        "statusClass": "term-warn"
-      },
-      {
-        "time": "00:06:07",
-        "message": "adhd.txt loading...",
-        "status": "Brain Not Found (404)",
-        "statusClass": "term-bad"
-      },
-      {
-        "time": "00:10:08",
-        "message": "loneliness.js...",
-        "status": "Loaded!",
-        "statusClass": "term-ok"
-      },
-      {
-        "type": "gap"
-      },
-      {
-        "time": "00:15:09",
-        "dimPrefix": "heartbeat:",
-        "message": "buffering…"
-      },
-      {
-        "time": "00:20:00",
-        "dimPrefix": "status:",
-        "message": "online • quietly longing"
-      }
+      { "time": "12:00:01", "message": "booting middaypuppy.exe…" },
+      { "time": "12:00:10", "message": "loading warmth.dll…", "status": "ok", "statusClass": "term-ok" },
+      { "time": "12:00:15", "message": "affection.exe", "status": "restored", "statusClass": "term-ok" },
+      { "time": "12:00:20", "message": "sunlight renderer active…" },
+
+      { "type": "gap" },
+
+      { "time": "12:01:00", "message": "comfort.exe...", "status": "running", "statusClass": "term-ok" },
+      { "time": "12:02:00", "message": "loneliness.js...", "status": "cleared", "statusClass": "term-ok" },
+
+      { "type": "gap" },
+
+      { "time": "12:05:00", "dimPrefix": "status:", "message": "online • safe • warm" }
     ]
   },
+
   "toast": {
     "header": "SYSTEM",
-    "line": "midnightpuppy.exe has entered the void • halo unstable • affection.exe corrupted"
+    "line": "middaypuppy.exe initialized • warmth restored • you are safe here"
   }
 }
