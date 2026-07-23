@@ -3,11 +3,11 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 :root{
-  --bg:#FCFBF4;
-  --pink:#F6D6E6;
-  --accent:#FF9ECB;
-  --peach:#FFDCCF;
-  --text:#5c4b56;
+  --bg:#000000;
+  --pink:#0017FF;
+  --accent:#0043FF;
+  --peach:#262626;
+  --text:#000000;
 
   /* NEW */
   --caramel:#F2D6C2;
