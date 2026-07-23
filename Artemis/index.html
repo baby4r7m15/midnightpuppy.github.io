@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>midnight.exe // ARTEMIS</title>
+<link rel="stylesheet" href="css/artemis.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="dot"></span>
+      <span class="online-label">ONLINE</span>
+      <span class="divider"></span>
+      <span class="secure-label">CONNECTION SECURE <span class="lock-icon">&#128274;</span></span>
+      <span class="signal-icon">&#128225;</span>
+    </div>
+    <div class="topbar-right">
+      <span class="systime-label">SYSTEM TIME</span>
+      <span class="systime-value" id="sys-time">02:00 AM</span>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1 class="brand">midnight.exe</h1>
+      <p class="brand-sub">guardian process</p>
+      <p class="brand-name">.... <span>ARTEMIS</span></p>
+    </div>
+
+    <div class="sidebar-thumb">
+      <img src="images/artemis-thumb.png" alt="Artemis thumbnail">
+    </div>
+
+    <nav class="sidebar-nav">
+      <p class="nav-label">NAVIGATION</p>
+      <ul id="nav-list"></ul>
+    </nav>
+
+    <div class="sidebar-protocol">
+      <p class="protocol-title">guardian protocol</p>
+      <p class="protocol-sub">active</p>
+      <div class="protocol-bar"><div class="protocol-fill" id="protocol-fill"></div></div>
+      <p class="protocol-threat" id="protocol-threat">threat level: none</p>
+      <p class="protocol-safe" id="protocol-safe">you are safe here.</p>
+    </div>
+
+    <div class="sidebar-logo">
+      <img src="images/rabbit-logo.png" alt="Artemis logo">
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ROW 1 -->
+    <section class="row row-1">
+      <div class="panel hero-panel">
+        <div class="panel-header">
+          <span id="hero-title">//_ARTEMIS.EXE</span>
+        </div>
+        <div class="hero-image-wrap">
+          <img src="images/artemis-hero.png" alt="Artemis" class="hero-image">
+          <div class="hero-overlay">
+            <div class="lock-badge top-left">
+              <span class="lock-glyph">&#128274;</span>
+              <span class="lock-text" id="locked-label">LOCKED</span>
+            </div>
+            <div class="hero-icons">
+              <span class="hero-icon">&#9825;</span>
+              <span class="hero-icon">&#128274;</span>
+              <span class="hero-icon">&#10060;</span>
+              <span class="hero-icon">&#10060;</span>
+            </div>
+          </div>
+          <div class="hero-dots">
+            <span class="hdot active"></span><span class="hdot"></span><span class="hdot"></span><span class="hdot"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="panel about-panel">
+          <div class="panel-header"><span id="about-title">//_ABOUT_ME</span></div>
+          <div class="about-body">
+            <div class="about-text">
+              <h2 class="about-name" id="about-name">ARTEMIS.EXE</h2>
+              <p class="about-role" id="about-role">Guardian Process</p>
+              <div class="about-bio" id="about-bio"></div>
+              <dl class="about-stats" id="about-stats"></dl>
+            </div>
+            <div class="about-image">
+              <img src="images/artemis-about.png" alt="Artemis portrait">
+            </div>
+          </div>
+        </div>
+
+        <div class="panel quote-panel">
+          <div class="panel-header"><span id="quote-title">//_QUOTE.LOG</span></div>
+          <div class="quote-body">
+            <p class="quote-text" id="quote-text"></p>
+            <img src="images/rabbit-quote-icon.png" alt="" class="quote-icon">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROW 2 -->
+    <section class="row row-2">
+      <div class="panel status-panel">
+        <div class="panel-header"><span id="status-title">//_STATUS</span></div>
+        <div class="status-body">
+          <span class="status-heart">&#9829;</span>
+          <div class="status-info">
+            <p class="status-state" id="status-state">STABLE</p>
+            <div id="status-rows"></div>
+          </div>
+        </div>
+        <div class="status-footer" id="status-footer">you are safe here.</div>
+      </div>
+
+      <div class="panel likes-panel">
+        <div class="panel-header"><span id="likes-title">//_LIKES</span></div>
+        <ul class="tag-list" id="likes-list"></ul>
+      </div>
+
+      <div class="panel dislikes-panel">
+        <div class="panel-header"><span id="dislikes-title">//_DISLIKES</span></div>
+        <ul class="tag-list" id="dislikes-list"></ul>
+      </div>
+
+      <div class="panel personality-panel">
+        <div class="panel-header"><span id="personality-title">//_PERSONALITY</span></div>
+        <div class="personality-body">
+          <svg id="personality-chart" viewBox="0 0 240 220"></svg>
+        </div>
+      </div>
+
+      <div class="panel memories-panel">
+        <div class="panel-header"><span id="memories-title">//_MEMORIES</span></div>
+        <ul class="memory-list" id="memories-list"></ul>
+        <p class="memories-footer" id="memories-footer">...more memories locked &#128274;</p>
+      </div>
+    </section>
+
+    <!-- ROW 3 -->
+    <section class="row row-3">
+      <div class="panel playlist-panel">
+        <div class="panel-header">
+          <span id="playlist-title">//_PLAYLIST.EXE</span>
+          <span class="panel-header-icon">&#9776;</span>
+        </div>
+        <div class="playlist-body">
+          <img src="images/playlist-art.png" alt="album art" class="playlist-art">
+          <div class="playlist-info">
+            <p class="playlist-name" id="playlist-name">midnight guardian</p>
+            <p class="playlist-status" id="playlist-status">now playing</p>
+            <p class="playlist-track" id="playlist-track">sleep token</p>
+            <p class="playlist-album" id="playlist-album">rain</p>
+          </div>
+        </div>
+        <div class="playlist-progress">
+          <span class="ptime" id="ptime-current">1:42</span>
+          <div class="pbar"><div class="pbar-fill" id="pbar-fill"></div></div>
+          <span class="ptime" id="ptime-duration">4:21</span>
+        </div>
+        <div class="playlist-controls">
+          <span class="ctrl">&#128256;</span>
+          <span class="ctrl">&#9198;</span>
+          <span class="ctrl play-btn" id="play-btn">&#9724;</span>
+          <span class="ctrl">&#9197;</span>
+          <span class="ctrl">&#128257;</span>
+        </div>
+      </div>
+
+      <div class="panel friends-panel">
+        <div class="panel-header"><span id="friends-title">//_FRIENDS.NET</span></div>
+        <div class="friends-grid" id="friends-grid"></div>
+      </div>
+
+      <div class="panel sysinfo-panel">
+        <div class="panel-header"><span id="sysinfo-title">//_SYSTEM_INFO</span></div>
+        <div class="sysinfo-body">
+          <div class="sysinfo-lines" id="sysinfo-lines"></div>
+          <img src="images/sysinfo-icon.png" alt="" class="sysinfo-icon">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-left" id="footer-left">midnight.exe // guardian OS</span>
+    <span class="footer-center" id="footer-center">© 2024 midnight.exe all rights reserved.</span>
+    <span class="footer-right" id="footer-right">stay safe, drink water, take your meds. &lt;3 <span class="lock-icon">&#128274;</span></span>
+  </footer>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

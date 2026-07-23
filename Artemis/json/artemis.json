@@ -1,0 +1,124 @@
+{
+  "system": {
+    "status": "ONLINE",
+    "connection": "CONNECTION SECURE",
+    "time": "02:00 AM"
+  },
+  "sidebar": {
+    "title": "midnight.exe",
+    "subtitle": "guardian process",
+    "name": "ARTEMIS",
+    "nav": [
+      { "label": "//_HOME", "icon": "home", "active": true },
+      { "label": "//_ABOUT", "icon": "about" },
+      { "label": "//_MEMORIES", "icon": "memories" },
+      { "label": "//_PLAYLIST", "icon": "playlist" },
+      { "label": "//_GALLERY", "icon": "gallery" },
+      { "label": "//_FRIENDS", "icon": "friends" },
+      { "label": "//_CONTACT", "icon": "contact" }
+    ],
+    "protocol": {
+      "label": "guardian protocol",
+      "sublabel": "active",
+      "progress": 78,
+      "threat": "threat level: none",
+      "safe": "you are safe here."
+    }
+  },
+  "about": {
+    "panelTitle": "//_ARTEMIS.EXE",
+    "locked": "LOCKED",
+    "aboutTitle": "//_ABOUT_ME",
+    "name": "ARTEMIS.EXE",
+    "role": "Guardian Process",
+    "bio": [
+      "I watch over the things that matter.",
+      "I don't always speak.",
+      "I don't need to.",
+      "If you're here... you're safe."
+    ],
+    "stats": [
+      { "label": "ROLE:", "value": "Guardian" },
+      { "label": "SPECIES:", "value": "Protogen Rabbit" },
+      { "label": "HEIGHT:", "value": "5'4\" (head)" },
+      { "label": "STATUS:", "value": "Protecting" },
+      { "label": "PRONOUNS:", "value": "any / all" },
+      { "label": "CORE:", "value": "Protection, Loyalty, Comfort" }
+    ]
+  },
+  "quote": {
+    "title": "//_QUOTE.LOG",
+    "lines": [
+      "\"You don't have to be strong here.",
+      "You just have to exist.\""
+    ]
+  },
+  "status": {
+    "title": "//_STATUS",
+    "state": "STABLE",
+    "rows": [
+      { "label": "heart rate:", "value": "calm" },
+      { "label": "energy:", "value": "medium" },
+      { "label": "threat level:", "value": "none" }
+    ],
+    "footer": "you are safe here."
+  },
+  "likes": {
+    "title": "//_LIKES",
+    "items": ["rain", "soft things", "night drives", "neon lights", "head pats", "loyalty", "quiet company", "you"]
+  },
+  "dislikes": {
+    "title": "//_DISLIKES",
+    "items": ["loud places", "being touched without consent", "lies", "hurting others", "crowds", "being ignored", "heat"]
+  },
+  "personality": {
+    "title": "//_PERSONALITY",
+    "axes": ["protective", "loyal", "calm", "chaotic", "shy", "intense"],
+    "values": [95, 90, 55, 30, 35, 55]
+  },
+  "memories": {
+    "title": "//_MEMORIES",
+    "items": [
+      { "file": "2022_07_15.exe", "label": "the beginning", "locked": true },
+      { "file": "2022_09_03.exe", "label": "first connection", "locked": true },
+      { "file": "2023_01_21.exe", "label": "rainy night", "locked": true },
+      { "file": "2023_06_11.exe", "label": "promise made", "locked": true }
+    ],
+    "footer": "...more memories locked"
+  },
+  "playlist": {
+    "title": "//_PLAYLIST.EXE",
+    "nowPlayingLabel": "midnight guardian",
+    "statusLabel": "now playing",
+    "track": "sleep token",
+    "album": "rain",
+    "currentTime": "1:42",
+    "duration": "4:21",
+    "progress": 40
+  },
+  "friends": {
+    "title": "//_FRIENDS.NET",
+    "items": [
+      { "name": "ASH.exe", "tag": "MIDNIGHT", "image": "images/friend-ash.png" },
+      { "name": "LUMI.exe", "tag": "MIDDAY", "image": "images/friend-lumi.png" },
+      { "name": "VEXX.exe", "tag": "CHAOS", "image": "images/friend-vexx.png" },
+      { "name": "YOU.exe", "tag": "TRUSTED", "image": "images/friend-you.png" }
+    ]
+  },
+  "sysinfo": {
+    "title": "//_SYSTEM_INFO",
+    "lines": [
+      "midnight.exe v1.3.7",
+      "guardian build",
+      "",
+      "uptime: \u221e",
+      "connections: 1",
+      "status: all systems normal"
+    ]
+  },
+  "footer": {
+    "left": "midnight.exe // guardian OS",
+    "center": "\u00a9 2024 midnight.exe all rights reserved.",
+    "right": "stay safe, drink water, take your meds. <3"
+  }
+}
