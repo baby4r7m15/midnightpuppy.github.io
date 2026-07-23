@@ -88,21 +88,20 @@
   },
   "playlist": {
     "title": "//_PLAYLIST.EXE",
-    "nowPlayingLabel": "midnight guardian",
+    "nowPlayingLabel": "obsession",
     "statusLabel": "now playing",
-    "track": "sleep token",
-    "album": "rain",
-    "currentTime": "1:42",
-    "duration": "4:21",
-    "progress": 40
+    "track": "Devil",
+    "album": "ironmouse",
+    "currentTime": "1:09",
+    "duration": "3:09",
+    "progress": 36.51
   },
   "friends": {
-    "title": "//_FRIENDS.NET",
+    "title": "//_EMOTIONS.NET",
     "items": [
-      { "name": "ASH.exe", "tag": "MIDNIGHT", "image": "images/friend-ash.png" },
-      { "name": "LUMI.exe", "tag": "MIDDAY", "image": "images/friend-lumi.png" },
-      { "name": "VEXX.exe", "tag": "CHAOS", "image": "images/friend-vexx.png" },
-      { "name": "YOU.exe", "tag": "TRUSTED", "image": "images/friend-you.png" }
+      { "name": "ASH.exe", "tag": "Depressed", "image": "images/friend-ash.png" },
+      { "name": "LUMI.exe", "tag": "Happy", "image": "images/friend-lumi.png" },
+      { "name": "VEXX.exe", "tag": "Angry", "image": "images/friend-vexx.png" }
     ]
   },
   "sysinfo": {
