@@ -42,7 +42,7 @@
       { "label": "SPECIES:", "value": "Protogen Rabbit" },
       { "label": "HEIGHT:", "value": "5'4\" (head)" },
       { "label": "STATUS:", "value": "Protecting" },
-      { "label": "PRONOUNS:", "value": "any / all" },
+      { "label": "PRONOUNS:", "value": "they / them" },
       { "label": "CORE:", "value": "Protection, Loyalty, Comfort" }
     ]
   },
@@ -99,9 +99,9 @@
   "friends": {
     "title": "//_EMOTIONS.NET",
     "items": [
-      { "name": "ASH.exe", "tag": "Depressed", "image": "images/friend-ash.png" },
-      { "name": "LUMI.exe", "tag": "Happy", "image": "images/friend-lumi.png" },
-      { "name": "VEXX.exe", "tag": "Angry", "image": "images/friend-vexx.png" }
+      { "name": "ASH.exe", "tag": "Depressed", "image": "images/ash.png" },
+      { "name": "LUMI.exe", "tag": "Happy", "image": "images/lumi.png" },
+      { "name": "VEXX.exe", "tag": "Angry", "image": "images/vexx.png" }
     ]
   },
   "sysinfo": {
