@@ -38,7 +38,6 @@ function renderNav(nav) {
 function renderAbout(about) {
   document.getElementById("about-title").textContent = about.panelTitle ? "//_ABOUT_ME" : "//_ABOUT_ME";
   document.getElementById("hero-title").textContent = about.panelTitle;
-  document.getElementById("locked-label").textContent = about.locked;
   document.getElementById("about-title").textContent = about.aboutTitle;
   document.getElementById("about-name").textContent = about.name;
   document.getElementById("about-role").textContent = about.role;
