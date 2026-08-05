@@ -26,16 +26,15 @@
     }
   },
   "about": {
-    "panelTitle": "//_ARTEMIS.EXE",
+    "panelTitle": "//_Artemis.exe",
     "locked": "LOCKED",
     "aboutTitle": "//_ABOUT_ME",
-    "name": "ARTEMIS.EXE",
+    "name": "Artemis.exe",
     "role": "Guardian Process",
     "bio": [
       "I watch over the things that matter.",
       "I don't always speak.",
-      "I don't need to.",
-      "If you're here... you're safe."
+      "I disapear when I am unwanted."
     ],
     "stats": [
       { "label": "ROLE:", "value": "Guardian" },
@@ -65,24 +64,24 @@
   },
   "likes": {
     "title": "//_LIKES",
-    "items": ["rain", "soft things", "night drives", "neon lights", "head pats", "loyalty", "quiet company", "you"]
+    "items": ["rain", "soft things", "night drives", "neon lights", "head pats", "loyalty"]
   },
   "dislikes": {
     "title": "//_DISLIKES",
-    "items": ["loud places", "being touched without consent", "lies", "hurting others", "crowds", "being ignored", "heat"]
+    "items": ["loud places", "being touched without consent", "lies", "hurting others", "crowds", "being ignored", "heat", "dry texting"]
   },
   "personality": {
     "title": "//_PERSONALITY",
     "axes": ["protective", "loyal", "calm", "chaotic", "shy", "intense"],
-    "values": [95, 90, 55, 30, 35, 55]
+    "values": [70, 90, 55, 80, 35, 75]
   },
   "memories": {
     "title": "//_MEMORIES",
     "items": [
-      { "file": "2022_07_15.exe", "label": "the beginning", "locked": true },
-      { "file": "2022_09_03.exe", "label": "first connection", "locked": true },
-      { "file": "2023_01_21.exe", "label": "rainy night", "locked": true },
-      { "file": "2023_06_11.exe", "label": "promise made", "locked": true }
+      { "file": "2004_08_22.exe", "label": "the beginning", "locked": true },
+      { "file": "2017_07_01.exe", "label": "first connection", "locked": true },
+      { "file": "2025_07_04.exe", "label": "rainy night", "locked": true },
+      { "file": "2026_08_05.exe", "label": "promise made", "locked": true }
     ],
     "footer": "...more memories locked"
   },
@@ -99,9 +98,9 @@
   "friends": {
     "title": "//_EMOTIONS.NET",
     "items": [
-      { "name": "ASH.exe", "tag": "Depressed", "image": "images/ash.png" },
-      { "name": "LUMI.exe", "tag": "Happy", "image": "images/lumi.png" },
-      { "name": "VEXX.exe", "tag": "Angry", "image": "images/vexx.png" }
+      { "name": "Ash.exe", "tag": "Depressed", "image": "images/ash.png" },
+      { "name": "Lumi.exe", "tag": "Happy", "image": "images/lumi.png" },
+      { "name": "Vexx.exe", "tag": "Angry", "image": "images/vexx.png" }
     ]
   },
   "sysinfo": {
