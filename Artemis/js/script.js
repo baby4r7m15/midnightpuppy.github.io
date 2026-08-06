@@ -182,15 +182,6 @@ function renderSidebarProtocol(protocol) {
   document.getElementById("protocol-safe").textContent = protocol.safe;
 }
 
-function setupPlayButton() {
-  const btn = document.getElementById("play-btn");
-  let playing = true;
-  btn.addEventListener("click", () => {
-    playing = !playing;
-    btn.innerHTML = playing ? "&#9724;" : "&#9654;";
-  });
-}
-
 async function init() {
   const data = await loadData();
   renderSystem(data.system);
