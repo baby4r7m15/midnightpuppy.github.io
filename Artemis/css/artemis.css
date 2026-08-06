@@ -526,3 +526,99 @@ img{ max-width:100%; display:block; }
   .about-body{ flex-direction:column; }
   .about-image{ width:100%; height:180px; }
 }
+
+/* ==========================================================
+   MOBILE OVERRIDE
+   Place this at the VERY END of your CSS
+   ========================================================== */
+
+@media screen and (max-width:768px){
+
+    html,
+    body{
+        width:100%;
+        min-height:100dvh;
+        overflow-x:hidden;
+        overflow-y:auto;
+    }
+
+    .app-shell{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        max-width:none;
+        min-height:auto;
+    }
+
+    .topbar{
+        padding:12px;
+        flex-wrap:wrap;
+        gap:8px;
+        justify-content:space-between;
+    }
+
+    .sidebar{
+        border-right:none;
+        border-bottom:1px solid var(--border-soft);
+        padding:16px;
+        gap:14px;
+    }
+
+    .main{
+        padding:14px;
+        overflow:visible;
+        width:100%;
+    }
+
+    .row,
+    .row-1,
+    .row-2,
+    .row-3{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:14px;
+    }
+
+    .hero-panel,
+    .about-panel,
+    .quote-panel,
+    .panel{
+        width:100%;
+    }
+
+    .hero-image-wrap{
+        min-height:280px;
+    }
+
+    .about-body{
+        flex-direction:column;
+    }
+
+    .about-image{
+        width:100%;
+        height:220px;
+    }
+
+    .friends-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .playlist-body,
+    .status-body,
+    .sysinfo-body{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .footer{
+        flex-direction:column;
+        gap:8px;
+        padding:12px;
+        text-align:center;
+    }
+
+    img{
+        max-width:100%;
+        height:auto;
+    }
+}
