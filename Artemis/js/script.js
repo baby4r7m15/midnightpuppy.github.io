@@ -202,8 +202,6 @@ async function init() {
   renderFriends(data.friends);
   renderSysinfo(data.sysinfo);
   renderFooter(data.footer);
-
-  setupPlayButton();
 }
 
 document.addEventListener("DOMContentLoaded", init);
